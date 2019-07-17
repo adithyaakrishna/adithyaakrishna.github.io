@@ -256,13 +256,13 @@ input:focus, textarea:focus, select:focus, button:focus {
 	background-color: #000000;
 }
 .prt_home_wrapper{
-	background-image:url("./images/header/x.png");
+	background-image:url("./images/header/x.jpg");
 	background-position: center center;
 	background-repeat:no-repeat;
 	background-size:cover;
 	position:relative;
 	overflow-y:auto;
-    padding: 200px 0px;
+    padding: 110px 0px;
 }
 .prt_home_wrapper h1{
 	position:absolute;
@@ -270,7 +270,7 @@ input:focus, textarea:focus, select:focus, button:focus {
 	font-size:150px;
 	color: #ffffff;
 	font-weight:bold;
-	background: url(./images/header/x1.png) no-repeat;
+	background: url("./images/header/x1.jpg") no-repeat;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
     background-size: cover;
@@ -856,7 +856,7 @@ input:focus, textarea:focus, select:focus, button:focus {
 .prt_contact_details_box:after{
 	content:"";
 	position:absolute;
-	background-color:rgba(0, 0, 0, 0.85);
+	background-color:rgba(0, 0, 0, 0);
 	top:0px;
 	left:0px;
 	bottom:0px;
@@ -869,7 +869,7 @@ input:focus, textarea:focus, select:focus, button:focus {
     transition: all 0.3s;
 }
 .prt_contact_details_box:hover:after{
-	background-color:rgba(0, 0, 0, 0.75);
+	background-color:rgba(0, 0, 0, 0);
 	-webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     -ms-transition: all 0.3s;
@@ -901,13 +901,13 @@ input:focus, textarea:focus, select:focus, button:focus {
     transition: all 0.3s;
 }
 .prt_contact_details_box.details_box1{
-	background-image:url(http://placehold.it/450X250);
+	background-image:url(./images/header/cb.jpg);
 }
 .prt_contact_details_box.details_box2{
-	background-image:url(http://placehold.it/450X250);
+	background-image:url(./images/header/cb.jpg);
 }
 .prt_contact_details_box.details_box3{
-	background-image:url(http://placehold.it/450X250);
+	background-image:url(./images/header/cb.jpg);
 }
 /*---------- Services css Start -------*/
 .prt_services_wrapper{
@@ -1134,28 +1134,28 @@ input:focus, textarea:focus, select:focus, button:focus {
 	text-align:center;
 }
 #circles-1{
-	background-image:url(http://placehold.it/200X200);
+	background-image:url("./images/header/ps.jpg");
 	border-radius: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 #circles-2{
-	background-image:url(http://placehold.it/200X200);
+	background-image:url("./images/header/as.jpg");
 	border-radius: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 #circles-3{
-	background-image:url(http://placehold.it/200X200);
+	background-image:url("./images/header/hscs.jpg");
 	border-radius: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 #circles-4{
-	background-image:url(http://placehold.it/200X200);
+	background-image:url(./images/header/pts.jpg);
 	border-radius: 100%;
     background-position: center;
     background-repeat: no-repeat;
