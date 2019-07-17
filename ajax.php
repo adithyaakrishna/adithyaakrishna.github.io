@@ -16,15 +16,15 @@ if(isset($_POST) && !empty($_POST)){
 	$sendMessage = $mailSubject = '';
 	if($_POST['form_type'] == 'contact'){
 		$mailSubject = 'Contact Details';
-		$sendMessage = "<p>Hello,</p><p>".$full_name." has sent a message having </p><p><b>Subject:</b> ".$subject."</p><p><b>Email id:</b> ".$email."</p><p><b>Query is:</b> ".$message."</p>";
+		$sendMessage = "<p>Hello,</p><p>".$full_name." Has sent a message having </p><p><b>Subject:</b> ".$subject."</p><p><b>Email id:</b> ".$email."</p><p><b>Query is:</b> ".$message."</p>";
 	}elseif($_POST['form_type'] == 'inquiry'){
 		$mailSubject = 'Inquiry Details';
 		$sendMessage = '';
 	}
 	
 	if($sendMessage != ''){
-		$fromEmail = 'support@cv_and_resume.com';
-		$toEmail = 'shubham.choudhary@himanshusofttech.com';
+		$fromEmail = 'contactus@thedevilx.github.io';
+		$toEmail = 'aadithya794@gmail.com';
 		
 		$headers = "MIME-Version: 1.0" . "\r\n";
 		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
