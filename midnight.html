@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Adi Kris</title>
+	<!-- Modernizr -->
+	<script src="js/modernizr.js"></script>
+	<!-- Open Sans from Google Webfonts -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+	<!-- Main styles file -->
+	<link rel="stylesheet" href="css/styles.css" />
+	<!-- Icons via Font Awesome -->
+	<link rel="stylesheet" href="css/font-awesome.min.css" />
+</head>
+<body>
+	<!-- Animated background -->
+	<canvas id="bg-canvas"></canvas>
+	
+	<!-- First screen -->
+	<div class="splash">
+		<div class="centered-unit">
+			<div class="container">
+				<!-- Main header -->
+				<h1>Launching Soon :)</h1>
+				<!-- Sub header -->
+				<p class="lead">Dealing with some really complicated stuff here.</p>
+				
+				<!-- Countdown -->
+				<div class="countdown large">
+					<!-- Days -->
+					<div class="time days">
+						<div class="value">00</div>
+						<div class="unit">Days</div>
+					</div>
+					<!-- Hours -->
+					<div class="time hours">
+						<div class="value">00</div>
+						<div class="unit">Hours</div>
+					</div>
+					<!-- Minutes -->
+					<div class="time minutes">
+						<div class="value">00</div>
+						<div class="unit">Minutes</div>
+					</div>
+					<!-- Seconds -->
+					<div class="time seconds">
+						<div class="value">00</div>
+						<div class="unit">Seconds</div>
+					</div>
+				</div>
+				<!-- Countdown end -->
+			</div>	
+		</div>
+	</div>
+	
+	<!-- Second screen -->
+	<div class="overlap">
+	
+		<!-- Link "Scroll down to learn more" -->
+		<a href="" class="more">Scroll down <i class="fa fa-chevron-down"></i> to learn more</a>
+		
+		<!-- Detailed info -->
+		<div class="container few-words">
+			<div class="row">
+				<!-- First column -->
+				<div class="col col-heading">
+					<!-- Detailed info -->
+					<h2>Coming Soon</h2>
+					
+					<!-- Social icons -->
+					<div class="social">
+						<a href="https://twitter.com/adii_kris" class="social-icon">
+							<i class="fa fa-twitter fa-lg"></i>
+						</a>
+						<a href="https://www.facebook.com/AdithyaKrishna007" class="social-icon">
+							<i class="fa fa-facebook fa-lg"></i>
+						</a>
+							<a href="https://www.instagram.com/adithyaa._/" class="social-icon">
+							<i class="fa fa-instagram fa-lg"></i>
+						</a>
+					</div>
+					<!-- Social icons block end -->
+				</div>
+				<!-- First column end -->
+				
+				<!-- Second column -->
+				<div class="col col-content">
+					<p>Hello</p>
+				</div>
+				<!-- Second column end -->
+				
+				<!-- Third column -->
+				<div class="col col-contacts">
+					<h3>Contact us</h3>
+					<div class="contact">
+						<span class="icon"><i class="fa fa-phone fa-fw"></i></span>
+						<span class="value">9482858070</span>
+					</div>
+					<div class="contact">
+						<span class="icon"><i class="fa fa-envelope-o fa-fw"></i></span>
+						<span class="value"><a href="mailto: aadithya794@gmail.com">aadithya794@gmail.com</a></span>
+					</div>
+					<div class="contact">
+						<span class="icon"><i class="fa fa-map-marker fa-fw"></i></span>
+						<span class="value">Bengaluru, Karnataka, India</span>
+					</div>
+				</div>
+				<!-- Third column end -->
+			</div>
+		</div>
+		<!-- Detailed info block end -->
+		
+		<!-- Send me an email when it's done -->
+		<div class="notify-by-email">
+			<div class="container">	
+				<div class="row">
+					<div class="col col-one-third">
+						<h3>Send me an email when&nbsp;it's done!</h3>
+					</div>
+					<div class="col col-two-thirds">
+						<!-- Subscribe form -->
+						<form action="notify-me.php" id="notifyMe" method="POST">
+							<input type="text" name="email" placeholder="Your e-mail address"/>
+							<button>Send</button>
+							<p class="note">I promise not to spam... No seriously, I won't!</p>
+						</form>
+						<!-- Subscribe form end -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Send me an email when it's done block end	 -->
+
+
+		<!-- Footer -->
+		<div class="footer">
+			<div class="container">
+				&copy; Made with <i class="fa fa-heart"></i> By <a href="https://www.instagram.com/adithyaa._">Adithya</a> .
+			</div>
+		</div>
+		<!-- Footer end -->
+	</div>
+	
+	<!-- JavaScripts -->
+	
+	<script src="js/jquery.js"></script>
+	<script src="js/countdown.js"></script>
+	<script src="js/bezierCanvas.js"></script>
+	<script src="js/notifyMe.js"></script>
+	
+	<script type="text/javascript">
+	$().ready(function(){
+	
+		// Activate countdownTimer plugin on a '.countdown' element
+		$(".countdown").countdownTimer({
+			// Set the end date for the countdown
+			endTime: new Date("20th Aug, 2019 00:00:00 UTC+0200")
+		});
+		
+		
+		// Activate notifyMe plugin on a '#notifyMe' element	
+		$("#notifyMe").notifyMe();
+		
+		
+		// Activate bezierCanvas plugin on a #bg-canvas element
+		$("#bg-canvas").bezierCanvas({
+			maxStyles: 10,
+			maxLines: 100,
+			lineSpacing: 1,
+			colorBase: {r: 100,g: 100,b: 100},
+			colorVariation: {r: 150, g: 120, b: 150},
+			delayVariation: 0.5,
+			globalAlpha: 0.5,
+			globalSpeed: 500,
+		});
+		
+		// Add handler on 'Scroll down to learn more' link
+		$().ready(function(){
+			$(".overlap .more").click(function(e){
+				e.preventDefault();
+				$("body,html").animate({scrollTop: $(window).height()});
+			});
+		});		
+
+		
+	});
+	</script>
+
+</body>
+</html>
