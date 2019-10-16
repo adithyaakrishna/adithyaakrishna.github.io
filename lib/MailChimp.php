@@ -1,6 +1,6 @@
 <?php
 
-namespace Drewm;
+/*namespace Drewm;*/
 
 /**
  * Super-simple, minimum abstraction MailChimp API v2 wrapper

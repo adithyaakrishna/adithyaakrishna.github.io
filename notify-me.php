@@ -12,14 +12,11 @@ variables with your actual MailChimp API Key and List ID below
 // Set to "mailchimp" to store contacts in MailChimp or "file" to store in a file.
 $STORE_MODE = "mailchimp";
 
-// Path to file. Please make sure that the script has write permissions on this file.
-$STORE_FILE = $_SERVER["DOCUMENT_ROOT"]."/notify-email-list.txt";
-
 // Your MailChimp API Key
-$API_KEY =  "51ra5f714afa21047180b942187216a7-us8";
+$API_KEY =  "43834c78a4b00ffc1aa4052809c06889-us11";
 
 // Your MailChimp List ID
-$LIST_ID =  "f018q6dawc";
+$LIST_ID =  "e6d9b98ecd";
 
 
 
@@ -65,7 +62,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["email"])) {
 		// Store in mailchimp
 		} elseif ($STORE_MODE == "mailchimp") { // Store with MailChimp
 			// Use MailChimp API to store
-			$MailChimp = new \Drewm\MailChimp($API_KEY);
+			$MailChimp = new MailChimp($API_KEY);
 			
 			$result = $MailChimp->call('lists/subscribe', array(
 		                'id'                => $LIST_ID,
