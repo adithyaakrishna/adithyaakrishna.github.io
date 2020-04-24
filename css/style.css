@@ -110,7 +110,7 @@ h6 {
   letter-spacing: 1.5px;
   font-weight: 500;
   text-transform: uppercase;
-  color: #d40000;
+  color: #005bff;
   margin-bottom: 33px; }
 
 p {
@@ -331,7 +331,6 @@ p {
 /********Body Sec CSS********/
 .fixed-bg {
   background: transparent url("../img/mainbg.jpg") no-repeat;
-  image-rendering: optimizeQuality;
   height: 100%;
   width: 100%;
   z-index: -1;
@@ -470,7 +469,7 @@ header {
       color: #fff;
       background: #141414; }
       header.fixed .btn .mask {
-        background: #d40000; }
+        background: #005bff; }
       header.fixed .btn:hover, header.fixed .btn:focus, header.fixed .btn:active {
         background: #141414 !important;
         outline: none !important;
@@ -638,7 +637,7 @@ a.goto-social, a.goto-social:hover {
       right: 0px;
       top: -27px; }
   .skills-wrap .progress-bar-graph span {
-    background-color: #d40000;
+    background-color: #005bff;
     height: 3px;
     width: 0px;
     display: block;
@@ -646,7 +645,7 @@ a.goto-social, a.goto-social:hover {
     position: relative;
     overflow: visible !important; }
     .skills-wrap .progress-bar-graph span:after {
-      border: 3px solid #d40000;
+      border: 3px solid #005bff;
       border-radius: 50%;
       content: "";
       height: 15px;
@@ -845,7 +844,7 @@ a.goto-social, a.goto-social:hover {
 .experience-wrap .exp-timeline.timeline-inactive.timeline-active .exp-content-wrap {
   opacity: 1 !important; }
 .experience-wrap .exp-timeline.timeline-active .timeline-st:after {
-  border: 3px solid #d40000; }
+  border: 3px solid #005bff; }
 
 /********Client Sec CSS********/
 .client-wrap .owl-carousel .owl-item img {
@@ -937,7 +936,7 @@ a.goto-social, a.goto-social:hover {
     background: #fff !important;
     color: #fff !important; }
   .contact-wrap .btn .mask {
-    background-color: #d40000; }
+    background-color: #005bff; }
 .contact-wrap .email-direct {
   font-size: 14px;
   margin-top: 60px; }
@@ -995,7 +994,7 @@ footer .available-wrap {
     display: block;
     float: left; }
   footer .available-wrap .available-pointer {
-    background: #d40000 none repeat scroll 0 0;
+    background: #005bff none repeat scroll 0 0;
     position: relative;
     display: inline-block;
     float: left;
@@ -1014,7 +1013,7 @@ footer .available-wrap {
     animation-iteration-count: infinite;
     content: ' '; }
     footer .available-wrap .available-pointer:before {
-      background-color: #d40000;
+      background-color: #005bff;
       content: ' ';
       position: absolute;
       top: -8px;
@@ -1237,7 +1236,7 @@ footer .goto-top {
       color: #fff;
       background: #fff; }
       header .btn .mask {
-        background: #d40000; }
+        background: #005bff; }
       header .btn:hover {
         color: #141414;
         background: #fff; }
