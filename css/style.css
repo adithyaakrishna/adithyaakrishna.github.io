@@ -619,6 +619,26 @@ a.goto-social, a.goto-social:hover {
   color: #fff; }
 
 /********Skills Sec CSS********/
+
+.list-inline {
+  padding-left: 0;
+  list-style: none;
+}
+
+.list-inline-item {
+  display: inline-block;
+  color: #ffffff;
+}
+.list-inline-item:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.dev-icons {
+  font-size: 2.7rem;
+  display: inline-block;
+}
+
+
 .skills-wrap {
   overflow: visible; }
   .skills-wrap .progress-bar-graph .bar-wrap {
