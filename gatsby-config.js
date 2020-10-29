@@ -5,9 +5,9 @@ module.exports = {
     title: 'Adithya Krishna',
     description:
       'Adithya Krishna is a Full Stack Web Developer and Designer based in Bangalore, IN.',
-    siteUrl: 'https://brittanychiang.com', // No trailing slash allowed!
+    siteUrl: 'https://adithyaakrishna.github.io', // No trailing slash allowed!
     image: '/og.png', // Path to your image you placed in the 'static' folder
-    twitterUsername: '@bchiang7',
+    twitterUsername: '@adii_kris',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -19,8 +19,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'BrittanyChiang',
-        short_name: 'BrittanyChiang',
+        name: 'AdithyaKrishna',
+        short_name: 'AdiKris',
         start_url: '/',
         background_color: config.colors.darkNavy,
         theme_color: config.colors.navy,
