@@ -8,15 +8,16 @@ const GlobalStyle = createGlobalStyle`
 
   :root {
     --dark-navy: #020c1b;
+    --Fwhite: #ffffff;
     --navy: #000000;
     --light-navy: #172a45;
     --lightest-navy: #303C55;
     --navy-shadow: rgba(2, 12, 27, 0.7);
     --slate: #8892b0;
     --light-slate: #a8b2d1;
-    --lightest-slate: #ccd6f6;
+    --lightest-slate: #ffffff;
     --white: #e6f1ff;
-    --green: #6099ff;
+    --green: #005bff;
     --green-tint: rgba(100, 255, 218, 0.1);
 
     --font-sans: 'Calibre', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;

@@ -53,14 +53,13 @@ const StyledPic = styled.div`
     margin: 50px auto 0;
     width: 70%;
   }
-
   .wrapper {
     ${({ theme }) => theme.mixins.boxShadow};
     display: block;
     position: relative;
     width: 100%;
     border-radius: var(--border-radius);
-    background-color: var(--green);
+    background-color: var(--white);
 
     &:hover,
     &:focus {
@@ -132,7 +131,15 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = ['React', 'HTML & CSS/SCSS', 'React-Native', 'Firebase', 'MERN', 'AWS', 'WordPress'];
+  const skills = [
+    'React',
+    'HTML & CSS/SCSS',
+    'React-Native',
+    'Firebase',
+    'MERN',
+    'AWS',
+    'WordPress',
+  ];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -141,18 +148,25 @@ const About = () => {
       <div className="inner">
         <StyledText>
           <div>
-            <p>Hello! I'm Adithya Krishna, a Full Stack Developer &amp; designer based in Bangalore, IN</p>
-
             <p>
-              Ever since I was a kid computers and software has been my passion and used to tinker with hardware 
-              whenever I was free and that passion and love for computers has led me to love coding and also designing.
+              Hello! I'm Adithya Krishna, a Full Stack Developer &amp; designer based in Bangalore,
+              IN
             </p>
 
             <p>
-              A passionate Computer Science Engineering Student at <a href="https://jyothyit.ac.in">Jyothy Institute of Technology</a> 
-              with hands-on experience in website designing/development and designing and I'm a quick learner, so will adapt to newer situations too.
-              Looking for an opportunity in full stack development, graphic designing and cloud computing.
-              Currently working as a Full Stack Web Developer Intern at <a href="https://letsbethechange.in">Let's Be The Change</a>.
+              Ever since I was a kid computers and software has been my passion and used to tinker
+              with hardware whenever I was free and that passion and love for computers has led me
+              to love coding and also designing.
+            </p>
+
+            <p>
+              A passionate Computer Science Engineering Student at{' '}
+              <a href="https://jyothyit.ac.in">Jyothy Institute of Technology</a>
+              with hands-on experience in website designing/development and designing and I'm a
+              quick learner, so will adapt to newer situations too. Looking for an opportunity in
+              full stack development, graphic designing and cloud computing. Currently working as a
+              Full Stack Web Developer Intern at{' '}
+              <a href="https://letsbethechange.in">Let's Be The Change</a>.
             </p>
 
             <p>Here are a few technologies I've been working with recently:</p>
