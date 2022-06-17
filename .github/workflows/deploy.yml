@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Deploy Website 🕸
 on:
   push:
     branches:
@@ -16,7 +16,5 @@ jobs:
       - name: Install and Build 🔧
         run: |
           yarn
-          npm run predeploy
-          git config user.email "Adithya Krishna"
-          git config user.email "adithyaakrishna@users.noreply.github.com"
+          npm run build
           npm run deploy
