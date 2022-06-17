@@ -18,13 +18,11 @@ jobs:
           git config user.email "Adithya Krishna"
           git config user.email "adithyaakrishna@users.noreply.github.com"
           yarn
-          npm run deploy
+          npm run build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           token: ${{secrets.GH_PAGES_DEPLOY_PAT}}
-          git-config-name: "Adithya Krishna"
-          git-config-email: adithyaakrishn@users.noreply.github.com
           branch: master
           folder: .
