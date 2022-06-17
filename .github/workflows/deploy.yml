@@ -15,6 +15,6 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           yarn
-          npm run build
           npm run deploy
