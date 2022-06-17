@@ -19,7 +19,9 @@ jobs:
           npm run deploy
 
       - name: Deploy 🚀
-        token: ${{GH_DEPLOY_PAT}}
+        token: ${{GH_PAGES_DEPLOY_PAT}}
+        permissions: 
+          contents: write
         git-config-name: "Adithya Krishna"
         git-config-email: adithyaakrishn@users.noreply.github.com
         uses: JamesIves/github-pages-deploy-action@v4.3.3
