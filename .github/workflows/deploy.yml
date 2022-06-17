@@ -24,5 +24,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           token: ${{secrets.GH_PAGES_DEPLOY_PAT}}
+          clean: false
           branch: master
           folder: .
