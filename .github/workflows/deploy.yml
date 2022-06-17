@@ -15,8 +15,8 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          npm ci
-          npm run build
+          yarn
+          npm run deploy
 
       - name: Deploy 🚀
         token: ${{GH_DEPLOY_PAT}}
