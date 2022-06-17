@@ -27,8 +27,6 @@ jobs:
         with:
           token: ${{secrets.GH_PAGES_DEPLOY_PAT}}
           repository: adithyaakrishna/adithyaakrishna.github.io
-          permissions: 
-            contents: write
           clean: false
           branch: master
           folder: .
