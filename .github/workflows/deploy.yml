@@ -12,21 +12,11 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GH_PAGES_DEPLOY_PAT }}
 
       - name: Install and Build 🔧
         run: |
+          yarn
+          npm run predeploy
           git config user.email "Adithya Krishna"
           git config user.email "adithyaakrishna@users.noreply.github.com"
-          yarn
-          npm run build
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
-        with:
-          token: ${{secrets.GH_PAGES_DEPLOY_PAT}}
-          repository: adithyaakrishna/adithyaakrishna.github.io
-          clean: false
-          branch: master
-          folder: .
+          npm run deploy
