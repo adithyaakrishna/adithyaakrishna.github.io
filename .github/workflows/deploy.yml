@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - source
-permissions: 
-  contents: write
 jobs:
   Build-N-Deploy:
     concurrency: ci-${{ github.ref }}
