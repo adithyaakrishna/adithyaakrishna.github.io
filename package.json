@@ -63,7 +63,7 @@
     "styled-components": "^4.4.0"
   },
   "devDependencies": {
-    "@upstatement/eslint-config": "0.4.3",
+    "@upstatement/eslint-config": "1.0.1",
     "@upstatement/prettier-config": "^0.3.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
