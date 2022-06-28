@@ -5814,17 +5814,17 @@ gatsby-plugin-netlify@^2.1.27:
     lodash "^4.17.15"
     webpack-assets-manifest "^3.1.1"
 
-gatsby-plugin-offline@^3.0.27:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-3.1.2.tgz#44e53459a3d04ca1fc432aee69c7c54358d2b4c6"
-  integrity sha512-RYX+tXO0/UGnhDCIcyloUD2veTqLUhOliNF7nyzYMEQKRtbqoIcJkYnJD5rfLWCvM5zqJgcIlr+lpFodA+yp6g==
+gatsby-plugin-offline@^3.10.2:
+  version "3.10.2"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-3.10.2.tgz#f17605ba567434908cc5ff33e702e26bf4a610fc"
+  integrity sha512-W67KLTtxDqaVHYmGBLuX6BwRvzIIiNjhoWEBw8VA1cM54QYyDykD+rXrs/mWCcBIiCQEj2xbuJc5jfdJh1Qptw==
   dependencies:
-    "@babel/runtime" "^7.8.7"
+    "@babel/runtime" "^7.12.5"
     cheerio "^1.0.0-rc.3"
-    gatsby-core-utils "^1.1.1"
+    gatsby-core-utils "^1.10.1"
     glob "^7.1.6"
     idb-keyval "^3.2.0"
-    lodash "^4.17.15"
+    lodash "^4.17.20"
     workbox-build "^4.3.1"
 
 gatsby-plugin-page-creator@^2.2.1:
@@ -8659,7 +8659,6 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
-
 
 lodash@^4.11.1, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
   version "4.17.21"
