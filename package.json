@@ -1,5 +1,5 @@
 {
-  "name": "v4",
+  "name": "adithya-krishna-portfolio-website",
   "homepage": "http://adithyaakrishna.github.io",
   "description": "Adithya Krishna",
   "version": "1.0.0",
@@ -15,7 +15,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "predeploy": "npm run build",
-    "deploy": "gatsby build && gh-pages -b master -d public"
+    "deploy": "gatsby build && gh-pages -b master -d public -u 'Adithya Krishna <23498248+adithyaakrishna@users.noreply.github.com>'"
   },
   "husky": {
     "hooks": {
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "animejs": "^3.1.0",
-    "babel-plugin-styled-components": "^1.10.6",
+    "babel-plugin-styled-components": "^2.0.7",
     "gatsby": "^2.18.7",
     "gatsby-image": "^2.2.34",
     "gatsby-plugin-google-analytics": "^2.1.29",
@@ -45,17 +45,17 @@
     "gatsby-plugin-sitemap": "^2.2.22",
     "gatsby-plugin-styled-components": "^3.1.14",
     "gatsby-remark-external-links": "0.0.4",
-    "gatsby-remark-images": "^3.1.35",
+    "gatsby-remark-images": "^3.11.1",
     "gatsby-remark-prismjs": "^3.3.25",
     "gatsby-source-filesystem": "^2.1.40",
     "gatsby-transformer-remark": "^2.6.39",
     "gatsby-transformer-sharp": "^2.3.7",
     "gh-pages": "^3.1.0",
-    "lodash": "^4.17.19",
-    "prismjs": "^1.17.1",
+    "lodash": "^4.17.21",
+    "prismjs": "^1.27.0",
     "prop-types": "^15.7.2",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-helmet": "^6.1.0",
     "react-transition-group": "^4.3.0",
     "scrollreveal": "^4.0.5",
@@ -68,11 +68,11 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.30.1",
     "gatsby-remark-code-titles": "^1.1.0",
     "husky": "^4.2.3",
     "lint-staged": "^10.1.2",
-    "prettier": "^2.0.4"
+    "prettier": "^2.3.2"
   }
 }

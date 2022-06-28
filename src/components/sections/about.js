@@ -136,7 +136,8 @@ const About = () => {
     'HTML & CSS/SCSS',
     'React-Native',
     'Firebase',
-    'MERN',
+    'Patternfly',
+    'Flutter',
     'AWS',
     'WordPress',
   ];
@@ -149,24 +150,28 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello! I'm Adithya Krishna, a Full Stack Developer &amp; designer based in Bangalore,
-              IN
+              Hello! I'm Adithya Krishna, an Associate Software Engineer at Red Hat and Maintainer
+              of{' '}
+              <a href="https://meshery.io" target="_blank" rel="noopener noreferrer">
+                Meshery
+              </a>
+              , a CNCF Sandbox Project. I am based out of Bengaluru, India
             </p>
 
             <p>
               Ever since I was a kid computers and software has been my passion and used to tinker
-              with hardware whenever I was free and that passion and love for computers has led me
-              to love coding and also designing.
+              with computer hardware whenever I was free and that passion and love for computers has
+              led me to love coding and also designing.
             </p>
 
             <p>
-              A passionate Computer Science Engineering Student at{' '}
-              <a href="https://jyothyit.ac.in">Jyothy Institute of Technology</a>
-              with hands-on experience in website designing/development and designing and I'm a
-              quick learner, so will adapt to newer situations too. Looking for an opportunity in
-              full stack development, graphic designing and cloud computing. Currently working as a
-              Full Stack Web Developer Intern at{' '}
-              <a href="https://letsbethechange.in">Let's Be The Change</a>.
+              A Software Enginner interested in Full Stack Development, UI/UX Design, App
+              Development and contributing to Open Source. Currently working as an Associate
+              Software Engineer at{' '}
+              <a href="https://redhat.com" target="_blank" rel="noopener noreferrer">
+                Red Hat
+              </a>
+              .
             </p>
 
             <p>Here are a few technologies I've been working with recently:</p>
