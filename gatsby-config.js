@@ -4,7 +4,7 @@ module.exports = {
   siteMetadata: {
     title: 'Adithya Krishna',
     description:
-      'Adithya Krishna is a Software Engineer based out of Bengaluru, IN.',
+      'Adithya Krishna is a Software Engineer based out of Bengaluru, India.',
     siteUrl: 'https://adithyaakrishna.github.io', // No trailing slash allowed!
     image: '/Adi.png', // Path to your image you placed in the 'static' folder
     twitterUsername: '@adii_kris',
