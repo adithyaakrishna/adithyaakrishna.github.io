@@ -32,11 +32,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install and Build 🔧
+      - name: Set URL 🔗
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
-      - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-      - if: steps.cache.outputs.cache-hit != 'true'
+        run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          
+      - name: Check Cache 🔒
+        if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
-      - run: npm run deploy
+
+      - name: Deploy to GH Pages Branch (main) 🔧
+        run: npm run deploy
