@@ -38,7 +38,7 @@ jobs:
         run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           
       - name: Check Cache 🔒
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'false'
         run: yarn install --frozen-lockfile
 
       - name: Deploy to GH Pages Branch (main) 🔧
