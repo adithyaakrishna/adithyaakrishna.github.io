@@ -13,7 +13,7 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
-      - name: Get yarn cache directory path
+      - name: Get yarn cache directory path # To get yarn cache path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
@@ -25,14 +25,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-#       - name: Set URL 🔗
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+      - name: Set URL 🔗 # To set repo URL to avoid errors like https://github.com/adithyaakrishna/adithyaakrishna.github.io/issues/83
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           
-      - name: Check Cache 🔒
+      - name: Check Cache 🔒 # Checks YARN cache and use it for dependencies install
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
-      - name: Deploy to GH Pages Branch (main) 🔧
+      - name: Deploy to GH Pages Branch (main) 🔧 # To deploy website to GH Pages
         run: npm run deploy
