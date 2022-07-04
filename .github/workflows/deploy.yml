@@ -13,11 +13,12 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
-      - name: Get yarn cache directory path # To get yarn cache path
+      - name: Get Yarn Cache 🔓 # To get yarn cache path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - uses: actions/cache@v3
+      - name: Cache Dependencies 🔒 # To cache yarn dependencies
+        uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -30,7 +31,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           
-      - name: Check Cache 🔒 # Checks YARN cache and use it for dependencies install
+      - name: Check Cache 👀 # Checks yarn cache and use it for dependencies install
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
