@@ -1,8 +1,10 @@
 name: Deploy Website 🕸
+
 on:
   push:
     branches:
       - source
+
 jobs:
   Build-N-Deploy:
     concurrency: ci-${{ github.ref }}
@@ -11,10 +13,29 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
+      - name: Cache Dependencies 🌐
+        uses: actions/setup-node@v3
+        with:
+          node-version: '10.13.0'
+          cache: 'yarn'
+          cache-dependency-path: '**/yarn-lock'
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
       - name: Install and Build 🔧
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          yarn
+          yarn install --frozen-lockfile
           npm run deploy
