@@ -12239,10 +12239,10 @@ scroll-behavior@^0.9.12:
     dom-helpers "^3.4.0"
     invariant "^2.2.4"
 
-scrollreveal@^4.0.5:
-  version "4.0.6"
-  resolved "https://registry.yarnpkg.com/scrollreveal/-/scrollreveal-4.0.6.tgz#4cb7d13cf95d4f8aeeb3fbae876caf07c7e54809"
-  integrity sha512-uXG2pYY5OWIk2XSsCYhv4yH1iypp4uM7H3jTdp0Q5+sTAwS6NYND3OY+7PTdTJVr1uzw6jLBcg4Vipwuxv+AiA==
+scrollreveal@^4.0.9:
+  version "4.0.9"
+  resolved "https://registry.yarnpkg.com/scrollreveal/-/scrollreveal-4.0.9.tgz#47866e1967ff604e64bac28818fe0dcea44f2c8b"
+  integrity sha512-fefGvzVS8YbXbDK1+T0kvy2yqxaiBJZeGUhPeqajf+7sGqtX4xikbKGAlzQuPCpswAMswx94ZwhDjXKnRIqW1w==
   dependencies:
     miniraf "1.0.0"
     rematrix "0.3.0"
