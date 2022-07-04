@@ -16,7 +16,7 @@ jobs:
       - name: Cache Dependencies 🌐
         uses: actions/setup-node@v3
         with:
-          node-version: '10.13.0'
+          node-version: '14'
           cache: 'yarn'
           cache-dependency-path: '**/yarn-lock'
 
