@@ -56,6 +56,20 @@ const GlobalStyle = createGlobalStyle`
     scroll-behavior: smooth;
   }
 
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--navy);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--dark-slate);
+    border: 3px solid var(--navy);
+    border-radius: 10px;
+  }
+
   *,
   *:before,
   *:after {
