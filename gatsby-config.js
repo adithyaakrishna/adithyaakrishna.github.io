@@ -19,8 +19,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'AdithyaKrishna',
-        short_name: 'AdiKris',
+        name: 'Adithya Krishna',
+        short_name: 'Adi Kris',
         start_url: '/',
         background_color: config.colors.darkNavy,
         theme_color: config.colors.navy,
