@@ -64,6 +64,7 @@ const StyledProject = styled.div`
     border-radius: var(--border-radius);
     background-color: var(--light-navy);
     transition: var(--transition);
+    overflow: auto;
   }
 
   .project-top {
@@ -134,7 +135,7 @@ const Projects = () => {
     query {
       projects: allMarkdownRemark(
         filter: {
-          fileAbsolutePath: { regex: "/projects/" }
+          fileAbsolutePath: { regex: "/content/projects/" }
           frontmatter: { showInProjects: { ne: false } }
         }
         sort: { fields: [frontmatter___date], order: DESC }

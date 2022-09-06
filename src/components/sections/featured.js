@@ -239,7 +239,7 @@ const Featured = () => {
   const data = useStaticQuery(graphql`
     query {
       featured: allMarkdownRemark(
-        filter: { fileAbsolutePath: { regex: "/featured/" } }
+        filter: { fileAbsolutePath: { regex: "/content/featured/" } }
         sort: { fields: [frontmatter___date], order: DESC }
       ) {
         edges {
@@ -292,9 +292,9 @@ const Featured = () => {
                   <h3 className="project-title">{title}</h3>
                   <div className="project-description" dangerouslySetInnerHTML={{ __html: html }} />
 
-                  {tech.length && (
+                  {tech?.length && (
                     <ul className="project-tech-list">
-                      {tech.map((tech, i) => (
+                      {tech?.map((tech, i) => (
                         <li key={i}>{tech}</li>
                       ))}
                     </ul>
