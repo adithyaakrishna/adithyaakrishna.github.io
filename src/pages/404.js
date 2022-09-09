@@ -12,10 +12,7 @@ const StyledMainContainer = styled.main`
   flex-direction: column;
 `;
 const StyledTitle = styled.h1`
-  // color: var(--red);
-  background: linear-gradient(to right, #3b82f6, #9333ea 70%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--red);
   font-family: var(--font-mono);
   font-size: clamp(100px, 25vw, 200px);
   line-height: 1;

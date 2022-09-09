@@ -141,10 +141,7 @@ const StyledTabContent = styled.div`
     font-weight: 500;
 
     .company {
-      // color: var(--red);
-      background: linear-gradient(to right, #3b82f6, #9333ea 70%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--red);
     }
   }
 

@@ -135,13 +135,7 @@ const StyledSidebar = styled.aside`
         content: '0' counter(item) '.';
         display: block;
         margin-bottom: 5px;
-        // // color: var(--red);
-background: linear-gradient(to right, #3b82f6, #9333ea 70%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-        background: linear-gradient(to right, #3b82f6, #9333ea 75%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: var(--red);
         font-size: var(--fz-sm);
       }
     }

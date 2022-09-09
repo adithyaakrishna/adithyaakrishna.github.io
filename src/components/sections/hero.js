@@ -12,10 +12,7 @@ const StyledHeroSection = styled.section`
 
   h1 {
     margin: 0 0 30px 4px;
-    // color: var(--red);
-    background: linear-gradient(to right, #3b82f6, #9333ea 70%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--red);
     font-family: var(--font-mono);
     font-size: clamp(var(--fz-sm), 5vw, var(--fz-md));
     font-weight: 400;
