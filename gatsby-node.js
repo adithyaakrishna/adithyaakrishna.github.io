@@ -8,11 +8,9 @@ const path = require('path');
 const _ = require('lodash');
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
-  const { createPage } = actions;
+  const { createPage, createRedirect } = actions;
   const postTemplate = path.resolve(`src/templates/post.js`);
   const tagTemplate = path.resolve('src/templates/tag.js');
-
-  const { createRedirect } = actions;
 
   createRedirect({
     fromPath: `/console-log/*`,
