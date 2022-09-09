@@ -15,9 +15,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createRedirect } = actions;
 
   createRedirect({
-    fromPath: `/console-log`,
+    fromPath: `/console-log/*`,
     toPath: `https://adithyaakrishna.notion.site/96eab65068354b4ab1b69bae6c12df5d`,
-    statusCode: 200,
+    statusCode: 404,
   });
 
   const result = await graphql(`
