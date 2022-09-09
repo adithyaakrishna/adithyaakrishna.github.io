@@ -38,7 +38,10 @@ const StyledText = styled.div`
         content: '▹';
         position: absolute;
         left: 0;
-        color: var(--red);
+        // color: var(--red);
+        background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         font-size: var(--fz-sm);
         line-height: 12px;
       }

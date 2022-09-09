@@ -87,7 +87,10 @@ const StyledProject = styled.div`
 
   .project-overline {
     margin: 10px 0;
-    color: var(--red);
+    // color: var(--red);
+    background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-family: var(--font-mono);
     font-size: var(--fz-xs);
     font-weight: 400;

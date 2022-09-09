@@ -22,7 +22,10 @@ const SkipToContentLink = styled.a`
     outline: 0;
     border-radius: var(--border-radius);
     background-color: var(--light-navy);
-    color: var(--red);
+    // color: var(--red);
+    background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-family: var(--font-mono);
     font-size: var(--fz-sm);
     line-height: 1;

@@ -2,6 +2,9 @@ import { css } from 'styled-components';
 
 const button = css`
   color: var(--red);
+  // background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+  // -webkit-background-clip: text;
+  // -webkit-text-fill-color: transparent;
   background-color: transparent;
   border: 1px solid var(--red);
   border-radius: var(--border-radius);
@@ -48,7 +51,10 @@ const mixins = {
     &:hover,
     &:active,
     &:focus {
-      color: var(--red);
+      // color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
       outline: 0;
     }
   `,
@@ -60,11 +66,17 @@ const mixins = {
     position: relative;
     transition: var(--transition);
     cursor: pointer;
-    color: var(--red);
+    // color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
     &:hover,
     &:focus,
     &:active {
-      color: var(--red);
+      // color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
       outline: 0;
       &:after {
         width: 100%;
@@ -81,7 +93,10 @@ const mixins = {
       height: 1px;
       position: relative;
       bottom: 0.37em;
-      background-color: var(--red);
+      background-// color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
       transition: var(--transition);
       opacity: 0.5;
     }
@@ -90,7 +105,10 @@ const mixins = {
   button,
 
   smallButton: css`
-    color: var(--red);
+    // color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
     background-color: transparent;
     border: 1px solid var(--red);
     border-radius: var(--border-radius);
@@ -112,7 +130,10 @@ const mixins = {
   `,
 
   bigButton: css`
-    color: var(--red);
+    // color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
     background-color: transparent;
     border: 1px solid var(--red);
     border-radius: var(--border-radius);
@@ -156,7 +177,10 @@ const mixins = {
         content: '▹';
         position: absolute;
         left: 0;
-        color: var(--red);
+        // color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
       }
     }
   `,

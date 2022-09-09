@@ -208,7 +208,10 @@ const GlobalStyle = createGlobalStyle`
       counter-increment: section;
       content: '0' counter(section) '.';
       margin-right: 10px;
-      color: var(--red);
+      // color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
       font-family: var(--font-mono);
       font-size: clamp(var(--fz-md), 3vw, var(--fz-xl));
       font-weight: 400;
@@ -272,7 +275,10 @@ const GlobalStyle = createGlobalStyle`
 
     &:hover,
     &:focus {
-      color: var(--red);
+      // color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
     }
 
     &.inline-link {
@@ -336,14 +342,20 @@ const GlobalStyle = createGlobalStyle`
           content: '▹';
           position: absolute;
           left: 0;
-          color: var(--red);
+          // color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
         }
       }
     }
   }
 
   blockquote {
-    border-left-color: var(--red);
+    border-left-// color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
     border-left-style: solid;
     border-left-width: 1px;
     margin-left: 0px;
@@ -372,18 +384,27 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #logo {
-    color: var(--red);
+    // color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
   }
 
   .overline {
-    color: var(--red);
+    // color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
     font-family: var(--font-mono);
     font-size: var(--fz-md);
     font-weight: 400;
   }
 
   .subtitle {
-    color: var(--red);
+    // color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
     margin: 0 0 20px 0;
     font-size: var(--fz-md);
     font-family: var(--font-mono);
@@ -406,7 +427,10 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     align-items: center;
     margin-bottom: 50px;
-    color: var(--red);
+    // color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 
     .arrow {
       display: block;

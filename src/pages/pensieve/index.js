@@ -106,7 +106,10 @@ const StyledTags = styled.ul`
   list-style: none;
 
   li {
-    color: var(--red);
+    // color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
     font-family: var(--font-mono);
     font-size: var(--fz-xxs);
     line-height: 1.75;

@@ -15,7 +15,10 @@ const StyledContactSection = styled.section`
   .overline {
     display: block;
     margin-bottom: 20px;
-    color: var(--red);
+    // color: var(--red);
+    background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-family: var(--font-mono);
     font-size: var(--fz-md);
     font-weight: 400;

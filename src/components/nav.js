@@ -64,7 +64,10 @@ const StyledNav = styled.nav`
     ${({ theme }) => theme.mixins.flexCenter};
 
     a {
-      color: var(--red);
+      // color: var(--red);
+      background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       width: 42px;
       height: 42px;
 
@@ -110,7 +113,10 @@ const StyledLinks = styled.div`
         &:before {
           content: '0' counter(item) '.';
           margin-right: 5px;
-          color: var(--red);
+          // color: var(--red);
+background: linear-gradient(to right, #3b82f6, #9333ea 70%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
           font-size: var(--fz-xxs);
           text-align: right;
         }
