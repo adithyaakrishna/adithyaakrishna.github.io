@@ -15,7 +15,8 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "predeploy": "npm run build",
-    "deploy": "gatsby build && gh-pages -b master -d public -m 'GitHub Pages Auto Deploy' -u 'Adithya Krishna <23498248+adithyaakrishna@users.noreply.github.com>'"
+    "deploy": "gatsby build && gh-pages -b master -d public -m 'GitHub Pages Auto Deploy' -u 'Adithya Krishna <23498248+adithyaakrishna@users.noreply.github.com>'",
+    "audit:fix": "npx yarn-audit-fix"
   },
   "husky": {
     "hooks": {
@@ -72,6 +73,7 @@
     "gatsby-remark-code-titles": "^1.1.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "yarn-audit-fix": "^9.3.5"
   }
 }
