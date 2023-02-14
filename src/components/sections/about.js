@@ -164,7 +164,7 @@ const About = () => {
             </p>
 
             <p>
-              A Software Enginner interested in Full Stack Development, UI/UX Design, App
+              A Software Engineer interested in Full Stack Development, UI/UX Design, App
               Development and contributing to Open Source. Currently working as an Associate
               Software Engineer at{' '}
               <a href="https://redhat.com" target="_blank" rel="noopener noreferrer">
