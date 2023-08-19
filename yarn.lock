@@ -2895,12 +2895,12 @@
   resolved "https://registry.yarnpkg.com/@upstatement/eslint-config/-/eslint-config-2.0.0.tgz#aa13edf5b9c8d2767be79da98298dc26079af823"
   integrity sha512-+rSTYjoHwrS5SCK8v3s6aQCkYmogrPzq7lCUMOL5DcvgEqC7YwH8wKgNUdKMCor0rzBmdsmYrmSEBx2TrxlXUg==
 
-"@upstatement/prettier-config@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@upstatement/prettier-config/-/prettier-config-0.3.0.tgz#cf34332dfba90c7586cd0bde134b7fc771163323"
-  integrity sha512-/DCKpd5tsgZ7Mshb7MSLdFkPRXHxZhzEKJP9ZW58ix0ARw1nbrcdbyiovHEutiQqmh4OjdLJjIAJ2MVUiEaB+Q==
+"@upstatement/prettier-config@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@upstatement/prettier-config/-/prettier-config-1.1.0.tgz#89eac0050d82721a4e02e9b58ff3bf5ecb226639"
+  integrity sha512-+APvCz1OOuRxvo9flQz6+mTrxy2Vaq4N0Zng9lYAaPQP5cAskFB4b1Eyil58FKvM/+d/NIhwvlWsq5jq7UtaFg==
   dependencies:
-    prettier "^1.x.x"
+    prettier "^2.x.x"
 
 "@vercel/webpack-asset-relocator-loader@^1.7.0":
   version "1.7.3"
@@ -11100,12 +11100,7 @@ prepend-http@^2.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
 
-prettier@^1.x.x:
-  version "1.19.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
-  integrity sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
-
-prettier@^2.8.8:
+prettier@^2.8.8, prettier@^2.x.x:
   version "2.8.8"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
   integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
