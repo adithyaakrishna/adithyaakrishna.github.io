@@ -48,7 +48,7 @@
     "gatsby-remark-external-links": "0.0.4",
     "gatsby-remark-images": "^3.11.1",
     "gatsby-remark-prismjs": "^3.13.0",
-    "gatsby-source-filesystem": "^2.11.1",
+    "gatsby-source-filesystem": "^5.11.0",
     "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^2.3.7",
     "gh-pages": "^5.0.0",
