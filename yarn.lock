@@ -3848,7 +3848,7 @@ cheerio-select@^2.1.0:
     domhandler "^5.0.3"
     domutils "^3.0.1"
 
-cheerio@^1.0.0-rc.10, cheerio@^1.0.0-rc.3:
+cheerio@^1.0.0-rc.10:
   version "1.0.0-rc.12"
   resolved "https://registry.yarnpkg.com/cheerio/-/cheerio-1.0.0-rc.12.tgz#788bf7466506b1c6bf5fae51d24a2c4d62e47683"
   integrity sha512-VqR8m68vM46BNnuZ5NtnGBKIE/DfN0cRIzg9n40EIq9NOv90ayxLBXA8fXC5gquFRGJSTRqBq25Jt2ECLR431Q==
@@ -6127,7 +6127,7 @@ gatsby-cli@^4.25.0:
     yoga-layout-prebuilt "^1.10.0"
     yurnalist "^2.1.0"
 
-gatsby-core-utils@^1.1.1, gatsby-core-utils@^1.10.1:
+gatsby-core-utils@^1.10.1:
   version "1.10.1"
   resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.10.1.tgz#97bed40df3fa79800e7ce0c0491680f0aadd6ce7"
   integrity sha512-4P3feGCJckg+DRWWl2beFk7N9c63zmCryEGPaU1OHCp+ZT2bO0ihCBuXywDWuuEp6SYP9PZ1fs0YJ/Rt6q6lag==
@@ -6280,17 +6280,17 @@ gatsby-plugin-netlify@^5.1.0:
     lodash.mergewith "^4.6.2"
     webpack-assets-manifest "^5.0.6"
 
-gatsby-plugin-offline@^3.0.27:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-3.1.2.tgz#44e53459a3d04ca1fc432aee69c7c54358d2b4c6"
-  integrity sha512-RYX+tXO0/UGnhDCIcyloUD2veTqLUhOliNF7nyzYMEQKRtbqoIcJkYnJD5rfLWCvM5zqJgcIlr+lpFodA+yp6g==
+gatsby-plugin-offline@^5.25.0:
+  version "5.25.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-5.25.0.tgz#d3ef5b5067f8d0b73b508221b858af8ced105e8c"
+  integrity sha512-WqAcnYvMpL1xwXF5Jf9BXTihLNktuqQHFUX0TPsQVJrmfjSNv4LxhgiWfeUuGiCO881EOHClXnBn6TqxIdS4EA==
   dependencies:
-    "@babel/runtime" "^7.8.7"
-    cheerio "^1.0.0-rc.3"
-    gatsby-core-utils "^1.1.1"
-    glob "^7.1.6"
+    "@babel/runtime" "^7.15.4"
+    cheerio "^1.0.0-rc.10"
+    gatsby-core-utils "^3.25.0"
+    glob "^7.2.3"
     idb-keyval "^3.2.0"
-    lodash "^4.17.15"
+    lodash "^4.17.21"
     workbox-build "^4.3.1"
 
 gatsby-plugin-page-creator@^4.25.0:
