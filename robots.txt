@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://adithyaakrishna.github.io/sitemap.xml
+Sitemap: https://adithyaakrishna.github.io/sitemap-index.xml
 Host: https://adithyaakrishna.github.io
