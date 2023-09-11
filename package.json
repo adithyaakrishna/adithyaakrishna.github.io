@@ -74,6 +74,6 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "yarn-audit-fix": "^9.3.6"
+    "yarn-audit-fix": "^10.0.1"
   }
 }
