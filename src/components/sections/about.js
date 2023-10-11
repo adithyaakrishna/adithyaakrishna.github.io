@@ -163,7 +163,11 @@ const About = () => {
           </div>
 
           <ul className="skills-list">
-            {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
+            <li><strong style={{color: 'white'}}>Languages:</strong> TypeScript, JavaScript, Python, GoLang, HTML, CSS, Dart, Java, WebAssembly</li>
+            <li><strong style={{color: 'white'}}>Libraries/Frameworks:</strong> ReactJS, NodeJS, Tensorflow, Jest, Flutter</li>
+            <li><strong style={{color: 'white'}}>Databases:</strong> MySQL, MongoDB, Firebase</li>
+            <li><strong style={{color: 'white'}}>Design:</strong> Adobe Photoshop, Illustrator, Xd, Figma</li>
+            <li><strong style={{color: 'white'}}>Tools:</strong> Kubernetes, Docker, Git, GCP, AWS, JIRA, Confluence, Apache Solr, Apache TomCat, GitHub Actions</li>
           </ul>
         </StyledText>
 
