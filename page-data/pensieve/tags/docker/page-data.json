@@ -2,4 +2,4 @@
     "componentChunkName": "component---src-templates-tag-js",
     "path": "/pensieve/tags/docker/",
     "result": {"data":{"allMarkdownRemark":{"totalCount":1,"edges":[{"node":{"frontmatter":{"title":"Docker Compose Error","description":"docker-compose version discrepancies","date":"2019-12-13","slug":"/pensieve/docker-error","tags":["WordPress","Docker"]}}}]}},"pageContext":{"tag":"Docker"}},
-    "staticQueryHashes": ["1994492073","2009693873","2835448309","3422390981","3825832676"]}
+    "staticQueryHashes": ["1994492073","2009693873","3825832676","4112399270","4162897811"]}
