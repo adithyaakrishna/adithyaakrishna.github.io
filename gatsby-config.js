@@ -6,12 +6,13 @@ module.exports = {
     description:
       'Adithya Krishna is a Software Engineer based out of Bengaluru, India.',
     siteUrl: 'https://adithyaakrishna.github.io', // No trailing slash allowed!
-    image: '/Adi.png', // Path to your image you placed in the 'static' folder
+    image: '/adi.png', // Path to your image you placed in the 'static' folder
     twitterUsername: '@adii_kris',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-styled-components`,
+    `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sitemap`,
