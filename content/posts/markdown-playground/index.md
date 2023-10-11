@@ -141,7 +141,7 @@ ul {
     float: left;
     margin-right: 10px;
     .home {
-      background: url('http://placehold.it/20') scroll no-repeat 0 0;
+      background: url('https://placehold.it/20') scroll no-repeat 0 0;
     }
   }
 }
@@ -176,12 +176,12 @@ a {
 ```markdown
 # hello world
 
-you can write text [with links](http://example.com) inline or [link references][1].
+you can write text [with links](https://example.com) inline or [link references][1].
 
 - one _thing_ has *em*phasis
 - two **things** are **bold**
 
-[1]: http://example.com
+[1]: https://example.com
 
 ---
 
@@ -322,21 +322,21 @@ Paragraph:
 
     ---------------------------------------
 
-This is [an example](http://example.com 'Example') link.
+This is [an example](https://example.com 'Example') link.
 
-[This link](http://example.com) has no title attr.
+[This link](https://example.com) has no title attr.
 
 This is [an example][id] reference-style link.
 
-[id]: http://example.com 'Optional Title'
+[id]: https://example.com 'Optional Title'
 
-    This is [an example](http://example.com "Example") link.
+    This is [an example](https://example.com "Example") link.
 
-    [This link](http://example.com) has no title attr.
+    [This link](https://example.com) has no title attr.
 
     This is [an example] [id] reference-style link.
 
-    [id]: http://example.com "Optional Title"
+    [id]: https://example.com "Optional Title"
 
 _single asterisks_
 

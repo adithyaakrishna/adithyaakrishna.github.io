@@ -1,7 +1,7 @@
 import React from 'react';
 
 const IconCodepen = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 31.665 31.665">
+  <svg xmlns="https://www.w3.org/2000/svg" role="img" viewBox="0 0 31.665 31.665">
     <title>Codepen</title>
     <path
       d="M16.878,0.415c-0.854-0.565-1.968-0.552-2.809,0.034L1.485,9.214c-0.671,0.468-1.071,1.233-1.071,2.052v9.444

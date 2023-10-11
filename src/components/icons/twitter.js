@@ -1,7 +1,7 @@
 import React from 'react';
 
 const IconTwitter = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 612 612">
+  <svg xmlns="https://www.w3.org/2000/svg" role="img" viewBox="0 0 612 612">
     <title>Twitter</title>
     <path
       d="M612,116.258c-22.525,9.981-46.694,16.75-72.088,19.772c25.929-15.527,45.777-40.155,55.184-69.411

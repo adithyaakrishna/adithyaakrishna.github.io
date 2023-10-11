@@ -2,7 +2,7 @@
 date: '2020-04-20'
 title: 'GouSwarga Website'
 github: ''
-external: 'http://gouswarga.org/'
+external: 'https://gouswarga.org/'
 tech:
   - HTML
   - CSS

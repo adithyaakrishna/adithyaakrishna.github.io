@@ -11,6 +11,7 @@ url: 'https://www.redhat.com/'
 - Created and Implemented custom components using extensions of React, TypeScript, and Patternfly
 - Streamlined and implemented new workflow for opening cases and for an overall better user experience
 - Working on implementing a history feature for cases, similar to Reddit’s comments
+
 - ***Skills:** HTML · JavaScript · CSS · React.js · TypeScript
 
 - **Promotions:** Associate Software Engineer-L1 (Oct 2023) - Software Engineer-L2 (Present)
