@@ -1,6 +1,6 @@
 ---
 date: '2021-07-01'
-title: 'Associate Software Engineer'
+title: 'Software Engineer'
 company: 'Red Hat'
 location: 'Bangalore, IN'
 range: 'July 2021 - Present'
