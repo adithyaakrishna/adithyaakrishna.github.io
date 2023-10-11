@@ -5,6 +5,7 @@ company: 'Red Hat'
 location: 'Bangalore, IN'
 range: 'July 2021 - Present'
 url: 'https://www.redhat.com/'
+index: 9
 ---
 
 - Improved GitLab pipeline speeds by writing custom stages and coverage scripts by 25%

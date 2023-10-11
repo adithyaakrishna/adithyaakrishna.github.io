@@ -5,6 +5,7 @@ company: 'Layer5'
 location: 'Remote, United States'
 range: 'March 2021 - August 2023'
 url: 'https://layer5.io/'
+index: 5
 ---
 
 - Working on Layer5 Website to improve its UI and also work on the general issues of the overall site

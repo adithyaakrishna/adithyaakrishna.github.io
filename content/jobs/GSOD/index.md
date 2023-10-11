@@ -5,6 +5,7 @@ company: 'WasmEdge - Google Season of Docs'
 location: 'Bangalore, IN'
 range: 'May 2023 - Present'
 url: 'https://wasmedge.org/'
+index: 7
 ---
 
 - ***Skills:** Markdown · WebAssembly · TypeScript

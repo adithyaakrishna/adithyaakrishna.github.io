@@ -5,6 +5,7 @@ company: 'Cloud Native Computing Foundation (CNCF)'
 location: 'Remote, United States'
 range: 'Aug 2021 - Present'
 url: 'https://meshery.io/'
+index: 8
 ---
 
 - Improved Meshery's (a CNCF Sandbox Project) Documentation

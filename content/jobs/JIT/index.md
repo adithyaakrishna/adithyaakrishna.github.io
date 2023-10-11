@@ -5,6 +5,7 @@ company: 'Jyothy Institute of Technology'
 location: 'Bangalore, IN'
 range: 'August 2018 - March 2020'
 url: 'https://jyothyit.ac.in'
+index: 3
 ---
 
 - Designed Posters, Flexes, Banners for College’s Fest using Adobe Photoshop, Illustrator.

@@ -5,6 +5,7 @@ company: 'OpenChemistry - Google Summer of Code'
 location: 'Bangalore, IN'
 range: 'May 2023 - August 2023'
 url: 'https://openchemistry.org/'
+index: 6
 ---
 
 - **Project Title:** Improve and Enhance 3DMol.js
