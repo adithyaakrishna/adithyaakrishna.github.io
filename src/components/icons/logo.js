@@ -9,7 +9,7 @@ const IconLogo = () => (
           <text
             id="A"
             transform="translate(0 62)"
-            fill="#FE3E57"
+            fill="#29bc89"
             fontSize="50"
             fontFamily="Roboto-Medium, Roboto"
             fontWeight="500">

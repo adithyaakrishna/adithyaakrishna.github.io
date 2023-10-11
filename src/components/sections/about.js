@@ -114,9 +114,9 @@ const StyledPic = styled.div`
 const About = () => {
   const data = useStaticQuery(graphql`
     query {
-      avatar: file(sourceInstanceName: { eq: "images" }, relativePath: { eq: "me.jpg" }) {
+      avatar: file(sourceInstanceName: { eq: "images" }, relativePath: { eq: "Adi.jpeg" }) {
         childImageSharp {
-          fluid(maxWidth: 500, traceSVG: { color: "#64ffda" }) {
+          fluid(maxWidth: 500, traceSVG: { color: "#29bc89" }) {
             ...GatsbyImageSharpFluid_withWebp_tracedSVG
           }
         }
@@ -133,7 +133,7 @@ const About = () => {
   const skills = [
     'React',
     'HTML & CSS/SCSS',
-    'React-Native',
+    'TypeScript',
     'Firebase',
     'Patternfly',
     'Flutter',
@@ -149,28 +149,17 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello! I'm Adithya Krishna, an Associate Software Engineer at Red Hat and Maintainer
+              ನಮಸ್ಕಾರ! I'm Adithya, a Software Engineer at Red Hat and Maintainer
               of{' '}
               <a href="https://meshery.io" target="_blank" rel="noopener noreferrer">
                 Meshery
               </a>
-              , a CNCF Sandbox Project. I am based out of Bengaluru, India
-            </p>
-
-            <p>
-              Ever since I was a kid computers and software has been my passion and used to tinker
-              with computer hardware whenever I was free and that passion and love for computers has
-              led me to love coding and also designing.
+              , a CNCF Sandbox Project. I'm based out of Bengaluru, India
             </p>
 
             <p>
               A Software Engineer interested in Full Stack Development, UI/UX Design, App
-              Development and contributing to Open Source. Currently working as an Associate
-              Software Engineer at{' '}
-              <a href="https://redhat.com" target="_blank" rel="noopener noreferrer">
-                Red Hat
-              </a>
-              .
+              Development and contributing to Open Source.
             </p>
 
             <p>Here are a few technologies I've been working with recently:</p>
