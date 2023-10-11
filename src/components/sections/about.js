@@ -20,8 +20,8 @@ const StyledAboutSection = styled.section`
 `;
 const StyledText = styled.div`
   ul.skills-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(140px, 200px));
+    // display: grid;
+    // grid-template-columns: repeat(2, minmax(140px, 200px));
     padding: 0;
     margin: 20px 0 0 0;
     overflow: hidden;
@@ -131,14 +131,11 @@ const About = () => {
   }, []);
 
   const skills = [
-    'React',
-    'HTML & CSS/SCSS',
-    'TypeScript',
-    'Firebase',
-    'Patternfly',
-    'Flutter',
-    'AWS',
-    'WordPress',
+    'Languages: TypeScript, JavaScript, Python, GoLang, HTML, CSS, Dart, Java, WebAssembly',
+    'Libraries/Frameworks: ReactJS, NodeJS, Tensorflow, Jest, Flutter',
+    'Databases: MySQL, MongoDB, Firebase',
+    'Design: Adobe Photoshop, Illustrator, Xd, Figma',
+    'Tools: Kubernetes, Docker, Git, GCP, AWS, JIRA, Confluence, Apache Solr, Apache TomCat, GitHub Actions'
   ];
 
   return (
