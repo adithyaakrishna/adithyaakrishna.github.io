@@ -143,13 +143,13 @@ const About = () => {
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
-      <h2 className="numbered-heading">About Me</h2>
+      <h2 className="numbered-heading">ನಮಸ್ಕಾರ</h2>
 
       <div className="inner">
         <StyledText>
           <div>
             <p>
-              ನಮಸ್ಕಾರ! I'm Adithya, a Software Engineer at Red Hat and Maintainer
+              I'm Adithya, a Software Engineer at Red Hat and Maintainer
               of{' '}
               <a href="https://meshery.io" target="_blank" rel="noopener noreferrer">
                 Meshery
