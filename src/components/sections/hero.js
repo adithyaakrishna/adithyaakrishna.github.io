@@ -54,12 +54,12 @@ const Hero = () => {
   // const three = <h3 className="big-heading">I design &amp; build your ideas into reality</h3>;
   const four = (
     <p>
-      I'm a Web Developer &amp; Designer based in Bangalore, IN
+      I'm a Software Engineer based out of Bengaluru, India 🇮🇳 
     </p>
   );
   const five = (
     <a href={`mailto:${email}`} className="email-link">
-      Get In Touch
+      Say Hi :)
     </a>
   );
 
