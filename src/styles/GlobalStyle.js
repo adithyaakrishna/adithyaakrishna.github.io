@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
     --lightest-slate: #ffffff;
     --white: #e6f1ff;
     --red: #29bc89;
-    --red-tint: #29bc89cf;
+    --red-tint: #43504b;
 
     --font-sans: 'Calibre', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
     --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
