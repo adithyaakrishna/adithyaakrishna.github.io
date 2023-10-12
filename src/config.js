@@ -1,5 +1,5 @@
 module.exports = {
-  email: 'aadithya794[at]gmail[dot]com',
+  email: 'aadithya794@gmail.com',
 
   socialMedia: [
     {
@@ -10,10 +10,6 @@ module.exports = {
       name: 'Linkedin',
       url: 'https://www.linkedin.com/in/adiiikris',
     },
-    // {
-    //   name: 'Codepen',
-    //   url: 'https://codepen.io/bchiang7',
-    // },
     {
       name: 'Instagram',
       url: 'https://www.instagram.com/adiiikris',
@@ -38,12 +34,12 @@ module.exports = {
       url: '/#projects',
     },
     {
-      name: 'Contact',
-      url: '/#contact',
-    },
-    {
       name: 'Archive',
       url: '/archive',
+    },
+    {
+      name: 'Contact',
+      url: '/#contact',
     },
   ],
 
