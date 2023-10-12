@@ -1,5 +1,5 @@
 ---
-date: '4'
+date: '3'
 title: 'XPLOR'
 cover: './xplor.png'
 github: 'https://github.com/cchirag/xplor'

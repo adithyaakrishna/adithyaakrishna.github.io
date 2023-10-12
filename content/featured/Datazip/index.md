@@ -1,5 +1,5 @@
 ---
-date: '3'
+date: '2'
 title: 'Datazip'
 cover: './Datazip.png'
 github: 'https://github.com/adithyaakrishna/ksp-submission/tree/datazip'
