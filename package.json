@@ -1,11 +1,13 @@
 {
-  "name": "adithya-krishna-portfolio-website",
-  "homepage": "https://adithyaakrishna.github.io",
+  "name": "adikris-portfolio",
+  "homepage": "https://adikris.in",
   "description": "Adithya Krishna",
   "version": "1.0.0",
-  "author": "Adithya Krishna <aadithya794[at]gmail[dot]com>",
+  "author": "Adithya Krishna",
   "keywords": [
-    "gatsby"
+    "gatsby",
+    "react",
+    "portfolio"
   ],
   "scripts": {
     "build": "gatsby build",
