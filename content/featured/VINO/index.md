@@ -1,5 +1,5 @@
 ---
-date: '1'
+date: '2'
 title: 'VINO'
 cover: './vino.png'
 github: 'https://github.com/adithyaakrishna/vino'
