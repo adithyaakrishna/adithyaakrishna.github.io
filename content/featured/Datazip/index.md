@@ -8,7 +8,8 @@ tech:
   - Keras
   - Python
   - ReactJS
-showInProjects: false
+company: 'Hackathon Project'
+showInProjects: true
 ---
 
 An E2E solution to scan criminal databases and suggest the closest match to the fingerprint and face data of a criminal using Tensorflow and Keras.

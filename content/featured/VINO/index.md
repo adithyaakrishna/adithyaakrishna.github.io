@@ -7,7 +7,8 @@ tech:
   - Tensorflow
   - Pattern Recognition
   - Flutter
-showInProjects: false
+company: 'Personal Project'
+showInProjects: true
 ---
 
 A mobile app built using flutter, tensorflow for VIN number and Odometer recognition

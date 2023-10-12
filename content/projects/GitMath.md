@@ -7,7 +7,7 @@ tech:
   - Flutter
   - Dart
   - Firebase
-company: 'Personal Project'
+company: 'Hackathon Project'
 showInProjects: true
 ---
 

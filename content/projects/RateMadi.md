@@ -6,7 +6,7 @@ external: 'https://ratemadi.com/'
 tech:
   - React
   - SASS
-company: ''
+company: 'Bounce'
 showInProjects: true
 ---
 

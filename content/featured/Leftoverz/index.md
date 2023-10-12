@@ -8,7 +8,8 @@ tech:
   - Firebase
   - Adobe Xd
   - Photoshop
-showInProjects: false
+company: 'Hackathon Project'
+showInProjects: true
 ---
 
 An App for needy people across a city to get leftover food from hotels or other persons along with a feature to connect with other similar people.

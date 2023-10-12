@@ -7,7 +7,7 @@ tech:
   - HTML
   - CSS
   - JavaScript
-company: 'Ramachandrapura Mata'
+company: 'Ramachandrapura Mata - Volunteer'
 showInProjects: true
 ---
 
