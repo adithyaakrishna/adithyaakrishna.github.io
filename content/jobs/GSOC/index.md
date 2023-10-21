@@ -12,4 +12,4 @@ index: 6
 - **Project Details:** [https://summerofcode.withgoogle.com/programs/2023/projects/r2fhQb5e](https://summerofcode.withgoogle.com/programs/2023/projects/r2fhQb5e)
 - **Project Work:** [GitHub Gist](https://gist.github.com/adithyaakrishna/33c35519edaa8cac130ec4a96800c93f)
 
-- **<span style="color:white">Skills</span>** GitHub Actions · JavaScript · TypeScript · WebGL
+- **<span style="color:white">Skills:</span>** GitHub Actions · JavaScript · TypeScript · WebGL

@@ -13,4 +13,4 @@ index: 5
 - Meshery was Taken up as a Sandbox Project at CNCF, https://www.cncf.io/sandbox-projects/ along with Service Mesh Interface and Service Mesh Performance
 - Member Role - [Official Link](https://layer5.io/community/members/adithya-krishna)
 
-- **<span style="color:white">Skills</span>** Go (Programming Language) · React.js
+- **<span style="color:white">Skills:</span>** Go (Programming Language) · React.js
