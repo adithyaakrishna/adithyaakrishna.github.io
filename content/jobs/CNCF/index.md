@@ -16,4 +16,4 @@ index: 8
 - Implemented end-to-end functionalities using ReactJS, and JavaScript after gathering requirements and design feedback
 - Maintainership Role - [Official Link](https://github.com/meshery/meshery/blob/master/MAINTAINERS.md#docs-maintainers)
 
-- <strong style={{color: 'white'}}>Skills:</strong> Go (Programming Language) · React.js
+- ***Skills:** Go (Programming Language) · React.js
