@@ -130,6 +130,14 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
+  const skills = [
+    'Languages: TypeScript, JavaScript, Python, GoLang, HTML, CSS, Dart, Java, WebAssembly',
+    'Libraries/Frameworks: ReactJS, NodeJS, Tensorflow, Jest, Flutter',
+    'Databases: MySQL, MongoDB, Firebase',
+    'Design: Adobe Photoshop, Illustrator, Xd, Figma',
+    'Tools: Kubernetes, Docker, Git, GCP, AWS, JIRA, Confluence, Apache Solr, Apache TomCat, GitHub Actions'
+  ];
+
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
       <h2 className="numbered-heading">ನಮಸ್ಕಾರ</h2>
