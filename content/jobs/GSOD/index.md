@@ -13,4 +13,4 @@ index: 7
 - Contribution Guide: Create a comprehensive contribution guide for WasmEdge projects covering topics like project setup, workflow, and more.
 - Enhancements to Documentation: Improve documentation by adding missing page, using images, flowcharts, and architecture diagrams, and updating the landing page.
 
-- **<span style="color:blue">Skills</span>** Markdown · WebAssembly · TypeScript
+- **<span style="color:white">Skills</span>** Markdown · WebAssembly · TypeScript
