@@ -9,8 +9,9 @@ index: 8
 ---
 
 - Improved Meshery's (a CNCF Sandbox Project) Documentation
-- Worked on Meshery UI, the service mesh management plane on improving it’s UI
-- Reviewed Multiple PRs from many contributors suggesting changes and improvements
+- Implemented UI features to communicate with Kubernetes APIs from scratch using ReactJS, Material UI, and NextJS
+- Improved and wrote technical docs related to Service Meshes, Envoy Proxy and ProtoBuf
+- Improved front-end UI feature facilitating seamless communication with Grafana and Prometheus dashboards
 - Worked on Adding new Features to the Documentation Site
 - Helped onboard new contributors by helping them set up the project and giving KT about the overall contribution flow
 - Implemented end-to-end functionalities using ReactJS, and JavaScript after gathering requirements and design feedback

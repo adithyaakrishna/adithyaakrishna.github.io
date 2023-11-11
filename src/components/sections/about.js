@@ -146,7 +146,7 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              I'm Adithya, a Software Engineer at Red Hat and Maintainer
+              I'm Adithya, a Software Engineer at Red Hat and a Maintainer
               of{' '}
               <a href="https://meshery.io" target="_blank" rel="noopener noreferrer">
                 Meshery
@@ -155,8 +155,7 @@ const About = () => {
             </p>
 
             <p>
-              A Software Engineer interested in Full Stack Development, UI/UX Design, App
-              Development and contributing to Open Source.
+              A Software Engineer passionate about Frontend Development and Distributed Systems, with a keen interest in UI/UX Design, Full Stack Development, and contributing to Open Source projects.
             </p>
 
             <p>Here are a few technologies I've been working with recently:</p>

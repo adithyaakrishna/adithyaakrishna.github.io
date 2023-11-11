@@ -8,12 +8,16 @@ url: 'https://www.redhat.com/'
 index: 9
 ---
 
+- Implemented a feature to request a remote session through the frontend UI
+- Streamlined and implemented new workflow for the creation of cases, thus enhancing the overall user experience
+- Contributed to CEPH and Red Hat OpenShift
+- Working on the development of a history feature catering to scenarios involving extensive historical data, resembling the commenting system found on Reddit
 - Improved GitLab pipeline speeds by writing custom stages and coverage scripts by 25%
-- Created and Implemented custom components using extensions of React, TypeScript, and Patternfly
-- Streamlined and implemented new workflow for opening cases and for an overall better user experience
-- Working on implementing a history feature for cases, similar to Reddit’s comments
+- Increased overall unit test coverage of the application
+- Revamped the UI of a Feedback form
+- Contributed to Kong Service Mesh
 
-- **<span style="color:white">Skills:</span>** HTML · JavaScript · CSS · React.js · TypeScript
+- **<span style="color:white">Skills:</span>** HTML · JavaScript · CSS · React.js · TypeScript · GoLang · Python
 
 - **<span style="color:white">Promotion:</span>** Associate Software Engineer-L1 (Nov 2021 - Sept 2023) - Software Engineer-L2 (Oct 2023 - Present)
 - **<span style="color:white">FTE:</span>** Intern (July 2021 - Oct 2021) - Associate Software Engineer-L1 (Nov 2021)
