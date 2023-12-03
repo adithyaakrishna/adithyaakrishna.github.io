@@ -7,6 +7,8 @@ on:
 jobs:
   countIssues:
     runs-on: ubuntu-latest
+    env:
+      MY_ENV_VARIABLE: ${{ secrets.MY_ACCESS_TOKEN }}
     steps:
       - name: Set up Node.js
         uses: actions/setup-node@v4
