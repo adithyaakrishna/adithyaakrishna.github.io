@@ -15,7 +15,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const comment = context.payload.comment.body.trim();
-            const regex = /^\/issue-count (\S+)/;
+            const regex = /^\/issue-count @(\S+)/;
             const match = comment.match(regex);
             if (match) {
               const username = match[1];
