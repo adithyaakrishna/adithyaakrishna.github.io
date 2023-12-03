@@ -8,7 +8,7 @@ jobs:
   countIssues:
     runs-on: ubuntu-latest
     env:
-      MY_ENV_VARIABLE: ${{ secrets.MY_ACCESS_TOKEN }}
+      MY_ENV_VARIABLE: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -22,10 +22,10 @@ jobs:
         id: parse-comment
         uses: actions/github-script@v5
         with:
-          github-token: ${{ secrets.MY_ACCESS_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { Octokit } = require("@octokit/rest");
-            const octokit = new Octokit({ auth: ${{ secrets.MY_ACCESS_TOKEN }} });
+            const octokit = new Octokit({ auth: ${{ secrets.GITHUB_TOKEN }} });
             
             const comment = context.payload.comment.body.trim();
             const regex = /^\/issue-count @(\S+)/;
