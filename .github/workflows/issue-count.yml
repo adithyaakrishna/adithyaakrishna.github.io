@@ -1,22 +1,4 @@
-name: "Issue Count"
-
-on:
-  issue_comment:
-    types: [created]
-
-jobs:
-  countIssues:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          
-      - name: Install Octokit
-        run: npm install @octokit/rest@18
-        
-      - name: Parse comment and count issues
+- name: Parse comment and count issues
         id: parse-comment
         uses: actions/github-script@v5
         with:
@@ -33,7 +15,9 @@ jobs:
               const username = match[1];
               console.log(`Username extracted: ${username}`);
               
-              const { data: issues } = await octokit.issues.listForAuthenticatedUser({
+              const { data: issues } = await octokit.issues.listForRepo({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
                 assignee: username,
                 state: 'open'
               });
