@@ -10,7 +10,7 @@ on:
 jobs:
   label_issues:
     runs-on: ubuntu-latest
-    if: github.repository == 'adithyaakrishna/adithyaakrishna'
+    if: github.repository == 'adithyaakrishna/adithyaakrishna.github.io'
     permissions:
       issues: write
     steps:
