@@ -23,7 +23,7 @@ jobs:
           github-token: ${{ secrets.MY_ACCESS_TOKEN }}
           script: |
             const { Octokit } = require("@octokit/rest");
-            const octokit = new Octokit({ auth: process.env.MY_ACCESS_TOKEN });
+            const octokit = new Octokit({ auth: process.env.github-token });
             
             const comment = context.payload.comment.body.trim();
             const regex = /^\/issue-count @(\S+)/;
