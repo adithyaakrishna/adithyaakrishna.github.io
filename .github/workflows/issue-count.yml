@@ -20,10 +20,10 @@ jobs:
         id: parse-comment
         uses: actions/github-script@v5
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.MY_ACCESS_TOKEN }}
           script: |
             const { Octokit } = require("@octokit/rest");
-            const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+            const octokit = new Octokit({ auth: process.env.MY_ACCESS_TOKEN });
             
             const comment = context.payload.comment.body.trim();
             const regex = /^\/issue-count @(\S+)/;
