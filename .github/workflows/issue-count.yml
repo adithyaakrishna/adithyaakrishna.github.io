@@ -21,7 +21,6 @@ jobs:
               const username = match[1];
               return { username, issueCommentId: context.payload.comment.id };
             }
-            return {};
 
       - name: Get issue count
         if: steps.parse-comment.outputs.username
