@@ -10,37 +10,49 @@ jobs:
     steps:
       - name: Parse comment
         id: parse-comment
-        run: |
-          comment=$(jq --raw-output .comment.body $GITHUB_EVENT_PATH)
-          regex="^/issue-count @(\S+)"
-          if [[ $comment =~ $regex ]]; then
-            username="${BASH_REMATCH[1]}"
-            echo "::set-output name=username::$username"
-            issueCommentId=$(jq --raw-output .comment.id $GITHUB_EVENT_PATH)
-            echo "::set-output name=issueCommentId::$issueCommentId"
-          else
-            echo "No valid username found in the comment"
-          fi
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const comment = context.payload.comment.body.trim();
+            const regex = /^\/issue-count @(\S+)/;
+            const match = comment.match(regex);
+            if (match) {
+              const username = match[1];
+              console.log(`Username extracted: ${username}`);
+              const issueCommentId = context.payload.comment.id;
+              console.log(`Issue comment ID: ${issueCommentId}`);
+              console.log(`::set-output name=username::${username}`);
+              console.log(`::set-output name=issueCommentId::${issueCommentId}`);
+            } else {
+              console.log('No valid username found in the comment');
+            }
 
       - name: Get issue count
         if: steps.parse-comment.outputs.username
-        run: |
-          username="${{ steps.parse-comment.outputs.username }}"
-          issueCommentId="${{ steps.parse-comment.outputs.issueCommentId }}"
-          echo "Retrieved username for issue count: $username"
-          echo "Retrieved issueCommentId: $issueCommentId"
-          const { data: issues } = await github.issues.listForRepo({
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const username = context.payload.outputs.username;
+            const issueCommentId = context.payload.outputs.issueCommentId;
+            console.log(`Retrieved username for issue count: ${username}`);
+            console.log(`Retrieved issueCommentId: ${issueCommentId}`);
+            
+            const { data: issues } = await github.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
               assignee: username,
               state: 'open'
             });
+            
             const issueCount = issues.length;
             const issueCountMessage = `@${username} has ${issueCount} open issues assigned.`;
+            
             await github.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body: issueCountMessage,
-                in_reply_to: parseInt(issueCommentId)
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: issueCountMessage,
+              in_reply_to: parseInt(issueCommentId)
             });
