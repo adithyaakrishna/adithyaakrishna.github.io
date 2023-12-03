@@ -26,10 +26,11 @@ jobs:
               console.log(`::set-output name=issueCommentId::${issueCommentId}`);
             } else {
               console.log('No valid username found in the comment');
+              process.exit(1); // Exit with error if no valid username found
             }
 
       - name: Get issue count
-        if: steps.parse-comment.outputs.username
+        if: ${{ steps.parse-comment.outputs.username != '' }}
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -38,6 +39,11 @@ jobs:
             const issueCommentId = context.payload.outputs.issueCommentId;
             console.log(`Retrieved username for issue count: ${username}`);
             console.log(`Retrieved issueCommentId: ${issueCommentId}`);
+            
+            if (!username || !issueCommentId) {
+              console.log('Missing username or issueCommentId');
+              process.exit(1); // Exit with error if username or issueCommentId is missing
+            }
             
             const { data: issues } = await github.issues.listForRepo({
               owner: context.repo.owner,
