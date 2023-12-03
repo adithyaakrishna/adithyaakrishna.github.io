@@ -1,0 +1,49 @@
+name: "Issue Count"
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  countIssues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Parse comment
+        id: parse-comment
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const comment = context.payload.comment.body.trim();
+            const regex = /^\/issue-count (\S+)/;
+            const match = comment.match(regex);
+            if (match) {
+              const username = match[1];
+              return { username, issueCommentId: context.payload.comment.id };
+            }
+            return {};
+
+      - name: Get issue count
+        if: steps.parse-comment.outputs.username
+        id: get-issue-count
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const username = steps.parse-comment.outputs.username;
+            const issueCommentId = steps.parse-comment.outputs.issueCommentId;
+            const { data: issues } = await github.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              assignee: username,
+              state: 'open'
+            });
+            const issueCount = issues.length;
+            const issueCountMessage = `@${username} has ${issueCount} open issues assigned.`;
+            await github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: issueCountMessage,
+              in_reply_to: issueCommentId
+            });
