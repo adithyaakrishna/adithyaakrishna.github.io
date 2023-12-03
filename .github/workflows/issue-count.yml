@@ -7,6 +7,9 @@ on:
 jobs:
   countIssues:
     runs-on: ubuntu-latest
+    outputs:
+      username: ${{ steps.parse-comment.outputs.username }}
+      issueCommentId: ${{ steps.parse-comment.outputs.issueCommentId }}
     steps:
       - name: Parse comment
         id: parse-comment
@@ -22,15 +25,14 @@ jobs:
               console.log(`Username extracted: ${username}`);
               const issueCommentId = context.payload.comment.id;
               console.log(`Issue comment ID: ${issueCommentId}`);
-              console.log(`::set-output name=username::${username}`);
-              console.log(`::set-output name=issueCommentId::${issueCommentId}`);
+              return { username, issueCommentId };
             } else {
               console.log('No valid username found in the comment');
-              process.exit(1); // Exit with error if no valid username found
+              return { username: '', issueCommentId: '' };
             }
 
       - name: Get issue count
-        if: ${{ steps.parse-comment.outputs.username != '' }}
+        if: ${{ needs.parse-comment.result == 'success' && needs.parse-comment.outputs.username != '' }}
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
