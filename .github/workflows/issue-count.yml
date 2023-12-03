@@ -14,16 +14,18 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const { Octokit } = require("@octokit/rest");
+            const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+            
             const comment = context.payload.comment.body.trim();
             const regex = /^\/issue-count @(\S+)/;
             const match = comment.match(regex);
+            
             if (match) {
               const username = match[1];
               console.log(`Username extracted: ${username}`);
               
-              const { data: issues } = await github.issues.listForRepo({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
+              const { data: issues } = await octokit.issues.listForAuthenticatedUser({
                 assignee: username,
                 state: 'open'
               });
@@ -36,7 +38,7 @@ jobs:
               
               const issueCountMessage = `@${username} has ${issueCount} open issues assigned.`;
               
-              await github.issues.createComment({
+              await octokit.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
