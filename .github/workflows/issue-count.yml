@@ -56,6 +56,7 @@ jobs:
                 headers: {
                     'X-GitHub-Api-Version': '2022-11-28'
                 }
+            });
             } else {
               console.log('No valid username found in the comment');
             }
