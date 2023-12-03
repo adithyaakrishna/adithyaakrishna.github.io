@@ -20,7 +20,10 @@ jobs:
             if (match) {
               const username = match[1];
               console.log(`Username extracted: ${username}`);
-              return { username, issueCommentId: context.payload.comment.id };
+              const issueCommentId = context.payload.comment.id;
+              console.log(`Issue comment ID: ${issueCommentId}`);
+              console.log(`::set-output name=username::${username}`);
+              console.log(`::set-output name=issueCommentId::${issueCommentId}`);
             } else {
               console.log('No valid username found in the comment');
             }
@@ -54,5 +57,5 @@ jobs:
               repo: context.repo.repo,
               issue_number: context.issue.number,
               body: issueCountMessage,
-              in_reply_to: issueCommentId
+              in_reply_to: parseInt(issueCommentId)
             });
