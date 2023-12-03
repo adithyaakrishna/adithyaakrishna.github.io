@@ -20,24 +20,8 @@ jobs:
             const comment = context.payload.comment.body.trim();
             const regex = /^\/issue-count @(\S+)/;
             const match = comment.match(regex);
-            if (match) {
-              const username = match[1];
-              console.log(`Username extracted: ${username}`);
-              const issueCommentId = context.payload.comment.id;
-              console.log(`Issue comment ID: ${issueCommentId}`);
-              return { username, issueCommentId };
-            } else {
-              console.log('No valid username found in the comment');
-              return { username: '', issueCommentId: '' };
-            }
-            console.log(`Retrieved username for issue count: ${username}`);
-            console.log(`Retrieved issueCommentId: ${issueCommentId}`);
-            
-            if (!username || !issueCommentId) {
-              console.log('Missing username or issueCommentId');
-              process.exit(1); // Exit with error if username or issueCommentId is missing
-            }
-            
+            const username = match[1];
+            const issueCommentId = context.payload.comment.id;
             const { data: issues } = await github.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
