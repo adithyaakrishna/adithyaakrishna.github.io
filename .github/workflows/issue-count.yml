@@ -30,15 +30,6 @@ jobs:
               console.log('No valid username found in the comment');
               return { username: '', issueCommentId: '' };
             }
-
-      - name: Get issue count
-        if: ${{ needs.parse-comment.result == 'success' && needs.parse-comment.outputs.username != '' }}
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const username = context.payload.outputs.username;
-            const issueCommentId = context.payload.outputs.issueCommentId;
             console.log(`Retrieved username for issue count: ${username}`);
             console.log(`Retrieved issueCommentId: ${issueCommentId}`);
             
