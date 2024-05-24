@@ -132,10 +132,10 @@ const About = () => {
 
   const skills = [
     'Languages: TypeScript, JavaScript, Python, GoLang, HTML, CSS, Dart, Java, WebAssembly',
-    'Libraries/Frameworks: ReactJS, NodeJS, Tensorflow, Jest, Flutter',
+    'Libraries/Frameworks: NextJS, ReactJS, NodeJS, Tensorflow, Jest, Flutter',
     'Databases: MySQL, MongoDB, Firebase',
     'Design: Adobe Photoshop, Illustrator, Xd, Figma',
-    'Tools: Kubernetes, Docker, Git, GCP, AWS, JIRA, Confluence, Apache Solr, Apache TomCat, GitHub Actions'
+    'Tools: Prisma, Kubernetes, Docker, Git, GCP, AWS, JIRA, Confluence, Apache Solr, Apache TomCat, GitHub Actions'
   ];
 
   return (
