@@ -68,7 +68,7 @@
   "devDependencies": {
     "@babel/core": "^7.23.2",
     "@babel/eslint-parser": "^7.13.14",
-    "@babel/preset-react": "^7.13.13",
+    "@babel/preset-react": "^7.23.3",
     "@upstatement/eslint-config": "^1.0.0",
     "@upstatement/prettier-config": "^1.0.0",
     "babel-preset-gatsby": "^1.4.0",
