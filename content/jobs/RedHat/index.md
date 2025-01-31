@@ -3,7 +3,7 @@ date: '2021-07-01'
 title: 'Software Engineer - L2'
 company: 'Red Hat'
 location: 'Bangalore, IN'
-range: 'July 2021 - Present'
+range: 'July 2021 - November 2023'
 url: 'https://www.redhat.com/'
 index: 9
 ---
@@ -17,7 +17,7 @@ index: 9
 - Revamped the UI of a Feedback form
 - Contributed to Kong Service Mesh
 
-- **<span style="color:white">Skills:</span>** HTML · JavaScript · CSS · React.js · TypeScript · GoLang · Python
+- **<span style="color:white">Skills:</span>** HTML · JavaScript · CSS · ReactJS · TypeScript · GoLang · Python
 
 - **<span style="color:white">Promotion:</span>** Associate Software Engineer-L1 (Nov 2021 - Sept 2023) - Software Engineer-L2 (Oct 2023 - Present)
 - **<span style="color:white">FTE:</span>** Intern (July 2021 - Oct 2021) - Associate Software Engineer-L1 (Nov 2021)

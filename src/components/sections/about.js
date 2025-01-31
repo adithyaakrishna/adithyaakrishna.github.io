@@ -162,11 +162,11 @@ const About = () => {
           </div>
 
           <ul className="skills-list">
-            <li><strong style={{color: 'white'}}>Languages:</strong> TypeScript, JavaScript, Python, GoLang, HTML, CSS, Dart, Java, WebAssembly</li>
-            <li><strong style={{color: 'white'}}>Libraries/Frameworks:</strong> ReactJS, NodeJS, Tensorflow, Jest, Flutter</li>
+            <li><strong style={{ color: 'white' }}>Languages:</strong> TypeScript, JavaScript, HTML, CSS, Python, GoLang, WebAssembly</li>
+            <li><strong style={{color: 'white'}}>Libraries/Frameworks:</strong> ReactJS, NextJS, Jest, React Testing Library, Playwright</li>
             <li><strong style={{color: 'white'}}>Databases:</strong> MySQL, MongoDB, Firebase</li>
             <li><strong style={{color: 'white'}}>Design:</strong> Adobe Photoshop, Illustrator, Xd, Figma</li>
-            <li><strong style={{color: 'white'}}>Tools:</strong> Kubernetes, Docker, Git, GCP, AWS, JIRA, Confluence, Apache Solr, Apache TomCat, GitHub Actions</li>
+            <li><strong style={{ color: 'white' }}>Tools:</strong> Kubernetes (Familiar), Docker (Familiar), Git, GCP, AWS, JIRA, Confluence, Apache Solr, Apache TomCat, GitHub Actions</li>
           </ul>
         </StyledText>
 
