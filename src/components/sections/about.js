@@ -146,16 +146,47 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              I'm Adithya, a Software Engineer at Red Hat and a Maintainer
-              of{' '}
-              <a href="https://meshery.io" target="_blank" rel="noopener noreferrer">
-                Meshery
+              I'm Adithya Krishna, a Full-stack developer by day and a framework tinkerer by night. I currently work with{' '}
+              <a href="https://tensorlake.ai" target="_blank" rel="noopener noreferrer">
+                TensorLake AI
               </a>
-              , a CNCF Sandbox Project. I'm based out of Bengaluru, India
+              , building the UI for next-gen AI Infrastructure catering to generative AI applications.
             </p>
 
             <p>
-              I'm passionate about Frontend Development and Distributed Systems, with a keen interest in UI/UX Design, Full Stack Development, and contributing to Open Source projects.
+              Previously, I worked as a SWE-II at{' '}
+              <a href="https://documenso.com" target="_blank" rel="noopener noreferrer">
+                Documenso
+              </a>
+              {' '}for ~7 months, and started my career at{' '}
+              <a href="https://redhat.com" target="_blank" rel="noopener noreferrer">
+                Red Hat
+              </a>
+              {' '}(~2.5 years) with the Customer Portal team.
+            </p>
+
+            <p>
+              I was a Google Season of Docs (GSoD '23) Technical Writer at{' '}
+              <a href="https://github.com/WasmEdge" target="_blank" rel="noopener noreferrer">
+                WasmEdge
+              </a>
+              {' '}and a Google Summer of Code (GSoC '23) Developer at{' '}
+              <a href="https://openchemistry.org" target="_blank" rel="noopener noreferrer">
+                OpenChemistry
+              </a>
+              , where I worked on the{' '}
+              <a href="https://github.com/3dmol/3Dmol.js" target="_blank" rel="noopener noreferrer">
+                3DMol.js
+              </a>
+              {' '}library.
+            </p>
+
+            <p>
+              I'm also a Maintainer of{' '}
+              <a href="https://meshery.io" target="_blank" rel="noopener noreferrer">
+                Meshery
+              </a>
+              , a CNCF Sandbox Project, where I contribute to UI, GitHub Actions, documentation, and code reviews.
             </p>
 
             <p>Here are a few technologies I've been working with recently:</p>
