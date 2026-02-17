@@ -1,7 +1,9 @@
 const THEME_MODE = 'light';
+const THEME_ANIMATION_SHAPE = 'fade';
 
 module.exports = {
   THEME_MODE,
+  THEME_ANIMATION_SHAPE,
   email: 'aadithya794@gmail.com',
 
   socialMedia: [

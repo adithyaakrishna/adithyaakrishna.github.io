@@ -6,6 +6,10 @@ import PrismStyles from './PrismStyles';
 const GlobalStyle = createGlobalStyle`
   ${Fonts};
 
+  [data-theme-transitioning] * {
+    transition: none !important;
+  }
+
   :root {
     --c-red: #D94838;
     --c-cream: #121212;

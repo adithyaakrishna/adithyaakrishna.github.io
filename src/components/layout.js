@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { ThemeProvider } from 'styled-components';
 import { Head, Nav, Social, Email, Footer } from '@components';
 import { GlobalStyle, theme } from '@styles';
+import { ThemeProvider as AppThemeProvider } from '../context/ThemeContext';
 
 const SkipToContentLink = styled.a`
   position: absolute;
@@ -76,8 +77,9 @@ const Layout = ({ children, location }) => {
       <Head />
 
       <div id="root">
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
+        <AppThemeProvider>
+          <ThemeProvider theme={theme}>
+            <GlobalStyle />
 
           <SkipToContentLink href="#content">Skip to Content</SkipToContentLink>
 
@@ -95,7 +97,8 @@ const Layout = ({ children, location }) => {
               </div>
             </StyledContent>
           )}
-        </ThemeProvider>
+          </ThemeProvider>
+        </AppThemeProvider>
       </div>
     </>
   );

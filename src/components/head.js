@@ -41,8 +41,11 @@ const Head = ({ title, description, image }) => {
     url: `${siteUrl}${pathname}`,
   };
 
+  const themeInitScript = `(function(){var t=localStorage.getItem('theme')||'${THEME_MODE}';document.documentElement.setAttribute('data-theme',t);})();`;
+
   return (
     <Helmet title={title} defaultTitle={seo.title} titleTemplate={`%s | ${defaultTitle}`}>
+      <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       <html lang="en" data-theme={THEME_MODE} />
 
       <link rel="preconnect" href="https://fonts.googleapis.com" />

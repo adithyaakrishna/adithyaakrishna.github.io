@@ -26,6 +26,8 @@ const StyledLeftRail = styled.aside`
   padding: 40px 0;
   z-index: 100;
   background: var(--c-cream);
+  transform: translateZ(0);
+  backface-visibility: hidden;
 
   @media (max-width: 768px) {
     display: none;

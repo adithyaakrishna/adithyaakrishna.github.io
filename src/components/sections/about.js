@@ -3,6 +3,7 @@ import { useStaticQuery, graphql, Link } from 'gatsby';
 import styled from 'styled-components';
 import { gsap } from 'gsap';
 import { email } from '@config';
+import { useTheme } from '../../context/ThemeContext';
 
 const StyledArticlePanel = styled.section`
   width: 100vw;
@@ -25,6 +26,8 @@ const StyledArticlePanel = styled.section`
     border-right: 2px solid var(--border-color-subtle);
     flex-shrink: 0;
     overflow-y: auto;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 
     @media (max-width: 1080px) {
       width: 240px;
@@ -211,6 +214,36 @@ const StyledArticlePanel = styled.section`
 
       &:hover {
         color: var(--c-red);
+      }
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .theme-toggle-btn {
+      font-family: var(--font-code);
+      font-size: 0.7rem;
+      padding: 6px 12px;
+      background: transparent;
+      border: 1px solid var(--border-color-subtle);
+      color: var(--c-ink);
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s, border-color 0.3s;
+
+      &:hover {
+        color: var(--c-red);
+        border-color: var(--c-red);
+      }
+
+      &.active {
+        color: var(--c-red);
+        border-color: var(--c-red);
       }
     }
   }
@@ -523,6 +556,7 @@ const StyledArticlePanel = styled.section`
 `;
 
 const About = ({ contentAreaRef, onBackToHero }) => {
+  const { theme, changeThemeWithReveal } = useTheme();
   const data = useStaticQuery(graphql`
     query {
       jobs: allMarkdownRemark(
@@ -723,13 +757,13 @@ const About = ({ contentAreaRef, onBackToHero }) => {
           <header className="article-header">
             <h1>
               <span className="header-line">
-                <span className="header-inner">Crafting</span>
+                <span className="header-inner">Performance.</span>
               </span>
               <span className="header-line">
-                <span className="header-inner">Efficient Digital</span>
+                <span className="header-inner">Clarity.</span>
               </span>
               <span className="header-line">
-                <span className="header-inner">Experiences</span>
+                <span className="header-inner">Craft.</span>
               </span>
             </h1>
           </header>
@@ -878,6 +912,24 @@ const About = ({ contentAreaRef, onBackToHero }) => {
                 <a href="https://adikris.in/blog">Blog</a>
               </li>
             </ul>
+          </div>
+
+          <div className="annotation-item reveal-anno">
+            <strong>Theme</strong>
+            <div className="theme-toggle">
+              <button
+                type="button"
+                className={`theme-toggle-btn ${theme === 'light' ? 'active' : ''}`}
+                onClick={e => changeThemeWithReveal('light', e)}>
+                Light
+              </button>
+              <button
+                type="button"
+                className={`theme-toggle-btn ${theme === 'dark' ? 'active' : ''}`}
+                onClick={e => changeThemeWithReveal('dark', e)}>
+                Dark
+              </button>
+            </div>
           </div>
         </aside>
       </div>
