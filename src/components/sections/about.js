@@ -113,6 +113,7 @@ const StyledArticlePanel = styled.section`
     overflow-y: auto;
     scroll-behavior: smooth;
     padding: 60px 0;
+    -webkit-overflow-scrolling: touch;
 
     &::-webkit-scrollbar {
       width: 4px;
@@ -125,7 +126,8 @@ const StyledArticlePanel = styled.section`
     }
 
     @media (max-width: 768px) {
-      padding-left: 80px;
+      padding: 30px 0;
+      flex-direction: column;
     }
   }
 
@@ -202,6 +204,27 @@ const StyledArticlePanel = styled.section`
     }
   }
 
+  .mobile-back {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-code);
+      font-size: 0.7rem;
+      color: var(--c-red);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+      padding: 8px 0;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+  }
+
   .article-header h1 {
     font-family: var(--font-display);
     font-size: clamp(2.5rem, 5vw, 4.2rem);
@@ -210,6 +233,11 @@ const StyledArticlePanel = styled.section`
     margin-bottom: 60px;
     color: white;
     max-width: 800px;
+
+    @media (max-width: 768px) {
+      font-size: clamp(1.8rem, 8vw, 2.5rem);
+      margin-bottom: 40px;
+    }
   }
 
   .portfolio-section {
@@ -222,7 +250,7 @@ const StyledArticlePanel = styled.section`
 
   .recommendations {
     margin: 80px 0 0 0 !important;
-    padding: 50px 0 0 0 !important;
+    padding: 50px 0 50px 0 !important;
     max-width: 720px;
     width: 100%;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -321,6 +349,11 @@ const StyledArticlePanel = styled.section`
     align-items: baseline;
     gap: 1rem;
     flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 0.2rem;
+    }
   }
 
   .exp-body {
@@ -348,6 +381,11 @@ const StyledArticlePanel = styled.section`
     margin-bottom: 0.5rem;
     gap: 1rem;
     flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
   }
 
   .item-title {
@@ -356,6 +394,10 @@ const StyledArticlePanel = styled.section`
     font-weight: 600;
     color: white;
     margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 1.1rem;
+    }
   }
 
   .item-meta {
@@ -364,6 +406,15 @@ const StyledArticlePanel = styled.section`
     color: var(--c-subtle);
     white-space: nowrap;
     letter-spacing: 0.5px;
+    transition: color 0.2s;
+
+    @media (max-width: 768px) {
+      font-size: 0.65rem;
+    }
+
+    &:hover {
+      color: var(--c-red);
+    }
   }
 
   .item-subtitle {
@@ -424,8 +475,9 @@ const StyledArticlePanel = styled.section`
     grid-template-columns: 1fr 1fr;
     gap: 30px;
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       grid-template-columns: 1fr;
+      gap: 16px;
     }
   }
 
@@ -586,6 +638,9 @@ const About = () => {
 
       <div className="content-area" ref={contentRef}>
         <div className="article-column">
+          <button className="mobile-back" onClick={handleBackClick}>
+            &larr; Back to Home
+          </button>
           <header className="article-header">
             <h1>
               Curating

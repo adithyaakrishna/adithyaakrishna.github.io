@@ -158,7 +158,9 @@ const IndexPage = ({ location }) => {
       isTransitioning = true;
       currentPanel = panel;
       container.style.transform = `translateX(-${panel * 100}vw)`;
-      indicator.style.height = `${panel * window.innerHeight}px`;
+      if (indicator) {
+        indicator.style.height = `${panel * window.innerHeight}px`;
+      }
       setTimeout(() => {
         isTransitioning = false;
       }, 750);
@@ -197,8 +199,40 @@ const IndexPage = ({ location }) => {
       }
     };
 
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    const handleTouchStart = evt => {
+      touchStartX = evt.touches[0].clientX;
+      touchStartY = evt.touches[0].clientY;
+    };
+
+    const handleTouchEnd = evt => {
+      const touchEndX = evt.changedTouches[0].clientX;
+      const touchEndY = evt.changedTouches[0].clientY;
+      const diffX = touchStartX - touchEndX;
+      const diffY = touchStartY - touchEndY;
+
+      // Only handle horizontal swipes (ignore vertical scroll)
+      if (Math.abs(diffX) < 50 || Math.abs(diffX) < Math.abs(diffY)) return;
+
+      if (currentPanel === 0 && diffX > 0) {
+        goToPanel(1);
+      } else if (currentPanel === 1 && diffX < 0) {
+        // On article panel, only swipe back if content is at top
+        const articlePanel = document.getElementById('article-panel');
+        const contentArea = articlePanel?.querySelector('.content-area');
+        if (contentArea && contentArea.scrollTop <= 1) {
+          goToPanel(0);
+        }
+      }
+    };
+
     document.addEventListener('wheel', handleWheel, { passive: false });
     document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     return () => {
       document.body.style.overflow = '';
@@ -206,6 +240,8 @@ const IndexPage = ({ location }) => {
       document.documentElement.style.overflow = '';
       document.removeEventListener('wheel', handleWheel);
       document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchend', handleTouchEnd);
     };
   }, []);
 

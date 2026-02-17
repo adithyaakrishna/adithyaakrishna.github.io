@@ -22,7 +22,8 @@ const StyledHeroSection = styled.section`
   margin: 0;
 
   @media (max-width: 768px) {
-    padding-left: var(--layout-padding);
+    padding: 24px;
+    padding-top: 40px;
   }
 
   .hero-meta {
@@ -35,6 +36,12 @@ const StyledHeroSection = styled.section`
     gap: 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
     padding-top: 1rem;
+
+    @media (max-width: 768px) {
+      font-size: 0.7rem;
+      max-width: 100%;
+      gap: 0.6rem;
+    }
   }
 
   .hero-title {
@@ -46,7 +53,13 @@ const StyledHeroSection = styled.section`
     letter-spacing: -2px;
     margin-top: 2rem;
     color: #ffffff;
+
+    @media (max-width: 768px) {
+      font-size: clamp(2.2rem, 12vw, 4rem);
+      letter-spacing: -1px;
+    }
   }
+
   .hero-subtitle-2 {
     font-family: var(--font-code);
     font-size: 1.2rem;
@@ -55,6 +68,11 @@ const StyledHeroSection = styled.section`
     max-width: 700px;
     opacity: 0.9;
     color: #ffffff;
+
+    @media (max-width: 768px) {
+      font-size: 0.95rem;
+      margin-top: 1rem;
+    }
   }
 
   .hero-subtitle {
@@ -68,7 +86,9 @@ const StyledHeroSection = styled.section`
     line-height: 1.3;
 
     @media (max-width: 768px) {
-      font-size: 1.4rem;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+      line-height: 1.5;
     }
   }
 
@@ -78,6 +98,11 @@ const StyledHeroSection = styled.section`
     letter-spacing: 4px;
     opacity: 0.5;
     text-transform: uppercase;
+
+    @media (max-width: 768px) {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+    }
   }
 `;
 
