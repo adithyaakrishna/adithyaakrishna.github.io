@@ -17,7 +17,7 @@ const StyledLeftRail = styled.aside`
   top: 0;
   bottom: 0;
   width: 80px;
-  border-right: var(--border-width) solid rgba(255, 255, 255, 0.1);
+  border-right: var(--border-width) solid var(--border-color);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,7 +68,7 @@ const StyledLeftRail = styled.aside`
   .rail-divider {
     width: 1px;
     height: 50px;
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--rail-divider);
     margin: 20px 0;
   }
 
@@ -108,8 +108,8 @@ const StyledRightRail = styled.aside`
   top: 0;
   bottom: 0;
   width: 60px;
-  background: #1a1a1a;
-  border-left: var(--border-width) solid rgba(255, 255, 255, 0.1);
+  background: var(--rail-right-bg);
+  border-left: var(--border-width) solid var(--border-color);
   z-index: 100;
 
   @media (max-width: 768px) {

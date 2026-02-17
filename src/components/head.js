@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useLocation } from '@reach/router';
 import { useStaticQuery, graphql } from 'gatsby';
+import { THEME_MODE } from '@config';
 
 // https://www.gatsbyjs.com/docs/add-seo-component/
 
@@ -42,7 +43,7 @@ const Head = ({ title, description, image }) => {
 
   return (
     <Helmet title={title} defaultTitle={seo.title} titleTemplate={`%s | ${defaultTitle}`}>
-      <html lang="en" />
+      <html lang="en" data-theme={THEME_MODE} />
 
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

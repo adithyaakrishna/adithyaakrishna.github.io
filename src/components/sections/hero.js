@@ -11,9 +11,9 @@ const StyledHeroSection = styled.section`
   position: relative;
   display: flex;
   flex-direction: column;
-  border-right: var(--border-width) solid rgba(255, 255, 255, 0.1);
+  border-right: var(--border-width) solid rgba(255, 255, 255, 0.2);
   background-color: var(--c-red);
-  color: #ffffff;
+  color: var(--hero-text);
   padding: var(--layout-padding);
   padding-left: calc(var(--layout-padding) + 80px);
   justify-content: space-between;
@@ -34,7 +34,7 @@ const StyledHeroSection = styled.section`
     grid-template-columns: 1fr 1fr;
     max-width: 400px;
     gap: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
     padding-top: 1rem;
 
     @media (max-width: 768px) {
@@ -52,7 +52,7 @@ const StyledHeroSection = styled.section`
     line-height: 0.85;
     letter-spacing: -2px;
     margin-top: 2rem;
-    color: #ffffff;
+    color: var(--hero-text);
 
     @media (max-width: 768px) {
       font-size: clamp(2.2rem, 12vw, 4rem);
@@ -67,7 +67,7 @@ const StyledHeroSection = styled.section`
     margin-top: 1.5rem;
     max-width: 700px;
     opacity: 0.9;
-    color: #ffffff;
+    color: var(--hero-text);
 
     @media (max-width: 768px) {
       font-size: 0.95rem;
@@ -82,7 +82,7 @@ const StyledHeroSection = styled.section`
     margin-top: 1.5rem;
     max-width: 700px;
     opacity: 0.9;
-    color: #ffffff;
+    color: var(--hero-text);
     line-height: 1.3;
 
     @media (max-width: 768px) {

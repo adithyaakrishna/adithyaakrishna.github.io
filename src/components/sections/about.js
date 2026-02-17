@@ -12,7 +12,7 @@ const StyledArticlePanel = styled.section`
   max-width: none;
   margin: 0;
   padding: 0;
-  background: var(--c-cream, #121212);
+  background: var(--c-cream);
   overflow: hidden;
 
   .article-nav {
@@ -21,7 +21,7 @@ const StyledArticlePanel = styled.section`
     padding: 60px 30px 60px calc(30px + 80px);
     display: flex;
     flex-direction: column;
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid var(--border-color-subtle);
     flex-shrink: 0;
     overflow-y: auto;
 
@@ -146,7 +146,7 @@ const StyledArticlePanel = styled.section`
     min-width: 340px;
     padding: 40px 20px 40px 30px;
     margin-right: 60px;
-    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    border-left: 1px solid var(--border-color-subtle);
     position: sticky;
     top: 0;
     height: fit-content;
@@ -175,9 +175,9 @@ const StyledArticlePanel = styled.section`
     }
 
     blockquote {
-      font-family: var(--font-body);
-      font-size: 1.1rem;
-      font-style: italic;
+      font-family: var(--font-code);
+      font-size: 0.75rem;
+      font-style: normal;
       color: var(--c-ink);
       margin-top: 8px;
       border-left: 1px solid var(--c-red);
@@ -231,7 +231,7 @@ const StyledArticlePanel = styled.section`
     line-height: 0.9;
     text-transform: uppercase;
     margin-bottom: 60px;
-    color: white;
+    color: var(--text-primary);
     max-width: 800px;
 
     @media (max-width: 768px) {
@@ -249,11 +249,12 @@ const StyledArticlePanel = styled.section`
   }
 
   .recommendations {
+    font-family: var(--font-code);
     margin: 80px 0 0 0 !important;
     padding: 50px 0 50px 0 !important;
     max-width: 720px;
     width: 100%;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid var(--border-color-subtle);
   }
 
   .section-label {
@@ -270,7 +271,7 @@ const StyledArticlePanel = styled.section`
     font-family: 'Inter', sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
-    color: white;
+    color: var(--text-primary);
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
     line-height: 1.3;
@@ -280,7 +281,7 @@ const StyledArticlePanel = styled.section`
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
     line-height: 1.7;
-    color: rgba(224, 224, 224, 0.8);
+    color: var(--text-muted);
     font-weight: 400;
 
     p {
@@ -296,13 +297,13 @@ const StyledArticlePanel = styled.section`
     li {
       margin-bottom: 0.4rem;
       font-size: 0.95rem;
-      color: rgba(224, 224, 224, 0.7);
+      color: var(--text-muted);
     }
   }
 
   .experience-item {
     margin-bottom: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--border-color-subtle);
   }
 
   .exp-toggle {
@@ -392,7 +393,7 @@ const StyledArticlePanel = styled.section`
     font-family: 'Inter', sans-serif;
     font-size: 1.25rem;
     font-weight: 600;
-    color: white;
+    color: var(--text-primary);
     margin: 0;
 
     @media (max-width: 768px) {
@@ -448,7 +449,7 @@ const StyledArticlePanel = styled.section`
   .skill-category {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
-    color: white;
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
   }
@@ -482,7 +483,8 @@ const StyledArticlePanel = styled.section`
   }
 
   .rec-card {
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    font-family: var(--font-code);
+    border: 1px solid var(--border-color-subtle);
     padding: 25px;
     text-decoration: none;
     transition: all 0.3s;
@@ -490,7 +492,7 @@ const StyledArticlePanel = styled.section`
 
     &:hover {
       border-color: var(--c-red);
-      background: #181818;
+      background: var(--card-hover-bg);
       color: inherit;
     }
 
@@ -504,10 +506,9 @@ const StyledArticlePanel = styled.section`
     }
 
     h4 {
-      font-family: var(--font-body);
-      font-style: italic;
+      font-family: var(--font-code);
       font-size: 1.3rem;
-      color: white;
+      color: var(--text-primary);
       font-weight: 400;
     }
   }
@@ -759,9 +760,9 @@ const About = () => {
                 <div className="rec-meta">Email</div>
                 <h4>{email}</h4>
               </a>
-              <Link to="/archive" className="rec-card">
-                <div className="rec-meta">Archive</div>
-                <h4>View All Projects</h4>
+              <Link to="https://x.com/adii_kris" className="rec-card">
+                <div className="rec-meta">Twitter</div>
+                <h4>@adii_kris</h4>
               </Link>
             </div>
           </section>
@@ -771,15 +772,15 @@ const About = () => {
           <div className="annotation-item">
             <strong>Design Ethos</strong>
             <blockquote>
-              &ldquo;Exploring the intersection of logic and aesthetics through code, distinct
-              systems, and digital architecture.&rdquo;
+              &ldquo;Building high-performance interfaces at the edge of web3, open-source,
+              and design systems. I care deeply about performant UIs, clean architecture, and shipping fast.&rdquo;
             </blockquote>
           </div>
 
           <div className="annotation-item">
             <strong>Currently</strong>
             <p>
-              Building web3 trading interfaces at Noice. Previously at Reclaim Protocol,
+              Building web3 experiences at Noice. Previously at Reclaim Protocol,
               Tensorlake, Documenso, and Red Hat.
             </p>
           </div>

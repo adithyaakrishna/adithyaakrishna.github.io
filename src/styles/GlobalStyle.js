@@ -11,15 +11,94 @@ const GlobalStyle = createGlobalStyle`
     --c-cream: #121212;
     --c-ink: #E0E0E0;
     --c-subtle: #666666;
-    --holo-orb: radial-gradient(circle at 30% 30%, rgba(217, 72, 56, 0.4), rgba(20, 20, 20, 0.1), rgba(0, 0, 0, 0.5));
-
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-color-subtle: rgba(255, 255, 255, 0.05);
+    --rail-right-bg: #1a1a1a;
+    --rail-divider: rgba(255, 255, 255, 0.2);
+    --hero-text: #ffffff;
+    --text-primary: #E0E0E0;
+    --text-muted: rgba(224, 224, 224, 0.8);
+    --card-bg: #181818;
+    --card-hover-bg: #1a1a1a;
+    --code-bg: #181818;
     --font-display: 'Oswald', sans-serif;
     --font-body: 'Cormorant Garamond', serif;
     --font-code: 'Space Mono', monospace;
-
     --border-width: 1px;
     --layout-padding: 6vw;
+    --font-sans: 'Cormorant Garamond', 'Calibre', serif;
+    --font-mono: 'Space Mono', 'SF Mono', monospace;
+    --fz-xxs: 12px;
+    --fz-xs: 13px;
+    --fz-sm: 14px;
+    --fz-md: 16px;
+    --fz-lg: 18px;
+    --fz-xl: 20px;
+    --fz-xxl: 22px;
+    --fz-heading: 32px;
+    --border-radius: 0px;
+    --nav-height: 100px;
+    --nav-scroll-height: 70px;
+    --tab-height: 42px;
+    --tab-width: 120px;
+    --easing: cubic-bezier(0.645, 0.045, 0.355, 1);
+    --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+    --hamburger-width: 30px;
+    --ham-before: top 0.1s ease-in 0.25s, opacity 0.1s ease-in;
+    --ham-before-active: top 0.1s ease-out, opacity 0.1s ease-out 0.12s;
+    --ham-after: bottom 0.1s ease-in 0.25s, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    --ham-after-active: bottom 0.1s ease-out, transform 0.22s cubic-bezier(0.215, 0.61, 0.355, 1) 0.12s;
+  }
 
+  [data-theme="light"] .section-content span[style*="color:white"],
+  [data-theme="light"] .section-content span[style*="color: white"] {
+    color: var(--text-primary) !important;
+  }
+
+  [data-theme="light"] {
+    --c-cream: #F2EFE9;
+    --c-ink: #1A1A1A;
+    --c-subtle: #8A8A8A;
+    --holo-orb: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(230,230,250,0.4), rgba(255,218,185,0.2));
+    --border-color: rgba(0, 0, 0, 0.1);
+    --border-color-subtle: rgba(0, 0, 0, 0.05);
+    --rail-right-bg: #fff;
+    --rail-divider: rgba(0, 0, 0, 0.15);
+    --hero-text: #F2EFE9;
+    --text-primary: #1A1A1A;
+    --text-muted: rgba(26, 26, 26, 0.8);
+    --card-bg: #fff;
+    --card-hover-bg: #f5f5f5;
+    --code-bg: #e8e8e8;
+    --dark-navy: #0a0a0a;
+    --Fwhite: #ffffff;
+    --navy: #121212;
+    --light-navy: #181818;
+    --lightest-navy: #2a2a2a;
+    --navy-shadow: #0a0a0a;
+    --slate: #666666;
+    --light-slate: #8a8a8a;
+    --lightest-slate: #1A1A1A;
+    --white: #1A1A1A;
+    --red: #D94838;
+    --red-tint: rgba(217, 72, 56, 0.15);
+  }
+
+  [data-theme="dark"] {
+    --c-cream: #121212;
+    --c-ink: #E0E0E0;
+    --c-subtle: #666666;
+    --holo-orb: radial-gradient(circle at 30% 30%, rgba(217, 72, 56, 0.4), rgba(20, 20, 20, 0.1), rgba(0, 0, 0, 0.5));
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-color-subtle: rgba(255, 255, 255, 0.05);
+    --rail-right-bg: #1a1a1a;
+    --rail-divider: rgba(255, 255, 255, 0.2);
+    --hero-text: #ffffff;
+    --text-primary: #E0E0E0;
+    --text-muted: rgba(224, 224, 224, 0.8);
+    --card-bg: #181818;
+    --card-hover-bg: #1a1a1a;
+    --code-bg: #181818;
     --dark-navy: #0a0a0a;
     --Fwhite: #ffffff;
     --navy: #121212;
@@ -32,33 +111,6 @@ const GlobalStyle = createGlobalStyle`
     --white: #f0f0f0;
     --red: #D94838;
     --red-tint: rgba(217, 72, 56, 0.15);
-
-    --font-sans: 'Cormorant Garamond', 'Calibre', serif;
-    --font-mono: 'Space Mono', 'SF Mono', monospace;
-
-    --fz-xxs: 12px;
-    --fz-xs: 13px;
-    --fz-sm: 14px;
-    --fz-md: 16px;
-    --fz-lg: 18px;
-    --fz-xl: 20px;
-    --fz-xxl: 22px;
-    --fz-heading: 32px;
-
-    --border-radius: 0px;
-    --nav-height: 100px;
-    --nav-scroll-height: 70px;
-    --tab-height: 42px;
-    --tab-width: 120px;
-
-    --easing: cubic-bezier(0.645, 0.045, 0.355, 1);
-    --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-
-    --hamburger-width: 30px;
-    --ham-before: top 0.1s ease-in 0.25s, opacity 0.1s ease-in;
-    --ham-before-active: top 0.1s ease-out, opacity 0.1s ease-out 0.12s;
-    --ham-after: bottom 0.1s ease-in 0.25s, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
-    --ham-after-active: bottom 0.1s ease-out, transform 0.22s cubic-bezier(0.215, 0.61, 0.355, 1) 0.12s;
   }
 
   html {
@@ -239,7 +291,7 @@ const GlobalStyle = createGlobalStyle`
       width: 300px;
       height: 1px;
       margin-left: 20px;
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: var(--border-color);
 
       @media (max-width: 1080px) {
         width: 200px;
@@ -324,8 +376,8 @@ const GlobalStyle = createGlobalStyle`
     }
 
     & > code {
-      background-color: var(--light-navy);
-      color: var(--white);
+      background-color: var(--code-bg);
+      color: var(--text-primary);
       font-size: var(--fz-sm);
       border-radius: var(--border-radius);
       padding: 0.3em 0.5em;
@@ -367,7 +419,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   hr {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--border-color);
     height: 1px;
     border-width: 0px;
     border-style: initial;

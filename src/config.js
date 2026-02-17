@@ -1,4 +1,7 @@
+const THEME_MODE = 'light';
+
 module.exports = {
+  THEME_MODE,
   email: 'aadithya794@gmail.com',
 
   socialMedia: [
