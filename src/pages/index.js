@@ -183,9 +183,9 @@ const IndexPage = ({ location }) => {
       );
 
       tl.from(
-        '.hero-panel .header-inner',
-        { yPercent: 100, duration: 1.2, stagger: 0.15, ease: 'expo.out' },
-        0.4,
+        ['.hero-panel .header-inner', '.hero-panel .header-inner-2'],
+        { yPercent: 100, duration: 1.2, ease: 'expo.out' },
+        0.2,
       );
 
       tl.from(

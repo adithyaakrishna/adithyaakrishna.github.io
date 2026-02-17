@@ -65,6 +65,20 @@ const StyledHeroSection = styled.section`
     height: 1.1em;
   }
 
+  .header-inner {
+    font-size: 1em;
+    display: block;
+  }
+
+  .header-inner-2 {
+    font-size: 0.65em;
+    font-family: var(--font-body);
+    font-style: italic;
+    display: block;
+    letter-spacing: 0.02em;
+    text-transform: none;
+  }
+
   .hero-subtitle-2 {
     font-family: var(--font-code);
     font-size: 1.2rem;
@@ -117,8 +131,8 @@ const Hero = () => {
       <div className="hero-meta">
         <span>PORTFOLIO VOL. 3</span>
         <span>BENGALURU</span>
-        <span>FULL STACK</span>
-        <span>UI ENGINEERING</span>
+        <span>FRONTEND · UI</span>
+        <span>OPEN SOURCE</span>
       </div>
       <div className="hero-content">
         <h1 className="hero-title">
@@ -130,7 +144,7 @@ const Hero = () => {
           </span>
         </h1>
         <p className="hero-subtitle">
-          Building high-performance interfaces at the edge of web3, open-source, and design systems.
+          Building web3 interfaces at Noice. Open source at Reclaim & Meshery. Past: Red Hat, Tensorlake, Documenso, GSoC.
         </p>
       </div>
     </StyledHeroSection>

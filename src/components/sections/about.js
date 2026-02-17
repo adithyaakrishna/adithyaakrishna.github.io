@@ -684,7 +684,7 @@ const About = ({ contentAreaRef, onBackToHero }) => {
             <div className="meta-value">Software Engineer</div>
             <div className="meta-label">Location</div>
             <div className="meta-value">Bengaluru, IN</div>
-            <div className="meta-label">Status</div>
+            <div className="meta-label">Now</div>
             <div className="meta-value">Building at Noice</div>
           </div>
 
@@ -723,7 +723,7 @@ const About = ({ contentAreaRef, onBackToHero }) => {
           <header className="article-header">
             <h1>
               <span className="header-line">
-                <span className="header-inner">Curating</span>
+                <span className="header-inner">Crafting</span>
               </span>
               <span className="header-line">
                 <span className="header-inner">Efficient Digital</span>
@@ -737,19 +737,19 @@ const About = ({ contentAreaRef, onBackToHero }) => {
           <section data-section="about" className="portfolio-section reveal-block">
             <span className="section-label">01 / Profile</span>
             <h2 className="section-title">
-              Full-stack developer crafting delightful digital experiences.
+              Software engineer who cares about performance, clarity, and craft.
             </h2>
             <div className="section-content">
               <p>
-                I&apos;m Adithya Krishna, a Software Engineer at Noice where I build
-                token launching interfaces and web3 experiences using Next.js, PixiJS, and WebGL2.
-                I care deeply about performant UIs, clean architecture, and shipping fast.
+                I&apos;m Adithya Krishna. I build token launching interfaces and web3 experiences
+                at Noice using Next.js, PixiJS, and WebGL2. I care about performant UIs,
+                clean architecture, and shipping fast.
               </p>
               <p>
-                Before Noice, I built frontend systems at Tensorlake and Reclaim Protocol,
-                worked on document signing UX at Documenso, and spent ~2.5 years at
-                Red Hat on the Customer Portal team. I&apos;m also a GSoC &apos;23 alum
-                (OpenChemistry / 3DMol.js) and a maintainer of Meshery, a CNCF Sandbox Project.
+                Before Noice, I shipped frontend systems at Tensorlake and Reclaim Protocol,
+                shaped document signing UX at Documenso, and spent ~2.5 years at Red Hat
+                on the Customer Portal team. I&apos;m a GSoC &apos;23 alum (OpenChemistry / 3DMol.js)
+                and a maintainer of Meshery, a CNCF Sandbox Project.
               </p>
             </div>
           </section>
@@ -854,16 +854,14 @@ const About = ({ contentAreaRef, onBackToHero }) => {
           <div className="annotation-item reveal-anno">
             <strong>Design Ethos</strong>
             <blockquote>
-              &ldquo;Building high-performance interfaces at the edge of web3, open-source,
-              and design systems. I care deeply about performant UIs, clean architecture, and shipping fast.&rdquo;
+              &ldquo;I build at the intersection of web3, open source, and design systems—with a bias toward performance, clean architecture, and shipping.&rdquo;
             </blockquote>
           </div>
 
           <div className="annotation-item reveal-anno">
             <strong>Currently</strong>
             <p>
-              Building web3 experiences at Noice. Previously at Reclaim Protocol,
-              Tensorlake, Documenso, and Red Hat.
+              Building web3 interfaces at Noice. Past: Reclaim Protocol, Tensorlake, Documenso, Red Hat.
             </p>
           </div>
 
