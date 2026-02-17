@@ -757,13 +757,13 @@ const About = ({ contentAreaRef, onBackToHero }) => {
           <header className="article-header">
             <h1>
               <span className="header-line">
-                <span className="header-inner">Performance.</span>
+                <span className="header-inner">Building at the</span>
               </span>
               <span className="header-line">
-                <span className="header-inner">Clarity.</span>
+                <span className="header-inner">Intersection of</span>
               </span>
               <span className="header-line">
-                <span className="header-inner">Craft.</span>
+                <span className="header-inner">Open Source & Design</span>
               </span>
             </h1>
           </header>
