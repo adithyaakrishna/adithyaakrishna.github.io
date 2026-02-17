@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { gsap } from 'gsap';
 import { Layout, Hero, About } from '@components';
 import { socialMedia, email } from '@config';
 
@@ -92,7 +93,6 @@ const StyledHorizontalScroller = styled.div`
   display: flex;
   width: 200vw;
   height: 100vh;
-  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
   will-change: transform;
 
   & > * {
@@ -108,7 +108,7 @@ const StyledRightRail = styled.aside`
   top: 0;
   bottom: 0;
   width: 60px;
-  background: var(--rail-right-bg);
+  background: var(--c-cream)
   border-left: var(--border-width) solid var(--border-color);
   z-index: 100;
 
@@ -124,15 +124,16 @@ const StyledRightRail = styled.aside`
     align-items: center;
     justify-content: center;
     position: relative;
+    background: var(--c-cream);
   }
 
   .minimap-indicator {
     width: 4px;
+    height: 0;
     background: var(--c-red);
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    transition: height 0.3s;
     top: 0;
   }
 `;
@@ -140,11 +141,16 @@ const StyledRightRail = styled.aside`
 const IndexPage = ({ location }) => {
   const scrollerRef = useRef(null);
   const indicatorRef = useRef(null);
+  const contentAreaRef = useRef(null);
+  const goToPanelRef = useRef(null);
 
   useEffect(() => {
     const container = scrollerRef.current;
     const indicator = indicatorRef.current;
     if (!container || !indicator) return;
+
+    gsap.set(container, { x: 0 });
+    gsap.set(indicator, { height: 0 });
 
     document.body.style.overflow = 'hidden';
     document.body.style.height = '100vh';
@@ -152,19 +158,112 @@ const IndexPage = ({ location }) => {
 
     let currentPanel = 0;
     let isTransitioning = false;
+    const scrollBackThreshold = 5;
+    const scrollBackDelta = 75;
+
+    const runHeroAnimations = () => {
+      const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+      tl.from(
+        '.left-rail',
+        { xPercent: -100, duration: 1.2, ease: 'expo.out' },
+        0,
+      );
+
+      tl.from(
+        ['.left-rail .vertical-text', '.left-rail .social-link', '.left-rail .rail-divider', '.left-rail .email-link'],
+        { opacity: 0, y: 20, stagger: 0.1, duration: 0.8 },
+        0.5,
+      );
+
+      tl.from(
+        '.hero-panel .hero-meta',
+        { opacity: 0, y: 15, duration: 0.7 },
+        0.35,
+      );
+
+      tl.from(
+        '.hero-panel .header-inner',
+        { yPercent: 100, duration: 1.2, stagger: 0.15, ease: 'expo.out' },
+        0.4,
+      );
+
+      tl.from(
+        '.hero-panel .hero-subtitle',
+        { opacity: 0, y: 20, duration: 0.8 },
+        0.7,
+      );
+
+      tl.from(
+        '.right-rail',
+        { xPercent: 100, duration: 1, ease: 'power3.out' },
+        0.3,
+      );
+    };
+
+    runHeroAnimations();
+
+    const getMinimapHeightForArticle = () => {
+      const contentArea = contentAreaRef.current || document.getElementById('article-panel')?.querySelector('.content-area');
+      if (!contentArea) return 0;
+      const vh = window.innerHeight;
+      const maxScroll = contentArea.scrollHeight - contentArea.clientHeight;
+      if (maxScroll <= 0) return vh * 0.2;
+      const progress = Math.min(1, contentArea.scrollTop / maxScroll);
+      return vh * (0.2 + 0.8 * progress);
+    };
+
+    const updateMinimapFromScroll = () => {
+      if (currentPanel !== 1 || !indicator) return;
+      const articlePanel = document.getElementById('article-panel');
+      const contentArea = contentAreaRef.current || articlePanel?.querySelector('.content-area');
+      if (!contentArea) return;
+      const vh = window.innerHeight;
+      const maxScroll = contentArea.scrollHeight - contentArea.clientHeight;
+      if (maxScroll <= 0) {
+        indicator.style.height = `${vh * 0.2}px`;
+        return;
+      }
+      const progress = Math.min(1, contentArea.scrollTop / maxScroll);
+      indicator.style.height = `${vh * (0.2 + 0.8 * progress)}px`;
+    };
 
     const goToPanel = panel => {
       if (isTransitioning || panel === currentPanel) return;
       isTransitioning = true;
       currentPanel = panel;
-      container.style.transform = `translateX(-${panel * 100}vw)`;
-      if (indicator) {
-        indicator.style.height = `${panel * window.innerHeight}px`;
-      }
-      setTimeout(() => {
-        isTransitioning = false;
-      }, 750);
+
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const transitionDuration = 1.1;
+
+      gsap.killTweensOf([container, indicator]);
+
+      const targetHeight = panel === 1 ? getMinimapHeightForArticle() : 0;
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          isTransitioning = false;
+          if (panel === 1) updateMinimapFromScroll();
+        },
+      });
+
+      tl.to(container, {
+        x: -panel * vw,
+        duration: transitionDuration,
+        ease: 'power3.inOut',
+        overwrite: true,
+      }).to(
+        indicator,
+        {
+          height: targetHeight,
+          duration: transitionDuration,
+          ease: 'power3.inOut',
+        },
+        '<',
+      );
     };
+    goToPanelRef.current = goToPanel;
 
     const handleWheel = evt => {
       const articlePanel = document.getElementById('article-panel');
@@ -173,10 +272,10 @@ const IndexPage = ({ location }) => {
       if (isOnArticle) {
         const contentArea = articlePanel.querySelector('.content-area');
         if (contentArea) {
-          const atTop = contentArea.scrollTop <= 1;
-          const scrollingUp = evt.deltaY < 0;
+          const atTop = contentArea.scrollTop <= scrollBackThreshold;
+          const scrollHardUp = evt.deltaY < -scrollBackDelta;
 
-          if (atTop && scrollingUp) {
+          if (atTop && scrollHardUp) {
             evt.preventDefault();
             goToPanel(0);
             return;
@@ -220,14 +319,35 @@ const IndexPage = ({ location }) => {
       if (currentPanel === 0 && diffX > 0) {
         goToPanel(1);
       } else if (currentPanel === 1 && diffX < 0) {
-        // On article panel, only swipe back if content is at top
         const articlePanel = document.getElementById('article-panel');
         const contentArea = articlePanel?.querySelector('.content-area');
-        if (contentArea && contentArea.scrollTop <= 1) {
+        const swipeHardEnough = Math.abs(diffX) > 50;
+        if (
+          contentArea &&
+          contentArea.scrollTop <= scrollBackThreshold &&
+          swipeHardEnough
+        ) {
           goToPanel(0);
         }
       }
     };
+
+    const handleContentScroll = () => {
+      requestAnimationFrame(updateMinimapFromScroll);
+    };
+
+    const attachScrollListener = () => {
+      const contentArea = contentAreaRef.current || document.getElementById('article-panel')?.querySelector('.content-area');
+      if (contentArea && !contentArea._minimapScrollAttached) {
+        contentArea._minimapScrollAttached = true;
+        contentArea.addEventListener('scroll', handleContentScroll, { passive: true });
+        return contentArea;
+      }
+      return contentArea;
+    };
+
+    attachScrollListener();
+    const retry = setTimeout(attachScrollListener, 100);
 
     document.addEventListener('wheel', handleWheel, { passive: false });
     document.addEventListener('keydown', handleKeyDown);
@@ -235,6 +355,13 @@ const IndexPage = ({ location }) => {
     document.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     return () => {
+      goToPanelRef.current = null;
+      clearTimeout(retry);
+      const contentArea = contentAreaRef.current || document.getElementById('article-panel')?.querySelector('.content-area');
+      if (contentArea) {
+        contentArea._minimapScrollAttached = false;
+        contentArea.removeEventListener('scroll', handleContentScroll);
+      }
       document.body.style.overflow = '';
       document.body.style.height = '';
       document.documentElement.style.overflow = '';
@@ -251,8 +378,8 @@ const IndexPage = ({ location }) => {
 
   return (
     <Layout location={location}>
-      <StyledHomeLayout>
-        <StyledLeftRail>
+      <StyledHomeLayout className="home-layout">
+        <StyledLeftRail className="left-rail">
           <div className="vertical-text">Est. 1999</div>
           <div className="social-links">
             {filteredSocials.map(({ url, name }) => (
@@ -272,12 +399,15 @@ const IndexPage = ({ location }) => {
           </div>
         </StyledLeftRail>
 
-        <StyledHorizontalScroller ref={scrollerRef} id="scrollContainer">
+        <StyledHorizontalScroller ref={scrollerRef} id="scrollContainer" className="horizontal-scroller">
           <Hero />
-          <About />
+          <About
+            contentAreaRef={contentAreaRef}
+            onBackToHero={() => goToPanelRef.current?.(0)}
+          />
         </StyledHorizontalScroller>
 
-        <StyledRightRail>
+        <StyledRightRail className="right-rail">
           <div className="minimap-container">
             <div className="minimap-indicator" ref={indicatorRef} />
           </div>

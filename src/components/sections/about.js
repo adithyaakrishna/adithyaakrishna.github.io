@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import styled from 'styled-components';
+import { gsap } from 'gsap';
 import { email } from '@config';
 
 const StyledArticlePanel = styled.section`
@@ -21,7 +22,7 @@ const StyledArticlePanel = styled.section`
     padding: 60px 30px 60px calc(30px + 80px);
     display: flex;
     flex-direction: column;
-    border-right: 1px solid var(--border-color-subtle);
+    border-right: 2px solid var(--border-color-subtle);
     flex-shrink: 0;
     overflow-y: auto;
 
@@ -146,14 +147,24 @@ const StyledArticlePanel = styled.section`
     min-width: 340px;
     padding: 40px 20px 40px 30px;
     margin-right: 60px;
-    border-left: 1px solid var(--border-color-subtle);
     position: sticky;
     top: 0;
-    height: fit-content;
+    align-self: stretch;
     display: flex;
     flex-direction: column;
     gap: 50px;
     flex-shrink: 0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: -60px;
+      bottom: -60px;
+      width: 2px;
+      background: var(--border-color-subtle);
+      pointer-events: none;
+    }
 
     @media (max-width: 1200px) {
       display: none;
@@ -238,6 +249,12 @@ const StyledArticlePanel = styled.section`
       font-size: clamp(1.8rem, 8vw, 2.5rem);
       margin-bottom: 40px;
     }
+  }
+
+  .article-header .header-line {
+    display: block;
+    overflow: hidden;
+    height: 1.1em;
   }
 
   .portfolio-section {
@@ -331,11 +348,6 @@ const StyledArticlePanel = styled.section`
     color: var(--c-red);
     flex-shrink: 0;
     margin-left: 1rem;
-    transition: transform 0.3s;
-
-    &.open {
-      transform: rotate(45deg);
-    }
   }
 
   .exp-toggle-left {
@@ -359,16 +371,12 @@ const StyledArticlePanel = styled.section`
 
   .exp-body {
     overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-    transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
-    padding: 0 0 0 0;
+    height: 0;
+    padding: 0;
+  }
 
-    &.open {
-      max-height: 600px;
-      opacity: 1;
-      padding: 0 0 1.5rem 0;
-    }
+  .exp-body.exp-open {
+    padding: 0 0 1.5rem 0;
   }
 
   .project-item {
@@ -514,7 +522,7 @@ const StyledArticlePanel = styled.section`
   }
 `;
 
-const About = () => {
+const About = ({ contentAreaRef, onBackToHero }) => {
   const data = useStaticQuery(graphql`
     query {
       jobs: allMarkdownRemark(
@@ -564,7 +572,56 @@ const About = () => {
     return initial;
   });
 
-  const toggleJob = i => {
+  const expBodyRefs = useRef({});
+
+  useEffect(() => {
+    jobsData.forEach((_, i) => {
+      if (openJobs[i] && expBodyRefs.current[i]) {
+        const el = expBodyRefs.current[i];
+        el.classList.add('exp-open');
+        el.style.height = 'auto';
+        const icon = el.previousElementSibling?.querySelector('.exp-toggle-icon');
+        if (icon) gsap.set(icon, { rotation: 45 });
+      }
+    });
+  }, []);
+
+  const toggleJob = (i, e) => {
+    const expBody = e?.currentTarget?.nextElementSibling;
+    const icon = e?.currentTarget?.querySelector('.exp-toggle-icon');
+    const isOpening = !openJobs[i];
+
+    if (expBody) {
+      gsap.killTweensOf(expBody);
+      if (isOpening) {
+        expBody.classList.add('exp-open');
+        expBody.style.height = 'auto';
+        const targetHeight = expBody.offsetHeight;
+        expBody.style.height = '0';
+        gsap.to(expBody, {
+          height: targetHeight,
+          duration: 0.6,
+          ease: 'power3.inOut',
+          onComplete: () => {
+            expBody.style.height = 'auto';
+          },
+        });
+        if (icon) {
+          gsap.to(icon, { rotation: 45, duration: 0.4, ease: 'power2.out' });
+        }
+      } else {
+        expBody.classList.remove('exp-open');
+        const currentHeight = expBody.offsetHeight;
+        gsap.to(expBody, {
+          height: 0,
+          duration: 0.5,
+          ease: 'power3.inOut',
+        });
+        if (icon) {
+          gsap.to(icon, { rotation: 0, duration: 0.4, ease: 'power2.out' });
+        }
+      }
+    }
     setOpenJobs(prev => ({ ...prev, [i]: !prev[i] }));
   };
 
@@ -591,36 +648,47 @@ const About = () => {
   const scrollToSection = sectionId => {
     const contentArea = contentRef.current;
     const section = contentArea?.querySelector(`[data-section="${sectionId}"]`);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (contentArea && section) {
+      const sectionRect = section.getBoundingClientRect();
+      const contentRect = contentArea.getBoundingClientRect();
+      const targetScroll =
+        contentArea.scrollTop + sectionRect.top - contentRect.top - 40;
+      gsap.to(contentArea, {
+        scrollTop: targetScroll,
+        duration: 1.2,
+        ease: 'power3.inOut',
+      });
     }
   };
 
   const handleBackClick = e => {
     e.preventDefault();
-    const scroller = document.getElementById('scrollContainer');
-    if (scroller) {
-      scroller.style.transform = 'translateX(0vw)';
+    if (onBackToHero) {
+      onBackToHero();
+    } else {
+      const scroller = document.getElementById('scrollContainer');
+      if (scroller) scroller.style.transform = 'translateX(0vw)';
     }
   };
 
   return (
     <StyledArticlePanel id="article-panel">
       <aside className="article-nav">
-        <a href="#" className="back-link" onClick={handleBackClick}>
-          &larr; Back to Home
-        </a>
+        <div className="reveal-nav-inner">
+          <a href="#" className="back-link" onClick={handleBackClick}>
+            &larr; Back to Home
+          </a>
 
-        <div className="article-meta">
-          <div className="meta-label">Role</div>
-          <div className="meta-value">Software Engineer</div>
-          <div className="meta-label">Location</div>
-          <div className="meta-value">Bengaluru, IN</div>
-          <div className="meta-label">Status</div>
-          <div className="meta-value">Building at Noice</div>
-        </div>
+          <div className="article-meta">
+            <div className="meta-label">Role</div>
+            <div className="meta-value">Software Engineer</div>
+            <div className="meta-label">Location</div>
+            <div className="meta-value">Bengaluru, IN</div>
+            <div className="meta-label">Status</div>
+            <div className="meta-value">Building at Noice</div>
+          </div>
 
-        <nav className="toc">
+          <nav className="toc">
           {[
             { id: 'about', num: '01', label: 'About Me' },
             { id: 'experience', num: '02', label: 'Work Experience' },
@@ -629,30 +697,44 @@ const About = () => {
           ].map(item => (
             <a
               key={item.id}
+              href={`#${item.id}`}
               className={`toc-item ${activeSection === item.id ? 'active' : ''}`}
-              onClick={() => scrollToSection(item.id)}>
+              onClick={e => {
+                e.preventDefault();
+                scrollToSection(item.id);
+              }}>
               <span>{item.num}</span> {item.label}
             </a>
           ))}
-        </nav>
+          </nav>
+        </div>
       </aside>
 
-      <div className="content-area" ref={contentRef}>
+      <div
+        className="content-area"
+        ref={el => {
+          contentRef.current = el;
+          if (contentAreaRef) contentAreaRef.current = el;
+        }}>
         <div className="article-column">
           <button className="mobile-back" onClick={handleBackClick}>
             &larr; Back to Home
           </button>
           <header className="article-header">
             <h1>
-              Curating
-              <br />
-              Efficient Digital
-              <br />
-              Experiences
+              <span className="header-line">
+                <span className="header-inner">Curating</span>
+              </span>
+              <span className="header-line">
+                <span className="header-inner">Efficient Digital</span>
+              </span>
+              <span className="header-line">
+                <span className="header-inner">Experiences</span>
+              </span>
             </h1>
           </header>
 
-          <section data-section="about" className="portfolio-section">
+          <section data-section="about" className="portfolio-section reveal-block">
             <span className="section-label">01 / Profile</span>
             <h2 className="section-title">
               Full-stack developer crafting delightful digital experiences.
@@ -672,7 +754,7 @@ const About = () => {
             </div>
           </section>
 
-          <section data-section="experience" className="portfolio-section">
+          <section data-section="experience" className="portfolio-section reveal-block">
             <span className="section-label">02 / Experience</span>
             {jobsData.map(({ node }, i) => {
               const { title, company, range, url } = node.frontmatter;
@@ -681,7 +763,7 @@ const About = () => {
                 <div className="experience-item" key={i}>
                   <button
                     className="exp-toggle"
-                    onClick={() => toggleJob(i)}
+                    onClick={e => toggleJob(i, e)}
                     aria-expanded={isOpen}>
                     <div className="exp-toggle-left">
                       <div className="exp-toggle-top">
@@ -696,9 +778,9 @@ const About = () => {
                         </a>
                       </div>
                     </div>
-                    <span className={`exp-toggle-icon ${isOpen ? 'open' : ''}`}>+</span>
+                    <span className="exp-toggle-icon">+</span>
                   </button>
-                  <div className={`exp-body ${isOpen ? 'open' : ''}`}>
+                  <div className="exp-body" ref={el => (expBodyRefs.current[i] = el)}>
                     <div
                       className="section-content"
                       dangerouslySetInnerHTML={{ __html: node.html }}
@@ -709,7 +791,7 @@ const About = () => {
             })}
           </section>
 
-          <section data-section="skills" className="portfolio-section">
+          <section data-section="skills" className="portfolio-section reveal-block">
             <span className="section-label">03 / Expertise</span>
             <div className="skills-grid">
               <div className="skill-group">
@@ -729,7 +811,7 @@ const About = () => {
             </div>
           </section>
 
-          <section data-section="projects" className="portfolio-section">
+          <section data-section="projects" className="portfolio-section reveal-block">
             <span className="section-label">04 / Projects</span>
             {featuredData.slice(0, 4).map(({ node }, i) => {
               const { title, tech, github, external } = node.frontmatter;
@@ -753,7 +835,7 @@ const About = () => {
             })}
           </section>
 
-          <section className="recommendations">
+          <section className="recommendations reveal-block">
             <span className="rec-label">Get In Touch</span>
             <div className="rec-grid">
               <a href={`mailto:${email}`} className="rec-card">
@@ -769,7 +851,7 @@ const About = () => {
         </div>
 
         <aside className="annotations-column">
-          <div className="annotation-item">
+          <div className="annotation-item reveal-anno">
             <strong>Design Ethos</strong>
             <blockquote>
               &ldquo;Building high-performance interfaces at the edge of web3, open-source,
@@ -777,7 +859,7 @@ const About = () => {
             </blockquote>
           </div>
 
-          <div className="annotation-item">
+          <div className="annotation-item reveal-anno">
             <strong>Currently</strong>
             <p>
               Building web3 experiences at Noice. Previously at Reclaim Protocol,
@@ -785,7 +867,7 @@ const About = () => {
             </p>
           </div>
 
-          <div className="annotation-item">
+          <div className="annotation-item reveal-anno">
             <strong>Quick Links</strong>
             <ul>
               <li>

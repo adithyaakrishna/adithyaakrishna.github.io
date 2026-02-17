@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import React from 'react';
 import styled from 'styled-components';
-import { loaderDelay } from '@utils';
+import { gsap } from 'gsap';
 
 const StyledHeroSection = styled.section`
   width: 100vw;
@@ -60,6 +59,12 @@ const StyledHeroSection = styled.section`
     }
   }
 
+  .header-line {
+    display: block;
+    overflow: hidden;
+    height: 1.1em;
+  }
+
   .hero-subtitle-2 {
     font-family: var(--font-code);
     font-size: 1.2rem;
@@ -107,48 +112,27 @@ const StyledHeroSection = styled.section`
 `;
 
 const Hero = () => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), 10);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  const one = (
-    <div className="hero-meta">
-      <span>PORTFOLIO VOL. 1</span>
-      <span>BENGALURU</span>
-      <span>FULL STACK</span>
-      <span>UI ENGINEERING</span>
-    </div>
-  );
-
-  const two = (
-    <div>
-      <h1 className="hero-title">
-        Adithya Krishna
-      </h1>
-      <h2 className="hero-subtitle-2">
-        Software Engineer
-      </h2>
-      <p className="hero-subtitle">
-        Building high-performance interfaces at the edge of web3, open-source, and design systems.
-      </p>
-    </div>
-  );
-
-  const items = [one, two];
-
   return (
-    <StyledHeroSection id="home">
-      <TransitionGroup component={null}>
-        {isMounted &&
-          items.map((item, i) => (
-            <CSSTransition key={i} classNames="fadeup" timeout={loaderDelay}>
-              <div style={{ transitionDelay: `${i + 1}00ms` }}>{item}</div>
-            </CSSTransition>
-          ))}
-      </TransitionGroup>
+    <StyledHeroSection id="home" className="hero-panel">
+      <div className="hero-meta">
+        <span>PORTFOLIO VOL. 3</span>
+        <span>BENGALURU</span>
+        <span>FULL STACK</span>
+        <span>UI ENGINEERING</span>
+      </div>
+      <div className="hero-content">
+        <h1 className="hero-title">
+          <span className="header-line">
+            <span className="header-inner">Adithya Krishna</span>
+          </span>
+          <span className="header-line">
+            <span className="header-inner-2">Software Engineer</span>
+          </span>
+        </h1>
+        <p className="hero-subtitle">
+          Building high-performance interfaces at the edge of web3, open-source, and design systems.
+        </p>
+      </div>
     </StyledHeroSection>
   );
 };
