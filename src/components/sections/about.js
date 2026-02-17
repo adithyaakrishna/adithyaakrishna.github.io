@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import styled from 'styled-components';
 import { gsap } from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+
+gsap.registerPlugin(ScrollToPlugin);
 import { email } from '@config';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -115,7 +118,6 @@ const StyledArticlePanel = styled.section`
     flex: 1;
     display: flex;
     overflow-y: auto;
-    scroll-behavior: smooth;
     padding: 60px 0;
     -webkit-overflow-scrolling: touch;
 
@@ -626,33 +628,41 @@ const About = ({ contentAreaRef, onBackToHero }) => {
     const isOpening = !openJobs[i];
 
     if (expBody) {
-      gsap.killTweensOf(expBody);
+      gsap.killTweensOf([expBody, icon]);
       if (isOpening) {
         expBody.classList.add('exp-open');
         expBody.style.height = 'auto';
-        const targetHeight = expBody.offsetHeight;
-        expBody.style.height = '0';
+        const targetHeight = expBody.scrollHeight;
+        expBody.style.height = '0px';
+        expBody.style.overflow = 'hidden';
         gsap.to(expBody, {
           height: targetHeight,
-          duration: 0.6,
-          ease: 'power3.inOut',
+          duration: 0.4,
+          ease: 'power2.out',
           onComplete: () => {
             expBody.style.height = 'auto';
+            expBody.style.overflow = '';
           },
         });
         if (icon) {
-          gsap.to(icon, { rotation: 45, duration: 0.4, ease: 'power2.out' });
+          gsap.to(icon, { rotation: 45, duration: 0.35, ease: 'power2.out' });
         }
       } else {
-        expBody.classList.remove('exp-open');
-        const currentHeight = expBody.offsetHeight;
+        const currentHeight = expBody.scrollHeight;
+        expBody.style.height = `${currentHeight}px`;
+        expBody.style.overflow = 'hidden';
         gsap.to(expBody, {
           height: 0,
-          duration: 0.5,
-          ease: 'power3.inOut',
+          duration: 0.4,
+          ease: 'power2.in',
+          onComplete: () => {
+            expBody.classList.remove('exp-open');
+            expBody.style.height = '';
+            expBody.style.overflow = '';
+          },
         });
         if (icon) {
-          gsap.to(icon, { rotation: 0, duration: 0.4, ease: 'power2.out' });
+          gsap.to(icon, { rotation: 0, duration: 0.35, ease: 'power2.in' });
         }
       }
     }
@@ -685,12 +695,15 @@ const About = ({ contentAreaRef, onBackToHero }) => {
     if (contentArea && section) {
       const sectionRect = section.getBoundingClientRect();
       const contentRect = contentArea.getBoundingClientRect();
-      const targetScroll =
-        contentArea.scrollTop + sectionRect.top - contentRect.top - 40;
+      const targetScroll = Math.max(
+        0,
+        contentArea.scrollTop + sectionRect.top - contentRect.top - 40
+      );
       gsap.to(contentArea, {
-        scrollTop: targetScroll,
-        duration: 1.2,
-        ease: 'power3.inOut',
+        duration: 1,
+        ease: 'power3.out',
+        scrollTo: { y: targetScroll, autoKill: true },
+        overwrite: 'auto',
       });
     }
   };
