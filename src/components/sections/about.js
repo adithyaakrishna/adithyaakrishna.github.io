@@ -23,7 +23,7 @@ const StyledArticlePanel = styled.section`
     padding: 60px 30px 60px calc(30px + 80px);
     display: flex;
     flex-direction: column;
-    border-right: 2px solid var(--border-color-subtle);
+    border-right: 1px solid var(--border-color);
     flex-shrink: 0;
     overflow-y: auto;
     transform: translateZ(0);
@@ -164,8 +164,8 @@ const StyledArticlePanel = styled.section`
       left: 0;
       top: -60px;
       bottom: -60px;
-      width: 2px;
-      background: var(--border-color-subtle);
+      width: 1px;
+      background: var(--border-color);
       pointer-events: none;
     }
 
