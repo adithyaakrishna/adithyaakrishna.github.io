@@ -44,6 +44,13 @@ const Head = ({ title, description, image }) => {
     <Helmet title={title} defaultTitle={seo.title} titleTemplate={`%s | ${defaultTitle}`}>
       <html lang="en" />
 
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Oswald:wght@300;400;600&family=Space+Mono:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
 

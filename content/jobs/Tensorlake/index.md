@@ -1,17 +1,16 @@
 ---
 date: '2024-06-01'
-title: 'Software Engineer'
+title: 'Software Engineer - Frontend'
 company: 'Tensorlake'
-location: 'Remote'
-range: 'June 2024 - Present'
+location: 'Remote - Contract'
+range: 'June 2024 - July 2025'
 url: 'https://tensorlake.ai'
-index: 11
+index: 12
 ---
 
-- Updated and implemented new documentation to improve developer experience
-- Rewrote the entire OSS Frontend for Indexify using modern web technologies
-- Improved re-ranking library for optimizing search results from retrieval systems
-- Working on building Tensorlake Cloud (SaaS offering) using ShadCN, NextJS App Router and TailwindCSS
+- Rewrote the entire OSS frontend for Indexify, including implementing bounding box rendering from JSON coordinates
+- Developed and built [arxiv.tensorlake.ai](https://arxiv.tensorlake.ai) - semantic search technology for arXiv papers
+- Implemented the entire documentation site [docs.tensorlake.ai](https://docs.tensorlake.ai) and company website [tensorlake.ai](https://www.tensorlake.ai) using NextJS, Tailwind, Contentlayer and Framer Motion
 
-- **<span style="color:white">Skills:</span>** TypeScript · ReactJS · NextJS · TailwindCSS · ShadCN UI
+- **<span style="color:white">Skills:</span>** TypeScript · ReactJS · NextJS · TailwindCSS · Contentlayer · Framer Motion
 

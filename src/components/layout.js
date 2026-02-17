@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider } from 'styled-components';
-import { Head, Loader, Nav, Social, Email, Footer } from '@components';
+import { Head, Nav, Social, Email, Footer } from '@components';
 import { GlobalStyle, theme } from '@styles';
 
 const SkipToContentLink = styled.a`
@@ -41,14 +41,10 @@ const StyledContent = styled.div`
 
 const Layout = ({ children, location }) => {
   const isHome = location.pathname === '/';
-  const [isLoading, setIsLoading] = useState(isHome);
 
   useEffect(() => {
-    if (isLoading) {
-      return;
-    }
     if (location.hash) {
-      const id = location.hash.substring(1); // location.hash without the '#'
+      const id = location.hash.substring(1);
       setTimeout(() => {
         const el = document.getElementById(id);
         if (el) {
@@ -57,9 +53,8 @@ const Layout = ({ children, location }) => {
         }
       }, 0);
     }
-  }, [isLoading]);
+  }, []);
 
-  // Sets target="_blank" rel="noopener noreferrer" on external links
   const handleExternalLinks = () => {
     const allLinks = Array.from(document.querySelectorAll('a'));
     if (allLinks.length > 0) {
@@ -86,8 +81,8 @@ const Layout = ({ children, location }) => {
 
           <SkipToContentLink href="#content">Skip to Content</SkipToContentLink>
 
-          {isLoading && isHome ? (
-            <Loader finishLoading={() => setIsLoading(false)} />
+          {isHome ? (
+            <div id="content">{children}</div>
           ) : (
             <StyledContent>
               <Nav isHome={isHome} />

@@ -3,7 +3,7 @@ date: '2023-05-01'
 title: 'Open Source Technical Writer - Mentorship'
 company: 'WasmEdge - Google Season of Docs'
 location: 'Bangalore, IN'
-range: 'May 2023 - Present'
+range: 'May 2023 - Nov 2023'
 url: 'https://wasmedge.org/'
 index: 7
 ---

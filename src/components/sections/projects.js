@@ -12,12 +12,16 @@ const StyledProjectsSection = styled.section`
   align-items: center;
 
   h2 {
+    font-family: var(--font-display);
     font-size: clamp(24px, 5vw, var(--fz-heading));
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 
   .archive-link {
     font-family: var(--font-mono);
     font-size: var(--fz-sm);
+    letter-spacing: 0.5px;
     &:after {
       bottom: 0.1em;
     }
@@ -36,8 +40,27 @@ const StyledProjectsSection = styled.section`
   }
 
   .more-button {
-    ${({ theme }) => theme.mixins.button};
+    color: var(--red);
+    background-color: transparent;
+    border: 1px solid var(--red);
+    border-radius: 0;
+    padding: 1.25rem 1.75rem;
+    font-size: var(--fz-sm);
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
     margin: 80px auto 0;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: var(--red-tint);
+      outline: none;
+    }
   }
 `;
 
@@ -50,20 +73,20 @@ const StyledProject = styled.div`
     outline: 0;
     .project-inner {
       transform: translateY(-5px);
+      box-shadow: 10px 10px 0px rgba(217, 72, 56, 0.15);
     }
   }
 
   .project-inner {
-    ${({ theme }) => theme.mixins.boxShadow};
     ${({ theme }) => theme.mixins.flexBetween};
     flex-direction: column;
     align-items: flex-start;
     position: relative;
     height: 100%;
     padding: 2rem 1.75rem;
-    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     background-color: var(--light-navy);
-    transition: var(--transition);
+    transition: all 0.3s;
     overflow: auto;
   }
 
@@ -85,6 +108,11 @@ const StyledProject = styled.div`
 
       a {
         padding: 5px 10px;
+        transition: color 0.3s;
+
+        &:hover {
+          color: var(--red);
+        }
 
         svg {
           width: 20px;
@@ -97,12 +125,16 @@ const StyledProject = styled.div`
   .project-title {
     margin: 0 0 10px;
     color: var(--lightest-slate);
+    font-family: var(--font-display);
     font-size: var(--fz-xxl);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .project-description {
     color: var(--light-slate);
     font-size: 17px;
+    line-height: 1.6;
 
     a {
       ${({ theme }) => theme.mixins.inlineLink};
@@ -122,6 +154,7 @@ const StyledProject = styled.div`
       font-family: var(--font-mono);
       font-size: var(--fz-xxs);
       line-height: 1.75;
+      color: var(--slate);
 
       &:not(:last-of-type) {
         margin-right: 15px;

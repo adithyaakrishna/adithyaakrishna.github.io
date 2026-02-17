@@ -7,21 +7,34 @@ const GlobalStyle = createGlobalStyle`
   ${Fonts};
 
   :root {
-    --dark-navy: #191b1c;
-    --Fwhite: #ffffff;
-    --navy: #1D1F20;
-    --light-navy: #172a45;
-    --lightest-navy: #303C55;
-    --navy-shadow: #282c2e;
-    --slate: #29bc89;
-    --light-slate: #a8b2d1;
-    --lightest-slate: #ffffff;
-    --white: #e6f1ff;
-    --red: #29bc89;
-    --red-tint: #43504b;
+    --c-red: #D94838;
+    --c-cream: #121212;
+    --c-ink: #E0E0E0;
+    --c-subtle: #666666;
+    --holo-orb: radial-gradient(circle at 30% 30%, rgba(217, 72, 56, 0.4), rgba(20, 20, 20, 0.1), rgba(0, 0, 0, 0.5));
 
-    --font-sans: 'Calibre', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
-    --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'Cormorant Garamond', serif;
+    --font-code: 'Space Mono', monospace;
+
+    --border-width: 1px;
+    --layout-padding: 6vw;
+
+    --dark-navy: #0a0a0a;
+    --Fwhite: #ffffff;
+    --navy: #121212;
+    --light-navy: #181818;
+    --lightest-navy: #2a2a2a;
+    --navy-shadow: #0a0a0a;
+    --slate: #999999;
+    --light-slate: #b0b0b0;
+    --lightest-slate: #E0E0E0;
+    --white: #f0f0f0;
+    --red: #D94838;
+    --red-tint: rgba(217, 72, 56, 0.15);
+
+    --font-sans: 'Cormorant Garamond', 'Calibre', serif;
+    --font-mono: 'Space Mono', 'SF Mono', monospace;
 
     --fz-xxs: 12px;
     --fz-xs: 13px;
@@ -32,10 +45,9 @@ const GlobalStyle = createGlobalStyle`
     --fz-xxl: 22px;
     --fz-heading: 32px;
 
-    --border-radius: 4px;
+    --border-radius: 0px;
     --nav-height: 100px;
     --nav-scroll-height: 70px;
-
     --tab-height: 42px;
     --tab-width: 120px;
 
@@ -43,7 +55,6 @@ const GlobalStyle = createGlobalStyle`
     --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
 
     --hamburger-width: 30px;
-
     --ham-before: top 0.1s ease-in 0.25s, opacity 0.1s ease-in;
     --ham-before-active: top 0.1s ease-out, opacity 0.1s ease-out 0.12s;
     --ham-after: bottom 0.1s ease-in 0.25s, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
@@ -53,32 +64,28 @@ const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
     width: 100%;
-    scroll-behavior: smooth;
-  }
-
-  ::-webkit-scrollbar {
-    width: 12px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--navy);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--dark-slate);
-    border: 3px solid var(--navy);
-    border-radius: 10px;
   }
 
   *,
   *:before,
   *:after {
     box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    cursor: crosshair;
+  }
+
+  a, button, input, textarea, [role="button"] {
+    cursor: pointer;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
   }
 
   ::selection {
-    background-color: var(--slate);
-    color: var(--lightest-slate);
+    background-color: var(--c-red);
+    color: #ffffff;
   }
 
   body {
@@ -88,11 +95,13 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    background-color: var(--navy);
-    color: var(--slate);
-    font-family: var(--font-sans);
+    background-color: var(--c-cream);
+    color: var(--c-ink);
+    font-family: var(--font-body);
     font-size: var(--fz-xl);
     line-height: 1.3;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 
     @media (max-width: 480px) {
       font-size: var(--fz-lg);
@@ -199,7 +208,10 @@ const GlobalStyle = createGlobalStyle`
     position: relative;
     margin: 10px 0 40px;
     width: 100%;
+    font-family: var(--font-display);
     font-size: clamp(26px, 5vw, var(--fz-heading));
+    text-transform: uppercase;
+    letter-spacing: 1px;
     white-space: nowrap;
 
     &:before {
@@ -227,7 +239,7 @@ const GlobalStyle = createGlobalStyle`
       width: 300px;
       height: 1px;
       margin-left: 20px;
-      background-color: var(--lightest-navy);
+      background-color: rgba(255, 255, 255, 0.1);
 
       @media (max-width: 1080px) {
         width: 200px;
@@ -268,7 +280,6 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
     position: relative;
     transition: var(--transition);
-    cursor: pointer;
 
     &:hover,
     &:focus {
@@ -281,7 +292,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    cursor: pointer;
     border: 0;
     border-radius: 0;
   }
@@ -357,7 +367,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   hr {
-    background-color: var(--lightest-navy);
+    background-color: rgba(255, 255, 255, 0.1);
     height: 1px;
     border-width: 0px;
     border-style: initial;

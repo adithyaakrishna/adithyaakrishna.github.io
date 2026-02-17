@@ -1,112 +1,462 @@
-import React, { useEffect, useRef } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import { StaticImage } from 'gatsby-plugin-image';
+import React, { useEffect, useRef, useState } from 'react';
+import { useStaticQuery, graphql, Link } from 'gatsby';
 import styled from 'styled-components';
-import { srConfig } from '@config';
-import sr from '@utils/sr';
+import { email } from '@config';
 
-const StyledAboutSection = styled.section`
-  max-width: 900px;
+const StyledArticlePanel = styled.section`
+  width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  display: flex;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: var(--c-cream, #121212);
+  overflow: hidden;
 
-  .inner {
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    grid-gap: 50px;
+  .article-nav {
+    width: 320px;
+    min-width: 320px;
+    padding: 60px 30px 60px calc(30px + 80px);
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    flex-shrink: 0;
+    overflow-y: auto;
+
+    @media (max-width: 1080px) {
+      width: 240px;
+      min-width: 240px;
+      padding-left: calc(20px + 80px);
+    }
 
     @media (max-width: 768px) {
-      display: block;
+      display: none;
     }
   }
-`;
-const StyledText = styled.div`
-  ul.skills-list {
-    // display: grid;
-    // grid-template-columns: repeat(2, minmax(140px, 200px));
-    padding: 0;
-    margin: 20px 0 0 0;
-    overflow: hidden;
+
+  .back-link {
+    font-family: var(--font-code);
+    font-size: 0.7rem;
+    text-decoration: none;
+    color: var(--c-red);
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.7;
+      color: var(--c-red);
+    }
+  }
+
+  .article-meta {
+    font-family: var(--font-code);
+    font-size: 0.7rem;
+    color: var(--c-subtle);
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+  }
+
+  .meta-label {
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .meta-value {
+    color: var(--c-ink);
+    margin-bottom: 18px;
+    font-size: 0.75rem;
+  }
+
+  .toc {
     list-style: none;
+    margin-top: 30px;
+    padding: 0;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+    font-family: var(--font-code);
+    font-size: 0.7rem;
+    color: var(--c-subtle);
+    text-decoration: none;
+    transition: color 0.3s;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--c-ink);
+    }
+
+    &.active {
+      color: var(--c-ink);
+    }
+
+    span {
+      margin-right: 10px;
+      color: var(--c-red);
+      font-weight: 600;
+    }
+  }
+
+  .content-area {
+    flex: 1;
+    display: flex;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    padding: 60px 0;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--c-red);
+    }
+
+    @media (max-width: 768px) {
+      padding-left: 80px;
+    }
+  }
+
+  .article-column {
+    flex: 1;
+    padding: 0 50px 80px 50px;
+    min-width: 0;
+
+    @media (max-width: 768px) {
+      padding: 0 20px 60px 20px;
+    }
+  }
+
+  .annotations-column {
+    width: 340px;
+    min-width: 340px;
+    padding: 40px 20px 40px 30px;
+    margin-right: 60px;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    position: sticky;
+    top: 0;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    flex-shrink: 0;
+
+    @media (max-width: 1200px) {
+      display: none;
+    }
+  }
+
+  .annotation-item {
+    font-family: var(--font-code);
+    font-size: 0.75rem;
+    line-height: 1.8;
+    color: var(--c-subtle);
+
+    strong {
+      display: block;
+      color: var(--c-red);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    blockquote {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--c-ink);
+      margin-top: 8px;
+      border-left: 1px solid var(--c-red);
+      padding-left: 15px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    ul a {
+      color: var(--c-ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.3s;
+
+      &:hover {
+        color: var(--c-red);
+      }
+    }
+  }
+
+  .article-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4.2rem);
+    line-height: 0.9;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    color: white;
+    max-width: 800px;
+  }
+
+  .portfolio-section {
+    font-family: 'Inter', sans-serif;
+    margin: 0 0 70px 0;
+    padding: 0;
+    max-width: 720px;
+    width: 100%;
+  }
+
+  .recommendations {
+    margin: 80px 0 0 0 !important;
+    padding: 50px 0 0 0 !important;
+    max-width: 720px;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .section-label {
+    font-family: var(--font-code);
+    color: var(--c-red);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+
+  .section-content {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(224, 224, 224, 0.8);
+    font-weight: 400;
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style: disc;
+      padding-left: 1.25rem;
+      margin: 0.5rem 0;
+    }
 
     li {
-      position: relative;
-      margin-bottom: 10px;
-      padding-left: 20px;
-      font-family: var(--font-mono);
-      font-size: var(--fz-xs);
-
-      &:before {
-        content: '▹';
-        position: absolute;
-        left: 0;
-        color: var(--red);
-        font-size: var(--fz-sm);
-        line-height: 12px;
-      }
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+      color: rgba(224, 224, 224, 0.7);
     }
   }
-`;
-const StyledPic = styled.div`
-  position: relative;
-  max-width: 300px;
 
-  @media (max-width: 768px) {
-    margin: 50px auto 0;
-    width: 70%;
+  .experience-item {
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
-  .wrapper {
-    ${({ theme }) => theme.mixins.boxShadow};
-    display: block;
-    position: relative;
+
+  .exp-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0;
+    cursor: pointer;
+    user-select: none;
     width: 100%;
-    border-radius: var(--border-radius);
-    background-color: var(--white);
+    background: none;
+    border: none;
+    text-align: left;
+    color: inherit;
+    font-family: inherit;
 
-    &:hover,
-    &:focus {
-      outline: 0;
+    &:hover .item-title {
+      color: var(--c-red);
+    }
+  }
 
-      &:after {
-        top: 15px;
-        left: 15px;
+  .exp-toggle-icon {
+    font-family: var(--font-code);
+    font-size: 1.2rem;
+    color: var(--c-red);
+    flex-shrink: 0;
+    margin-left: 1rem;
+    transition: transform 0.3s;
+
+    &.open {
+      transform: rotate(45deg);
+    }
+  }
+
+  .exp-toggle-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+
+  .exp-toggle-top {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .exp-body {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+    padding: 0 0 0 0;
+
+    &.open {
+      max-height: 600px;
+      opacity: 1;
+      padding: 0 0 1.5rem 0;
+    }
+  }
+
+  .project-item {
+    margin-bottom: 2.5rem;
+  }
+
+  .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .item-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+  }
+
+  .item-meta {
+    font-family: var(--font-code);
+    font-size: 0.7rem;
+    color: var(--c-subtle);
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+
+  .item-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--c-red);
+    margin-bottom: 0.75rem;
+
+    a {
+      color: var(--c-red);
+      text-decoration: none;
+      transition: opacity 0.3s;
+
+      &:hover {
+        opacity: 0.7;
       }
+    }
+  }
 
-      .img {
-        filter: none;
-        mix-blend-mode: normal;
-      }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .skill-category {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .skill-list {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: var(--c-subtle);
+    line-height: 1.6;
+  }
+
+  .rec-label {
+    font-family: var(--font-code);
+    color: var(--c-red);
+    font-size: 0.75rem;
+    margin-bottom: 30px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .rec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .rec-card {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: block;
+
+    &:hover {
+      border-color: var(--c-red);
+      background: #181818;
+      color: inherit;
     }
 
-    .img {
-      position: relative;
-      border-radius: var(--border-radius);
-      mix-blend-mode: multiply;
-      filter: grayscale(100%) contrast(1);
-      transition: var(--transition);
+    .rec-meta {
+      font-family: var(--font-code);
+      font-size: 0.7rem;
+      color: var(--c-subtle);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    &:before,
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: var(--border-radius);
-      transition: var(--transition);
-    }
-
-    &:before {
-      top: 0;
-      left: 0;
-      background-color: var(--navy);
-      mix-blend-mode: screen;
-    }
-
-    &:after {
-      border: 2px solid var(--red);
-      top: 20px;
-      left: 20px;
-      z-index: -1;
+    h4 {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 1.3rem;
+      color: white;
+      font-weight: 400;
     }
   }
 `;
@@ -114,106 +464,288 @@ const StyledPic = styled.div`
 const About = () => {
   const data = useStaticQuery(graphql`
     query {
-      avatar: file(sourceInstanceName: { eq: "images" }, relativePath: { eq: "Adi.jpeg" }) {
-        childImageSharp {
-          fluid(maxWidth: 500, traceSVG: { color: "#29bc89" }) {
-            ...GatsbyImageSharpFluid_withWebp_tracedSVG
+      jobs: allMarkdownRemark(
+        filter: { fileAbsolutePath: { regex: "/content/jobs/" } }
+        sort: { fields: [frontmatter___index], order: DESC }
+      ) {
+        edges {
+          node {
+            frontmatter {
+              title
+              company
+              range
+              url
+            }
+            html
+          }
+        }
+      }
+      featured: allMarkdownRemark(
+        filter: { fileAbsolutePath: { regex: "/content/featured/" } }
+        sort: { fields: [frontmatter___date], order: DESC }
+      ) {
+        edges {
+          node {
+            frontmatter {
+              title
+              tech
+              github
+              external
+            }
+            html
           }
         }
       }
     }
   `);
 
-  const revealContainer = useRef(null);
+  const jobsData = data.jobs.edges;
+  const featuredData = data.featured.edges;
+  const contentRef = useRef(null);
+  const [activeSection, setActiveSection] = useState('about');
+  const [openJobs, setOpenJobs] = useState(() => {
+    const initial = {};
+    jobsData.forEach((_, i) => {
+      if (i < 2) initial[i] = true;
+    });
+    return initial;
+  });
+
+  const toggleJob = i => {
+    setOpenJobs(prev => ({ ...prev, [i]: !prev[i] }));
+  };
 
   useEffect(() => {
-    sr.reveal(revealContainer.current, srConfig());
+    const contentArea = contentRef.current;
+    if (!contentArea) return;
+
+    const handleScroll = () => {
+      const sections = contentArea.querySelectorAll('[data-section]');
+      let current = 'about';
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 250) {
+          current = section.dataset.section;
+        }
+      });
+      setActiveSection(current);
+    };
+
+    contentArea.addEventListener('scroll', handleScroll);
+    return () => contentArea.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const skills = [
-    'Languages: TypeScript, JavaScript, Python, GoLang, HTML, CSS, Dart, Java, WebAssembly',
-    'Libraries/Frameworks: NextJS, ReactJS, NodeJS, Tensorflow, Jest, Flutter',
-    'Databases: MySQL, MongoDB, Firebase',
-    'Design: Adobe Photoshop, Illustrator, Xd, Figma',
-    'Tools: Prisma, Kubernetes, Docker, Git, GCP, AWS, JIRA, Confluence, Apache Solr, Apache TomCat, GitHub Actions'
-  ];
+  const scrollToSection = sectionId => {
+    const contentArea = contentRef.current;
+    const section = contentArea?.querySelector(`[data-section="${sectionId}"]`);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handleBackClick = e => {
+    e.preventDefault();
+    const scroller = document.getElementById('scrollContainer');
+    if (scroller) {
+      scroller.style.transform = 'translateX(0vw)';
+    }
+  };
 
   return (
-    <StyledAboutSection id="about" ref={revealContainer}>
-      <h2 className="numbered-heading">ನಮಸ್ಕಾರ</h2>
+    <StyledArticlePanel id="article-panel">
+      <aside className="article-nav">
+        <a href="#" className="back-link" onClick={handleBackClick}>
+          &larr; Back to Home
+        </a>
 
-      <div className="inner">
-        <StyledText>
-          <div>
-            <p>
-              I'm Adithya Krishna, a Full-stack developer by day and a framework tinkerer by night. I currently work with{' '}
-              <a href="https://tensorlake.ai" target="_blank" rel="noopener noreferrer">
-                TensorLake AI
-              </a>
-              , building the UI for next-gen AI Infrastructure catering to generative AI applications.
-            </p>
+        <div className="article-meta">
+          <div className="meta-label">Role</div>
+          <div className="meta-value">Software Engineer</div>
+          <div className="meta-label">Location</div>
+          <div className="meta-value">Bengaluru, IN</div>
+          <div className="meta-label">Status</div>
+          <div className="meta-value">Building at Noice</div>
+        </div>
 
-            <p>
-              Previously, I worked as a SWE-II at{' '}
-              <a href="https://documenso.com" target="_blank" rel="noopener noreferrer">
-                Documenso
-              </a>
-              {' '}for ~7 months, and started my career at{' '}
-              <a href="https://redhat.com" target="_blank" rel="noopener noreferrer">
-                Red Hat
-              </a>
-              {' '}(~2.5 years) with the Customer Portal team.
-            </p>
+        <nav className="toc">
+          {[
+            { id: 'about', num: '01', label: 'About Me' },
+            { id: 'experience', num: '02', label: 'Work Experience' },
+            { id: 'skills', num: '03', label: 'Technical Skills' },
+            { id: 'projects', num: '04', label: 'Selected Projects' },
+          ].map(item => (
+            <a
+              key={item.id}
+              className={`toc-item ${activeSection === item.id ? 'active' : ''}`}
+              onClick={() => scrollToSection(item.id)}>
+              <span>{item.num}</span> {item.label}
+            </a>
+          ))}
+        </nav>
+      </aside>
 
-            <p>
-              I was a Google Season of Docs (GSoD '23) Technical Writer at{' '}
-              <a href="https://github.com/WasmEdge" target="_blank" rel="noopener noreferrer">
-                WasmEdge
-              </a>
-              {' '}and a Google Summer of Code (GSoC '23) Developer at{' '}
-              <a href="https://openchemistry.org" target="_blank" rel="noopener noreferrer">
-                OpenChemistry
-              </a>
-              , where I worked on the{' '}
-              <a href="https://github.com/3dmol/3Dmol.js" target="_blank" rel="noopener noreferrer">
-                3DMol.js
-              </a>
-              {' '}library.
-            </p>
+      <div className="content-area" ref={contentRef}>
+        <div className="article-column">
+          <header className="article-header">
+            <h1>
+              Curating
+              <br />
+              Efficient Digital
+              <br />
+              Experiences
+            </h1>
+          </header>
 
-            <p>
-              I'm also a Maintainer of{' '}
-              <a href="https://meshery.io" target="_blank" rel="noopener noreferrer">
-                Meshery
-              </a>
-              , a CNCF Sandbox Project, where I contribute to UI, GitHub Actions, documentation, and code reviews.
-            </p>
+          <section data-section="about" className="portfolio-section">
+            <span className="section-label">01 / Profile</span>
+            <h2 className="section-title">
+              Full-stack developer crafting delightful digital experiences.
+            </h2>
+            <div className="section-content">
+              <p>
+                I&apos;m Adithya Krishna, currently building next-gen web3 interfaces and
+                trading experiences at Noice. I specialize in creating high-performance,
+                accessible frontends with a focus on clean architecture and thoughtful design.
+              </p>
+              <p>
+                Previously worked as a fractional engineer at Reclaim Protocol and Tensorlake,
+                as a SWE-II at Documenso, and started my career at Red Hat (~2.5 years).
+                I was a GSoC &apos;23 Developer at OpenChemistry and I&apos;m a Maintainer of
+                Meshery, a CNCF Sandbox Project.
+              </p>
+            </div>
+          </section>
 
-            <p>Here are a few technologies I've been working with recently:</p>
+          <section data-section="experience" className="portfolio-section">
+            <span className="section-label">02 / Experience</span>
+            {jobsData.map(({ node }, i) => {
+              const { title, company, range, url } = node.frontmatter;
+              const isOpen = !!openJobs[i];
+              return (
+                <div className="experience-item" key={i}>
+                  <button
+                    className="exp-toggle"
+                    onClick={() => toggleJob(i)}
+                    aria-expanded={isOpen}>
+                    <div className="exp-toggle-left">
+                      <div className="exp-toggle-top">
+                        <h3 className="item-title">{title}</h3>
+                        <span className="item-meta">{range}</span>
+                      </div>
+                      <div className="item-subtitle">
+                        <a
+                          href={url}
+                          onClick={e => e.stopPropagation()}>
+                          {company}
+                        </a>
+                      </div>
+                    </div>
+                    <span className={`exp-toggle-icon ${isOpen ? 'open' : ''}`}>+</span>
+                  </button>
+                  <div className={`exp-body ${isOpen ? 'open' : ''}`}>
+                    <div
+                      className="section-content"
+                      dangerouslySetInnerHTML={{ __html: node.html }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </section>
+
+          <section data-section="skills" className="portfolio-section">
+            <span className="section-label">03 / Expertise</span>
+            <div className="skills-grid">
+              <div className="skill-group">
+                <div className="skill-category">Frontend &amp; Design</div>
+                <div className="skill-list">
+                  TypeScript, React, Next.js, PixiJS, WebGL2, Tailwind CSS, Framer Motion,
+                  Playwright, Jest, Figma
+                </div>
+              </div>
+              <div className="skill-group">
+                <div className="skill-category">Backend &amp; Tools</div>
+                <div className="skill-list">
+                  PostgreSQL, MongoDB, Firebase, Docker, Kubernetes, Git, GitHub Actions,
+                  GCP, AWS, Vercel
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section data-section="projects" className="portfolio-section">
+            <span className="section-label">04 / Projects</span>
+            {featuredData.slice(0, 4).map(({ node }, i) => {
+              const { title, tech, github, external } = node.frontmatter;
+              return (
+                <div className="project-item" key={i}>
+                  <div className="item-header">
+                    <h3 className="item-title">{title}</h3>
+                    <span className="item-meta">{tech ? tech.join(' / ') : ''}</span>
+                  </div>
+                  <div className="item-subtitle">
+                    {external && <a href={external}>Live &rarr;</a>}
+                    {external && github && ' \u00A0 '}
+                    {github && <a href={github}>GitHub &rarr;</a>}
+                  </div>
+                  <div
+                    className="section-content"
+                    dangerouslySetInnerHTML={{ __html: node.html }}
+                  />
+                </div>
+              );
+            })}
+          </section>
+
+          <section className="recommendations">
+            <span className="rec-label">Get In Touch</span>
+            <div className="rec-grid">
+              <a href={`mailto:${email}`} className="rec-card">
+                <div className="rec-meta">Email</div>
+                <h4>{email}</h4>
+              </a>
+              <Link to="/archive" className="rec-card">
+                <div className="rec-meta">Archive</div>
+                <h4>View All Projects</h4>
+              </Link>
+            </div>
+          </section>
+        </div>
+
+        <aside className="annotations-column">
+          <div className="annotation-item">
+            <strong>Design Ethos</strong>
+            <blockquote>
+              &ldquo;Exploring the intersection of logic and aesthetics through code, distinct
+              systems, and digital architecture.&rdquo;
+            </blockquote>
           </div>
 
-          <ul className="skills-list">
-            <li><strong style={{ color: 'white' }}>Languages:</strong> TypeScript, JavaScript, HTML, CSS, Python, GoLang, WebAssembly</li>
-            <li><strong style={{color: 'white'}}>Libraries/Frameworks:</strong> ReactJS, NextJS, Jest, React Testing Library, Playwright</li>
-            <li><strong style={{color: 'white'}}>Databases:</strong> MySQL, MongoDB, Firebase</li>
-            <li><strong style={{color: 'white'}}>Design:</strong> Adobe Photoshop, Illustrator, Xd, Figma</li>
-            <li><strong style={{ color: 'white' }}>Tools:</strong> Kubernetes (Familiar), Docker (Familiar), Git, GCP, AWS, JIRA, Confluence, Apache Solr, Apache TomCat, GitHub Actions</li>
-          </ul>
-        </StyledText>
-
-        <StyledPic>
-          <div className="wrapper">
-            <StaticImage 
-              className="img"
-              src="../../images/Adi.jpeg"
-              width={500}
-              quality={95}
-              formats={['AUTO', 'WEBP', 'AVIF']}
-              alt="Headshot" />
+          <div className="annotation-item">
+            <strong>Currently</strong>
+            <p>
+              Building web3 trading interfaces at Noice. Previously at Reclaim Protocol,
+              Tensorlake, Documenso, and Red Hat.
+            </p>
           </div>
-        </StyledPic>
+
+          <div className="annotation-item">
+            <strong>Quick Links</strong>
+            <ul>
+              <li>
+                <a href="/resume.pdf">Resume (PDF)</a>
+              </li>
+              <li>
+                <a href="https://github.com/adithyaakrishna">GitHub</a>
+              </li>
+              <li>
+                <a href="https://adikris.in/blog">Blog</a>
+              </li>
+            </ul>
+          </div>
+        </aside>
       </div>
-    </StyledAboutSection>
+    </StyledArticlePanel>
   );
 };
 
