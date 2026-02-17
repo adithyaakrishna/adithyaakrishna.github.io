@@ -603,15 +603,15 @@ const About = () => {
             </h2>
             <div className="section-content">
               <p>
-                I&apos;m Adithya Krishna, currently building next-gen web3 interfaces and
-                trading experiences at Noice. I specialize in creating high-performance,
-                accessible frontends with a focus on clean architecture and thoughtful design.
+                I&apos;m Adithya Krishna, a Software Engineer at Noice where I build
+                token launching interfaces and web3 experiences using Next.js, PixiJS, and WebGL2.
+                I care deeply about performant UIs, clean architecture, and shipping fast.
               </p>
               <p>
-                Previously worked as a fractional engineer at Reclaim Protocol and Tensorlake,
-                as a SWE-II at Documenso, and started my career at Red Hat (~2.5 years).
-                I was a GSoC &apos;23 Developer at OpenChemistry and I&apos;m a Maintainer of
-                Meshery, a CNCF Sandbox Project.
+                Before Noice, I built frontend systems at Tensorlake and Reclaim Protocol,
+                worked on document signing UX at Documenso, and spent ~2.5 years at
+                Red Hat on the Customer Portal team. I&apos;m also a GSoC &apos;23 alum
+                (OpenChemistry / 3DMol.js) and a maintainer of Meshery, a CNCF Sandbox Project.
               </p>
             </div>
           </section>

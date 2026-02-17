@@ -107,8 +107,7 @@ const Hero = () => {
         Software Engineer
       </h2>
       <p className="hero-subtitle">
-        Exploring the intersection of logic and aesthetics through code, distinct systems, and
-        digital architecture.
+        Building high-performance interfaces at the edge of web3, open-source, and design systems.
       </p>
     </div>
   );
