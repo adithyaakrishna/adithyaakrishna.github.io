@@ -10,6 +10,14 @@ const StyledHomeLayout = styled.div`
   height: 100vh;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100vw;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
 `;
 
 const StyledLeftRail = styled.aside`
@@ -102,6 +110,23 @@ const StyledHorizontalScroller = styled.div`
     width: 100vw;
     height: 100vh;
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    will-change: auto;
+    box-sizing: border-box;
+
+    & > * {
+      width: 100%;
+      max-width: 100%;
+      min-height: 100vh;
+      height: auto;
+      box-sizing: border-box;
+    }
+  }
 `;
 
 const StyledRightRail = styled.aside`
@@ -150,6 +175,9 @@ const IndexPage = ({ location }) => {
     const container = scrollerRef.current;
     const indicator = indicatorRef.current;
     if (!container || !indicator) return;
+
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (isMobile) return;
 
     gsap.set(container, { x: 0 });
     gsap.set(indicator, { height: 0 });

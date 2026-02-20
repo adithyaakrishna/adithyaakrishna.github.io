@@ -20,6 +20,15 @@ const StyledArticlePanel = styled.section`
   background: var(--c-cream);
   overflow: hidden;
 
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+    box-sizing: border-box;
+  }
+
   .article-nav {
     width: 320px;
     min-width: 320px;
@@ -134,6 +143,8 @@ const StyledArticlePanel = styled.section`
     @media (max-width: 768px) {
       padding: 30px 0;
       flex-direction: column;
+      overflow: visible;
+      max-width: 100%;
     }
   }
 
@@ -144,6 +155,9 @@ const StyledArticlePanel = styled.section`
 
     @media (max-width: 768px) {
       padding: 0 20px 60px 20px;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
   }
 
@@ -692,7 +706,12 @@ const About = ({ contentAreaRef, onBackToHero }) => {
   const scrollToSection = sectionId => {
     const contentArea = contentRef.current;
     const section = contentArea?.querySelector(`[data-section="${sectionId}"]`);
-    if (contentArea && section) {
+    if (!section) return;
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+    if (contentArea) {
       const sectionRect = section.getBoundingClientRect();
       const contentRect = contentArea.getBoundingClientRect();
       const targetScroll = Math.max(
@@ -710,6 +729,11 @@ const About = ({ contentAreaRef, onBackToHero }) => {
 
   const handleBackClick = e => {
     e.preventDefault();
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      const layout = document.querySelector('.home-layout');
+      if (layout) layout.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     if (onBackToHero) {
       onBackToHero();
     } else {
@@ -908,7 +932,7 @@ const About = ({ contentAreaRef, onBackToHero }) => {
           <div className="annotation-item reveal-anno">
             <strong>Currently</strong>
             <p>
-              Building web3 interfaces at Noice. Past: Reclaim Protocol, Tensorlake, Documenso, Red Hat.
+              Engineering clarity and performance into products that ship. Building interfaces users actually trust and use.
             </p>
           </div>
 

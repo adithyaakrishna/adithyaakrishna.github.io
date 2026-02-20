@@ -21,8 +21,12 @@ const StyledHeroSection = styled.section`
   margin: 0;
 
   @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
     padding: 24px;
     padding-top: 40px;
+    min-height: 100vh;
+    box-sizing: border-box;
   }
 
   .hero-meta {
@@ -144,7 +148,7 @@ const Hero = () => {
           </span>
         </h1>
         <p className="hero-subtitle">
-          Building web3 interfaces at Noice. Open source at Reclaim & Meshery. Past: Red Hat, Tensorlake, Documenso, GSoC.
+          Engineering clarity and performance into products that ship. Building interfaces users actually trust and use.
         </p>
       </div>
     </StyledHeroSection>

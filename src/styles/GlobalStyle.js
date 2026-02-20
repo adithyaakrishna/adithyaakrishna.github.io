@@ -120,6 +120,11 @@ const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
     width: 100%;
+    overflow-x: hidden;
+
+    @media (max-width: 768px) {
+      max-width: 100vw;
+    }
   }
 
   *,
@@ -149,6 +154,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     min-height: 100%;
     overflow-x: hidden;
+    max-width: 100%;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     background-color: var(--c-cream);
@@ -188,6 +194,13 @@ const GlobalStyle = createGlobalStyle`
     display: grid;
     grid-template-rows: 1fr auto;
     grid-template-columns: 100%;
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  #content {
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   main {

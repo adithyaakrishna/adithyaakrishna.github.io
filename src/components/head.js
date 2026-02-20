@@ -55,6 +55,7 @@ const Head = ({ title, description, image }) => {
         rel="stylesheet"
       />
 
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
 
