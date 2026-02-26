@@ -1,186 +1,125 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { srConfig, email, socialMedia } from '@config';
-import sr from '@utils/sr';
+import { email, socialMedia } from '@config';
 
 const StyledContactSection = styled.section`
-  width: 100vw;
-  height: 100vh;
-  scroll-snap-align: start;
-  flex-shrink: 0;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border-right: var(--border-width) solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 80px;
   max-width: none;
-  margin: 0;
   padding: 0;
 
-  .contact-container {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    height: 100%;
-
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
+  @media (max-width: 768px) {
+    margin-bottom: 40px;
   }
 
-  .contact-left {
-    padding: var(--layout-padding);
-    padding-left: calc(var(--layout-padding) + 80px);
+  .contact-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-
-    @media (max-width: 768px) {
-      padding-left: var(--layout-padding);
-    }
   }
 
-  .contact-title {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 6vw, 5rem);
-    text-transform: uppercase;
+  .contact-item {
+    margin-bottom: 32px;
+  }
+
+  .contact-label {
+    font-size: 10px;
     color: var(--c-red);
-    line-height: 1;
-    margin-bottom: 3rem;
-  }
-
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .contact-input {
-    width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    font-family: var(--font-body);
-    font-size: clamp(1.2rem, 2vw, 2rem);
-    padding: 1rem 0;
-    margin-bottom: 3rem;
-    outline: none;
-    color: var(--c-ink);
-    cursor: text;
-
-    &::placeholder {
-      color: var(--c-subtle);
-      font-family: var(--font-code);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-  }
-
-  .submit-button {
-    background: var(--c-red);
-    color: white;
-    border: none;
-    padding: 1.5rem 4rem;
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: opacity 0.3s;
-    align-self: flex-start;
-
-    &:hover {
-      opacity: 0.9;
-    }
-  }
-
-  .contact-right {
-    padding: var(--layout-padding);
-    background-color: var(--c-red);
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .contact-details {
-    h4 {
-      font-family: var(--font-code);
-      opacity: 0.7;
-      margin-bottom: 1rem;
-      font-size: 0.8rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: #ffffff;
-    }
-
-    a {
-      display: block;
-      color: #ffffff;
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 3vw, 3rem);
-      text-decoration: none;
-      margin-bottom: 1rem;
-      transition: opacity 0.3s;
-
-      &:hover {
-        opacity: 0.8;
-        color: #ffffff;
-      }
-    }
-  }
-
-  .contact-footer {
-    margin-top: 4rem;
-    font-family: var(--font-code);
-    font-size: 0.7rem;
-    opacity: 0.8;
-    color: #ffffff;
+    display: block;
+    margin-bottom: 4px;
     text-transform: uppercase;
     letter-spacing: 1px;
+  }
+
+  .contact-value {
+    color: var(--c-bright);
+    font-size: var(--fz-md);
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--c-red);
+    }
+  }
+
+  .contact-socials {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .social-link {
+    color: var(--c-bright);
+    text-decoration: none;
+    font-size: var(--fz-sm);
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--c-red);
+    }
+  }
+
+  .contact-cta {
+    margin-top: 32px;
+    padding: 16px 24px;
+    border: 1px solid var(--border-color);
+    display: inline-block;
+    color: var(--c-red);
+    text-decoration: none;
+    font-size: var(--fz-sm);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba(217, 72, 56, 0.08);
+      border-color: var(--c-red);
+      color: var(--c-red);
+    }
   }
 `;
 
 const Contact = () => {
-  const revealContainer = useRef(null);
-  useEffect(() => sr.reveal(revealContainer.current, srConfig()), []);
-
   const socialLinks = socialMedia
     ? socialMedia.filter(({ name }) => ['Twitter', 'Linkedin', 'GitHub'].includes(name))
     : [];
 
   return (
-    <StyledContactSection id="contact" ref={revealContainer}>
-      <div className="contact-container">
-        <div className="contact-left">
-          <h2 className="contact-title">Let&apos;s Talk</h2>
-          <form
-            className="contact-form"
-            onSubmit={e => {
-              e.preventDefault();
-              window.location.href = `mailto:${email}`;
-            }}>
-            <input type="text" className="contact-input" placeholder="YOUR NAME" />
-            <input type="email" className="contact-input" placeholder="YOUR EMAIL" />
-            <input type="text" className="contact-input" placeholder="YOUR MESSAGE" />
-            <button type="submit" className="submit-button">
-              Send Inquiry
-            </button>
-          </form>
+    <StyledContactSection data-section="contact">
+      <h2 className="terminal-header">./contact.sh</h2>
+      <br />
+      <div className="contact-content">
+        <div className="contact-item">
+          <span className="contact-label">Email</span>
+          <a className="contact-value" href={`mailto:${email}`}>
+            {email}
+          </a>
         </div>
-        <div className="contact-right">
-          <div className="contact-details">
-            <h4>Direct Contact</h4>
-            <a href={`mailto:${email}`}>{email}</a>
-            <br />
-            <h4>Socials</h4>
+
+        <div className="contact-item">
+          <span className="contact-label">Socials</span>
+          <div className="contact-socials">
             {socialLinks.map(({ url, name }) => (
-              <a key={name} href={url} target="_blank" rel="noopener noreferrer">
-                {name === 'Twitter' ? 'Twitter / X' : name}
+              <a
+                key={name}
+                href={url}
+                className="social-link"
+                target="_blank"
+                rel="noopener noreferrer">
+                [{name.toUpperCase()}]
               </a>
             ))}
           </div>
-          <footer className="contact-footer">
-            &copy; {new Date().getFullYear()} AADITHYA. DESIGNED WITH PRECISION.
-          </footer>
         </div>
+
+        <div className="contact-item">
+          <span className="contact-label">Resume</span>
+          <a className="contact-value" href="/resume.pdf">
+            resume.pdf
+          </a>
+        </div>
+
+        <a className="contact-cta" href={`mailto:${email}`}>
+          Send Inquiry →
+        </a>
       </div>
     </StyledContactSection>
   );

@@ -9,7 +9,7 @@ import { Layout } from '@components';
 import { Icon } from '@components/icons';
 
 const StyledTableContainer = styled.div`
-  margin: 100px -20px;
+  margin: 80px -20px;
 
   @media (max-width: 768px) {
     margin: 50px -10px;
@@ -18,6 +18,7 @@ const StyledTableContainer = styled.div`
   table {
     width: 100%;
     border-collapse: collapse;
+    font-family: var(--font-mono);
 
     .hide-on-mobile {
       @media (max-width: 768px) {
@@ -28,7 +29,7 @@ const StyledTableContainer = styled.div`
     tbody tr {
       &:hover,
       &:focus {
-        background-color: var(--light-navy);
+        background-color: rgba(217, 72, 56, 0.03);
       }
     }
 
@@ -36,6 +37,8 @@ const StyledTableContainer = styled.div`
     td {
       padding: 10px;
       text-align: left;
+      font-size: var(--fz-sm);
+      border-bottom: 1px solid var(--border-color);
 
       &:first-child {
         padding-left: 20px;
@@ -53,9 +56,17 @@ const StyledTableContainer = styled.div`
       }
 
       svg {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
       }
+    }
+
+    th {
+      color: var(--c-red);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
     }
 
     tr {
@@ -74,10 +85,12 @@ const StyledTableContainer = styled.div`
     td {
       &.year {
         padding-right: 20px;
+        color: var(--c-red);
+        font-size: var(--fz-xs);
 
         @media (max-width: 768px) {
           padding-right: 10px;
-          font-size: var(--fz-sm);
+          font-size: 10px;
         }
       }
 
@@ -85,20 +98,23 @@ const StyledTableContainer = styled.div`
         padding-top: 15px;
         padding-right: 20px;
         color: var(--lightest-slate);
-        font-size: var(--fz-xl);
+        font-size: var(--fz-md);
         font-weight: 600;
         line-height: 1.25;
       }
 
       &.company {
-        font-size: var(--fz-lg);
+        font-size: var(--fz-sm);
         white-space: nowrap;
+        color: var(--c-subtle);
       }
 
       &.tech {
-        font-size: var(--fz-xxs);
+        font-size: 10px;
         font-family: var(--font-mono);
         line-height: 1.5;
+        color: var(--c-subtle);
+
         .separator {
           margin: 0 5px;
         }
@@ -117,6 +133,11 @@ const StyledTableContainer = styled.div`
           a {
             ${({ theme }) => theme.mixins.flexCenter};
             flex-shrink: 0;
+            color: var(--c-subtle);
+
+            &:hover {
+              color: var(--c-red);
+            }
           }
 
           a + a {
@@ -146,8 +167,8 @@ const ArchivePage = ({ location, data }) => {
 
       <main>
         <header ref={revealTitle}>
-          <h1 className="big-heading">Archive</h1>
-          <p className="subtitle">A list of things I’ve worked on :)</p>
+          <h1 className="big-heading" style={{ fontFamily: 'var(--font-mono)' }}>Archive</h1>
+          <p className="subtitle">ls -la ./all_projects</p>
         </header>
 
         <StyledTableContainer ref={revealTable}>
@@ -186,11 +207,11 @@ const ArchivePage = ({ location, data }) => {
 
                       <td className="tech hide-on-mobile">
                         {tech?.length > 0 &&
-                          tech?.map((item, i) => (
-                            <span key={i}>
+                          tech?.map((item, j) => (
+                            <span key={j}>
                               {item}
                               {''}
-                              {i !== tech?.length - 1 && <span className="separator">&middot;</span>}
+                              {j !== tech?.length - 1 && <span className="separator">&middot;</span>}
                             </span>
                           ))}
                       </td>
@@ -229,6 +250,7 @@ const ArchivePage = ({ location, data }) => {
     </Layout>
   );
 };
+
 ArchivePage.propTypes = {
   location: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,

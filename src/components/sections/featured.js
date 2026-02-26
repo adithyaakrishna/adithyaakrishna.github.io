@@ -1,106 +1,107 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
-import sr from '@utils/sr';
-import { srConfig } from '@config';
 
 const StyledFeaturedSection = styled.section`
-  width: 100vw;
-  height: 100vh;
-  scroll-snap-align: start;
-  flex-shrink: 0;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-right: var(--border-width) solid rgba(255, 255, 255, 0.1);
-  padding: var(--layout-padding);
-  padding-left: calc(var(--layout-padding) + 80px);
-  padding-right: calc(var(--layout-padding) + 60px);
+  margin-bottom: 60px;
   max-width: none;
-  margin: 0;
+  padding: 0;
 
   @media (max-width: 768px) {
-    padding-left: var(--layout-padding);
-    padding-right: var(--layout-padding);
+    margin-bottom: 40px;
   }
 
-  .section-header {
-    margin-bottom: 4rem;
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
-  .section-label {
-    font-family: var(--font-code);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--c-red);
-    display: block;
-    margin-bottom: 1rem;
-  }
-
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 6vw, 5rem);
-    text-transform: uppercase;
-    color: var(--c-ink);
-    line-height: 1;
-    margin: 0;
-  }
-
-  .blog-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .blog-card {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 3rem;
-    background: #181818;
-    transition: transform 0.3s;
+  .project-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
     text-decoration: none;
-    display: block;
+    color: inherit;
+
+    &:last-child {
+      border-bottom: 1px solid var(--border-color);
+    }
 
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: 10px 10px 0px rgba(217, 72, 56, 0.2);
+      border-color: rgba(217, 72, 56, 0.4);
+      background: rgba(217, 72, 56, 0.03);
       color: inherit;
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
     }
   }
 
-  .blog-meta {
-    font-family: var(--font-code);
-    font-size: 0.8rem;
+  .project-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+
+    @media (max-width: 768px) {
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+  }
+
+  .project-permission {
     color: var(--c-red);
-    margin-bottom: 1.5rem;
-    display: block;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: var(--fz-xs);
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
-  .blog-title {
-    font-family: var(--font-body);
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    font-style: italic;
-    color: var(--c-ink);
-    font-weight: 400;
+  .project-title {
+    color: var(--c-bright);
+    font-size: var(--fz-md);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media (max-width: 768px) {
+      white-space: normal;
+    }
   }
 
-  .blog-description {
-    font-size: 1rem;
-    line-height: 1.6;
+  .project-tech {
+    font-size: 10px;
     color: var(--c-subtle);
-    font-family: var(--font-body);
+    white-space: nowrap;
+    opacity: 0.7;
 
-    p {
-      margin: 0;
+    @media (max-width: 768px) {
+      white-space: normal;
+    }
+  }
+
+  .project-links {
+    display: flex;
+    gap: 12px;
+    font-size: 10px;
+    flex-shrink: 0;
+
+    a {
+      color: var(--c-subtle);
+      text-decoration: none;
+      transition: color 0.2s;
+
+      &:hover {
+        color: var(--c-red);
+      }
     }
   }
 `;
@@ -128,36 +129,41 @@ const Featured = () => {
     }
   `);
 
-  const featuredProjects = data.featured.edges.filter(({ node }) => node).slice(0, 2);
-
-  const revealContainer = useRef(null);
-  useEffect(() => {
-    sr.reveal(revealContainer.current, srConfig());
-  }, []);
+  const featuredProjects = data.featured.edges.filter(({ node }) => node);
 
   return (
-    <StyledFeaturedSection id="projects" ref={revealContainer}>
-      <div className="section-header">
-        <span className="section-label">03 / Thoughts</span>
-        <h2 className="section-title">The Journal</h2>
-      </div>
-
-      <div className="blog-grid">
+    <StyledFeaturedSection data-section="projects">
+      <h2 className="terminal-header">ls -la ./projects</h2>
+      <br />
+      <div className="projects-list">
         {featuredProjects.map(({ node }, i) => {
-          const { frontmatter, html } = node;
-          const { external, title, tech, github } = frontmatter;
+          const { title, tech, github, external, date } = node.frontmatter;
           const techString = tech ? tech.join(' / ') : '';
-          const link = external || github || '#';
+          const dateStr = date
+            ? new Date(date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase().replace(' ', '_')
+            : '';
 
           return (
-            <a href={link} className="blog-card" key={i}>
-              <span className="blog-meta">{techString}</span>
-              <h3 className="blog-title">{title}</h3>
-              <div
-                className="blog-description"
-                dangerouslySetInnerHTML={{ __html: html }}
-              />
-            </a>
+            <div className="project-item" key={i}>
+              <div className="project-left">
+                <span className="project-permission">drwxr-xr-x</span>
+                <span className="project-title">{title}</span>
+                {techString && <span className="project-tech">{techString}</span>}
+              </div>
+              <div className="project-links">
+                {external && (
+                  <a href={external} target="_blank" rel="noopener noreferrer">
+                    [LIVE]
+                  </a>
+                )}
+                {github && (
+                  <a href={github} target="_blank" rel="noopener noreferrer">
+                    [SRC]
+                  </a>
+                )}
+                {dateStr && <span style={{ opacity: 0.4 }}>{dateStr}</span>}
+              </div>
+            </div>
           );
         })}
       </div>

@@ -99,7 +99,7 @@ const StyledSidebar = styled.aside`
     height: 100vh;
     outline: 0;
     background-color: var(--light-navy);
-    box-shadow: -10px 0px 30px -15px var(--navy-shadow);
+    border-left: 1px solid var(--border-color);
     z-index: 9;
     transform: translateX(${props => (props.menuOpen ? 0 : 100)}vw);
     visibility: ${props => (props.menuOpen ? 'visible' : 'hidden')};
@@ -152,6 +152,9 @@ const StyledSidebar = styled.aside`
     padding: 18px 50px;
     margin: 10% auto 0;
     width: max-content;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: var(--fz-xs);
   }
 `;
 

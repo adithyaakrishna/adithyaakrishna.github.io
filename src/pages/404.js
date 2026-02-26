@@ -11,19 +11,41 @@ const StyledMainContainer = styled.main`
   ${({ theme }) => theme.mixins.flexCenter};
   flex-direction: column;
 `;
+
 const StyledTitle = styled.h1`
   color: var(--red);
   font-family: var(--font-mono);
-  font-size: clamp(100px, 25vw, 200px);
+  font-size: clamp(80px, 20vw, 160px);
   line-height: 1;
 `;
+
 const StyledSubtitle = styled.h2`
-  font-size: clamp(30px, 5vw, 50px);
+  font-size: clamp(20px, 4vw, 32px);
   font-weight: 400;
+  font-family: var(--font-mono);
+  color: var(--c-ink);
+  margin-top: 8px;
 `;
+
+const StyledTerminalText = styled.p`
+  font-family: var(--font-mono);
+  font-size: var(--fz-sm);
+  color: var(--c-subtle);
+  margin-top: 24px;
+  text-align: center;
+  line-height: 1.8;
+
+  .cmd {
+    color: var(--c-red);
+  }
+`;
+
 const StyledHomeButton = styled(Link)`
   ${({ theme }) => theme.mixins.bigButton};
   margin-top: 40px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: var(--fz-xs);
 `;
 
 const NotFoundPage = ({ location }) => {
@@ -44,7 +66,11 @@ const NotFoundPage = ({ location }) => {
             <StyledMainContainer className="fillHeight">
               <StyledTitle>404</StyledTitle>
               <StyledSubtitle>Page Not Found</StyledSubtitle>
-              <StyledHomeButton to="/">Go Home</StyledHomeButton>
+              <StyledTerminalText>
+                <span className="cmd">user@adithya:~$</span> cat page.txt<br />
+                Error: No such file or directory
+              </StyledTerminalText>
+              <StyledHomeButton to="/">cd ~</StyledHomeButton>
             </StyledMainContainer>
           </CSSTransition>
         )}

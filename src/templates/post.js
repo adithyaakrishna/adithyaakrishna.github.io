@@ -24,12 +24,20 @@ const StyledPostContent = styled.div`
   h5,
   h6 {
     margin: 2em 0 1em;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   p {
     margin: 1em 0;
-    line-height: 1.5;
-    color: var(--light-slate);
+    line-height: 1.7;
+    color: var(--c-ink);
+    font-size: var(--fz-md);
+  }
+
+  code {
+    font-size: var(--fz-sm);
   }
 `;
 

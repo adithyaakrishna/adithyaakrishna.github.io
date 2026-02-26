@@ -1,0 +1,233 @@
+<html lang="en" vid="0"><head vid="1">
+    <meta charset="UTF-8" vid="2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
+    <title vid="4">Stephanie - Portfolio Terminal</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17" vid="5"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet" vid="6">
+    <style vid="7">
+        :root {
+            --bg-blue: #020617; 
+            --accent-blue: #3b82f6;
+            --grid-color: rgba(59, 130, 246, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-blue);
+            color: #94a3b8;
+            font-family: 'Space Mono', monospace;
+            overflow: hidden; 
+        }
+
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+        }
+
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+            display: inline-block;
+            width: 8px;
+            height: 1.2em;
+            background-color: #3b82f6;
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .terminal-header {
+            color: #3b82f6;
+            font-weight: 700;
+        }
+
+        .terminal-header::before {
+            content: 'user@steph:~$ ';
+            opacity: 0.5;
+        }
+
+        .pixel-art { image-rendering: pixelated; }
+
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+
+        .nav-link {
+            transition: all 0.2s ease;
+            color: #64748b;
+        }
+        .nav-link:hover {
+            color: #3b82f6;
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="h-screen w-full flex selection:bg-blue-500 selection:text-white" vid="8">
+
+    <div class="absolute inset-0 z-0 bg-grid pointer-events-none" vid="9"></div>
+
+    <aside class="w-1/4 h-full border-r border-blue-900/30 relative z-20 flex flex-col justify-between p-10 bg-slate-950/50 backdrop-blur-sm" vid="10">
+        <div class="text-[10px] uppercase tracking-[0.3em] text-blue-500 font-bold" vid="11">
+            TERMINAL_V2.0.24
+        </div>
+
+        <nav class="flex flex-col gap-4 text-sm" vid="12">
+            <div class="mb-4 opacity-40 text-[10px]" vid="13">[ NAVIGATION ]</div>
+            <a href="#" class="nav-link py-2 px-3 border-l-2 border-transparent hover:border-blue-500" vid="14">&gt; ABOUT.md</a>
+            <a href="#" class="nav-link py-2 px-3 border-l-2 border-blue-500 bg-blue-500/5 text-blue-400" vid="15">&gt; SKILLS.exe</a>
+            <a href="#" class="nav-link py-2 px-3 border-l-2 border-transparent hover:border-blue-500" vid="16">&gt; PROJECTS/</a>
+            <a href="#" class="nav-link py-2 px-3 border-l-2 border-transparent hover:border-blue-500" vid="17">&gt; BLOG_LOGS/</a>
+            <a href="#" class="nav-link py-2 px-3 border-l-2 border-transparent hover:border-blue-500" vid="18">&gt; CONTACT.sh</a>
+        </nav>
+
+        <div class="flex flex-col gap-6" vid="19">
+            <div class="text-[10px] leading-relaxed" vid="20">
+                <span class="text-blue-500" vid="21">LOC:</span> PARIS, FR<br vid="22">
+                <span class="text-blue-500" vid="23">STATUS:</span> ACTIVE_FREELANCE
+            </div>
+            <div class="flex gap-4 text-[10px]" vid="24">
+                <a href="#" class="hover:text-blue-400 transition-colors" vid="25">[GITHUB]</a>
+                <a href="#" class="hover:text-blue-400 transition-colors" vid="26">[LINKEDIN]</a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="w-3/4 h-full relative z-10 flex flex-col p-12 overflow-y-auto custom-scrollbar" vid="27">
+        
+        
+        <section class="mb-20" vid="28">
+            <h2 class="terminal-header text-lg mb-6" vid="29">cat about_me.txt</h2>
+            <p class="max-w-2xl leading-relaxed text-slate-300" vid="30">
+                Creative developer focused on building interactive digital experiences at the intersection of design and code. Specializing in high-performance frontend architectures and experimental UI/UX. Currently exploring the boundaries of pixel manipulation and procedural animations.
+                <span class="cursor-blink" vid="31"></span>
+            </p>
+        </section>
+
+        
+        <section class="mb-20" vid="32">
+            <h2 class="terminal-header text-lg mb-8" vid="33">./display_skills --verbose</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 max-w-3xl" vid="34">
+                <div vid="35">
+                    <div class="flex justify-between text-[10px] mb-2" vid="36">
+                        <span vid="37">FRONTEND_ENG</span>
+                        <span vid="38">92%</span>
+                    </div>
+                    <div class="text-blue-500/60 text-xs tracking-tight" vid="39">[##########################--]</div>
+                </div>
+                <div vid="40">
+                    <div class="flex justify-between text-[10px] mb-2" vid="41">
+                        <span vid="42">WEBGL_CREATIVE</span>
+                        <span vid="43">78%</span>
+                    </div>
+                    <div class="text-blue-500/60 text-xs tracking-tight" vid="44">[######################------]</div>
+                </div>
+                <div vid="45">
+                    <div class="flex justify-between text-[10px] mb-2" vid="46">
+                        <span vid="47">UI_SYSTEMS</span>
+                        <span vid="48">85%</span>
+                    </div>
+                    <div class="text-blue-500/60 text-xs tracking-tight" vid="49">[########################----]</div>
+                </div>
+                <div vid="50">
+                    <div class="flex justify-between text-[10px] mb-2" vid="51">
+                        <span vid="52">TYPESCRIPT</span>
+                        <span vid="53">95%</span>
+                    </div>
+                    <div class="text-blue-500/60 text-xs tracking-tight" vid="54">[###########################-]</div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="mb-20" vid="55">
+            <h2 class="terminal-header text-lg mb-8" vid="56">ls -la ./projects</h2>
+            <div class="space-y-4" vid="57">
+                <div class="group flex items-center justify-between p-4 border border-blue-900/20 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all cursor-pointer" vid="58">
+                    <div vid="59">
+                        <span class="text-blue-500 mr-4" vid="60">drwxr-xr-x</span>
+                        <span class="text-slate-200" vid="61">Project_Hyperion</span>
+                    </div>
+                    <span class="text-[10px] opacity-40" vid="62">JUL_2024</span>
+                </div>
+                <div class="group flex items-center justify-between p-4 border border-blue-900/20 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all cursor-pointer" vid="63">
+                    <div vid="64">
+                        <span class="text-blue-500 mr-4" vid="65">drwxr-xr-x</span>
+                        <span class="text-slate-200" vid="66">Nebula_Dashboard</span>
+                    </div>
+                    <span class="text-[10px] opacity-40" vid="67">MAY_2024</span>
+                </div>
+                <div class="group flex items-center justify-between p-4 border border-blue-900/20 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all cursor-pointer" vid="68">
+                    <div vid="69">
+                        <span class="text-blue-500 mr-4" vid="70">drwxr-xr-x</span>
+                        <span class="text-slate-200" vid="71">Pixel_Synth_v4</span>
+                    </div>
+                    <span class="text-[10px] opacity-40" vid="72">FEB_2024</span>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="mb-32" vid="73">
+            <h2 class="terminal-header text-lg mb-8" vid="74">tail -n 2 blog.log</h2>
+            <div class="border-l border-blue-900/50 ml-2 pl-6 space-y-8" vid="75">
+                <article vid="76">
+                    <time class="text-[10px] text-blue-500 block mb-1" vid="77">2024-06-12 14:30:01</time>
+                    <h3 class="text-slate-200 hover:text-blue-400 cursor-pointer mb-2" vid="78">Optimizing Canvas Render Loops</h3>
+                    <p class="text-sm opacity-60 line-clamp-2" vid="79">Exploring how requestAnimationFrame and worker threads can stabilize framerates in heavy SVG-based animations...</p>
+                </article>
+                <article vid="80">
+                    <time class="text-[10px] text-blue-500 block mb-1" vid="81">2024-05-28 09:15:44</time>
+                    <h3 class="text-slate-200 hover:text-blue-400 cursor-pointer mb-2" vid="82">The Aesthetics of Minimal Terminals</h3>
+                    <p class="text-sm opacity-60 line-clamp-2" vid="83">Why the monospaced constraint often leads to more focused and usable developer tools...</p>
+                </article>
+            </div>
+        </section>
+
+        
+        <div class="fixed right-0 top-0 h-full flex items-center pointer-events-none pr-8" vid="84">
+            <h1 class="text-[15vh] leading-none text-blue-500/10 tracking-tighter vertical-text flex items-center select-none" style="font-family: 'Playfair Display', serif; font-style: italic;" vid="85">
+                <span vid="86">stephan</span>
+                <div class="inline-block w-[4vh] h-[7vh] mx-2 pixel-art relative opacity-20 grayscale" vid="87">
+                    <svg viewBox="0 0 24 40" class="w-full h-full" vid="88">
+                        <rect x="10" y="20" width="4" height="20" fill="#3b82f6" vid="89"></rect>
+                        <rect x="8" y="8" width="8" height="8" fill="#3b82f6" vid="90"></rect>
+                        <rect x="8" y="0" width="8" height="8" fill="#3b82f6" vid="91"></rect>
+                        <rect x="8" y="16" width="8" height="8" fill="#3b82f6" vid="92"></rect>
+                        <rect x="0" y="8" width="8" height="8" fill="#3b82f6" vid="93"></rect>
+                        <rect x="16" y="8" width="8" height="8" fill="#3b82f6" vid="94"></rect>
+                    </svg>
+                </div>
+                <span vid="95">e</span>
+            </h1>
+        </div>
+
+        <footer class="mt-auto pt-12 flex justify-between items-end text-[10px] tracking-[0.2em] opacity-40 border-t border-blue-900/20" vid="96">
+            <div class="flex flex-col" vid="97">
+                <span vid="98">SYST_MONITOR: OK</span>
+                <span vid="99">Uptime: 142h 32m</span>
+            </div>
+            <div class="text-right flex flex-col" vid="100">
+                <span vid="101">© STEPHANIE_TERMINAL_ENV</span>
+                <span vid="102">V.24.0.0</span>
+            </div>
+        </footer>
+    </main>
+
+
+</body></html>

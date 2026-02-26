@@ -1,448 +1,417 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { gsap } from 'gsap';
-import { Layout, Hero, About } from '@components';
+import { Layout, Hero, Jobs, Featured, Contact } from '@components';
 import { socialMedia, email } from '@config';
 
-const StyledHomeLayout = styled.div`
+const StyledTerminalLayout = styled.div`
   width: 100vw;
   height: 100vh;
   position: relative;
   overflow: hidden;
+  display: flex;
 
   @media (max-width: 768px) {
-    width: 100%;
-    max-width: 100vw;
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
   }
 `;
 
-const StyledLeftRail = styled.aside`
+const StyledGridOverlay = styled.div`
   position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 80px;
-  border-right: var(--border-width) solid var(--border-color);
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+`;
+
+const StyledSidebar = styled.aside`
+  width: 25%;
+  min-width: 240px;
+  max-width: 320px;
+  height: 100vh;
+  border-right: 1px solid var(--border-color);
+  position: relative;
+  z-index: 20;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
-  padding: 40px 0;
-  z-index: 100;
-  background: var(--c-cream);
-  transform: translateZ(0);
-  backface-visibility: hidden;
+  padding: 40px 30px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  flex-shrink: 0;
 
   @media (max-width: 768px) {
     display: none;
   }
 
-  .vertical-text {
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    transform: rotate(180deg);
-    font-family: var(--font-code);
-    font-size: 0.8rem;
-    letter-spacing: 2px;
+  .version-label {
+    font-size: 10px;
     text-transform: uppercase;
-    color: var(--c-ink);
-    opacity: 0.6;
+    letter-spacing: 0.3em;
+    color: var(--c-red);
+    font-weight: 700;
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .nav-section-label {
+    margin-bottom: 12px;
+    opacity: 0.4;
+    font-size: var(--fz-xs);
+    letter-spacing: 0.2em;
+  }
+
+  .nav-link {
+    padding: 8px 12px;
+    font-size: var(--fz-sm);
+    color: var(--c-subtle);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: all 0.2s ease;
+    display: block;
+
+    &:hover {
+      color: var(--c-red);
+      background-color: rgba(217, 72, 56, 0.08);
+      border-left-color: var(--c-red);
+    }
+
+    &.active {
+      color: var(--c-red);
+      background-color: rgba(217, 72, 56, 0.08);
+      border-left-color: var(--c-red);
+    }
+  }
+
+  .sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .location-info {
+    font-size: var(--fz-sm);
+    line-height: 2;
+
+    .label {
+      color: var(--c-red);
+    }
   }
 
   .social-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 12px;
+    font-size: var(--fz-sm);
 
-  .social-link {
-    writing-mode: vertical-rl;
-    text-decoration: none;
-    color: var(--c-ink);
-    font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin: 10px 0;
-    transition: color 0.3s;
-    font-size: 0.85rem;
-    text-transform: uppercase;
+    a {
+      color: var(--c-subtle);
+      text-decoration: none;
+      transition: color 0.2s;
 
-    &:hover {
-      color: var(--c-red);
-    }
-  }
-
-  .rail-divider {
-    width: 1px;
-    height: 50px;
-    background: var(--rail-divider);
-    margin: 20px 0;
-  }
-
-  .email-link {
-    writing-mode: vertical-rl;
-    text-decoration: none;
-    color: var(--c-ink);
-    font-family: var(--font-code);
-    font-size: 0.7rem;
-    opacity: 0.6;
-    transition: color 0.3s;
-
-    &:hover {
-      color: var(--c-red);
-      opacity: 1;
+      &:hover {
+        color: var(--c-red);
+      }
     }
   }
 `;
 
-const StyledHorizontalScroller = styled.div`
-  display: flex;
-  width: 200vw;
-  height: 100vh;
-  will-change: transform;
+const StyledMobileHeader = styled.header`
+  display: none;
 
-  & > * {
-    flex-shrink: 0;
-    width: 100vw;
-    height: 100vh;
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    .mobile-logo {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--c-red);
+      font-weight: 700;
+    }
+
+    .mobile-nav-toggle {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--c-subtle);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 6px 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        color: var(--c-red);
+        border-color: var(--c-red);
+      }
+    }
+  }
+`;
+
+const StyledMobileNav = styled.nav`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: ${props => (props.isOpen ? 'flex' : 'none')};
+    flex-direction: column;
+    padding: 16px 20px;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom: 1px solid var(--border-color);
+
+    a {
+      padding: 10px 12px;
+      font-size: var(--fz-sm);
+      color: var(--c-subtle);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: all 0.2s;
+
+      &:hover {
+        color: var(--c-red);
+        border-left-color: var(--c-red);
+      }
+    }
+  }
+`;
+
+const StyledMain = styled.main`
+  flex: 1;
+  height: 100vh;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  padding: 48px;
+  overflow-y: auto;
+  min-height: auto;
+  max-width: none;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #ccc;
+  }
+
+  @media (max-width: 1080px) {
+    padding: 40px 32px;
   }
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    width: 100%;
-    max-width: 100%;
     height: auto;
-    will-change: auto;
-    box-sizing: border-box;
-
-    & > * {
-      width: 100%;
-      max-width: 100%;
-      min-height: 100vh;
-      height: auto;
-      box-sizing: border-box;
-    }
+    min-height: auto;
+    padding: 24px 20px;
+    overflow: visible;
   }
 `;
 
-const StyledRightRail = styled.aside`
+const StyledVerticalName = styled.div`
   position: fixed;
   right: 0;
   top: 0;
-  bottom: 0;
-  width: 60px;
-  background: var(--c-cream)
-  border-left: var(--border-width) solid var(--border-color);
-  z-index: 100;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  padding-right: 24px;
+  z-index: 5;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
     display: none;
   }
 
-  .minimap-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    background: var(--c-cream);
-  }
-
-  .minimap-indicator {
-    width: 4px;
-    height: 0;
-    background: var(--c-red);
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 0;
+  h1 {
+    font-size: 15vh;
+    line-height: 1;
+    color: rgba(217, 72, 56, 0.08);
+    letter-spacing: -0.05em;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-family: var(--font-decorative);
+    font-style: italic;
+    font-weight: 400;
+    user-select: none;
+    margin: 0;
   }
 `;
 
+const StyledTerminalFooter = styled.footer`
+  margin-top: auto;
+  padding-top: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  opacity: 0.4;
+  border-top: 1px solid var(--border-color);
+  padding-bottom: 0;
+
+  .footer-left,
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .footer-right {
+    text-align: right;
+  }
+`;
+
+const navItems = [
+  { id: 'about', label: '> ABOUT.md', href: '#about' },
+  { id: 'skills', label: '> SKILLS.exe', href: '#skills' },
+  { id: 'experience', label: '> EXPERIENCE/', href: '#experience' },
+  { id: 'projects', label: '> PROJECTS/', href: '#projects' },
+  { id: 'contact', label: '> CONTACT.sh', href: '#contact' },
+];
+
 const IndexPage = ({ location }) => {
-  const scrollerRef = useRef(null);
-  const indicatorRef = useRef(null);
-  const contentAreaRef = useRef(null);
-  const goToPanelRef = useRef(null);
+  const [activeSection, setActiveSection] = useState('about');
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   useEffect(() => {
-    const container = scrollerRef.current;
-    const indicator = indicatorRef.current;
-    if (!container || !indicator) return;
+    const mainEl = document.getElementById('terminal-main');
+    if (!mainEl) return;
 
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    if (isMobile) return;
-
-    gsap.set(container, { x: 0 });
-    gsap.set(indicator, { height: 0 });
-
-    document.body.style.overflow = 'hidden';
-    document.body.style.height = '100vh';
-    document.documentElement.style.overflow = 'hidden';
-
-    let currentPanel = 0;
-    let isTransitioning = false;
-    const scrollBackThreshold = 5;
-    const scrollBackDelta = 75;
-
-    const runHeroAnimations = () => {
-      const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-
-      tl.from(
-        '.left-rail',
-        { xPercent: -100, duration: 1.2, ease: 'expo.out' },
-        0,
-      );
-
-      tl.from(
-        ['.left-rail .vertical-text', '.left-rail .social-link', '.left-rail .rail-divider', '.left-rail .email-link'],
-        { opacity: 0, y: 20, stagger: 0.1, duration: 0.8 },
-        0.5,
-      );
-
-      tl.from(
-        '.hero-panel .hero-meta',
-        { opacity: 0, y: 15, duration: 0.7 },
-        0.35,
-      );
-
-      tl.from(
-        ['.hero-panel .header-inner', '.hero-panel .header-inner-2'],
-        { yPercent: 100, duration: 1.2, ease: 'expo.out' },
-        0.2,
-      );
-
-      tl.from(
-        '.hero-panel .hero-subtitle',
-        { opacity: 0, y: 20, duration: 0.8 },
-        0.7,
-      );
-
-      tl.from(
-        '.right-rail',
-        { xPercent: 100, duration: 1, ease: 'power3.out' },
-        0.3,
-      );
-    };
-
-    runHeroAnimations();
-
-    const getMinimapHeightForArticle = () => {
-      const contentArea = contentAreaRef.current || document.getElementById('article-panel')?.querySelector('.content-area');
-      if (!contentArea) return 0;
-      const vh = window.innerHeight;
-      const maxScroll = contentArea.scrollHeight - contentArea.clientHeight;
-      if (maxScroll <= 0) return vh * 0.2;
-      const progress = Math.min(1, contentArea.scrollTop / maxScroll);
-      return vh * (0.2 + 0.8 * progress);
-    };
-
-    const updateMinimapFromScroll = () => {
-      if (currentPanel !== 1 || !indicator) return;
-      const articlePanel = document.getElementById('article-panel');
-      const contentArea = contentAreaRef.current || articlePanel?.querySelector('.content-area');
-      if (!contentArea) return;
-      const vh = window.innerHeight;
-      const maxScroll = contentArea.scrollHeight - contentArea.clientHeight;
-      if (maxScroll <= 0) {
-        indicator.style.height = `${vh * 0.2}px`;
-        return;
-      }
-      const progress = Math.min(1, contentArea.scrollTop / maxScroll);
-      indicator.style.height = `${vh * (0.2 + 0.8 * progress)}px`;
-    };
-
-    const goToPanel = panel => {
-      if (isTransitioning || panel === currentPanel) return;
-      isTransitioning = true;
-      currentPanel = panel;
-
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
-      const transitionDuration = 1.1;
-
-      gsap.killTweensOf([container, indicator]);
-
-      const targetHeight = panel === 1 ? getMinimapHeightForArticle() : 0;
-
-      const tl = gsap.timeline({
-        onComplete: () => {
-          isTransitioning = false;
-          if (panel === 1) updateMinimapFromScroll();
-        },
+    const handleScroll = () => {
+      const sections = mainEl.querySelectorAll('[data-section]');
+      let current = 'about';
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 200) {
+          current = section.dataset.section;
+        }
       });
-
-      tl.to(container, {
-        x: -panel * vw,
-        duration: transitionDuration,
-        ease: 'power3.inOut',
-        overwrite: true,
-      }).to(
-        indicator,
-        {
-          height: targetHeight,
-          duration: transitionDuration,
-          ease: 'power3.inOut',
-        },
-        '<',
-      );
-    };
-    goToPanelRef.current = goToPanel;
-
-    const handleWheel = evt => {
-      const articlePanel = document.getElementById('article-panel');
-      const isOnArticle = articlePanel && articlePanel.contains(evt.target);
-
-      if (isOnArticle) {
-        const contentArea = articlePanel.querySelector('.content-area');
-        if (contentArea) {
-          const atTop = contentArea.scrollTop <= scrollBackThreshold;
-          const scrollHardUp = evt.deltaY < -scrollBackDelta;
-
-          if (atTop && scrollHardUp) {
-            evt.preventDefault();
-            goToPanel(0);
-            return;
-          }
-        }
-        return;
-      }
-
-      evt.preventDefault();
-      if (evt.deltaY > 0) {
-        goToPanel(1);
-      }
+      setActiveSection(current);
     };
 
-    const handleKeyDown = evt => {
-      if (evt.key === 'ArrowRight' || evt.key === 'ArrowDown') {
-        goToPanel(1);
-      } else if (evt.key === 'ArrowLeft' || evt.key === 'ArrowUp') {
-        goToPanel(0);
-      }
-    };
-
-    // Touch/swipe support for mobile
-    let touchStartX = 0;
-    let touchStartY = 0;
-
-    const handleTouchStart = evt => {
-      touchStartX = evt.touches[0].clientX;
-      touchStartY = evt.touches[0].clientY;
-    };
-
-    const handleTouchEnd = evt => {
-      const touchEndX = evt.changedTouches[0].clientX;
-      const touchEndY = evt.changedTouches[0].clientY;
-      const diffX = touchStartX - touchEndX;
-      const diffY = touchStartY - touchEndY;
-
-      // Only handle horizontal swipes (ignore vertical scroll)
-      if (Math.abs(diffX) < 50 || Math.abs(diffX) < Math.abs(diffY)) return;
-
-      if (currentPanel === 0 && diffX > 0) {
-        goToPanel(1);
-      } else if (currentPanel === 1 && diffX < 0) {
-        const articlePanel = document.getElementById('article-panel');
-        const contentArea = articlePanel?.querySelector('.content-area');
-        const swipeHardEnough = Math.abs(diffX) > 50;
-        if (
-          contentArea &&
-          contentArea.scrollTop <= scrollBackThreshold &&
-          swipeHardEnough
-        ) {
-          goToPanel(0);
-        }
-      }
-    };
-
-    const handleContentScroll = () => {
-      requestAnimationFrame(updateMinimapFromScroll);
-    };
-
-    const attachScrollListener = () => {
-      const contentArea = contentAreaRef.current || document.getElementById('article-panel')?.querySelector('.content-area');
-      if (contentArea && !contentArea._minimapScrollAttached) {
-        contentArea._minimapScrollAttached = true;
-        contentArea.addEventListener('scroll', handleContentScroll, { passive: true });
-        return contentArea;
-      }
-      return contentArea;
-    };
-
-    attachScrollListener();
-    const retry = setTimeout(attachScrollListener, 100);
-
-    document.addEventListener('wheel', handleWheel, { passive: false });
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('touchstart', handleTouchStart, { passive: true });
-    document.addEventListener('touchend', handleTouchEnd, { passive: true });
-
-    return () => {
-      goToPanelRef.current = null;
-      clearTimeout(retry);
-      const contentArea = contentAreaRef.current || document.getElementById('article-panel')?.querySelector('.content-area');
-      if (contentArea) {
-        contentArea._minimapScrollAttached = false;
-        contentArea.removeEventListener('scroll', handleContentScroll);
-      }
-      document.body.style.overflow = '';
-      document.body.style.height = '';
-      document.documentElement.style.overflow = '';
-      document.removeEventListener('wheel', handleWheel);
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchend', handleTouchEnd);
-    };
+    mainEl.addEventListener('scroll', handleScroll, { passive: true });
+    return () => mainEl.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToSection = (sectionId, e) => {
+    if (e) e.preventDefault();
+    setMobileNavOpen(false);
+    const mainEl = document.getElementById('terminal-main');
+    const section = mainEl?.querySelector(`[data-section="${sectionId}"]`);
+    if (section && mainEl) {
+      const offset = section.offsetTop - mainEl.offsetTop;
+      mainEl.scrollTo({ top: offset - 20, behavior: 'smooth' });
+    }
+  };
+
   const filteredSocials = socialMedia
-    ? socialMedia.filter(({ name }) => ['Twitter', 'GitHub', 'Linkedin'].includes(name))
+    ? socialMedia.filter(({ name }) => ['GitHub', 'Linkedin', 'Twitter'].includes(name))
     : [];
 
   return (
     <Layout location={location}>
-      <StyledHomeLayout className="home-layout">
-        <StyledLeftRail className="left-rail">
-          <div className="vertical-text">Est. 1999</div>
-          <div className="social-links">
-            {filteredSocials.map(({ url, name }) => (
+      <StyledTerminalLayout>
+        <StyledGridOverlay />
+
+        <StyledSidebar>
+          <div className="version-label">TERMINAL_V3.0.26</div>
+
+          <div className="sidebar-nav">
+            <div className="nav-section-label">[ NAVIGATION ]</div>
+            {navItems.map(item => (
               <a
-                key={name}
-                href={url}
-                className="social-link"
-                target="_blank"
-                rel="noopener noreferrer">
-                {name.toUpperCase()}
+                key={item.id}
+                href={item.href}
+                className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
+                onClick={e => scrollToSection(item.id, e)}>
+                {item.label}
               </a>
             ))}
-            <div className="rail-divider" />
-            <a href={`mailto:${email}`} className="email-link">
-              {email}
+          </div>
+
+          <div className="sidebar-footer">
+            <div className="location-info">
+              <span className="label">LOC:</span> BENGALURU, IN<br />
+              <span className="label">STATUS:</span> BUILDING_AT_NOICE
+            </div>
+            <div className="social-links">
+              {filteredSocials.map(({ url, name }) => (
+                <a key={name} href={url} target="_blank" rel="noopener noreferrer">
+                  [{name.toUpperCase()}]
+                </a>
+              ))}
+              <a href={`mailto:${email}`}>[EMAIL]</a>
+            </div>
+          </div>
+        </StyledSidebar>
+
+        <StyledMobileHeader>
+          <span className="mobile-logo">ADITHYA_TERMINAL</span>
+          <button
+            className="mobile-nav-toggle"
+            onClick={() => setMobileNavOpen(!mobileNavOpen)}>
+            {mobileNavOpen ? 'CLOSE' : 'MENU'}
+          </button>
+        </StyledMobileHeader>
+
+        <StyledMobileNav isOpen={mobileNavOpen}>
+          {navItems.map(item => (
+            <a
+              key={item.id}
+              href={item.href}
+              onClick={e => scrollToSection(item.id, e)}>
+              {item.label}
             </a>
-          </div>
-        </StyledLeftRail>
+          ))}
+        </StyledMobileNav>
 
-        <StyledHorizontalScroller ref={scrollerRef} id="scrollContainer" className="horizontal-scroller">
+        <StyledMain id="terminal-main">
           <Hero />
-          <About
-            contentAreaRef={contentAreaRef}
-            onBackToHero={() => goToPanelRef.current?.(0)}
-          />
-        </StyledHorizontalScroller>
+          <Jobs />
+          <Featured />
+          <Contact />
 
-        <StyledRightRail className="right-rail">
-          <div className="minimap-container">
-            <div className="minimap-indicator" ref={indicatorRef} />
-          </div>
-        </StyledRightRail>
-      </StyledHomeLayout>
+          <StyledVerticalName>
+            <h1>adithya</h1>
+          </StyledVerticalName>
+
+          <StyledTerminalFooter>
+            <div className="footer-left">
+              <span>SYST_MONITOR: OK</span>
+              <span>UPTIME: STABLE</span>
+            </div>
+            <div className="footer-right">
+              <span>&copy; ADITHYA_TERMINAL_ENV</span>
+              <span>V.26.0.0</span>
+            </div>
+          </StyledTerminalFooter>
+        </StyledMain>
+      </StyledTerminalLayout>
     </Layout>
   );
 };

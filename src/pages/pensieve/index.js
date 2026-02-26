@@ -43,16 +43,19 @@ const StyledGrid = styled.div`
   }
 `;
 const StyledPostInner = styled.div`
-  ${({ theme }) => theme.mixins.boxShadow};
   ${({ theme }) => theme.mixins.flexBetween};
   flex-direction: column;
   align-items: flex-start;
   position: relative;
   height: 100%;
-  padding: 2rem 1.75rem;
-  border-radius: var(--border-radius);
+  padding: 24px 20px;
+  border: 1px solid var(--border-color);
   transition: var(--transition);
-  background-color: var(--light-navy);
+  background-color: var(--card-bg);
+
+  &:hover {
+    border-color: rgba(217, 72, 56, 0.4);
+  }
 
   header,
   a {
@@ -85,11 +88,15 @@ const StyledFolder = styled.div`
 const StyledPostName = styled.h5`
   margin: 0 0 10px;
   color: var(--lightest-slate);
-  font-size: var(--fz-xxl);
+  font-size: var(--fz-lg);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 `;
 const StyledPostDescription = styled.div`
-  color: var(--light-slate);
-  font-size: 17px;
+  color: var(--c-ink);
+  font-size: var(--fz-sm);
+  line-height: 1.6;
 `;
 const StyledDate = styled.span`
   color: var(--light-slate);

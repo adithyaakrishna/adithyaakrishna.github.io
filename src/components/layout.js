@@ -34,6 +34,7 @@ const SkipToContentLink = styled.a`
     z-index: 99;
   }
 `;
+
 const StyledContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -81,22 +82,20 @@ const Layout = ({ children, location }) => {
           <ThemeProvider theme={theme}>
             <GlobalStyle />
 
-          <SkipToContentLink href="#content">Skip to Content</SkipToContentLink>
+            <SkipToContentLink href="#content">Skip to Content</SkipToContentLink>
 
-          {isHome ? (
-            <div id="content">{children}</div>
-          ) : (
-            <StyledContent>
-              <Nav isHome={isHome} />
-              <Social isHome={isHome} />
-              <Email isHome={isHome} />
+            {isHome ? (
+              <div id="content">{children}</div>
+            ) : (
+              <StyledContent>
+                <Nav isHome={isHome} />
 
-              <div id="content">
-                {children}
-                <Footer />
-              </div>
-            </StyledContent>
-          )}
+                <div id="content">
+                  {children}
+                  <Footer />
+                </div>
+              </StyledContent>
+            )}
           </ThemeProvider>
         </AppThemeProvider>
       </div>

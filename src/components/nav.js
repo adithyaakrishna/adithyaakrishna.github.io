@@ -7,7 +7,6 @@ import { navLinks } from '@config';
 import { loaderDelay } from '@utils';
 import { useScrollDirection } from '@hooks';
 import { Menu } from '@components';
-import { IconLogo } from '@components/icons';
 
 const StyledHeader = styled.header`
   ${({ theme }) => theme.mixins.flexBetween};
@@ -17,12 +16,13 @@ const StyledHeader = styled.header`
   padding: 0px 50px;
   width: 100%;
   height: var(--nav-height);
-  background-color: var(--navy);
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
   filter: none !important;
   pointer-events: auto !important;
   user-select: auto !important;
-  backdrop-filter: blur(10px);
   transition: var(--transition);
+  border-bottom: 1px solid var(--border-color);
 
   ${props =>
     props.scrollDirection === 'up' &&
@@ -30,7 +30,6 @@ const StyledHeader = styled.header`
     css`
       height: var(--nav-scroll-height);
       transform: translateY(0px);
-      box-shadow: 0 10px 30px -10px var(--navy-shadow);
     `};
 
   ${props =>
@@ -39,7 +38,6 @@ const StyledHeader = styled.header`
     css`
       height: var(--nav-scroll-height);
       transform: translateY(calc(var(--nav-scroll-height) * -1));
-      box-shadow: 0 10px 30px -10px var(--navy-shadow);
     `};
 
   @media (max-width: 1080px) {
@@ -64,20 +62,16 @@ const StyledNav = styled.nav`
 
     a {
       color: var(--red);
-      width: 42px;
-      height: 42px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      text-decoration: none;
 
       &:hover,
       &:focus {
-        svg {
-          fill: var(--red-tint);
-        }
-      }
-
-      svg {
-        fill: none;
-        transition: var(--transition);
-        user-select: none;
+        color: var(--red);
       }
     }
   }
@@ -105,12 +99,14 @@ const StyledLinks = styled.div`
 
       a {
         padding: 10px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
 
         &:before {
           content: '0' counter(item) '.';
           margin-right: 5px;
           color: var(--red);
-          font-size: var(--fz-xxs);
+          font-size: 10px;
           text-align: right;
         }
       }
@@ -121,6 +117,7 @@ const StyledLinks = styled.div`
     ${({ theme }) => theme.mixins.smallButton};
     margin-left: 15px;
     font-size: var(--fz-xs);
+    letter-spacing: 1px;
   }
 `;
 
@@ -159,11 +156,11 @@ const Nav = ({ isHome }) => {
               <div className="logo" tabIndex="-1">
                 {isHome ? (
                   <a href="/" aria-label="home">
-                    <IconLogo />
+                    ADITHYA_TERMINAL
                   </a>
                 ) : (
                   <Link to="/" aria-label="home">
-                    <IconLogo />
+                    ADITHYA_TERMINAL
                   </Link>
                 )}
               </div>

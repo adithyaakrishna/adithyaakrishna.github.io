@@ -12,16 +12,17 @@ const StyledProjectsSection = styled.section`
   align-items: center;
 
   h2 {
-    font-family: var(--font-display);
-    font-size: clamp(24px, 5vw, var(--fz-heading));
+    font-family: var(--font-mono);
+    font-size: clamp(16px, 3vw, var(--fz-heading));
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
   }
 
   .archive-link {
     font-family: var(--font-mono);
     font-size: var(--fz-sm);
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    color: var(--c-red);
     &:after {
       bottom: 0.1em;
     }
@@ -33,6 +34,7 @@ const StyledProjectsSection = styled.section`
     grid-gap: 15px;
     position: relative;
     margin-top: 50px;
+    width: 100%;
 
     @media (max-width: 1080px) {
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -44,16 +46,16 @@ const StyledProjectsSection = styled.section`
     background-color: transparent;
     border: 1px solid var(--red);
     border-radius: 0;
-    padding: 1.25rem 1.75rem;
+    padding: 1rem 1.5rem;
     font-size: var(--fz-sm);
-    font-family: var(--font-display);
+    font-family: var(--font-mono);
     text-transform: uppercase;
     letter-spacing: 2px;
     line-height: 1;
     text-decoration: none;
     cursor: pointer;
     transition: all 0.3s;
-    margin: 80px auto 0;
+    margin: 60px auto 0;
 
     &:hover,
     &:focus,
@@ -72,8 +74,8 @@ const StyledProject = styled.div`
   &:focus {
     outline: 0;
     .project-inner {
-      transform: translateY(-5px);
-      box-shadow: 10px 10px 0px rgba(217, 72, 56, 0.15);
+      transform: translateY(-3px);
+      border-color: rgba(217, 72, 56, 0.4);
     }
   }
 
@@ -83,28 +85,28 @@ const StyledProject = styled.div`
     align-items: flex-start;
     position: relative;
     height: 100%;
-    padding: 2rem 1.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background-color: var(--light-navy);
+    padding: 24px 20px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
     transition: all 0.3s;
     overflow: auto;
   }
 
   .project-top {
     ${({ theme }) => theme.mixins.flexBetween};
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 
     .folder {
       color: var(--red);
       svg {
-        width: 40px;
-        height: 40px;
+        width: 32px;
+        height: 32px;
       }
     }
 
     .project-links {
       margin-right: -10px;
-      color: var(--light-slate);
+      color: var(--c-subtle);
 
       a {
         padding: 5px 10px;
@@ -115,8 +117,8 @@ const StyledProject = styled.div`
         }
 
         svg {
-          width: 20px;
-          height: 20px;
+          width: 18px;
+          height: 18px;
         }
       }
     }
@@ -125,15 +127,15 @@ const StyledProject = styled.div`
   .project-title {
     margin: 0 0 10px;
     color: var(--lightest-slate);
-    font-family: var(--font-display);
-    font-size: var(--fz-xxl);
+    font-family: var(--font-mono);
+    font-size: var(--fz-lg);
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
   .project-description {
-    color: var(--light-slate);
-    font-size: 17px;
+    color: var(--c-ink);
+    font-size: var(--fz-sm);
     line-height: 1.6;
 
     a {
@@ -152,9 +154,9 @@ const StyledProject = styled.div`
 
     li {
       font-family: var(--font-mono);
-      font-size: var(--fz-xxs);
+      font-size: 10px;
       line-height: 1.75;
-      color: var(--slate);
+      color: var(--c-subtle);
 
       &:not(:last-of-type) {
         margin-right: 15px;
@@ -262,8 +264,8 @@ const Projects = () => {
                     <footer>
                       {tech && (
                         <ul className="project-tech-list">
-                          {tech.map((tech, i) => (
-                            <li key={i}>{tech}</li>
+                          {tech.map((t, j) => (
+                            <li key={j}>{t}</li>
                           ))}
                         </ul>
                       )}

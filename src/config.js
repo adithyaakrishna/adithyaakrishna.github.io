@@ -1,4 +1,4 @@
-const THEME_MODE = 'light';
+const THEME_MODE = 'dark';
 const THEME_ANIMATION_SHAPE = 'fade';
 
 module.exports = {

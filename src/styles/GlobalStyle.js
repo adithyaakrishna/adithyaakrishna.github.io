@@ -11,38 +11,41 @@ const GlobalStyle = createGlobalStyle`
   }
 
   :root {
-    --c-red: #D94838;
-    --c-cream: #121212;
-    --c-ink: #E0E0E0;
-    --c-subtle: #666666;
-    --border-color: rgba(255, 255, 255, 0.1);
-    --border-color-subtle: rgba(255, 255, 255, 0.05);
-    --rail-right-bg: #1a1a1a;
-    --rail-divider: rgba(255, 255, 255, 0.2);
-    --hero-text: #ffffff;
-    --text-primary: #E0E0E0;
-    --text-muted: rgba(224, 224, 224, 0.8);
-    --card-bg: #181818;
-    --card-hover-bg: #1a1a1a;
-    --code-bg: #181818;
-    --font-display: 'Oswald', sans-serif;
-    --font-body: 'Cormorant Garamond', serif;
+    --c-red: #C0392B;
+    --c-cream: #ffffff;
+    --c-ink: #000000;
+    --c-subtle: #444444;
+    --c-bright: #000000;
+    --border-color: rgba(0, 0, 0, 0.18);
+    --border-color-subtle: rgba(0, 0, 0, 0.1);
+    --grid-color: rgba(192, 57, 43, 0.03);
+    --rail-right-bg: #ffffff;
+    --rail-divider: rgba(0, 0, 0, 0.25);
+    --hero-text: #000000;
+    --text-primary: #000000;
+    --text-muted: #222222;
+    --card-bg: #f5f5f5;
+    --card-hover-bg: #eeeeee;
+    --code-bg: #f5f5f5;
+    --font-display: 'Inter', -apple-system, sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
     --font-code: 'Space Mono', monospace;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'Space Mono', 'SF Mono', monospace;
+    --font-decorative: 'Playfair Display', serif;
     --border-width: 1px;
     --layout-padding: 6vw;
-    --font-sans: 'Cormorant Garamond', 'Calibre', serif;
-    --font-mono: 'Space Mono', 'SF Mono', monospace;
-    --fz-xxs: 12px;
-    --fz-xs: 13px;
-    --fz-sm: 14px;
+    --fz-xxs: 13px;
+    --fz-xs: 14px;
+    --fz-sm: 15px;
     --fz-md: 16px;
-    --fz-lg: 18px;
-    --fz-xl: 20px;
-    --fz-xxl: 22px;
-    --fz-heading: 32px;
+    --fz-lg: 17px;
+    --fz-xl: 18px;
+    --fz-xxl: 20px;
+    --fz-heading: 22px;
     --border-radius: 0px;
-    --nav-height: 100px;
-    --nav-scroll-height: 70px;
+    --nav-height: 70px;
+    --nav-scroll-height: 56px;
     --tab-height: 42px;
     --tab-width: 120px;
     --easing: cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -52,69 +55,48 @@ const GlobalStyle = createGlobalStyle`
     --ham-before-active: top 0.1s ease-out, opacity 0.1s ease-out 0.12s;
     --ham-after: bottom 0.1s ease-in 0.25s, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
     --ham-after-active: bottom 0.1s ease-out, transform 0.22s cubic-bezier(0.215, 0.61, 0.355, 1) 0.12s;
+    --dark-navy: #eeeeee;
+    --Fwhite: #000000;
+    --navy: #ffffff;
+    --light-navy: #f5f5f5;
+    --lightest-navy: #eeeeee;
+    --navy-shadow: rgba(0, 0, 0, 0.1);
+    --slate: #444444;
+    --light-slate: #444444;
+    --lightest-slate: #000000;
+    --white: #000000;
+    --red: #C0392B;
+    --red-tint: rgba(192, 57, 43, 0.1);
   }
 
-  [data-theme="light"] .section-content span[style*="color:white"],
-  [data-theme="light"] .section-content span[style*="color: white"] {
-    color: var(--text-primary) !important;
-  }
-
-  [data-theme="light"] {
-    --c-cream: #F2EFE9;
-    --c-ink: #1A1A1A;
-    --c-subtle: #8A8A8A;
-    --holo-orb: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(230,230,250,0.4), rgba(255,218,185,0.2));
-    --border-color: rgba(0, 0, 0, 0.1);
-    --border-color-subtle: rgba(0, 0, 0, 0.05);
-    --rail-right-bg: #fff;
-    --rail-divider: rgba(0, 0, 0, 0.15);
-    --hero-text: #F2EFE9;
-    --text-primary: #1A1A1A;
-    --text-muted: rgba(26, 26, 26, 0.8);
-    --card-bg: #fff;
-    --card-hover-bg: #f5f5f5;
-    --code-bg: #e8e8e8;
-    --dark-navy: #0a0a0a;
-    --Fwhite: #ffffff;
-    --navy: #121212;
-    --light-navy: #181818;
-    --lightest-navy: #2a2a2a;
-    --navy-shadow: #0a0a0a;
-    --slate: #666666;
-    --light-slate: #8a8a8a;
-    --lightest-slate: #1A1A1A;
-    --white: #1A1A1A;
-    --red: #D94838;
-    --red-tint: rgba(217, 72, 56, 0.15);
-  }
-
+  [data-theme="light"],
   [data-theme="dark"] {
-    --c-cream: #121212;
-    --c-ink: #E0E0E0;
-    --c-subtle: #666666;
-    --holo-orb: radial-gradient(circle at 30% 30%, rgba(217, 72, 56, 0.4), rgba(20, 20, 20, 0.1), rgba(0, 0, 0, 0.5));
-    --border-color: rgba(255, 255, 255, 0.1);
-    --border-color-subtle: rgba(255, 255, 255, 0.05);
-    --rail-right-bg: #1a1a1a;
-    --rail-divider: rgba(255, 255, 255, 0.2);
-    --hero-text: #ffffff;
-    --text-primary: #E0E0E0;
-    --text-muted: rgba(224, 224, 224, 0.8);
-    --card-bg: #181818;
-    --card-hover-bg: #1a1a1a;
-    --code-bg: #181818;
-    --dark-navy: #0a0a0a;
-    --Fwhite: #ffffff;
-    --navy: #121212;
-    --light-navy: #181818;
-    --lightest-navy: #2a2a2a;
-    --navy-shadow: #0a0a0a;
-    --slate: #999999;
-    --light-slate: #b0b0b0;
-    --lightest-slate: #E0E0E0;
-    --white: #f0f0f0;
-    --red: #D94838;
-    --red-tint: rgba(217, 72, 56, 0.15);
+    --c-red: #C0392B;
+    --c-cream: #ffffff;
+    --c-ink: #000000;
+    --c-subtle: #444444;
+    --c-bright: #000000;
+    --border-color: rgba(0, 0, 0, 0.18);
+    --border-color-subtle: rgba(0, 0, 0, 0.1);
+    --grid-color: rgba(192, 57, 43, 0.03);
+    --hero-text: #000000;
+    --text-primary: #000000;
+    --text-muted: #222222;
+    --card-bg: #f5f5f5;
+    --card-hover-bg: #eeeeee;
+    --code-bg: #f5f5f5;
+    --dark-navy: #eeeeee;
+    --Fwhite: #000000;
+    --navy: #ffffff;
+    --light-navy: #f5f5f5;
+    --lightest-navy: #eeeeee;
+    --navy-shadow: rgba(0, 0, 0, 0.1);
+    --slate: #444444;
+    --light-slate: #444444;
+    --lightest-slate: #000000;
+    --white: #000000;
+    --red: #C0392B;
+    --red-tint: rgba(192, 57, 43, 0.1);
   }
 
   html {
@@ -133,15 +115,10 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: inherit;
     margin: 0;
     padding: 0;
-    cursor: crosshair;
   }
 
   a, button, input, textarea, [role="button"] {
     cursor: pointer;
-  }
-
-  ::-webkit-scrollbar {
-    display: none;
   }
 
   ::selection {
@@ -160,13 +137,13 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--c-cream);
     color: var(--c-ink);
     font-family: var(--font-body);
-    font-size: var(--fz-xl);
-    line-height: 1.3;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    font-size: var(--fz-md);
+    line-height: 1.6;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
 
     @media (max-width: 480px) {
-      font-size: var(--fz-lg);
+      font-size: var(--fz-sm);
     }
 
     &.hidden {
@@ -187,6 +164,68 @@ const GlobalStyle = createGlobalStyle`
         user-select: none;
       }
     }
+  }
+
+  .bg-grid {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  }
+
+  @keyframes blink {
+    from, to { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .cursor-blink {
+    animation: blink 1s step-end infinite;
+    display: inline-block;
+    width: 8px;
+    height: 1.2em;
+    background-color: var(--c-red);
+    vertical-align: middle;
+    margin-left: 4px;
+  }
+
+  .terminal-header {
+    color: var(--c-red);
+    font-weight: 700;
+    font-size: 22px;
+    font-family: var(--font-mono);
+    padding: 16px 0;
+    margin-bottom: 12px;
+    border-bottom: 2px solid var(--c-red);
+    letter-spacing: 0.5px;
+
+    &::before {
+      content: 'user@adithya:~$ ';
+      color: var(--c-subtle);
+      font-weight: 400;
+      font-size: 16px;
+    }
+  }
+
+  .custom-scrollbar {
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #ccc;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #ccc;
   }
 
   #root {
@@ -236,16 +275,16 @@ const GlobalStyle = createGlobalStyle`
   }
 
   section {
-    margin: 0 auto;
-    padding: 80px 0;
-    max-width: 1000px;
+    margin: 0;
+    padding: 60px 0;
+    max-width: none;
 
     @media (max-width: 768px) {
-      padding: 80px 0;
+      padding: 50px 0;
     }
 
     @media (max-width: 480px) {
-      padding: 60px 0;
+      padding: 40px 0;
     }
   }
 
@@ -256,19 +295,22 @@ const GlobalStyle = createGlobalStyle`
   h5,
   h6 {
     margin: 0 0 10px 0;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--lightest-slate);
     line-height: 1.1;
+    font-family: var(--font-mono);
   }
 
   .big-heading {
     margin: 0;
     font-size: clamp(40px, 8vw, 80px);
+    font-family: var(--font-mono);
   }
 
   .medium-heading {
     margin: 0;
     font-size: clamp(40px, 8vw, 60px);
+    font-family: var(--font-mono);
   }
 
   .numbered-heading {
@@ -277,21 +319,21 @@ const GlobalStyle = createGlobalStyle`
     position: relative;
     margin: 10px 0 40px;
     width: 100%;
-    font-family: var(--font-display);
-    font-size: clamp(26px, 5vw, var(--fz-heading));
+    font-family: var(--font-mono);
+    font-size: clamp(16px, 3vw, var(--fz-heading));
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     white-space: nowrap;
 
     &:before {
       position: relative;
-      bottom: 4px;
+      bottom: 0;
       counter-increment: section;
       content: '0' counter(section) '.';
       margin-right: 10px;
       color: var(--red);
       font-family: var(--font-mono);
-      font-size: clamp(var(--fz-md), 3vw, var(--fz-xl));
+      font-size: clamp(var(--fz-sm), 3vw, var(--fz-lg));
       font-weight: 400;
 
       @media (max-width: 480px) {
@@ -304,7 +346,7 @@ const GlobalStyle = createGlobalStyle`
       content: '';
       display: block;
       position: relative;
-      top: -5px;
+      top: 0;
       width: 300px;
       height: 1px;
       margin-left: 20px;
@@ -406,7 +448,7 @@ const GlobalStyle = createGlobalStyle`
       padding: 0;
       margin: 0;
       list-style: none;
-      font-size: var(--fz-lg);
+      font-size: var(--fz-md);
       li {
         position: relative;
         padding-left: 30px;
@@ -431,7 +473,7 @@ const GlobalStyle = createGlobalStyle`
 
     p {
       font-style: italic;
-      font-size: 24px;
+      font-size: var(--fz-lg);
     }
   }
 

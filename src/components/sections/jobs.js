@@ -1,128 +1,139 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
-import { srConfig } from '@config';
-import sr from '@utils/sr';
+import { gsap } from 'gsap';
 
 const StyledJobsSection = styled.section`
-  width: 100vw;
-  height: 100vh;
-  scroll-snap-align: start;
-  flex-shrink: 0;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-right: var(--border-width) solid rgba(255, 255, 255, 0.1);
-  padding: var(--layout-padding);
-  padding-left: calc(var(--layout-padding) + 80px);
-  padding-right: calc(var(--layout-padding) + 60px);
+  margin-bottom: 60px;
   max-width: none;
-  margin: 0;
+  padding: 0;
 
   @media (max-width: 768px) {
-    padding-left: var(--layout-padding);
-    padding-right: var(--layout-padding);
-  }
-
-  .section-header {
-    margin-bottom: 4rem;
-  }
-
-  .section-label {
-    font-family: var(--font-code);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--c-red);
-    display: block;
-    margin-bottom: 1rem;
-  }
-
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 6vw, 5rem);
-    text-transform: uppercase;
-    color: var(--c-ink);
-    line-height: 1;
-    margin: 0;
+    margin-bottom: 40px;
   }
 
   .experience-list {
     display: flex;
-    gap: 4rem;
-
-    @media (max-width: 768px) {
-      flex-direction: column;
-      gap: 2rem;
-    }
+    flex-direction: column;
+    gap: 0;
   }
 
   .experience-item {
-    flex: 1;
-    max-width: 450px;
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:last-child {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    &:hover {
+      border-color: rgba(217, 72, 56, 0.4);
+      background: rgba(217, 72, 56, 0.05);
+    }
+  }
+
+  .exp-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 20px;
+    background: none;
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: left;
+    cursor: pointer;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+  }
+
+  .exp-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+  }
+
+  .exp-permission {
+    color: var(--c-red);
+    font-size: var(--fz-xs);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .exp-title {
+    color: var(--c-bright);
+    font-size: var(--fz-lg);
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media (max-width: 768px) {
+      white-space: normal;
+    }
+  }
+
+  .exp-company {
+    color: var(--c-red);
+    font-size: var(--fz-sm);
+    font-weight: 700;
   }
 
   .exp-date {
-    font-family: var(--font-code);
-    color: var(--c-red);
-    font-size: 1rem;
-    margin-bottom: 1rem;
+    font-size: var(--fz-xs);
+    opacity: 0.5;
+    white-space: nowrap;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    flex-shrink: 0;
   }
 
-  .exp-details {
-    h3 {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 3vw, 2.5rem);
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      color: var(--c-ink);
+  .exp-body {
+    overflow: hidden;
+    height: 0;
+  }
+
+  .exp-body-inner {
+    padding: 0 20px 16px 20px;
+    font-size: var(--fz-sm);
+    line-height: 1.7;
+    color: var(--c-ink);
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
 
-    .company {
-      font-family: var(--font-code);
-      color: var(--c-red);
-      margin-bottom: 15px;
-      display: block;
-      font-size: 0.9rem;
+    li {
+      margin-bottom: 6px;
+      padding-left: 20px;
+      position: relative;
 
-      a {
+      &:before {
+        content: '▹';
+        position: absolute;
+        left: 0;
         color: var(--c-red);
-        text-decoration: none;
-        transition: opacity 0.3s;
-
-        &:hover {
-          opacity: 0.7;
-        }
       }
     }
 
-    .description {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      color: var(--c-subtle);
-      font-family: var(--font-body);
-
-      ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      li {
-        margin-bottom: 0.5rem;
-        padding-left: 0;
-
-        &:before {
-          display: none;
-        }
-      }
-
-      p {
-        margin: 0;
-      }
+    p {
+      margin: 0 0 8px 0;
     }
   }
 `;
@@ -139,10 +150,8 @@ const Jobs = () => {
             frontmatter {
               title
               company
-              location
               range
               url
-              index
             }
             html
           }
@@ -151,34 +160,77 @@ const Jobs = () => {
     }
   `);
 
-  const jobsData = data.jobs.edges.slice(0, 2);
+  const jobsData = data.jobs.edges;
+  const [openJobs, setOpenJobs] = useState({ 0: true, 1: true });
+  const expBodyRefs = useRef({});
 
-  const revealContainer = useRef(null);
-  useEffect(() => sr.reveal(revealContainer.current, srConfig()), []);
+  useEffect(() => {
+    [0, 1].forEach(i => {
+      const el = expBodyRefs.current[i];
+      if (el) {
+        el.style.height = 'auto';
+      }
+    });
+  }, []);
+
+  const toggleJob = (i, e) => {
+    const expBody = expBodyRefs.current[i];
+    if (!expBody) return;
+
+    const isOpening = !openJobs[i];
+    gsap.killTweensOf(expBody);
+
+    if (isOpening) {
+      expBody.style.height = 'auto';
+      const targetHeight = expBody.scrollHeight;
+      expBody.style.height = '0px';
+      gsap.to(expBody, {
+        height: targetHeight,
+        duration: 0.35,
+        ease: 'power2.out',
+        onComplete: () => {
+          expBody.style.height = 'auto';
+        },
+      });
+    } else {
+      gsap.to(expBody, {
+        height: 0,
+        duration: 0.3,
+        ease: 'power2.in',
+      });
+    }
+
+    setOpenJobs(prev => ({ ...prev, [i]: !prev[i] }));
+  };
 
   return (
-    <StyledJobsSection id="jobs" ref={revealContainer}>
-      <div className="section-header">
-        <span className="section-label">02 / History</span>
-        <h2 className="section-title">Selected Works</h2>
-      </div>
-
+    <StyledJobsSection data-section="experience">
+      <h2 className="terminal-header">ls -la ./experience</h2>
+      <br />
       <div className="experience-list">
         {jobsData.map(({ node }, i) => {
-          const { frontmatter, html } = node;
-          const { title, url, company, range } = frontmatter;
-
+          const { title, company, range, url } = node.frontmatter;
           return (
             <div className="experience-item" key={i}>
-              <div className="exp-date">{range}</div>
-              <div className="exp-details">
-                <h3>{title}</h3>
-                <span className="company">
-                  <a href={url}>{company}</a>
-                </span>
+              <button className="exp-toggle" onClick={e => toggleJob(i, e)}>
+                <div className="exp-left">
+                  <span className="exp-permission">drwxr-xr-x</span>
+                  <span className="exp-title">{title}</span>
+                  <a
+                    href={url}
+                    className="exp-company"
+                    onClick={e => e.stopPropagation()}
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    @ {company}
+                  </a>
+                </div>
+                <span className="exp-date">{range?.replace(/ /g, '_')}</span>
+              </button>
+              <div className="exp-body" ref={el => (expBodyRefs.current[i] = el)}>
                 <div
-                  className="description"
-                  dangerouslySetInnerHTML={{ __html: html }}
+                  className="exp-body-inner"
+                  dangerouslySetInnerHTML={{ __html: node.html }}
                 />
               </div>
             </div>
