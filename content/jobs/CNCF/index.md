@@ -3,7 +3,7 @@ date: '2021-08-01'
 title: 'Open Source Maintainer - Meshery'
 company: 'Cloud Native Computing Foundation (CNCF)'
 location: 'Remote, United States'
-range: 'Aug 2021 - Present'
+range: 'Aug 2021 - Dec 2024'
 url: 'https://meshery.io/'
 index: 8
 ---
