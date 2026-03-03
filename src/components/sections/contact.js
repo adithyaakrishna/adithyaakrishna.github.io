@@ -55,15 +55,14 @@ const StyledContactSection = styled.section`
 
 const Contact = () => (
   <StyledContactSection id="contact">
-    <div className="section-header">transmission</div>
+    <div className="section-header">contact</div>
     <p>
       I'd love to hear from you. Feel free to reach out via email anytime.
     </p>
     <a href={`mailto:${email}`} className="email-link">{email}</a>
     <div className="footer-quote">
-      &ldquo;I build at the intersection of web3, open source, and design
-      systems&mdash;with a bias toward performance, clean architecture,
-      and shipping.&rdquo;
+      &ldquo;I build clear, fast products and design interfaces
+      people trust and love to use.&rdquo;
     </div>
   </StyledContactSection>
 );
