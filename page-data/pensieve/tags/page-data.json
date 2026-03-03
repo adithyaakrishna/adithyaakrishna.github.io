@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---src-pages-pensieve-tags-js",
-    "path": "/pensieve/tags/",
-    "result": {"data":{"allMarkdownRemark":{"group":[{"fieldValue":"Docker","totalCount":1},{"fieldValue":"WordPress","totalCount":2}]}},"pageContext":{}},
-    "staticQueryHashes": ["148307205","1737871322","1994492073","4117294525"]}

@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-templates-tag-js",
+    "path": "/blog/tags/play/",
+    "result": {"data":{"allMarkdownRemark":{"totalCount":1,"edges":[{"node":{"frontmatter":{"title":"play: the joyful path to productivity","description":"how embracing playfulness in your work can pave the way for joy and creativity","date":"2024-10-21","slug":"/blog/play","tags":["work","joy","play"]}}}]}},"pageContext":{"tag":"play"}},
+    "staticQueryHashes": ["148307205","1737871322","1994492073","4117294525"]}
