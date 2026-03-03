@@ -1,128 +1,228 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
-import { srConfig } from '@config';
-import sr from '@utils/sr';
+
+const monthMap = {
+  january: 'jan', february: 'feb', march: 'mar', april: 'apr',
+  may: 'may', june: 'jun', july: 'jul', august: 'aug',
+  september: 'sep', october: 'oct', november: 'nov', december: 'dec',
+};
+
+function shortenRange(range) {
+  if (!range) return '';
+  return range.toLowerCase().replace(
+    /\b(january|february|march|april|may|june|july|august|september|october|november|december)\b/g,
+    match => monthMap[match],
+  );
+}
+
+const hiddenCompanies = [
+  'openchemistry - google summer of code',
+  'wasmedge - google season of docs',
+  'cloud native computing foundation (cncf)',
+  'layer5',
+  'bounce',
+  'lets be the change',
+];
 
 const StyledJobsSection = styled.section`
-  width: 100vw;
-  height: 100vh;
-  scroll-snap-align: start;
-  flex-shrink: 0;
-  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  border-right: var(--border-width) solid rgba(255, 255, 255, 0.1);
-  padding: var(--layout-padding);
-  padding-left: calc(var(--layout-padding) + 80px);
-  padding-right: calc(var(--layout-padding) + 60px);
-  max-width: none;
+  gap: 1rem;
   margin: 0;
-
-  @media (max-width: 768px) {
-    padding-left: var(--layout-padding);
-    padding-right: var(--layout-padding);
-  }
+  padding: 0;
+  max-width: none;
 
   .section-header {
-    margin-bottom: 4rem;
-  }
-
-  .section-label {
-    font-family: var(--font-code);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--c-red);
-    display: block;
+    font-size: 12px;
+    color: #29BC89;
     margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    &::after {
+      content: '';
+      height: 1px;
+      flex-grow: 1;
+      background: var(--text-dim, #888888);
+      opacity: 0.2;
+    }
   }
 
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 6vw, 5rem);
-    text-transform: uppercase;
-    color: var(--c-ink);
-    line-height: 1;
+  .exp-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: border-color 0.3s ease;
+
+    &:hover {
+      border-bottom-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1rem 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: inherit;
+    user-select: none;
+
+    &:hover {
+      padding-left: 10px;
+      color: var(--accent, #ffffff);
+    }
+
+    &:hover .item-title {
+      filter: blur(0px);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .item-left {
+    display: flex;
+    gap: 2rem;
+    align-items: baseline;
+  }
+
+  .item-index {
+    font-size: 12px;
+    color: #29BC89;
+    font-family: 'Courier Prime', monospace;
+  }
+
+  .item-title {
+    font-size: 16px;
+    transition: 0.3s;
+    text-transform: lowercase;
+    letter-spacing: normal;
+    font-weight: 400;
+    color: var(--text-main, #e8e8e8);
     margin: 0;
   }
 
-  .experience-list {
+  .item-meta {
+    font-size: 12px;
+    color: var(--text-dim, #888888);
+    text-align: right;
+    white-space: nowrap;
+
+    .role {
+      color: var(--text-main, #e8e8e8);
+    }
+
+    .separator {
+      margin: 0 0.4rem;
+      color: #29BC89;
+      opacity: 0.8;
+    }
+  }
+
+  .exp-toggle {
+    font-size: 14px;
+    color: var(--text-dim, #888888);
+    transition: transform 0.3s ease, color 0.3s ease;
+    display: inline-block;
+    margin-left: 1rem;
+  }
+
+  .exp-item.open .exp-toggle {
+    transform: rotate(45deg);
+    color: var(--accent, #ffffff);
+  }
+
+  .exp-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .exp-item.open .exp-body {
+    max-height: 500px;
+    opacity: 1;
+  }
+
+  .exp-detail {
+    padding: 0.5rem 0 1.5rem 3.5rem;
+    font-size: 13px;
+    color: var(--text-dim, #888888);
+    line-height: 1.8;
+
+    span {
+      color: var(--text-main, #e8e8e8);
+    }
+
+    p {
+      max-width: none;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+      padding-left: 1.2rem;
+      position: relative;
+
+      &:before {
+        content: '▸';
+        position: absolute;
+        left: 0;
+        color: #29BC89;
+      }
+    }
+  }
+
+  .others-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-stack, 'Space Mono', monospace);
+    font-size: 12px;
+    line-height: 1;
+    color: var(--text-dim, #888888);
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px 14px;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease, text-shadow 0.3s ease;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+
+    &:hover {
+      color: var(--accent, #ffffff);
+      border-color: rgba(255, 255, 255, 0.25);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    }
+
+    .pill-toggle {
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    &.open .pill-toggle {
+      transform: rotate(45deg);
+    }
+  }
+
+  .others-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    opacity: 0;
     display: flex;
-    gap: 4rem;
+    flex-direction: column;
+    gap: 0;
 
-    @media (max-width: 768px) {
-      flex-direction: column;
-      gap: 2rem;
-    }
-  }
-
-  .experience-item {
-    flex: 1;
-    max-width: 450px;
-  }
-
-  .exp-date {
-    font-family: var(--font-code);
-    color: var(--c-red);
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .exp-details {
-    h3 {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 3vw, 2.5rem);
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      color: var(--c-ink);
-    }
-
-    .company {
-      font-family: var(--font-code);
-      color: var(--c-red);
-      margin-bottom: 15px;
-      display: block;
-      font-size: 0.9rem;
-
-      a {
-        color: var(--c-red);
-        text-decoration: none;
-        transition: opacity 0.3s;
-
-        &:hover {
-          opacity: 0.7;
-        }
-      }
-    }
-
-    .description {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      color: var(--c-subtle);
-      font-family: var(--font-body);
-
-      ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      li {
-        margin-bottom: 0.5rem;
-        padding-left: 0;
-
-        &:before {
-          display: none;
-        }
-      }
-
-      p {
-        margin: 0;
-      }
+    &.open {
+      max-height: 2000px;
+      opacity: 1;
     }
   }
 `;
@@ -139,10 +239,8 @@ const Jobs = () => {
             frontmatter {
               title
               company
-              location
               range
               url
-              index
             }
             html
           }
@@ -151,40 +249,66 @@ const Jobs = () => {
     }
   `);
 
-  const jobsData = data.jobs.edges.slice(0, 2);
+  const allJobs = data.jobs.edges;
+  const mainJobs = allJobs.filter(
+    ({ node }) => !hiddenCompanies.includes(node.frontmatter.company?.toLowerCase()),
+  );
+  const otherJobs = allJobs.filter(
+    ({ node }) => hiddenCompanies.includes(node.frontmatter.company?.toLowerCase()),
+  );
 
-  const revealContainer = useRef(null);
-  useEffect(() => sr.reveal(revealContainer.current, srConfig()), []);
+  const [openJobs, setOpenJobs] = useState({});
+  const [showOthers, setShowOthers] = useState(false);
+
+  const toggleJob = key => {
+    setOpenJobs(prev => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const renderExpItem = (node, idx, keyPrefix) => {
+    const { title, company, range } = node.frontmatter;
+    const companySlug = company?.toLowerCase().replace(/\s+/g, '_');
+    const key = `${keyPrefix}-${idx}`;
+    const isOpen = !!openJobs[key];
+    return (
+      <div className={`exp-item${isOpen ? ' open' : ''}`} key={key}>
+        <div className="exp-header" onClick={() => toggleJob(key)} role="button" tabIndex={0}>
+          <div className="item-left">
+            <span className="item-index">{String(idx + 1).padStart(2, '0')}</span>
+            <span className="item-title">{companySlug}</span>
+          </div>
+          <span className="item-meta">
+            <span className="role">{title?.toLowerCase()}</span>
+            <span className="separator">&middot;</span>
+            {shortenRange(range)} <span className="exp-toggle">+</span>
+          </span>
+        </div>
+        <div className="exp-body">
+          <div
+            className="exp-detail"
+            dangerouslySetInnerHTML={{ __html: node.html }}
+          />
+        </div>
+      </div>
+    );
+  };
 
   return (
-    <StyledJobsSection id="jobs" ref={revealContainer}>
-      <div className="section-header">
-        <span className="section-label">02 / History</span>
-        <h2 className="section-title">Selected Works</h2>
-      </div>
+    <StyledJobsSection id="jobs">
+      <div className="section-header">selected_experience</div>
+      {mainJobs.map(({ node }, i) => renderExpItem(node, i, 'main'))}
 
-      <div className="experience-list">
-        {jobsData.map(({ node }, i) => {
-          const { frontmatter, html } = node;
-          const { title, url, company, range } = frontmatter;
-
-          return (
-            <div className="experience-item" key={i}>
-              <div className="exp-date">{range}</div>
-              <div className="exp-details">
-                <h3>{title}</h3>
-                <span className="company">
-                  <a href={url}>{company}</a>
-                </span>
-                <div
-                  className="description"
-                  dangerouslySetInnerHTML={{ __html: html }}
-                />
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      {otherJobs.length > 0 && (
+        <>
+          <button
+            className={`others-pill${showOthers ? ' open' : ''}`}
+            onClick={() => setShowOthers(prev => !prev)}>
+            others ({otherJobs.length}) <span className="pill-toggle">+</span>
+          </button>
+          <div className={`others-body${showOthers ? ' open' : ''}`}>
+            {otherJobs.map(({ node }, i) => renderExpItem(node, i, 'other'))}
+          </div>
+        </>
+      )}
     </StyledJobsSection>
   );
 };

@@ -1,448 +1,175 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { gsap } from 'gsap';
-import { Layout, Hero, About } from '@components';
-import { socialMedia, email } from '@config';
+import styled, { keyframes } from 'styled-components';
+import { Layout, Hero, Jobs, Featured, Projects, Thoughts, Contact } from '@components';
+import { email } from '@config';
 
-const StyledHomeLayout = styled.div`
-  width: 100vw;
-  height: 100vh;
+const breathe = keyframes`
+  0% { transform: translate(-50%, -50%) scale(0.95) rotate(0deg); opacity: 0.25; }
+  100% { transform: translate(-50%, -50%) scale(1.05) rotate(3deg); opacity: 0.4; }
+`;
+
+const StyledNoiseOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: var(--noise-opacity, 0.06);
+  background: url('data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');
+`;
+
+const StyledGhostBlob = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vh;
+  height: 50vh;
+  background: radial-gradient(circle, rgba(30,30,30,0.6) 0%, rgba(10,10,10,0) 70%);
+  filter: blur(60px);
+  z-index: -1;
+  animation: ${breathe} 12s infinite alternate ease-in-out;
+  opacity: 0.35;
+`;
+
+const StyledLayoutGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 720px 1fr;
+  min-height: 100vh;
+  padding: 4rem 2rem;
   position: relative;
-  overflow: hidden;
 
-  @media (max-width: 768px) {
-    width: 100%;
-    max-width: 100vw;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    padding: 2rem;
   }
 `;
 
-const StyledLeftRail = styled.aside`
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 80px;
-  border-right: var(--border-width) solid var(--border-color);
+const StyledBrandCol = styled.aside`
+  position: sticky;
+  top: 4rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 40px 0;
-  z-index: 100;
-  background: var(--c-cream);
-  transform: translateZ(0);
-  backface-visibility: hidden;
+  gap: 2rem;
+  align-items: flex-start;
+  align-self: start;
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     display: none;
   }
 
-  .vertical-text {
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    transform: rotate(180deg);
-    font-family: var(--font-code);
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--c-ink);
-    opacity: 0.6;
+  .logo {
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    color: #fff !important;
+    text-decoration: none;
+
+    &:hover, &:focus {
+      color: #29BC89;
+    }
   }
 
-  .social-links {
+  .coords {
+    font-size: 10px;
+    color: #29BC89;
+    opacity: 0.6;
+  }
+`;
+
+const StyledMainContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  z-index: 10;
+`;
+
+const StyledMetaCol = styled.aside`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+
+  .vertical-line-container {
+    position: fixed;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 2rem;
   }
 
   .social-link {
     writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: #29BC89;
     text-decoration: none;
-    color: var(--c-ink);
-    font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin: 10px 0;
-    transition: color 0.3s;
-    font-size: 0.85rem;
-    text-transform: uppercase;
+    text-transform: lowercase;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    padding: 0.25rem 0;
 
     &:hover {
-      color: var(--c-red);
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
     }
-  }
-
-  .rail-divider {
-    width: 1px;
-    height: 50px;
-    background: var(--rail-divider);
-    margin: 20px 0;
-  }
-
-  .email-link {
-    writing-mode: vertical-rl;
-    text-decoration: none;
-    color: var(--c-ink);
-    font-family: var(--font-code);
-    font-size: 0.7rem;
-    opacity: 0.6;
-    transition: color 0.3s;
-
-    &:hover {
-      color: var(--c-red);
-      opacity: 1;
-    }
-  }
-`;
-
-const StyledHorizontalScroller = styled.div`
-  display: flex;
-  width: 200vw;
-  height: 100vh;
-  will-change: transform;
-
-  & > * {
-    flex-shrink: 0;
-    width: 100vw;
-    height: 100vh;
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    will-change: auto;
-    box-sizing: border-box;
-
-    & > * {
-      width: 100%;
-      max-width: 100%;
-      min-height: 100vh;
-      height: auto;
-      box-sizing: border-box;
-    }
-  }
-`;
-
-const StyledRightRail = styled.aside`
-  position: fixed;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 60px;
-  background: var(--c-cream)
-  border-left: var(--border-width) solid var(--border-color);
-  z-index: 100;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-
-  .minimap-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    background: var(--c-cream);
-  }
-
-  .minimap-indicator {
-    width: 4px;
-    height: 0;
-    background: var(--c-red);
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 0;
   }
 `;
 
 const IndexPage = ({ location }) => {
-  const scrollerRef = useRef(null);
-  const indicatorRef = useRef(null);
-  const contentAreaRef = useRef(null);
-  const goToPanelRef = useRef(null);
+  const blobRef = useRef(null);
 
   useEffect(() => {
-    const container = scrollerRef.current;
-    const indicator = indicatorRef.current;
-    if (!container || !indicator) return;
-
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    if (isMobile) return;
-
-    gsap.set(container, { x: 0 });
-    gsap.set(indicator, { height: 0 });
-
-    document.body.style.overflow = 'hidden';
-    document.body.style.height = '100vh';
-    document.documentElement.style.overflow = 'hidden';
-
-    let currentPanel = 0;
-    let isTransitioning = false;
-    const scrollBackThreshold = 5;
-    const scrollBackDelta = 75;
-
-    const runHeroAnimations = () => {
-      const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-
-      tl.from(
-        '.left-rail',
-        { xPercent: -100, duration: 1.2, ease: 'expo.out' },
-        0,
-      );
-
-      tl.from(
-        ['.left-rail .vertical-text', '.left-rail .social-link', '.left-rail .rail-divider', '.left-rail .email-link'],
-        { opacity: 0, y: 20, stagger: 0.1, duration: 0.8 },
-        0.5,
-      );
-
-      tl.from(
-        '.hero-panel .hero-meta',
-        { opacity: 0, y: 15, duration: 0.7 },
-        0.35,
-      );
-
-      tl.from(
-        ['.hero-panel .header-inner', '.hero-panel .header-inner-2'],
-        { yPercent: 100, duration: 1.2, ease: 'expo.out' },
-        0.2,
-      );
-
-      tl.from(
-        '.hero-panel .hero-subtitle',
-        { opacity: 0, y: 20, duration: 0.8 },
-        0.7,
-      );
-
-      tl.from(
-        '.right-rail',
-        { xPercent: 100, duration: 1, ease: 'power3.out' },
-        0.3,
-      );
+    const handleMouseMove = e => {
+      if (!blobRef.current) return;
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      blobRef.current.style.transform =
+        `translate(calc(-50% + ${x * 30}px), calc(-50% + ${y * 30}px))`;
     };
-
-    runHeroAnimations();
-
-    const getMinimapHeightForArticle = () => {
-      const contentArea = contentAreaRef.current || document.getElementById('article-panel')?.querySelector('.content-area');
-      if (!contentArea) return 0;
-      const vh = window.innerHeight;
-      const maxScroll = contentArea.scrollHeight - contentArea.clientHeight;
-      if (maxScroll <= 0) return vh * 0.2;
-      const progress = Math.min(1, contentArea.scrollTop / maxScroll);
-      return vh * (0.2 + 0.8 * progress);
-    };
-
-    const updateMinimapFromScroll = () => {
-      if (currentPanel !== 1 || !indicator) return;
-      const articlePanel = document.getElementById('article-panel');
-      const contentArea = contentAreaRef.current || articlePanel?.querySelector('.content-area');
-      if (!contentArea) return;
-      const vh = window.innerHeight;
-      const maxScroll = contentArea.scrollHeight - contentArea.clientHeight;
-      if (maxScroll <= 0) {
-        indicator.style.height = `${vh * 0.2}px`;
-        return;
-      }
-      const progress = Math.min(1, contentArea.scrollTop / maxScroll);
-      indicator.style.height = `${vh * (0.2 + 0.8 * progress)}px`;
-    };
-
-    const goToPanel = panel => {
-      if (isTransitioning || panel === currentPanel) return;
-      isTransitioning = true;
-      currentPanel = panel;
-
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
-      const transitionDuration = 1.1;
-
-      gsap.killTweensOf([container, indicator]);
-
-      const targetHeight = panel === 1 ? getMinimapHeightForArticle() : 0;
-
-      const tl = gsap.timeline({
-        onComplete: () => {
-          isTransitioning = false;
-          if (panel === 1) updateMinimapFromScroll();
-        },
-      });
-
-      tl.to(container, {
-        x: -panel * vw,
-        duration: transitionDuration,
-        ease: 'power3.inOut',
-        overwrite: true,
-      }).to(
-        indicator,
-        {
-          height: targetHeight,
-          duration: transitionDuration,
-          ease: 'power3.inOut',
-        },
-        '<',
-      );
-    };
-    goToPanelRef.current = goToPanel;
-
-    const handleWheel = evt => {
-      const articlePanel = document.getElementById('article-panel');
-      const isOnArticle = articlePanel && articlePanel.contains(evt.target);
-
-      if (isOnArticle) {
-        const contentArea = articlePanel.querySelector('.content-area');
-        if (contentArea) {
-          const atTop = contentArea.scrollTop <= scrollBackThreshold;
-          const scrollHardUp = evt.deltaY < -scrollBackDelta;
-
-          if (atTop && scrollHardUp) {
-            evt.preventDefault();
-            goToPanel(0);
-            return;
-          }
-        }
-        return;
-      }
-
-      evt.preventDefault();
-      if (evt.deltaY > 0) {
-        goToPanel(1);
-      }
-    };
-
-    const handleKeyDown = evt => {
-      if (evt.key === 'ArrowRight' || evt.key === 'ArrowDown') {
-        goToPanel(1);
-      } else if (evt.key === 'ArrowLeft' || evt.key === 'ArrowUp') {
-        goToPanel(0);
-      }
-    };
-
-    // Touch/swipe support for mobile
-    let touchStartX = 0;
-    let touchStartY = 0;
-
-    const handleTouchStart = evt => {
-      touchStartX = evt.touches[0].clientX;
-      touchStartY = evt.touches[0].clientY;
-    };
-
-    const handleTouchEnd = evt => {
-      const touchEndX = evt.changedTouches[0].clientX;
-      const touchEndY = evt.changedTouches[0].clientY;
-      const diffX = touchStartX - touchEndX;
-      const diffY = touchStartY - touchEndY;
-
-      // Only handle horizontal swipes (ignore vertical scroll)
-      if (Math.abs(diffX) < 50 || Math.abs(diffX) < Math.abs(diffY)) return;
-
-      if (currentPanel === 0 && diffX > 0) {
-        goToPanel(1);
-      } else if (currentPanel === 1 && diffX < 0) {
-        const articlePanel = document.getElementById('article-panel');
-        const contentArea = articlePanel?.querySelector('.content-area');
-        const swipeHardEnough = Math.abs(diffX) > 50;
-        if (
-          contentArea &&
-          contentArea.scrollTop <= scrollBackThreshold &&
-          swipeHardEnough
-        ) {
-          goToPanel(0);
-        }
-      }
-    };
-
-    const handleContentScroll = () => {
-      requestAnimationFrame(updateMinimapFromScroll);
-    };
-
-    const attachScrollListener = () => {
-      const contentArea = contentAreaRef.current || document.getElementById('article-panel')?.querySelector('.content-area');
-      if (contentArea && !contentArea._minimapScrollAttached) {
-        contentArea._minimapScrollAttached = true;
-        contentArea.addEventListener('scroll', handleContentScroll, { passive: true });
-        return contentArea;
-      }
-      return contentArea;
-    };
-
-    attachScrollListener();
-    const retry = setTimeout(attachScrollListener, 100);
-
-    document.addEventListener('wheel', handleWheel, { passive: false });
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('touchstart', handleTouchStart, { passive: true });
-    document.addEventListener('touchend', handleTouchEnd, { passive: true });
-
-    return () => {
-      goToPanelRef.current = null;
-      clearTimeout(retry);
-      const contentArea = contentAreaRef.current || document.getElementById('article-panel')?.querySelector('.content-area');
-      if (contentArea) {
-        contentArea._minimapScrollAttached = false;
-        contentArea.removeEventListener('scroll', handleContentScroll);
-      }
-      document.body.style.overflow = '';
-      document.body.style.height = '';
-      document.documentElement.style.overflow = '';
-      document.removeEventListener('wheel', handleWheel);
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchend', handleTouchEnd);
-    };
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => document.removeEventListener('mousemove', handleMouseMove);
   }, []);
-
-  const filteredSocials = socialMedia
-    ? socialMedia.filter(({ name }) => ['Twitter', 'GitHub', 'Linkedin'].includes(name))
-    : [];
 
   return (
     <Layout location={location}>
-      <StyledHomeLayout className="home-layout">
-        <StyledLeftRail className="left-rail">
-          <div className="vertical-text">Est. 1999</div>
-          <div className="social-links">
-            {filteredSocials.map(({ url, name }) => (
-              <a
-                key={name}
-                href={url}
-                className="social-link"
-                target="_blank"
-                rel="noopener noreferrer">
-                {name.toUpperCase()}
-              </a>
-            ))}
-            <div className="rail-divider" />
-            <a href={`mailto:${email}`} className="email-link">
-              {email}
-            </a>
-          </div>
-        </StyledLeftRail>
+      <StyledNoiseOverlay />
+      <StyledGhostBlob ref={blobRef} />
 
-        <StyledHorizontalScroller ref={scrollerRef} id="scrollContainer" className="horizontal-scroller">
+      <StyledLayoutGrid>
+        <StyledBrandCol>
+          <a href="#" className="logo">Adithya Krishna</a>
+          <div className="coords">
+            lat: 12.9716<br />
+            lon: 77.5946
+          </div>
+        </StyledBrandCol>
+
+        <StyledMainContent>
           <Hero />
-          <About
-            contentAreaRef={contentAreaRef}
-            onBackToHero={() => goToPanelRef.current?.(0)}
-          />
-        </StyledHorizontalScroller>
+          <Jobs />
+          <Projects />
+          <Featured />
+          <Thoughts />
+          <Contact />
+        </StyledMainContent>
 
-        <StyledRightRail className="right-rail">
-          <div className="minimap-container">
-            <div className="minimap-indicator" ref={indicatorRef} />
+        <StyledMetaCol>
+          <div className="vertical-line-container">
+            <a href={`mailto:${email}`} className="social-link">{email}</a>
           </div>
-        </StyledRightRail>
-      </StyledHomeLayout>
+        </StyledMetaCol>
+      </StyledLayoutGrid>
     </Layout>
   );
 };

@@ -57,6 +57,7 @@
     "gh-pages": "^4.0.0",
     "gsap": "^3.14.2",
     "lodash": "^4.17.19",
+    "lottie-react": "^2.4.1",
     "prismjs": "^1.27.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",

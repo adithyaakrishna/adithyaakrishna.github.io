@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
-import anime from 'animejs';
+import Lottie from 'lottie-react';
 import styled from 'styled-components';
-import { IconLoader } from '@components/icons';
+import adiLoadingAnimation from './loading.json';
 
 const StyledLoader = styled.div`
-  ${({ theme }) => theme.mixins.flexCenter};
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -14,79 +16,37 @@ const StyledLoader = styled.div`
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--navy);
+  background-color: #000;
   z-index: 99;
+  opacity: ${props => (props.isFading ? 0 : 1)};
+  transition: opacity 0.4s ease-out;
 
-  .logo-wrapper {
-    width: max-content;
-    max-width: 100px;
-    transition: var(--transition);
-    opacity: ${props => (props.isMounted ? 1 : 0)};
-    svg {
-      display: block;
-      width: 100%;
-      height: 100%;
-      margin: 0 auto;
-      fill: none;
-      user-select: none;
-      #A {
-        opacity: 0;
-      }
-    }
+  .lottie-wrapper {
+    width: 200px;
+    height: 200px;
+    filter: invert(1);
   }
 `;
 
 const Loader = ({ finishLoading }) => {
-  const animate = () => {
-    const loader = anime.timeline({
-      complete: () => finishLoading(),
-    });
-
-    loader
-      .add({
-        targets: '#logo path',
-        delay: 300,
-        duration: 1500,
-        easing: 'easeInOutQuart',
-        strokeDashoffset: [anime.setDashoffset, 0],
-      })
-      .add({
-        targets: '#logo #A',
-        duration: 700,
-        easing: 'easeInOutQuart',
-        opacity: 1,
-      })
-      .add({
-        targets: '#logo',
-        delay: 500,
-        duration: 300,
-        easing: 'easeInOutQuart',
-        opacity: 0,
-        scale: 0.1,
-      })
-      .add({
-        targets: '.loader',
-        duration: 200,
-        easing: 'easeInOutQuart',
-        opacity: 0,
-        zIndex: -1,
-      });
-  };
-
   const [isMounted, setIsMounted] = useState(false);
-
+  const [isFading, setIsFading] = useState(false);
   useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), 10);
-    animate();
-    return () => clearTimeout(timeout);
+    const mountTimeout = setTimeout(() => setIsMounted(true), 10);
+    const fadeTimeout = setTimeout(() => setIsFading(true), 2200);
+    const doneTimeout = setTimeout(() => finishLoading(), 2600);
+    return () => {
+      clearTimeout(mountTimeout);
+      clearTimeout(fadeTimeout);
+      clearTimeout(doneTimeout);
+    };
   }, []);
 
   return (
-    <StyledLoader className="loader" isMounted={isMounted}>
-      <Helmet bodyAttributes={{ class: `hidden` }} />
-
-      <div className="logo-wrapper">
-        <IconLoader />
+    <StyledLoader className="loader" isMounted={isMounted} isFading={isFading}>
+      <Helmet bodyAttributes={{ class: 'hidden' }} />
+      <div className="lottie-wrapper">
+        <Lottie animationData={adiLoadingAnimation} loop />
       </div>
     </StyledLoader>
   );

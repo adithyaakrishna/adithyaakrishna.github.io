@@ -1,6 +1,6 @@
 ---
 date: '2024-07-01'
-title: 'Developer Experience Engineer'
+title: 'DX Engineer'
 company: 'Reclaim Protocol'
 location: 'Remote - Contract'
 range: 'July 2024 - March 2025'

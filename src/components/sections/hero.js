@@ -1,155 +1,123 @@
 import React from 'react';
-import styled from 'styled-components';
-import { gsap } from 'gsap';
+import styled, { keyframes } from 'styled-components';
+import { socialMedia } from '@config';
+
+const iconMap = {
+  GitHub: 'ri-github-line',
+  Twitter: 'ri-twitter-x-line',
+  Linkedin: 'ri-linkedin-box-line',
+};
+
+const pulse = keyframes`
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+`;
 
 const StyledHeroSection = styled.section`
-  width: 100vw;
-  height: 100vh;
-  scroll-snap-align: start;
-  flex-shrink: 0;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border-right: var(--border-width) solid rgba(255, 255, 255, 0.2);
-  background-color: var(--c-red);
-  color: var(--hero-text);
-  padding: var(--layout-padding);
-  padding-left: calc(var(--layout-padding) + 80px);
-  justify-content: space-between;
-  overflow: hidden;
-  max-width: none;
+  padding-top: 10vh;
   margin: 0;
+  max-width: none;
 
-  @media (max-width: 768px) {
-    width: 100%;
-    max-width: 100%;
-    padding: 24px;
-    padding-top: 40px;
-    min-height: 100vh;
-    box-sizing: border-box;
-  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    padding: 0;
+    color: var(--text-dim, #888888);
+    font-size: 12px;
+    border-radius: 0;
 
-  .hero-meta {
-    font-family: var(--font-code);
-    font-size: 1rem;
-    font-weight: 700;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    max-width: 400px;
-    gap: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.25);
-    padding-top: 1rem;
-
-    @media (max-width: 768px) {
-      font-size: 0.7rem;
-      max-width: 100%;
-      gap: 0.6rem;
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #29BC89;
+      animation: ${pulse} 2s ease-in-out infinite;
     }
   }
 
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 10vw, 8rem);
+  .intro-text {
+    font-size: 24px;
+    line-height: 1.4;
+    color: var(--text-main, #e8e8e8);
+    margin-bottom: 2rem;
+    filter: blur(0.4px);
     font-weight: 400;
-    text-transform: uppercase;
-    line-height: 0.85;
-    letter-spacing: -2px;
-    margin-top: 2rem;
-    color: var(--hero-text);
-
-    @media (max-width: 768px) {
-      font-size: clamp(2.2rem, 12vw, 4rem);
-      letter-spacing: -1px;
-    }
+    text-transform: lowercase;
+    letter-spacing: -0.02em;
+    max-width: none;
   }
 
-  .header-line {
-    display: block;
-    overflow: hidden;
-    height: 1.1em;
+  p {
+    color: var(--text-dim, #888888);
+    max-width: 100ch;
   }
 
-  .header-inner {
-    font-size: 1em;
-    display: block;
-  }
-
-  .header-inner-2 {
-    font-size: 0.65em;
-    font-family: var(--font-body);
-    font-style: italic;
-    display: block;
-    letter-spacing: 0.02em;
-    text-transform: none;
-  }
-
-  .hero-subtitle-2 {
-    font-family: var(--font-code);
-    font-size: 1.2rem;
-    font-weight: 600;
+  .social-chips {
+    display: flex;
+    gap: 0.75rem;
     margin-top: 1.5rem;
-    max-width: 700px;
-    opacity: 0.9;
-    color: var(--hero-text);
-
-    @media (max-width: 768px) {
-      font-size: 0.95rem;
-      margin-top: 1rem;
-    }
+    flex-wrap: wrap;
   }
 
-  .hero-subtitle {
-    font-family: var(--font-code);
-    font-size: 1rem;
-    font-weight: 600;
-    margin-top: 1.5rem;
-    max-width: 700px;
-    opacity: 0.9;
-    color: var(--hero-text);
-    line-height: 1.3;
+  .social-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-stack, 'Space Mono', monospace);
+    font-size: 12px;
+    line-height: 1;
+    color: var(--text-dim, #888888);
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px 14px;
+    transition: color 0.3s ease, border-color 0.3s ease, text-shadow 0.3s ease;
 
-    @media (max-width: 768px) {
-      font-size: 0.85rem;
-      margin-top: 0.75rem;
-      line-height: 1.5;
+    i {
+      font-size: 14px;
+      line-height: 1;
     }
-  }
 
-  .scroll-hint {
-    font-family: var(--font-code);
-    font-size: 0.8rem;
-    letter-spacing: 4px;
-    opacity: 0.5;
-    text-transform: uppercase;
-
-    @media (max-width: 768px) {
-      font-size: 0.65rem;
-      letter-spacing: 2px;
+    &:hover {
+      color: #29BC89;
+      border-color: rgba(41, 188, 137, 0.35);
+      text-shadow: 0 0 8px rgba(41, 188, 137, 0.3);
     }
   }
 `;
 
 const Hero = () => {
+  const filteredSocials = socialMedia
+    ? socialMedia.filter(({ name }) => ['GitHub', 'Twitter', 'Linkedin'].includes(name))
+    : [];
+
   return (
-    <StyledHeroSection id="home" className="hero-panel">
-      <div className="hero-meta">
-        <span>PORTFOLIO VOL. 3</span>
-        <span>BENGALURU</span>
-        <span>FRONTEND · UI</span>
-        <span>OPEN SOURCE</span>
+    <StyledHeroSection id="home">
+      <div className="status-pill">
+        <span className="status-dot" />
+        building at noice
       </div>
-      <div className="hero-content">
-        <h1 className="hero-title">
-          <span className="header-line">
-            <span className="header-inner">Adithya Krishna</span>
-          </span>
-          <span className="header-line">
-            <span className="header-inner-2">Software Engineer</span>
-          </span>
-        </h1>
-        <p className="hero-subtitle">
-          Engineering clarity and performance into products that ship. Building interfaces users actually trust and use.
-        </p>
+      <h1 className="intro-text">
+        I build clear, fast products and design interfaces people trust and love to use.
+      </h1>
+      <p>
+        I'm Adithya Krishna. I build web3 and token launch products at Noice using Next.js, PixiJS, and WebGL2—focused on fast, reliable UIs and clean code.<br /><br />
+        <span style={{ color: '#29BC89' }}>Previously:</span> frontend at Tensorlake &amp; Reclaim Protocol, document flows at Documenso, and Red Hat. GSoC '23 alum, Meshery maintainer, based in <span style={{ color: '#29BC89' }}>Bengaluru</span>.
+      </p>
+      <div className="social-chips">
+        {filteredSocials.map(({ url, name }) => (
+          <a
+            key={name}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-chip">
+            <i className={iconMap[name] || 'ri-link'} />
+            {name.toLowerCase()}
+          </a>
+        ))}
       </div>
     </StyledHeroSection>
   );
