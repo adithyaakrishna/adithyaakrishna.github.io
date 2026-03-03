@@ -2,4 +2,4 @@
     "componentChunkName": "component---src-templates-tag-js",
     "path": "/blog/tags/thoughts/",
     "result": {"data":{"allMarkdownRemark":{"totalCount":1,"edges":[{"node":{"frontmatter":{"title":"fomo: your unexpected ally","description":"fear of missing out and it being your best friend.","date":"2024-09-25","slug":"/blog/fomo","tags":["life","thoughts","joy"]}}}]}},"pageContext":{"tag":"thoughts"}},
-    "staticQueryHashes": ["148307205","1737871322","1994492073","4117294525"]}
+    "staticQueryHashes": ["1737871322","1994492073","4117294525"]}

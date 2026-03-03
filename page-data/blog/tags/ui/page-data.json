@@ -2,4 +2,4 @@
     "componentChunkName": "component---src-templates-tag-js",
     "path": "/blog/tags/ui/",
     "result": {"data":{"allMarkdownRemark":{"totalCount":2,"edges":[{"node":{"frontmatter":{"title":"deduped sonner toasts with nudge","description":"a thin wrapper around sonner that deduplicates toasts by message content and nudges with a shake animation","date":"2026-02-11","slug":"/blog/sonner-toast-dedup","tags":["tech","react","ui"]}}},{"node":{"frontmatter":{"title":"boxing the digital canvas: i love pdfs","description":"how to render rectangles on a pdf using coordinates from json","date":"2025-04-12","slug":"/blog/bounding-box","tags":["tech","ui","react"]}}}]}},"pageContext":{"tag":"ui"}},
-    "staticQueryHashes": ["148307205","1737871322","1994492073","4117294525"]}
+    "staticQueryHashes": ["1737871322","1994492073","4117294525"]}

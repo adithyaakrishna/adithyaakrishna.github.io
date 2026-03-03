@@ -2,4 +2,4 @@
     "componentChunkName": "component---src-templates-tag-js",
     "path": "/blog/tags/pixijs/",
     "result": {"data":{"allMarkdownRemark":{"totalCount":1,"edges":[{"node":{"frontmatter":{"title":"smooth trading charts with pixijs & react","description":"how i ditched canvas 2d and svg libraries for a gpu-powered chart that feels native","date":"2026-02-17","slug":"/blog/pixijs-trading-chart","tags":["tech","react","pixijs"]}}}]}},"pageContext":{"tag":"pixijs"}},
-    "staticQueryHashes": ["148307205","1737871322","1994492073","4117294525"]}
+    "staticQueryHashes": ["1737871322","1994492073","4117294525"]}
