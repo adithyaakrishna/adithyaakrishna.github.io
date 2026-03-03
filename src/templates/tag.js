@@ -10,16 +10,26 @@ import BlogLayout from '@components/blog-layout';
 const StyledTagPage = styled.div`
   padding-top: 10vh;
 
+  .nav-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
   .back-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    font-family: var(--font-stack, 'Space Mono', monospace);
     font-size: 12px;
     color: #29BC89;
     text-decoration: none;
     text-transform: lowercase;
     letter-spacing: 0.1em;
-    margin-bottom: 3rem;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
     transition: opacity 0.3s;
 
     &:hover {
@@ -125,9 +135,11 @@ const TagTemplate = ({ pageContext, data, location }) => {
         <Helmet title={`tagged: #${tag}`} />
 
         <StyledTagPage>
-          <Link to="/" className="back-link">
-            &larr; all posts
-          </Link>
+          <div className="nav-row">
+            <button className="back-link" onClick={() => window.history.back()}>
+              &larr; back
+            </button>
+          </div>
 
           <div className="tag-header">
             <h1>#{tag}</h1>
