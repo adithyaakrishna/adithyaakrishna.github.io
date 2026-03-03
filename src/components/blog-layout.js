@@ -36,14 +36,14 @@ const StyledGhostBlob = styled.div`
 
 const StyledLayoutGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 720px 1fr;
+  grid-template-columns: 1fr min(720px, 100%) 1fr;
   min-height: 100vh;
   padding: 4rem 2rem;
   position: relative;
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
-    padding: 2rem;
+    padding: 1.5rem;
   }
 `;
 
@@ -82,6 +82,9 @@ const StyledMainContent = styled.div`
   display: flex;
   flex-direction: column;
   z-index: 10;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 `;
 
 const StyledMetaCol = styled.aside`

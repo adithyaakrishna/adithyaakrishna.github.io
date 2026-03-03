@@ -42,8 +42,13 @@ const StyledContent = styled.div`
 
 const Layout = ({ children, location }) => {
   const isHome = location.pathname === '/';
-  const hasLoaded = typeof window !== 'undefined' && sessionStorage.getItem('loaderShown');
-  const [isLoading, setIsLoading] = useState(isHome && !hasLoaded);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (isHome && !sessionStorage.getItem('loaderShown')) {
+      setIsLoading(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (location.hash) {

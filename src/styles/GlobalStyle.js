@@ -71,11 +71,8 @@ const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
     width: 100%;
+    max-width: 100vw;
     overflow-x: hidden;
-
-    @media (max-width: 768px) {
-      max-width: 100vw;
-    }
   }
 
   *,
@@ -103,9 +100,9 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     width: 100%;
+    max-width: 100vw;
     min-height: 100%;
     overflow-x: hidden;
-    max-width: 100%;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     background-color: #080808;
@@ -145,58 +142,36 @@ const GlobalStyle = createGlobalStyle`
     display: grid;
     grid-template-rows: 1fr auto;
     grid-template-columns: 100%;
-    overflow: clip;
-    max-width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 
   #content {
-    overflow: clip;
-    max-width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    width: 100%;
   }
 
   main {
-    margin: 0 auto;
+    margin: 0;
     width: 100%;
-    max-width: 1600px;
-    min-height: 100vh;
-    padding: 200px 150px;
-
-    @media (max-width: 1080px) {
-      padding: 200px 100px;
-    }
-    @media (max-width: 768px) {
-      padding: 150px 50px;
-    }
-    @media (max-width: 480px) {
-      padding: 125px 25px;
-    }
-
-    &.fillHeight {
-      padding: 0 150px;
-
-      @media (max-width: 1080px) {
-        padding: 0 100px;
-      }
-      @media (max-width: 768px) {
-        padding: 0 50px;
-      }
-      @media (max-width: 480px) {
-        padding: 0 25px;
-      }
-    }
+    max-width: 100%;
+    min-height: auto;
+    padding: 0;
   }
 
   section {
-    margin: 0 auto;
-    padding: 40px 0;
-    max-width: 1000px;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    width: 100%;
 
     @media (max-width: 768px) {
-      padding: 40px 0;
+      padding: 0;
     }
 
     @media (max-width: 480px) {
-      padding: 30px 0;
+      padding: 0;
     }
   }
 

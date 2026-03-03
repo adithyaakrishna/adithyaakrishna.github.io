@@ -10,6 +10,10 @@ import BlogLayout from '@components/blog-layout';
 const StyledBlogPage = styled.div`
   padding-top: 10vh;
 
+  @media (max-width: 600px) {
+    padding-top: 4vh;
+  }
+
   .back-link {
     display: inline-flex;
     align-items: center;
@@ -79,6 +83,12 @@ const StyledPostList = styled.div`
     transition: all 0.3s ease;
     text-decoration: none;
     color: inherit;
+    gap: 1rem;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
 
     &:hover {
       padding-left: 10px;
@@ -96,6 +106,11 @@ const StyledPostList = styled.div`
     flex-direction: column;
     gap: 0.25rem;
     min-width: 0;
+    flex: 1;
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
   }
 
   .post-title {
@@ -119,6 +134,11 @@ const StyledPostList = styled.div`
     align-items: baseline;
     gap: 1rem;
     flex-shrink: 0;
+
+    @media (max-width: 600px) {
+      width: 100%;
+      justify-content: space-between;
+    }
   }
 
   .post-tags {

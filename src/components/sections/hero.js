@@ -17,6 +17,12 @@ const StyledHeroSection = styled.section`
   padding-top: 10vh;
   margin: 0;
   max-width: none;
+  width: 100%;
+  overflow-wrap: break-word;
+
+  @media (max-width: 600px) {
+    padding-top: 4vh;
+  }
 
   .status-pill {
     display: inline-flex;
@@ -50,6 +56,10 @@ const StyledHeroSection = styled.section`
     text-transform: lowercase;
     letter-spacing: -0.02em;
     max-width: none;
+
+    @media (max-width: 600px) {
+      font-size: 18px;
+    }
   }
 
   p {

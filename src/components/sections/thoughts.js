@@ -42,6 +42,8 @@ const StyledThoughtsSection = styled.section`
   margin: 0;
   padding: 0;
   max-width: none;
+  width: 100%;
+  overflow: hidden;
 
   .section-header {
     font-size: 12px;
@@ -70,6 +72,11 @@ const StyledThoughtsSection = styled.section`
     position: relative;
     text-decoration: none;
     color: inherit;
+    gap: 0.5rem;
+
+    @media (max-width: 600px) {
+      flex-wrap: wrap;
+    }
 
     &:hover {
       padding-left: 10px;
@@ -85,8 +92,15 @@ const StyledThoughtsSection = styled.section`
 
   .item-left {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     align-items: baseline;
+    min-width: 0;
+    flex: 1;
+
+    @media (max-width: 600px) {
+      gap: 0.75rem;
+      flex: 1 1 100%;
+    }
   }
 
   .item-index {

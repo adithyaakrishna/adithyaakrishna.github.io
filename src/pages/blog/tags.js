@@ -10,6 +10,10 @@ import BlogLayout from '@components/blog-layout';
 const StyledTagsPage = styled.div`
   padding-top: 10vh;
 
+  @media (max-width: 600px) {
+    padding-top: 4vh;
+  }
+
   .nav-row {
     display: flex;
     gap: 1.5rem;

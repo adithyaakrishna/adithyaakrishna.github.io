@@ -9,6 +9,8 @@ const StyledFeaturedSection = styled.section`
   margin: 0;
   padding: 0;
   max-width: none;
+  width: 100%;
+  overflow: hidden;
 
   .section-header {
     font-size: 12px;
@@ -37,6 +39,12 @@ const StyledFeaturedSection = styled.section`
     position: relative;
     text-decoration: none;
     color: inherit;
+    gap: 0.5rem;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
 
     &:hover {
       padding-left: 10px;
@@ -52,8 +60,13 @@ const StyledFeaturedSection = styled.section`
 
   .item-left {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     align-items: baseline;
+    min-width: 0;
+
+    @media (max-width: 600px) {
+      gap: 0.75rem;
+    }
   }
 
   .item-index {
@@ -82,6 +95,7 @@ const StyledFeaturedSection = styled.section`
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    flex-wrap: wrap;
     margin-top: 0.25rem;
     padding: 1rem 0;
     font-size: 12px;

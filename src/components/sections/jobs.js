@@ -34,6 +34,8 @@ const StyledJobsSection = styled.section`
   margin: 0;
   padding: 0;
   max-width: none;
+  width: 100%;
+  overflow: hidden;
 
   .section-header {
     font-size: 12px;
@@ -70,6 +72,11 @@ const StyledJobsSection = styled.section`
     transition: all 0.3s ease;
     color: inherit;
     user-select: none;
+    gap: 0.5rem;
+
+    @media (max-width: 600px) {
+      align-items: flex-start;
+    }
 
     &:hover {
       padding-left: 10px;
@@ -82,9 +89,24 @@ const StyledJobsSection = styled.section`
     }
   }
 
+  .exp-left-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    min-width: 0;
+    flex: 1;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+  }
+
   .item-left {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     align-items: baseline;
   }
 
@@ -92,6 +114,7 @@ const StyledJobsSection = styled.section`
     font-size: 12px;
     color: #29BC89;
     font-family: 'Courier Prime', monospace;
+    flex-shrink: 0;
   }
 
   .item-title {
@@ -105,18 +128,17 @@ const StyledJobsSection = styled.section`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 280px;
-
-    @media (max-width: 600px) {
-      max-width: 160px;
-    }
   }
 
   .item-meta {
     font-size: 12px;
     color: var(--text-dim, #888888);
-    text-align: right;
     white-space: nowrap;
+
+    @media (max-width: 600px) {
+      padding-left: calc(1rem + 1.5em);
+      white-space: normal;
+    }
 
     .role {
       color: var(--text-main, #e8e8e8);
@@ -134,7 +156,8 @@ const StyledJobsSection = styled.section`
     color: var(--text-dim, #888888);
     transition: transform 0.3s ease, color 0.3s ease;
     display: inline-block;
-    margin-left: 1rem;
+    flex-shrink: 0;
+    margin-top: 2px;
   }
 
   .exp-item.open .exp-toggle {
@@ -143,19 +166,28 @@ const StyledJobsSection = styled.section`
   }
 
   .exp-body {
-    max-height: 0;
+    display: grid;
+    grid-template-rows: 0fr;
     overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    transition: grid-template-rows 0.35s ease, opacity 0.3s ease;
     opacity: 0;
+
+    > div {
+      overflow: hidden;
+    }
   }
 
   .exp-item.open .exp-body {
-    max-height: 500px;
+    grid-template-rows: 1fr;
     opacity: 1;
   }
 
   .exp-detail {
-    padding: 0.5rem 0 1.5rem 3.5rem;
+    padding: 0.5rem 0 1.5rem 2.5rem;
+
+    @media (max-width: 600px) {
+      padding: 0.5rem 0 1rem 1.75rem;
+    }
     font-size: 13px;
     color: var(--text-dim, #888888);
     line-height: 1.8;
@@ -283,15 +315,18 @@ const Jobs = () => {
     return (
       <div className={`exp-item${isOpen ? ' open' : ''}`} key={key}>
         <div className="exp-header" onClick={() => toggleJob(key)} role="button" tabIndex={0}>
-          <div className="item-left">
-            <span className="item-index">{String(displayNum).padStart(2, '0')}</span>
-            <span className="item-title">{companySlug}</span>
+          <div className="exp-left-group">
+            <div className="item-left">
+              <span className="item-index">{String(displayNum).padStart(2, '0')}</span>
+              <span className="item-title">{companySlug}</span>
+            </div>
+            <span className="item-meta">
+              <span className="role">{title?.toLowerCase()}</span>
+              <span className="separator">&middot;</span>
+              {shortenRange(range)}
+            </span>
           </div>
-          <span className="item-meta">
-            <span className="role">{title?.toLowerCase()}</span>
-            <span className="separator">&middot;</span>
-            {shortenRange(range)} <span className="exp-toggle">+</span>
-          </span>
+          <span className="exp-toggle">+</span>
         </div>
         <div className="exp-body">
           <div

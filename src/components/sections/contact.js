@@ -6,6 +6,8 @@ const StyledContactSection = styled.section`
   padding-top: 2rem;
   margin: 0;
   max-width: none;
+  width: 100%;
+  overflow-wrap: break-word;
 
   .section-header {
     font-size: 12px;
