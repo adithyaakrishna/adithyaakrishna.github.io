@@ -84,9 +84,12 @@ const Layout = ({ children, location }) => {
 
           <SkipToContentLink href="#content">Skip to Content</SkipToContentLink>
 
-          {isLoading && isHome ? (
-            <Loader finishLoading={() => setIsLoading(false)} />
-          ) : isHome ? (
+          {isHome ? (
+            <>
+              {isLoading && <Loader finishLoading={() => setIsLoading(false)} />}
+              <div id="content">{children}</div>
+            </>
+          ) : location.pathname.startsWith('/blog') ? (
             <div id="content">{children}</div>
           ) : (
             <StyledContent>

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
-import { Layout, Hero, Jobs, Featured, Skills, Thoughts, Contact } from '@components';
 import { email } from '@config';
 
 const breathe = keyframes`
@@ -64,7 +63,7 @@ const StyledBrandCol = styled.aside`
   .logo {
     font-size: 14px;
     letter-spacing: 0.05em;
-    color: #fff !important;
+    color: #fff;
     text-decoration: none;
 
     &:hover, &:focus {
@@ -82,7 +81,6 @@ const StyledBrandCol = styled.aside`
 const StyledMainContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4rem;
   z-index: 10;
 `;
 
@@ -126,7 +124,7 @@ const StyledMetaCol = styled.aside`
   }
 `;
 
-const IndexPage = ({ location }) => {
+const BlogLayout = ({ children }) => {
   const blobRef = useRef(null);
 
   useEffect(() => {
@@ -142,13 +140,13 @@ const IndexPage = ({ location }) => {
   }, []);
 
   return (
-    <Layout location={location}>
+    <>
       <StyledNoiseOverlay />
       <StyledGhostBlob ref={blobRef} />
 
       <StyledLayoutGrid>
         <StyledBrandCol>
-          <a href="#" className="logo">Adithya Krishna</a>
+          <a href="/" className="logo">Adithya Krishna</a>
           <div className="coords">
             lat: 12.9716<br />
             lon: 77.5946
@@ -156,12 +154,7 @@ const IndexPage = ({ location }) => {
         </StyledBrandCol>
 
         <StyledMainContent>
-          <Hero />
-          <Thoughts />
-          <Jobs />
-          <Skills />
-          <Featured />
-          <Contact />
+          {children}
         </StyledMainContent>
 
         <StyledMetaCol>
@@ -170,12 +163,12 @@ const IndexPage = ({ location }) => {
           </div>
         </StyledMetaCol>
       </StyledLayoutGrid>
-    </Layout>
+    </>
   );
 };
 
-IndexPage.propTypes = {
-  location: PropTypes.object.isRequired,
+BlogLayout.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
-export default IndexPage;
+export default BlogLayout;

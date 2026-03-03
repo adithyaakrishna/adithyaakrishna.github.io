@@ -5,43 +5,107 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Layout } from '@components';
+import BlogLayout from '@components/blog-layout';
 
-const StyledTagsContainer = styled.main`
-  max-width: 1000px;
+const StyledTagPage = styled.div`
+  padding-top: 10vh;
 
-  a {
-    ${({ theme }) => theme.mixins.inlineLink};
-  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #29BC89;
+    text-decoration: none;
+    text-transform: lowercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 3rem;
+    transition: opacity 0.3s;
 
-  h1 {
-    ${({ theme }) => theme.mixins.flexBetween};
-    margin-bottom: 50px;
-
-    a {
-      font-size: var(--fz-lg);
-      font-weight: 400;
+    &:hover {
+      opacity: 0.7;
+      color: #29BC89;
     }
   }
 
-  ul {
-    li {
+  .tag-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2rem;
+
+    h1 {
       font-size: 24px;
-      h2 {
-        font-size: inherit;
-        margin: 0;
-        a {
-          color: var(--light-slate);
-        }
-      }
-      .subtitle {
-        color: var(--slate);
-        font-size: var(--fz-sm);
+      font-weight: 400;
+      text-transform: lowercase;
+      color: var(--text-main, #e8e8e8);
+    }
 
-        .tag {
-          margin-right: 10px;
-        }
+    .view-all {
+      font-size: 12px;
+      color: #29BC89;
+      text-decoration: none;
+      transition: opacity 0.3s;
+
+      &:hover {
+        opacity: 0.7;
+        color: #29BC89;
       }
     }
+  }
+
+  .section-header {
+    font-size: 12px;
+    color: var(--text-dim, #888888);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    &::after {
+      content: '';
+      height: 1px;
+      flex-grow: 1;
+      background: var(--text-dim, #888888);
+      opacity: 0.2;
+    }
+  }
+
+  .post-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      padding-left: 10px;
+      color: var(--accent, #ffffff);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    &:hover .post-title {
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .post-title {
+    font-size: 16px;
+    text-transform: lowercase;
+    font-weight: 400;
+    color: var(--text-main, #e8e8e8);
+    transition: 0.3s;
+    margin: 0;
+  }
+
+  .post-date {
+    font-size: 12px;
+    color: var(--text-dim, #888888);
+    font-family: 'Courier Prime', monospace;
+    white-space: nowrap;
   }
 `;
 
@@ -49,53 +113,40 @@ const TagTemplate = ({ pageContext, data, location }) => {
   const { tag } = pageContext;
   const { edges } = data.allMarkdownRemark;
 
+  const formatDate = dateStr => {
+    const d = new Date(dateStr);
+    const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+    return `${months[d.getMonth()]} ${d.getFullYear()}`;
+  };
+
   return (
     <Layout location={location}>
-      <Helmet title={`Tagged: #${tag}`} />
+      <BlogLayout>
+        <Helmet title={`tagged: #${tag}`} />
 
-      <StyledTagsContainer>
-        <span className="breadcrumb">
-          <span className="arrow">&larr;</span>
-          <Link to="/pensieve">All memories</Link>
-        </span>
+        <StyledTagPage>
+          <Link to="/blog" className="back-link">
+            &larr; all posts
+          </Link>
 
-        <h1>
-          <span>#{tag}</span>
-          <span>
-            <Link to="/pensieve/tags">View all tags</Link>
-          </span>
-        </h1>
+          <div className="tag-header">
+            <h1>#{tag}</h1>
+            <Link to="/blog/tags" className="view-all">view all tags</Link>
+          </div>
 
-        <ul className="fancy-list">
+          <div className="section-header">posts</div>
+
           {edges.map(({ node }) => {
-            const { title, slug, date, tags } = node.frontmatter;
+            const { title, slug, date } = node.frontmatter;
             return (
-              <li key={slug}>
-                <h2>
-                  <Link to={slug}>{title}</Link>
-                </h2>
-                <p className="subtitle">
-                  <time>
-                    {new Date(date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </time>
-                  <span>&nbsp;&mdash;&nbsp;</span>
-                  {tags &&
-                    tags.length > 0 &&
-                    tags.map((tag, i) => (
-                      <Link key={i} to={`/pensieve/tags/${kebabCase(tag)}/`} className="tag">
-                        #{tag}
-                      </Link>
-                    ))}
-                </p>
-              </li>
+              <Link to={slug} className="post-item" key={slug}>
+                <span className="post-title">{title}</span>
+                <span className="post-date">{formatDate(date)}</span>
+              </Link>
             );
           })}
-        </ul>
-      </StyledTagsContainer>
+        </StyledTagPage>
+      </BlogLayout>
     </Layout>
   );
 };

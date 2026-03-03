@@ -11,6 +11,6 @@ export { default as Hero } from './sections/hero';
 export { default as About } from './sections/about';
 export { default as Jobs } from './sections/jobs';
 export { default as Featured } from './sections/featured';
-export { default as Projects } from './sections/projects';
+export { default as Skills } from './sections/skills';
 export { default as Contact } from './sections/contact';
 export { default as Thoughts } from './sections/thoughts';

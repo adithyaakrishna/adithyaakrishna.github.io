@@ -77,6 +77,40 @@ const StyledFeaturedSection = styled.section`
     color: var(--text-dim, #555555);
     text-align: right;
   }
+
+  .update-notice {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+    padding: 1rem 0;
+    font-size: 12px;
+    color: var(--text-dim, #888888);
+
+    .update-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #e8a317;
+      border: 1px solid rgba(232, 163, 23, 0.25);
+      padding: 4px 10px;
+      letter-spacing: 0.05em;
+    }
+
+    a {
+      color: #29BC89;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(41, 188, 137, 0.3);
+      font-size: 12px;
+      transition: border-color 0.3s;
+
+      &:hover {
+        border-color: #29BC89;
+        color: #29BC89;
+      }
+    }
+  }
 `;
 
 const Featured = () => {
@@ -105,6 +139,13 @@ const Featured = () => {
   return (
     <StyledFeaturedSection id="featured">
       <div className="section-header">selected_projects</div>
+      <div className="update-notice">
+        <span className="update-chip">update pending</span>
+        for newer projects, visit{' '}
+        <a href="https://github.com/adithyaakrishna" target="_blank" rel="noopener noreferrer">
+          github.com/adithyaakrishna
+        </a>
+      </div>
       {featuredProjects.map(({ node }, i) => {
         const { title, external, github } = node.frontmatter;
         const link = external || github || '#';

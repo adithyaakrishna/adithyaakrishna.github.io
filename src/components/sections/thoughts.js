@@ -3,9 +3,22 @@ import styled from 'styled-components';
 
 const blogPosts = [
   {
+    slug: 'log_003',
+    title: 'boxing the digital canvas: i love pdfs',
+    url: '/blog/bounding-box',
+    date: 'apr 2025',
+  },
+  {
+    slug: 'log_002',
+    title: 'play: the joyful path to productivity',
+    url: '/blog/play',
+    date: 'oct 2024',
+  },
+  {
     slug: 'log_001',
-    title: 'placeholder — add your posts here',
-    url: 'https://github.com/adithyaakrishna/blog/tree/master/src/content/post',
+    title: 'fomo: your unexpected ally',
+    url: '/blog/fomo',
+    date: 'sep 2024',
   },
 ];
 
@@ -19,7 +32,7 @@ const StyledThoughtsSection = styled.section`
 
   .section-header {
     font-size: 12px;
-    color: var(--text-dim, #888888);
+    color: #29BC89;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -29,7 +42,7 @@ const StyledThoughtsSection = styled.section`
       content: '';
       height: 1px;
       flex-grow: 1;
-      background: var(--text-dim, #888888);
+      background: var(--text-dim, #555555);
       opacity: 0.2;
     }
   }
@@ -83,6 +96,7 @@ const StyledThoughtsSection = styled.section`
     font-size: 12px;
     color: var(--text-dim, #888888);
     text-align: right;
+    white-space: nowrap;
   }
 `;
 
@@ -93,14 +107,12 @@ const Thoughts = () => (
       <a
         href={post.url}
         className="list-item"
-        key={i}
-        target="_blank"
-        rel="noopener noreferrer">
+        key={i}>
         <div className="item-left">
           <span className="item-index">{post.slug}</span>
           <span className="item-title">{post.title}</span>
         </div>
-        <span className="item-meta">read</span>
+        <span className="item-meta">read &middot; {post.date}</span>
       </a>
     ))}
   </StyledThoughtsSection>

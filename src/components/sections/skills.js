@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledProjectsSection = styled.section`
+const StyledSkillsSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -63,8 +63,8 @@ const skills = [
   'figma',
 ];
 
-const Projects = () => (
-  <StyledProjectsSection id="projects">
+const Skills = () => (
+  <StyledSkillsSection id="skills">
     <div className="section-header">technical_stack</div>
     <div className="skills-block">
       {skills.map((skill, i) => (
@@ -74,7 +74,7 @@ const Projects = () => (
         </React.Fragment>
       ))}
     </div>
-  </StyledProjectsSection>
+  </StyledSkillsSection>
 );
 
-export default Projects;
+export default Skills;
