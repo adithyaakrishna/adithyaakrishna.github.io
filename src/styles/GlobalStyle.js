@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
     --text-main: #e8e8e8;
     --text-dim: #888888;
     --accent: #ffffff;
-    --noise-opacity: 0.06;
+    --noise-opacity: 0.1;
     --font-stack: 'Space Mono', 'Courier Prime', monospace;
     --c-red: #ffffff;
     --c-cream: #080808;
