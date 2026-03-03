@@ -191,7 +191,7 @@ const PostTemplate = ({ data, location }) => {
         <Helmet title={title} />
 
         <StyledPostPage>
-          <Link to="/blog" className="back-link">
+          <Link to="/" className="back-link">
             &larr; all posts
           </Link>
 

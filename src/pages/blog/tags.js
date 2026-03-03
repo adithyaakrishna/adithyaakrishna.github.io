@@ -81,7 +81,7 @@ const TagsPage = ({
       <Helmet title="Tags" />
 
       <StyledTagsPage>
-        <Link to="/blog" className="back-link">
+        <Link to="/" className="back-link">
           &larr; all posts
         </Link>
 

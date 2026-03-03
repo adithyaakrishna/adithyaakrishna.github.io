@@ -125,7 +125,7 @@ const TagTemplate = ({ pageContext, data, location }) => {
         <Helmet title={`tagged: #${tag}`} />
 
         <StyledTagPage>
-          <Link to="/blog" className="back-link">
+          <Link to="/" className="back-link">
             &larr; all posts
           </Link>
 
