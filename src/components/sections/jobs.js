@@ -16,14 +16,16 @@ function shortenRange(range) {
   );
 }
 
-const hiddenCompanies = [
-  'openchemistry - google summer of code',
-  'wasmedge - google season of docs',
-  'cloud native computing foundation (cncf)',
-  'layer5',
-  'bounce',
-  'lets be the change',
+const shownCompanies = [
+  'noice',
+  'tensorlake',
 ];
+
+const companyDisplayNames = {
+  'openchemistry - google summer of code': 'GSOC',
+  'wasmedge - google season of docs': 'GSOC',
+  'cloud native computing foundation (cncf)': 'CNCF',
+};
 
 const StyledJobsSection = styled.section`
   display: flex;
@@ -100,6 +102,14 @@ const StyledJobsSection = styled.section`
     font-weight: 400;
     color: var(--text-main, #e8e8e8);
     margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 280px;
+
+    @media (max-width: 600px) {
+      max-width: 160px;
+    }
   }
 
   .item-meta {
@@ -251,10 +261,10 @@ const Jobs = () => {
 
   const allJobs = data.jobs.edges;
   const mainJobs = allJobs.filter(
-    ({ node }) => !hiddenCompanies.includes(node.frontmatter.company?.toLowerCase()),
+    ({ node }) => shownCompanies.includes(node.frontmatter.company?.toLowerCase()),
   );
   const otherJobs = allJobs.filter(
-    ({ node }) => hiddenCompanies.includes(node.frontmatter.company?.toLowerCase()),
+    ({ node }) => !shownCompanies.includes(node.frontmatter.company?.toLowerCase()),
   );
 
   const [openJobs, setOpenJobs] = useState({});
@@ -264,16 +274,17 @@ const Jobs = () => {
     setOpenJobs(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const renderExpItem = (node, idx, keyPrefix) => {
+  const renderExpItem = (node, idx, keyPrefix, displayNum) => {
     const { title, company, range } = node.frontmatter;
-    const companySlug = company?.toLowerCase().replace(/\s+/g, '_');
+    const companyLower = company?.toLowerCase();
+    const companySlug = companyDisplayNames[companyLower] || companyLower?.replace(/\s+/g, '_');
     const key = `${keyPrefix}-${idx}`;
     const isOpen = !!openJobs[key];
     return (
       <div className={`exp-item${isOpen ? ' open' : ''}`} key={key}>
         <div className="exp-header" onClick={() => toggleJob(key)} role="button" tabIndex={0}>
           <div className="item-left">
-            <span className="item-index">{String(idx + 1).padStart(2, '0')}</span>
+            <span className="item-index">{String(displayNum).padStart(2, '0')}</span>
             <span className="item-title">{companySlug}</span>
           </div>
           <span className="item-meta">
@@ -294,18 +305,18 @@ const Jobs = () => {
 
   return (
     <StyledJobsSection id="jobs">
-      <div className="section-header">selected_experience</div>
-      {mainJobs.map(({ node }, i) => renderExpItem(node, i, 'main'))}
+      <div className="section-header">experience</div>
+      {mainJobs.map(({ node }, i) => renderExpItem(node, i, 'main', i + 1))}
 
       {otherJobs.length > 0 && (
         <>
           <button
             className={`others-pill${showOthers ? ' open' : ''}`}
             onClick={() => setShowOthers(prev => !prev)}>
-            others ({otherJobs.length}) <span className="pill-toggle">+</span>
+            previous ({otherJobs.length}) <span className="pill-toggle">+</span>
           </button>
           <div className={`others-body${showOthers ? ' open' : ''}`}>
-            {otherJobs.map(({ node }, i) => renderExpItem(node, i, 'other'))}
+            {otherJobs.map(({ node }, i) => renderExpItem(node, i, 'other', mainJobs.length + i + 1))}
           </div>
         </>
       )}

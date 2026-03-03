@@ -42,7 +42,8 @@ const StyledContent = styled.div`
 
 const Layout = ({ children, location }) => {
   const isHome = location.pathname === '/';
-  const [isLoading, setIsLoading] = useState(isHome);
+  const hasLoaded = typeof window !== 'undefined' && sessionStorage.getItem('loaderShown');
+  const [isLoading, setIsLoading] = useState(isHome && !hasLoaded);
 
   useEffect(() => {
     if (location.hash) {
@@ -86,7 +87,10 @@ const Layout = ({ children, location }) => {
 
           {isHome ? (
             <>
-              {isLoading && <Loader finishLoading={() => setIsLoading(false)} />}
+              {isLoading && <Loader finishLoading={() => {
+                setIsLoading(false);
+                sessionStorage.setItem('loaderShown', '1');
+              }} />}
               <div id="content">{children}</div>
             </>
           ) : location.pathname.startsWith('/blog') ? (

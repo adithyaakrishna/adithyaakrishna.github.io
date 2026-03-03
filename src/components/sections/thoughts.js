@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import styled from 'styled-components';
 
 const blogPosts = [
@@ -110,12 +111,35 @@ const StyledThoughtsSection = styled.section`
     text-align: right;
     white-space: nowrap;
   }
+
+  .view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-stack, 'Space Mono', monospace);
+    font-size: 12px;
+    line-height: 1;
+    color: var(--text-dim, #888888);
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px 14px;
+    margin-top: 0.5rem;
+    transition: color 0.3s ease, border-color 0.3s ease, text-shadow 0.3s ease;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+
+    &:hover {
+      color: var(--accent, #ffffff);
+      border-color: rgba(255, 255, 255, 0.25);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    }
+  }
 `;
 
 const Thoughts = () => (
   <StyledThoughtsSection id="thoughts">
     <div className="section-header">thoughts_&amp;_logs</div>
-    {blogPosts.map((post, i) => (
+    {blogPosts.slice(0, 3).map((post, i) => (
       <a
         href={post.url}
         className="list-item"
@@ -127,6 +151,9 @@ const Thoughts = () => (
         <span className="item-meta">read &middot; {post.date}</span>
       </a>
     ))}
+    <Link to="/blog" className="view-all">
+      all posts &rarr;
+    </Link>
   </StyledThoughtsSection>
 );
 
