@@ -3,6 +3,18 @@ import styled from 'styled-components';
 
 const blogPosts = [
   {
+    slug: 'log_005',
+    title: 'smooth trading charts with pixijs & react',
+    url: '/blog/pixijs-trading-chart',
+    date: 'feb 2026',
+  },
+  {
+    slug: 'log_004',
+    title: 'deduped sonner toasts with nudge',
+    url: '/blog/sonner-toast-dedup',
+    date: 'feb 2026',
+  },
+  {
     slug: 'log_003',
     title: 'boxing the digital canvas: i love pdfs',
     url: '/blog/bounding-box',

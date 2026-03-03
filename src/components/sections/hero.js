@@ -21,12 +21,14 @@ const StyledHeroSection = styled.section`
   .status-pill {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    border: none;
-    padding: 0;
-    color: var(--text-dim, #888888);
+    gap: 8px;
+    border: 1px solid rgba(41, 188, 137, 0.3);
+    padding: 6px 14px;
+    color: #29BC89;
     font-size: 12px;
     border-radius: 0;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
 
     .status-dot {
       display: inline-block;
@@ -97,14 +99,14 @@ const Hero = () => {
     <StyledHeroSection id="home">
       <div className="status-pill">
         <span className="status-dot" />
-        building at noice
+        open to opportunities
       </div>
       <h1 className="intro-text">
         I build clear, fast products and design interfaces people trust and love to use.
       </h1>
       <p>
-        I'm Adithya Krishna. I build web3 and token launch products at Noice using Next.js, PixiJS, and WebGL2—focused on fast, reliable UIs and clean code.<br /><br />
-        <span style={{ color: '#29BC89' }}>Previously:</span> frontend at Tensorlake &amp; Reclaim Protocol, document flows at Documenso, and Red Hat. GSoC '23 alum, Meshery maintainer, based in <span style={{ color: '#29BC89' }}>Bengaluru</span>.
+        Hi, I'm Adithya Krishna. I create high-performance web products and crisp, intuitive interfaces using technologies like Next.js, PixiJS, and WebGL2.<br /><br />
+        <span style={{ color: '#29BC89' }}>Previously:</span> frontend at Noice, Tensorlake &amp; Reclaim Protocol, workflow automation at Documenso, and engineering at Red Hat. Meshery maintainer, GSoC '23 alum, based in Bengaluru, India.
       </p>
       <div className="social-chips">
         {filteredSocials.map(({ url, name }) => (
