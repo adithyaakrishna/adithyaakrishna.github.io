@@ -8,7 +8,7 @@ import { Layout } from '@components';
 import BlogLayout from '@components/blog-layout';
 
 const StyledBlogPage = styled.div`
-  padding-top: 10vh;
+  padding-top: 0.5vh;
 
   @media (max-width: 600px) {
     padding-top: 4vh;
@@ -23,7 +23,7 @@ const StyledBlogPage = styled.div`
     text-decoration: none;
     text-transform: lowercase;
     letter-spacing: 0.1em;
-    margin-bottom: 3rem;
+    margin-bottom: 10px;
     transition: opacity 0.3s;
 
     &:hover {

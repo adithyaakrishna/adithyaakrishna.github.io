@@ -8,7 +8,7 @@ import { Layout } from '@components';
 import BlogLayout from '@components/blog-layout';
 
 const StyledPostPage = styled.div`
-  padding-top: 10vh;
+  padding-top: 0.5vh;
 
   @media (max-width: 600px) {
     padding-top: 4vh;

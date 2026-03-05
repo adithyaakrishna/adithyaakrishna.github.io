@@ -5,12 +5,63 @@
  */
 
 const path = require('path');
+const fs = require('fs');
 const _ = require('lodash');
+const snippetMetas = require('./src/data/snippets.json');
+
+function decodeHtmlEntities(value = '') {
+  return value
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
+
+function extractMatch(content, expression, fallback = '') {
+  const match = content.match(expression);
+  if (!match || !match[1]) return fallback;
+  return match[1].trim();
+}
+
+function parseSnippetSource({ slug, sourceFile, title, description, tag }) {
+  const sourcePath = path.resolve(sourceFile);
+  const source = fs.readFileSync(sourcePath, 'utf8');
+  const sharedCss = fs.readFileSync(path.resolve('content/css-hacks/style.css'), 'utf8');
+  const demoCss = extractMatch(source, /<style>([\s\S]*?)<\/style>/i);
+  const mainInner = extractMatch(source, /<main>([\s\S]*?)<\/main>/i);
+  const codeLanguageClass = extractMatch(source, /<pre><code class="([^"]+)">/i, 'language-css');
+  const code = decodeHtmlEntities(extractMatch(source, /<pre><code class="[^"]+">([\s\S]*?)<\/code><\/pre>/i));
+  const inferredTitle = decodeHtmlEntities(extractMatch(source, /<h1>([\s\S]*?)<\/h1>/i, title));
+  const inferredDescription = decodeHtmlEntities(
+    extractMatch(source, /<p class="desc">([\s\S]*?)<\/p>/i, description)
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/\s+/g, ' ')
+  ).trim();
+  const inferredTag = decodeHtmlEntities(extractMatch(source, /<span class="tag[^"]*">([\s\S]*?)<\/span>/i, tag));
+
+  const withoutHero = mainInner.replace(/<div class="hero">[\s\S]*?<\/div>/i, '');
+  const withoutCode = withoutHero.replace(/<div class="code-block">[\s\S]*?<\/div>/i, '');
+  const demoMarkup = withoutCode.trim();
+
+  return {
+    slug,
+    title: inferredTitle || title,
+    description: inferredDescription || description,
+    tag: inferredTag || tag,
+    code,
+    codeLanguage: codeLanguageClass.replace('language-', ''),
+    sharedCss,
+    demoCss,
+    demoMarkup,
+  };
+}
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage, createRedirect } = actions;
   const postTemplate = path.resolve(`src/templates/post.js`);
   const tagTemplate = path.resolve('src/templates/tag.js');
+  const snippetTemplate = path.resolve('src/templates/snippet.js');
 
   createRedirect({
     fromPath: `/console-log/*`,
@@ -67,6 +118,17 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       component: tagTemplate,
       context: {
         tag: tag.fieldValue,
+      },
+    });
+  });
+
+  snippetMetas.forEach(snippetMeta => {
+    const snippet = parseSnippetSource(snippetMeta);
+    createPage({
+      path: snippetMeta.path,
+      component: snippetTemplate,
+      context: {
+        snippet,
       },
     });
   });

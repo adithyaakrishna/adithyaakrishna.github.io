@@ -10,6 +10,9 @@
     "portfolio"
   ],
   "scripts": {
+    "generate:snippet-previews": "node scripts/generate-snippet-previews.js",
+    "prebuild": "npm run generate:snippet-previews",
+    "predevelop": "npm run generate:snippet-previews",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
@@ -82,5 +85,6 @@
     "husky": "^8.0.1",
     "lint-staged": "^10.1.2",
     "prettier": "^2.7.1"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

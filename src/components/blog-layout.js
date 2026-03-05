@@ -36,7 +36,7 @@ const StyledGhostBlob = styled.div`
 
 const StyledLayoutGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr min(720px, 100%) 1fr;
+  grid-template-columns: 1fr min(${props => props.$contentWidth}px, 100%) 1fr;
   min-height: 100vh;
   padding: 4rem 2rem;
   position: relative;
@@ -127,7 +127,7 @@ const StyledMetaCol = styled.aside`
   }
 `;
 
-const BlogLayout = ({ children }) => {
+const BlogLayout = ({ children, contentWidth = 720 }) => {
   const blobRef = useRef(null);
 
   useEffect(() => {
@@ -147,7 +147,7 @@ const BlogLayout = ({ children }) => {
       <StyledNoiseOverlay />
       <StyledGhostBlob ref={blobRef} />
 
-      <StyledLayoutGrid>
+      <StyledLayoutGrid $contentWidth={contentWidth}>
         <StyledBrandCol>
           <a href="/" className="logo">Adithya Krishna</a>
           <div className="coords">
@@ -172,6 +172,7 @@ const BlogLayout = ({ children }) => {
 
 BlogLayout.propTypes = {
   children: PropTypes.node.isRequired,
+  contentWidth: PropTypes.number,
 };
 
 export default BlogLayout;

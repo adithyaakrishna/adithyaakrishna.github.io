@@ -1,0 +1,13 @@
+[
+  {
+    "slug": "property",
+    "path": "/snippets/property",
+    "title": "Animate the Unanimatable",
+    "description": "Use @property for smooth custom property animation.",
+    "tag": "@property",
+    "tagTone": "violet",
+    "sourceFile": "content/css-hacks/property.html",
+    "previewImage": "/snippets/previews/property.png",
+    "order": 1
+  }
+]

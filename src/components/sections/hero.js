@@ -14,7 +14,7 @@ const pulse = keyframes`
 `;
 
 const StyledHeroSection = styled.section`
-  padding-top: 10vh;
+  padding-top: 0.5vh;
   margin: 0;
   max-width: none;
   width: 100%;
@@ -116,7 +116,14 @@ const Hero = () => {
       </h1>
       <p>
         Hi, I'm Adithya Krishna. I create high-performance web products and crisp, intuitive interfaces using technologies like Next.js, PixiJS, and WebGL2.<br /><br />
-        <span style={{ color: '#29BC89' }}>Previously:</span> frontend at Noice, Tensorlake &amp; Reclaim Protocol, workflow automation at Documenso, and engineering at Red Hat. Meshery maintainer, GSoC '23 alum, based in Bengaluru, India.
+        <span style={{ color: '#29BC89' }}>Previously:</span> frontend at{' '}
+        <a href="https://noice.so" target="_blank" rel="noopener noreferrer" style={{ color: '#29BC89', textDecoration: 'underline' }}>Noice</a>
+        {', '}
+        <a href="https://tensorlake.ai" target="_blank" rel="noopener noreferrer" style={{ color: '#29BC89', textDecoration: 'underline' }}>Tensorlake</a>
+        {' & '}
+        DX engineer at Reclaim Protocol, Software engineer at Documenso, and{' '}
+        <a href="https://redhat.com" target="_blank" rel="noopener noreferrer" style={{ color: '#29BC89', textDecoration: 'underline' }}>Red Hat</a>.
+        Meshery maintainer, GSoC '23 alum, based in Bengaluru, India.
       </p>
       <div className="social-chips">
         {filteredSocials.map(({ url, name }) => (

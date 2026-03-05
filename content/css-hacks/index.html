@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Niche CSS Hacks</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  html, body { overflow: auto; height: auto; }
+  body { justify-content: flex-start; min-height: 100vh; }
+
+  main {
+    max-width: 640px;
+    padding: 60px 40px 80px;
+    gap: 40px;
+  }
+
+  .index-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+  }
+
+  .index-title .gradient {
+    background: linear-gradient(135deg, var(--mint), var(--violet), var(--rose));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .index-sub {
+    font-size: 1rem;
+    color: var(--text-2);
+    font-weight: 300;
+    margin-top: -24px;
+  }
+
+  .hack-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .hack-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--text);
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .hack-link:hover {
+    background: var(--surface-2);
+    border-color: var(--border-light);
+  }
+
+  .hack-link .tag { margin: 0; flex-shrink: 0; }
+
+  .hack-link .hack-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .hack-link .arrow {
+    margin-left: auto;
+    color: var(--text-3);
+    font-size: 1.1rem;
+    transition: translate 0.2s;
+  }
+
+  .hack-link:hover .arrow { translate: 4px 0; }
+</style>
+</head>
+<body>
+
+<main>
+  <h1 class="index-title">My <span class="gradient">CSS</span> Findings</h1>
+  <p class="index-sub">Findings from my snippets and hacks.</p>
+
+  <div class="hack-list">
+    <a href="property.html" class="hack-link">
+      <span class="tag tag-violet">@property</span>
+      <span class="hack-name">Animate the Unanimatable</span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</main>
+
+</body>
+</html>

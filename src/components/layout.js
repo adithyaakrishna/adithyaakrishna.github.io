@@ -98,7 +98,7 @@ const Layout = ({ children, location }) => {
               }} />}
               <div id="content">{children}</div>
             </>
-          ) : location.pathname.startsWith('/blog') ? (
+          ) : location.pathname.startsWith('/blog') || location.pathname.startsWith('/snippets') ? (
             <div id="content">{children}</div>
           ) : (
             <StyledContent>
