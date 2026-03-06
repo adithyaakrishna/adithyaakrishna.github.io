@@ -70,6 +70,29 @@ const StyledSnippetsPage = styled.div`
       background: var(--text-dim, #888888);
       opacity: 0.2;
     }
+
+    .section-header-line {
+      flex-grow: 1;
+      height: 1px;
+      background: var(--text-dim, #888888);
+      opacity: 0.2;
+    }
+
+    .section-header-link {
+      margin-left: auto;
+      font-size: 14px;
+      color: #29bc89;
+      text-decoration: none;
+      flex-shrink: 0;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &.section-header-has-link::after {
+      display: none;
+    }
   }
 `;
 
@@ -103,6 +126,29 @@ const StyledSnippetGrid = styled.div`
       border-color: rgba(255, 255, 255, 0.2);
       transform: translateY(-2px);
     }
+  }
+
+  .snippet-ux-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    color: #fbbf24;
+    width: fit-content;
+  }
+
+  .snippet-ux-chip span {
+    color: var(--text-dim, #888888);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
   }
 
   .snippet-tag {
@@ -194,9 +240,37 @@ function getTokenClassName(tag) {
   return 'is-keyword';
 }
 
+function SnippetCard({ snippet }) {
+  return (
+    <Link to={snippet.path} className="snippet-item">
+      {snippet.uxLaw && (
+        <span className="snippet-ux-chip">
+          Law of UX <span>· {snippet.uxLaw}</span>
+        </span>
+      )}
+      <div className="preview-frame">
+        <img
+          src={snippet.previewImage}
+          alt={`${snippet.title} preview`}
+          className="preview-image"
+          loading="lazy"
+          onError={event => {
+            event.currentTarget.classList.add('is-hidden');
+          }}
+        />
+        <div className="preview-fallback">{snippet.tag}</div>
+      </div>
+      <span className={`snippet-tag ${getTokenClassName(snippet.tag)}`}>{snippet.tag}</span>
+      <h3 className="snippet-title">{snippet.title}</h3>
+      <p className="snippet-desc">{snippet.description}</p>
+    </Link>
+  );
+}
+
 const SnippetsPage = ({ location }) => {
-  const orderedSnippets = [...snippets]
-    .sort((a, b) => a.order - b.order);
+  const allSnippets = [...snippets].sort((a, b) => a.order - b.order);
+  const cssHacks = allSnippets.filter(s => (s.section || 'css-hacks') === 'css-hacks');
+  const lawsOfUx = allSnippets.filter(s => s.section === 'laws-of-ux');
 
   return (
     <Layout location={location}>
@@ -212,30 +286,29 @@ const SnippetsPage = ({ location }) => {
             <h1 className="page-title">snippets_&amp;_hacks</h1>
             <p className="page-subtitle">
               These are findings from my snippets and hacks.<br />
+              <Link to="/snippets/ux-laws" style={{ color: '#29bc89', textDecoration: 'none', marginTop: '0.5rem', display: 'inline-block' }}>
+                Laws of UX in CSS →
+              </Link>
             </p>
           </div>
 
-          <div className="section-header">all_snippets</div>
-
+          <div className="section-header">css_hacks</div>
           <StyledSnippetGrid>
-            {orderedSnippets.map(snippet => (
-              <Link to={snippet.path} className="snippet-item" key={snippet.slug}>
-                <div className="preview-frame">
-                  <img
-                    src={snippet.previewImage}
-                    alt={`${snippet.title} preview`}
-                    className="preview-image"
-                    loading="lazy"
-                    onError={event => {
-                      event.currentTarget.classList.add('is-hidden');
-                    }}
-                  />
-                  <div className="preview-fallback">{snippet.tag}</div>
-                </div>
-                <span className={`snippet-tag ${getTokenClassName(snippet.tag)}`}>{snippet.tag}</span>
-                <h3 className="snippet-title">{snippet.title}</h3>
-                <p className="snippet-desc">{snippet.description}</p>
-              </Link>
+            {cssHacks.map(snippet => (
+              <SnippetCard snippet={snippet} key={snippet.slug} />
+            ))}
+          </StyledSnippetGrid>
+
+          <div className="section-header section-header-has-link" style={{ marginTop: '2.5rem' }}>
+            laws_of_ux
+            <span className="section-header-line" aria-hidden="true" />
+            <Link to="/snippets/ux-laws" className="section-header-link">
+              See all principles →
+            </Link>
+          </div>
+          <StyledSnippetGrid>
+            {lawsOfUx.map(snippet => (
+              <SnippetCard snippet={snippet} key={snippet.slug} />
             ))}
           </StyledSnippetGrid>
         </StyledSnippetsPage>

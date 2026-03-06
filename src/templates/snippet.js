@@ -74,11 +74,50 @@ const StyledSnippetHeader = styled.header`
     font-family: 'Courier Prime', monospace;
   }
 
+  .snippet-ux-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: rgba(251, 191, 36, 0.12);
+    border: 1px solid rgba(251, 191, 36, 0.35);
+    color: #fbbf24;
+    margin-bottom: 0.5rem;
+  }
+
+  .snippet-ux-chip span {
+    color: var(--text-dim, #888888);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
   .snippet-description {
     margin-top: 1rem;
     line-height: 1.7;
     color: var(--text-dim, #888888);
     font-size: 17px;
+  }
+
+  .snippet-why {
+    margin-top: 1rem;
+    padding: 0.9rem 1rem;
+    background: rgba(41, 188, 137, 0.06);
+    border: 1px solid rgba(41, 188, 137, 0.2);
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-dim, #888888);
+  }
+
+  .snippet-why strong {
+    color: #29bc89;
+    font-weight: 600;
   }
 `;
 
@@ -390,12 +429,22 @@ const SnippetTemplate = ({ location, pageContext }) => {
           </div>
 
           <StyledSnippetHeader>
+            {snippet.uxLaw && (
+              <Link to="/snippets/ux-laws" className="snippet-ux-chip">
+                Law of UX <span>· {snippet.uxLaw}</span>
+              </Link>
+            )}
             <h1>{snippet.title}</h1>
             <div className="snippet-meta">
               <span className="snippet-tag">#{snippet.tag}</span>
               <span>{snippet.slug}</span>
             </div>
             <p className="snippet-description">{snippet.description}</p>
+            {snippet.whyItWorks && (
+              <p className="snippet-why">
+                <strong>Why it works:</strong> {snippet.whyItWorks}
+              </p>
+            )}
           </StyledSnippetHeader>
 
           <StyledSnippetSection>
@@ -442,6 +491,8 @@ SnippetTemplate.propTypes = {
       demoMarkup: PropTypes.string.isRequired,
       code: PropTypes.string.isRequired,
       codeLanguage: PropTypes.string.isRequired,
+      whyItWorks: PropTypes.string,
+      uxLaw: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };

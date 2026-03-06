@@ -8,6 +8,23 @@
     "tagTone": "violet",
     "sourceFile": "content/css-hacks/property.html",
     "previewImage": "/snippets/previews/property.png",
-    "order": 1
+    "order": 1,
+    "whyItWorks": "Aesthetic-Usability Effect — smooth, polished transitions read as higher quality and more usable.",
+    "uxLaw": "Aesthetic-Usability Effect",
+    "section": "css-hacks"
+  },
+  {
+    "slug": "has",
+    "path": "/snippets/has",
+    "title": "The Parent Selector That Does Everything",
+    "description": "Style ancestors from child state with pure CSS.",
+    "tag": ":has()",
+    "tagTone": "mint",
+    "sourceFile": "content/css-hacks/has.html",
+    "previewImage": "/snippets/previews/has.png",
+    "order": 2,
+    "whyItWorks": "Law of Proximity & Common Region — one control (checkbox) visually groups and updates the whole card, so the relationship is obvious.",
+    "uxLaw": "Law of Proximity & Common Region",
+    "section": "css-hacks"
   }
 ]

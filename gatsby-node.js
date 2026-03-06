@@ -128,7 +128,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       path: snippetMeta.path,
       component: snippetTemplate,
       context: {
-        snippet,
+        snippet: {
+          ...snippet,
+          ...(snippetMeta.whyItWorks && { whyItWorks: snippetMeta.whyItWorks }),
+          ...(snippetMeta.uxLaw && { uxLaw: snippetMeta.uxLaw }),
+        },
       },
     });
   });
