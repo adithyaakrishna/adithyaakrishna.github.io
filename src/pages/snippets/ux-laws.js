@@ -182,11 +182,11 @@ const UxLawsPage = ({ location }) => {
                 <p className="law-description">{law.description}</p>
                 <div className="law-css-label">CSS takeaway</div>
                 <p className="law-css">{law.cssTakeaway}</p>
-                {law.snippetSlug && (
+                {/* {law.snippetSlug && (
                   <Link to={`/snippets/${law.snippetSlug}`} className="law-link">
                     See snippet: {law.snippetSlug} →
                   </Link>
-                )}
+                )} */}
                 <div className="law-external">
                   <a href={law.externalUrl} target="_blank" rel="noopener noreferrer">
                     Read on Laws of UX →
