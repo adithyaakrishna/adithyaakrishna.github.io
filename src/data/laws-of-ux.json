@@ -1,0 +1,106 @@
+[
+  {
+    "id": "aesthetic-usability",
+    "name": "Aesthetic-Usability Effect",
+    "description": "Users often perceive aesthetically pleasing design as design that's more usable.",
+    "cssTakeaway": "Use design tokens (CSS custom properties) for color, type scale, and spacing so the UI feels consistent and polished. Consistency reads as quality.",
+    "snippetSlug": null,
+    "externalUrl": "https://lawsofux.com/aesthetic-usability-effect"
+  },
+  {
+    "id": "doherty-threshold",
+    "name": "Doherty Threshold",
+    "description": "Productivity soars when a computer and its users interact at a pace (<400ms) that ensures that neither has to wait on the other.",
+    "cssTakeaway": "Keep transition and animation duration under ~300–400ms for hover, focus, and toggle feedback so the system feels responsive.",
+    "snippetSlug": "doherty-threshold",
+    "externalUrl": "https://lawsofux.com/doherty-threshold"
+  },
+  {
+    "id": "fitts-law",
+    "name": "Fitts's Law",
+    "description": "The time to acquire a target is a function of the distance to and size of the target.",
+    "cssTakeaway": "Use min-height/min-width (e.g. 44px for touch), padding to grow hit area without changing visual size, and gap to separate targets.",
+    "snippetSlug": "fitts-law",
+    "externalUrl": "https://lawsofux.com/fittss-law"
+  },
+  {
+    "id": "hick-law",
+    "name": "Hick's Law",
+    "description": "The time it takes to make a decision increases with the number and complexity of choices.",
+    "cssTakeaway": "Progressive disclosure: use <details>/<summary> or show/hide with CSS to reduce visible options. Fewer choices at once.",
+    "snippetSlug": null,
+    "externalUrl": "https://lawsofux.com/hicks-law"
+  },
+  {
+    "id": "jakob-law",
+    "name": "Jakob's Law",
+    "description": "Users spend most of their time on other sites and prefer your site to work the same way.",
+    "cssTakeaway": "Respect platform: -webkit-tap-highlight-color, :focus-visible for focus rings, and familiar spacing so interactions feel familiar.",
+    "snippetSlug": null,
+    "externalUrl": "https://lawsofux.com/jakobs-law"
+  },
+  {
+    "id": "law-of-proximity",
+    "name": "Law of Proximity",
+    "description": "Objects that are near each other tend to be perceived as grouped.",
+    "cssTakeaway": "Use gap in flex/grid and margin to group related elements and separate groups. Spacing encodes hierarchy.",
+    "snippetSlug": "proximity",
+    "externalUrl": "https://lawsofux.com/law-of-proximity"
+  },
+  {
+    "id": "law-of-common-region",
+    "name": "Law of Common Region",
+    "description": "Elements sharing a clearly defined boundary tend to be perceived as one group.",
+    "cssTakeaway": "Use background, border, border-radius, or box-shadow to create regions (cards, sections, modals) so grouping is obvious.",
+    "snippetSlug": "common-region",
+    "externalUrl": "https://lawsofux.com/law-of-common-region"
+  },
+  {
+    "id": "law-of-similarity",
+    "name": "Law of Similarity",
+    "description": "Similar elements are perceived as a complete picture or group.",
+    "cssTakeaway": "Reuse the same classes and design tokens so similar function looks similar; reserve contrast for the primary action.",
+    "snippetSlug": "von-restorff",
+    "externalUrl": "https://lawsofux.com/law-of-similarity"
+  },
+  {
+    "id": "miller-law",
+    "name": "Miller's Law (Chunking)",
+    "description": "The average person can only keep 7 (±2) items in working memory.",
+    "cssTakeaway": "Chunk with layout: use grid/flex + gap and borders or backgrounds to create 5–9 clear chunks (e.g. form sections, list groups).",
+    "snippetSlug": "common-region",
+    "externalUrl": "https://lawsofux.com/millers-law"
+  },
+  {
+    "id": "peak-end-rule",
+    "name": "Peak-End Rule",
+    "description": "People judge an experience by how they felt at its peak and at its end.",
+    "cssTakeaway": "Add a short transition on exit (e.g. transition on state change) so the end of an interaction feels intentional, not abrupt.",
+    "snippetSlug": "peak-end",
+    "externalUrl": "https://lawsofux.com/peak-end-rule"
+  },
+  {
+    "id": "serial-position",
+    "name": "Serial Position Effect",
+    "description": "Users best remember the first and last items in a series.",
+    "cssTakeaway": "Use :first-child / :last-child or :nth-child(n of S) to emphasize start and end (e.g. stepper, list, breadcrumb).",
+    "snippetSlug": null,
+    "externalUrl": "https://lawsofux.com/serial-position-effect"
+  },
+  {
+    "id": "von-restorff",
+    "name": "Von Restorff Effect",
+    "description": "When multiple similar objects are present, the one that differs is most likely to be remembered.",
+    "cssTakeaway": "Style the primary CTA with contrast (color, font-weight, size, box-shadow); keep secondary actions visually similar.",
+    "snippetSlug": "von-restorff",
+    "externalUrl": "https://lawsofux.com/von-restorff-effect"
+  },
+  {
+    "id": "zeigarnik",
+    "name": "Zeigarnik Effect",
+    "description": "People remember uncompleted or interrupted tasks better than completed ones.",
+    "cssTakeaway": "Use progress indicators and clear incomplete-state styling (e.g. outline, accent border) so in-progress items are visible.",
+    "snippetSlug": null,
+    "externalUrl": "https://lawsofux.com/zeigarnik-effect"
+  }
+]
