@@ -34,7 +34,7 @@
     "description": "Drive keyframes directly from scroll progression.",
     "tag": "scroll()",
     "tagTone": "rose",
-    "sourceFile": "css-hacks/scroll-timeline.html",
+    "sourceFile": "content/css-hacks/scroll-timeline.html",
     "previewImage": "/snippets/previews/scroll-timeline.png",
     "order": 3
   }
