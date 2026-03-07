@@ -26,5 +26,16 @@
     "whyItWorks": "Law of Proximity & Common Region — one control (checkbox) visually groups and updates the whole card, so the relationship is obvious.",
     "uxLaw": "Law of Proximity & Common Region",
     "section": "css-hacks"
+  },
+  {
+    "slug": "scroll-timeline",
+    "path": "/snippets/scroll-timeline",
+    "title": "Scroll-Driven Animations",
+    "description": "Drive keyframes directly from scroll progression.",
+    "tag": "scroll()",
+    "tagTone": "rose",
+    "sourceFile": "css-hacks/scroll-timeline.html",
+    "previewImage": "/snippets/previews/scroll-timeline.png",
+    "order": 3
   }
 ]
