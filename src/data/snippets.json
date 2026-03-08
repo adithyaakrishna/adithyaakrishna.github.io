@@ -37,5 +37,16 @@
     "sourceFile": "content/css-hacks/scroll-timeline.html",
     "previewImage": "/snippets/previews/scroll-timeline.png",
     "order": 3
+  },
+  {
+    "slug": "user-invalid",
+    "path": "/snippets/user-invalid",
+    "title": "Validation That Waits For You",
+    "description": "Apply invalid styles only after user interaction.",
+    "tag": ":user-invalid",
+    "tagTone": "rose",
+    "sourceFile": "content/css-hacks/user-invalid.html",
+    "previewImage": "/snippets/previews/user-invalid.png",
+    "order": 4
   }
 ]

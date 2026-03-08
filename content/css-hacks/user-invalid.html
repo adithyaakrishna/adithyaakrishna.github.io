@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>:user-invalid — Niche CSS Hacks</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  .input-eager:invalid {
+    border-color: var(--rose);
+    box-shadow: 0 0 0 3px var(--rose-dim);
+  }
+
+  .input-smart:user-invalid {
+    border-color: var(--rose);
+    box-shadow: 0 0 0 3px var(--rose-dim);
+  }
+
+  .hint {
+    font-size: 0.78rem;
+    color: var(--text-3);
+    text-align: center;
+    max-width: 200px;
+  }
+</style>
+</head>
+<body>
+
+<main>
+  <div class="hero">
+    <span class="tag tag-rose">:user-invalid</span>
+    <h1>Validation That Waits For You</h1>
+    <p class="desc"><code style="font-family:var(--font-mono);color:var(--rose)">:invalid</code> fires immediately on page load. <code style="font-family:var(--font-mono);color:var(--mint)">:user-invalid</code> only triggers after the user has actually interacted and blurred.</p>
+  </div>
+
+  <div class="comparison">
+    <div class="side">
+      <input type="email" required class="demo-input input-eager" placeholder="Required email..." />
+      <span class="side-label"><span class="dot dot-red"></span> :invalid</span>
+      <p class="hint">Red immediately — even before you type anything</p>
+    </div>
+    <div class="side">
+      <input type="email" required class="demo-input input-smart" placeholder="Required email..." />
+      <span class="side-label"><span class="dot dot-green"></span> :user-invalid</span>
+      <p class="hint">Type something invalid, then blur to see the red</p>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this)"><svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Copy</span></button>
+    <pre><code class="language-css">/* Bad — red on page load */
+input:invalid { border-color: red; }
+
+/* Good — red only after user interaction */
+input:user-invalid { border-color: red; }</code></pre>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
+<script>
+function copyCode(btn) {
+  const code = btn.closest('.code-block').querySelector('code');
+  navigator.clipboard.writeText(code.textContent).then(() => {
+    btn.classList.add('copied');
+    btn.querySelector('span').textContent = 'Copied';
+    setTimeout(() => { btn.classList.remove('copied'); btn.querySelector('span').textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>
