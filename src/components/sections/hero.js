@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { Link } from 'gatsby';
 import { socialMedia } from '@config';
 
 const iconMap = {
@@ -33,7 +34,7 @@ const StyledHeroSection = styled.section`
     color: #29BC89;
     font-size: 12px;
     border-radius: 0;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
     letter-spacing: 0.05em;
 
     .status-dot {
@@ -43,6 +44,33 @@ const StyledHeroSection = styled.section`
       border-radius: 50%;
       background-color: #29BC89;
       animation: ${pulse} 2s ease-in-out infinite;
+    }
+  }
+
+  .status-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .status-link {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-stack, 'Space Mono', monospace);
+    font-size: 12px;
+    line-height: 1;
+    color: var(--text-dim, #888888);
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px 14px;
+    transition: color 0.3s ease, border-color 0.3s ease, text-shadow 0.3s ease;
+
+    &:hover {
+      color: #29BC89;
+      border-color: rgba(41, 188, 137, 0.35);
+      text-shadow: 0 0 8px rgba(41, 188, 137, 0.3);
     }
   }
 
@@ -107,9 +135,17 @@ const Hero = () => {
 
   return (
     <StyledHeroSection id="home">
-      <div className="status-pill">
-        <span className="status-dot" />
-        open to opportunities
+      <div className="status-actions">
+        <div className="status-pill">
+          <span className="status-dot" />
+          open to opportunities
+        </div>
+        <Link to="/snippets" className="status-link">
+          snippets
+        </Link>
+        <Link to="/snippets/ux-laws" className="status-link">
+          laws of ux
+        </Link>
       </div>
       <h1 className="intro-text">
         I build clear, fast products and design interfaces people trust and love to use.
