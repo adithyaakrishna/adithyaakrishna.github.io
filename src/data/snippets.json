@@ -48,5 +48,17 @@
     "sourceFile": "content/css-hacks/user-invalid.html",
     "previewImage": "/snippets/previews/user-invalid.png",
     "order": 4
+  },
+  {
+    "slug": "interruptibility",
+    "path": "/snippets/interruptibility",
+    "title": "Make Interactions Interruptible",
+    "description": "Transitions interpolate toward the latest state and can be interrupted; keyframe animations run on a fixed timeline.",
+    "tag": "transition vs keyframes",
+    "tagTone": "mint",
+    "sourceFile": "content/css-hacks/interruptibility.html",
+    "previewImage": "/snippets/previews/interruptibility.png",
+    "order": 9,
+    "section": "css-hacks"
   }
 ]
