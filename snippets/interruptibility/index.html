@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 3.15.0"/><title data-react-helmet="true">Scroll-Driven Animations | Snippets | Adithya Krishna</title><link data-react-helmet="true" rel="preconnect" href="https://fonts.googleapis.com"/><link data-react-helmet="true" rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link data-react-helmet="true" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/><link data-react-helmet="true" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet"/><meta data-react-helmet="true" name="viewport" content="width=device-width, initial-scale=1"/><meta data-react-helmet="true" name="description" content="Adithya Krishna is a Software Engineer based out of Bengaluru, India."/><meta data-react-helmet="true" name="image" content="https://adithyaakrishna.github.io/adi.png"/><meta data-react-helmet="true" property="og:title" content="Adithya Krishna"/><meta data-react-helmet="true" property="og:description" content="Adithya Krishna is a Software Engineer based out of Bengaluru, India."/><meta data-react-helmet="true" property="og:image" content="https://adithyaakrishna.github.io/adi.png"/><meta data-react-helmet="true" property="og:url" content="https://adithyaakrishna.github.io/snippets/scroll-timeline"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"/><meta data-react-helmet="true" name="twitter:creator" content="@adii_kris"/><meta data-react-helmet="true" name="twitter:title" content="Adithya Krishna"/><meta data-react-helmet="true" name="twitter:description" content="Adithya Krishna is a Software Engineer based out of Bengaluru, India."/><meta data-react-helmet="true" name="twitter:image" content="https://adithyaakrishna.github.io/adi.png"/><meta data-react-helmet="true" name="google-site-verification" content="oTQe20vWS95cJorl7M8ATvhTxab4w8M-uuBJq855R4U"/><style data-styled="" data-styled-version="5.3.11">@font-face{font-family:'Calibre';src:url(/static/Calibre-Regular-b0d4cbb1201155ddccc21d1b8059a670.woff2) format('woff2'), url(/static/Calibre-Regular-98526589fa32315c552129869e08427e.woff) format('woff');font-weight:400;font-style:normal;font-display:auto;}/*!sc*/
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 3.15.0"/><title data-react-helmet="true">Make Interactions Interruptible | Snippets | Adithya Krishna</title><link data-react-helmet="true" rel="preconnect" href="https://fonts.googleapis.com"/><link data-react-helmet="true" rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link data-react-helmet="true" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/><link data-react-helmet="true" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet"/><meta data-react-helmet="true" name="viewport" content="width=device-width, initial-scale=1"/><meta data-react-helmet="true" name="description" content="Adithya Krishna is a Software Engineer based out of Bengaluru, India."/><meta data-react-helmet="true" name="image" content="https://adithyaakrishna.github.io/adi.png"/><meta data-react-helmet="true" property="og:title" content="Adithya Krishna"/><meta data-react-helmet="true" property="og:description" content="Adithya Krishna is a Software Engineer based out of Bengaluru, India."/><meta data-react-helmet="true" property="og:image" content="https://adithyaakrishna.github.io/adi.png"/><meta data-react-helmet="true" property="og:url" content="https://adithyaakrishna.github.io/snippets/interruptibility"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"/><meta data-react-helmet="true" name="twitter:creator" content="@adii_kris"/><meta data-react-helmet="true" name="twitter:title" content="Adithya Krishna"/><meta data-react-helmet="true" name="twitter:description" content="Adithya Krishna is a Software Engineer based out of Bengaluru, India."/><meta data-react-helmet="true" name="twitter:image" content="https://adithyaakrishna.github.io/adi.png"/><meta data-react-helmet="true" name="google-site-verification" content="oTQe20vWS95cJorl7M8ATvhTxab4w8M-uuBJq855R4U"/><style data-styled="" data-styled-version="5.3.11">@font-face{font-family:'Calibre';src:url(/static/Calibre-Regular-b0d4cbb1201155ddccc21d1b8059a670.woff2) format('woff2'), url(/static/Calibre-Regular-98526589fa32315c552129869e08427e.woff) format('woff');font-weight:400;font-style:normal;font-display:auto;}/*!sc*/
 @font-face{font-family:'Calibre';src:url(/static/Calibre-Medium-568dce56f869a519a015d3b69443b067.woff2) format('woff2'), url(/static/Calibre-Medium-46693d9b57a6b8a657b5393258f6e899.woff) format('woff');font-weight:500;font-style:normal;font-display:auto;}/*!sc*/
 @font-face{font-family:'Calibre';src:url(/static/Calibre-Semibold-94fc73852539d6733dc0d80252c5e3fb.woff2) format('woff2'), url(/static/Calibre-Semibold-6972688a249bd53a6c7e69a89e50cdd6.woff) format('woff');font-weight:600;font-style:normal;font-display:auto;}/*!sc*/
 @font-face{font-family:'Calibre';src:url(/static/Calibre-RegularItalic-5f875bd7b669f1e11b622d4d6d71b5b0.woff2) format('woff2'), url(/static/Calibre-RegularItalic-57371b9e514dbbe9da31dad1a298de2d.woff) format('woff');font-weight:400;font-style:italic;font-display:auto;}/*!sc*/
@@ -196,7 +196,7 @@ data-styled.g53[id="snippet__StyledCodeBlock-sc-j6rx98-4"]{content:"hbTVHV,"}/*!
 @-webkit-keyframes dgvptW{0%{-webkit-transform:translate(-50%,-50%) scale(0.95) rotate(0deg);-ms-transform:translate(-50%,-50%) scale(0.95) rotate(0deg);transform:translate(-50%,-50%) scale(0.95) rotate(0deg);opacity:0.25;}100%{-webkit-transform:translate(-50%,-50%) scale(1.05) rotate(3deg);-ms-transform:translate(-50%,-50%) scale(1.05) rotate(3deg);transform:translate(-50%,-50%) scale(1.05) rotate(3deg);opacity:0.4;}}/*!sc*/
 @keyframes dgvptW{0%{-webkit-transform:translate(-50%,-50%) scale(0.95) rotate(0deg);-ms-transform:translate(-50%,-50%) scale(0.95) rotate(0deg);transform:translate(-50%,-50%) scale(0.95) rotate(0deg);opacity:0.25;}100%{-webkit-transform:translate(-50%,-50%) scale(1.05) rotate(3deg);-ms-transform:translate(-50%,-50%) scale(1.05) rotate(3deg);transform:translate(-50%,-50%) scale(1.05) rotate(3deg);opacity:0.4;}}/*!sc*/
 data-styled.g55[id="sc-keyframes-dgvptW"]{content:"dgvptW,"}/*!sc*/
-</style><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){if(void 0===e.target.dataset.mainImage)return;if(void 0===e.target.dataset.gatsbyImageSsr)return;const t=e.target;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script><link rel="sitemap" type="application/xml" href="/sitemap/sitemap-index.xml"/><link rel="icon" href="/favicon-32x32.png?v=1db82ad190219d6155ec9fe376407bc4" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><meta name="theme-color" content="#0a192f"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="preconnect" href="https://www.google-analytics.com"/><link rel="dns-prefetch" href="https://www.google-analytics.com"/><link as="script" rel="preload" href="/webpack-runtime-c2aec7528692dce10ee3.js"/><link as="script" rel="preload" href="/framework-9c9e72562348597eca86.js"/><link as="script" rel="preload" href="/app-ad529ea62d02597637a5.js"/><link as="script" rel="preload" href="/ea88be26-cca2dfabdd872139948c.js"/><link as="script" rel="preload" href="/94726e6d-fd82790929ea2102d75c.js"/><link as="script" rel="preload" href="/406146c62b33e952bd15d6da681988e61f3afcf7-34f4af4d6a7099ccb1ba.js"/><link as="script" rel="preload" href="/component---src-templates-snippet-js-bbb8cf010f1b0eddbea2.js"/><link as="fetch" rel="preload" href="/page-data/snippets/scroll-timeline/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/1737871322.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/1994492073.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/4117294525.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div id="root"><a href="#content" class="layout__SkipToContentLink-sc-1mvjq42-0 byXRhK">Skip to Content</a><div id="content"><div class="blog-layout__StyledNoiseOverlay-sc-fgzxhq-0 gPKwhG"></div><div class="blog-layout__StyledGhostBlob-sc-fgzxhq-1 eUXqxW"></div><div class="blog-layout__StyledLayoutGrid-sc-fgzxhq-2 jVtEPr"><aside class="blog-layout__StyledBrandCol-sc-fgzxhq-3 fEKBPL"><a href="/" class="logo">Adithya Krishna</a><div class="coords">lat: 12.9716<br/>lon: 77.5946</div></aside><div class="blog-layout__StyledMainContent-sc-fgzxhq-4 kyfZGG"><div class="snippet__StyledSnippetPage-sc-j6rx98-0 jvgcZD"><div class="nav-row"><button class="back-link">← back</button><a class="back-link" href="/snippets">snippets</a></div><header class="snippet__StyledSnippetHeader-sc-j6rx98-1 iZLCmd"><h1>Scroll-Driven Animations</h1><div class="snippet-meta"><span class="snippet-tag">#<!-- -->animation-timeline: scroll()</span><span>scroll-timeline</span></div><p class="snippet-description">Tie any animation to scroll position. No IntersectionObserver, no scroll events, no JavaScript. Watch the gradient progress bar fill as you scroll.</p></header><section class="snippet__StyledSnippetSection-sc-j6rx98-2 fngaaB"><div class="section-title">live_demo</div><iframe title="scroll-timeline demo" srcDoc="&lt;!DOCTYPE html&gt;
+</style><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){if(void 0===e.target.dataset.mainImage)return;if(void 0===e.target.dataset.gatsbyImageSsr)return;const t=e.target;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script><link rel="sitemap" type="application/xml" href="/sitemap/sitemap-index.xml"/><link rel="icon" href="/favicon-32x32.png?v=1db82ad190219d6155ec9fe376407bc4" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><meta name="theme-color" content="#0a192f"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=1db82ad190219d6155ec9fe376407bc4"/><link rel="preconnect" href="https://www.google-analytics.com"/><link rel="dns-prefetch" href="https://www.google-analytics.com"/><link as="script" rel="preload" href="/webpack-runtime-c2aec7528692dce10ee3.js"/><link as="script" rel="preload" href="/framework-9c9e72562348597eca86.js"/><link as="script" rel="preload" href="/app-ad529ea62d02597637a5.js"/><link as="script" rel="preload" href="/ea88be26-cca2dfabdd872139948c.js"/><link as="script" rel="preload" href="/94726e6d-fd82790929ea2102d75c.js"/><link as="script" rel="preload" href="/406146c62b33e952bd15d6da681988e61f3afcf7-34f4af4d6a7099ccb1ba.js"/><link as="script" rel="preload" href="/component---src-templates-snippet-js-bbb8cf010f1b0eddbea2.js"/><link as="fetch" rel="preload" href="/page-data/snippets/interruptibility/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/1737871322.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/1994492073.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/4117294525.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div id="root"><a href="#content" class="layout__SkipToContentLink-sc-1mvjq42-0 byXRhK">Skip to Content</a><div id="content"><div class="blog-layout__StyledNoiseOverlay-sc-fgzxhq-0 gPKwhG"></div><div class="blog-layout__StyledGhostBlob-sc-fgzxhq-1 eUXqxW"></div><div class="blog-layout__StyledLayoutGrid-sc-fgzxhq-2 jVtEPr"><aside class="blog-layout__StyledBrandCol-sc-fgzxhq-3 fEKBPL"><a href="/" class="logo">Adithya Krishna</a><div class="coords">lat: 12.9716<br/>lon: 77.5946</div></aside><div class="blog-layout__StyledMainContent-sc-fgzxhq-4 kyfZGG"><div class="snippet__StyledSnippetPage-sc-j6rx98-0 jvgcZD"><div class="nav-row"><button class="back-link">← back</button><a class="back-link" href="/snippets">snippets</a></div><header class="snippet__StyledSnippetHeader-sc-j6rx98-1 iZLCmd"><h1>Make Interactions Interruptible</h1><div class="snippet-meta"><span class="snippet-tag">#<!-- -->transition vs keyframes</span><span>interruptibility</span></div><p class="snippet-description">Transitions interpolate toward the latest state and can be interrupted when you move the cursor away. Keyframe animations run on a fixed timeline and don&#x27;t retarget once started.</p></header><section class="snippet__StyledSnippetSection-sc-j6rx98-2 fngaaB"><div class="section-title">live_demo</div><iframe title="interruptibility demo" srcDoc="&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot; /&gt;
@@ -614,58 +614,78 @@ main {
       }
     }
   &lt;/style&gt;
-  &lt;style&gt;@keyframes progress-fill {
-    from { scale: 0 1; }
-    to   { scale: 1 1; }
-  }
-
-  .scroll-area {
+  &lt;style&gt;.interrupt-demo {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
     width: 100%;
-    height: 280px;
-    overflow-y: auto;
-    border-radius: var(--radius);
+    max-width: 420px;
+  }
+
+  .interrupt-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .interrupt-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-3);
+  }
+
+  .interrupt-box {
+    width: 100%;
+    height: 56px;
+    border-radius: var(--radius-sm);
     border: 1px solid var(--border);
-    background: var(--surface);
-    position: relative;
+    background: var(--surface-2);
+    cursor: pointer;
   }
 
-  .scroll-progress {
-    position: sticky;
-    top: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--mint), var(--violet), var(--rose));
-    transform-origin: 0 0;
-    scale: 0 1;
-    animation: progress-fill linear;
-    animation-timeline: scroll(nearest);
-    z-index: 2;
-    border-radius: 0 0 2px 2px;
+  .interrupt-box.transition-demo {
+    transition: transform 0.6s ease, background 0.3s;
   }
 
-  .scroll-content {
-    padding: 24px;
+  .interrupt-box.transition-demo:hover {
+    transform: translateX(120px);
+    background: var(--mint-dim);
+    border-color: var(--mint);
   }
 
-  .scroll-content p {
-    font-size: 0.9rem;
+  .interrupt-box.keyframe-demo {
+    animation: slide-right 1.2s ease-in-out infinite alternate;
+  }
+
+  .interrupt-box.keyframe-demo:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes slide-right {
+    from { transform: translateX(0); }
+    to { transform: translateX(120px); }
+  }
+
+  .interrupt-note {
+    font-size: 0.85rem;
     color: var(--text-2);
-    margin-bottom: 20px;
-    line-height: 1.7;
+    line-height: 1.5;
   }&lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
   &lt;main&gt;&lt;div class=&quot;demo&quot;&gt;
-    &lt;div class=&quot;scroll-area&quot;&gt;
-      &lt;div class=&quot;scroll-progress&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;scroll-content&quot;&gt;
-        &lt;p&gt;Scroll this container and watch the progress bar above fill with a gradient. It&#x27;s driven entirely by CSS.&lt;/p&gt;
-        &lt;p&gt;The animation is tied to the nearest scroll container using &lt;code style=&quot;font-family:var(--font-mono);color:var(--mint)&quot;&gt;animation-timeline: scroll(nearest)&lt;/code&gt;.&lt;/p&gt;
-        &lt;p&gt;You can drive any animatable property — opacity, transforms, colors, clip-path — from scroll position.&lt;/p&gt;
-        &lt;p&gt;Think: parallax, reveal animations, progress indicators, sticky header transitions — all pure CSS.&lt;/p&gt;
-        &lt;p&gt;The Web Animations API took years to build this. Now it&#x27;s two lines of CSS.&lt;/p&gt;
-        &lt;p&gt;Keep scrolling...&lt;/p&gt;
-        &lt;p style=&quot;padding-bottom:60px&quot;&gt;You made it. The bar is full.&lt;/p&gt;
+    &lt;div class=&quot;interrupt-demo&quot;&gt;
+      &lt;div class=&quot;interrupt-row&quot;&gt;
+        &lt;span class=&quot;interrupt-label&quot;&gt;Transition — hover and move away mid-way&lt;/span&gt;
+        &lt;div class=&quot;interrupt-box transition-demo&quot;&gt;&lt;/div&gt;
       &lt;/div&gt;
+      &lt;div class=&quot;interrupt-row&quot;&gt;
+        &lt;span class=&quot;interrupt-label&quot;&gt;Keyframes — runs to completion&lt;/span&gt;
+        &lt;div class=&quot;interrupt-box keyframe-demo&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;p class=&quot;interrupt-note&quot;&gt;Use transitions for interactions that should respond to user intent; use keyframes for staged sequences that run once.&lt;/p&gt;
     &lt;/div&gt;
   &lt;/div&gt;&lt;/main&gt;
   &lt;script&gt;
@@ -696,14 +716,18 @@ main {
     })();
   &lt;/script&gt;
 &lt;/body&gt;
-&lt;/html&gt;" style="height:260px" loading="lazy" sandbox="allow-scripts" class="snippet__StyledDemoFrame-sc-j6rx98-3 fHMOCT"></iframe></section><section class="snippet__StyledSnippetSection-sc-j6rx98-2 fngaaB"><div class="section-title">code</div><div class="snippet__StyledCodeBlock-sc-j6rx98-4 hbTVHV"><button type="button" class="copy-button">copy</button><pre><code class="language-css"><span class="token-selector">.progress </span><span class="token-punctuation"><span class="token-punctuation">{</span></span>
-  <span class="token-property">scale</span><span class="token-punctuation">:<span class="token-value"></span> 0 1</span><span class="token-punctuation"><span class="token-punctuation">;</span></span>
-  <span class="token-property">transform-origin</span><span class="token-punctuation">:<span class="token-value"></span> 0 0</span><span class="token-punctuation"><span class="token-punctuation">;</span></span>
-  <span class="token-property">animation</span><span class="token-punctuation">:<span class="token-value"></span> fill linear</span><span class="token-punctuation"><span class="token-punctuation">;</span></span>
-  <span class="token-property">animation-timeline</span><span class="token-punctuation">:<span class="token-value"></span> scroll<span class="token-punctuation">(</span>root<span class="token-punctuation">)</span></span><span class="token-punctuation"><span class="token-punctuation">;</span></span>
+&lt;/html&gt;" style="height:260px" loading="lazy" sandbox="allow-scripts" class="snippet__StyledDemoFrame-sc-j6rx98-3 fHMOCT"></iframe></section><section class="snippet__StyledSnippetSection-sc-j6rx98-2 fngaaB"><div class="section-title">code</div><div class="snippet__StyledCodeBlock-sc-j6rx98-4 hbTVHV"><button type="button" class="copy-button">copy</button><pre><code class="language-css"><span class="token-comment">/* <span class="token-property">Interruptible</span><span class="token-punctuation">:<span class="token-value"></span> reverses when hover ends */</span></span><span class="token-punctuation"></span>
+<span class="token-selector">.box </span><span class="token-punctuation"><span class="token-punctuation">{</span></span>
+  <span class="token-property">transition</span><span class="token-punctuation">:<span class="token-value"></span> transform 0.6s ease</span><span class="token-punctuation"><span class="token-punctuation">;</span></span>
+<span class="token-punctuation">}</span>
+<span class="token-selector">.<span class="token-property">box</span><span class="token-punctuation">:<span class="token-value"></span>hover </span><span class="token-punctuation"><span class="token-punctuation">{</span></span></span><span class="token-punctuation"></span>
+  <span class="token-property">transform</span><span class="token-punctuation">:<span class="token-value"></span> translateX<span class="token-punctuation">(</span>120px<span class="token-punctuation">)</span></span><span class="token-punctuation"><span class="token-punctuation">;</span></span>
 <span class="token-punctuation">}</span>
 
-<span class="token-selector">@keyframes fill </span><span class="token-punctuation"><span class="token-punctuation">{</span></span><span class="token-selector"> to </span><span class="token-punctuation"><span class="token-punctuation">{</span></span> <span class="token-property">scale</span><span class="token-punctuation">:<span class="token-value"></span> 1 1</span><span class="token-punctuation"><span class="token-punctuation">;</span></span> <span class="token-punctuation">}</span> <span class="token-punctuation">}</span></code></pre></div></section></div></div><aside class="blog-layout__StyledMetaCol-sc-fgzxhq-5 fPhfZu"><div class="vertical-line-container"><a href="mailto:aadithya794@gmail.com" class="social-link">aadithya794@gmail.com</a></div></aside></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
+<span class="token-comment">/* Fixed <span class="token-property">timeline</span><span class="token-punctuation">:<span class="token-value"></span> cannot retarget mid-run */</span></span><span class="token-punctuation"></span>
+<span class="token-selector">.box-animated </span><span class="token-punctuation"><span class="token-punctuation">{</span></span>
+  <span class="token-property">animation</span><span class="token-punctuation">:<span class="token-value"></span> slide 1.2s ease-in-out infinite alternate</span><span class="token-punctuation"><span class="token-punctuation">;</span></span>
+<span class="token-punctuation">}</span></code></pre></div></section></div></div><aside class="blog-layout__StyledMetaCol-sc-fgzxhq-5 fPhfZu"><div class="vertical-line-container"><a href="mailto:aadithya794@gmail.com" class="social-link">aadithya794@gmail.com</a></div></aside></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
   
   
   if(true) {
@@ -719,4 +743,4 @@ main {
       
       
       
-      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/snippets/scroll-timeline";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-11e93f6b460090d94a3d.js"],"app":["/app-ad529ea62d02597637a5.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-e1b95d697ef69d0a253f.js"],"component---src-pages-404-js":["/component---src-pages-404-js-ff3204ca89ca577db759.js"],"component---src-pages-archive-js":["/component---src-pages-archive-js-6c06659b0a66aa171948.js"],"component---src-pages-blog-index-js":["/component---src-pages-blog-index-js-c80f0e8b288aa2d1a6de.js"],"component---src-pages-blog-tags-js":["/component---src-pages-blog-tags-js-45d64ce7df6e9d50162d.js"],"component---src-pages-index-js":["/component---src-pages-index-js-44a51e2e1c1188bcf328.js"],"component---src-pages-snippets-index-js":["/component---src-pages-snippets-index-js-dc0019a9c88aedbd0b09.js"],"component---src-pages-snippets-ux-laws-js":["/component---src-pages-snippets-ux-laws-js-d5a436445843a93e61d1.js"],"component---src-templates-post-js":["/component---src-templates-post-js-4b83d29969a96c4bfb73.js"],"component---src-templates-snippet-js":["/component---src-templates-snippet-js-bbb8cf010f1b0eddbea2.js"],"component---src-templates-tag-js":["/component---src-templates-tag-js-f89b012cd331be666d7a.js"]};/*]]>*/</script><script src="/polyfill-11e93f6b460090d94a3d.js" nomodule=""></script><script src="/component---src-templates-snippet-js-bbb8cf010f1b0eddbea2.js" async=""></script><script src="/406146c62b33e952bd15d6da681988e61f3afcf7-34f4af4d6a7099ccb1ba.js" async=""></script><script src="/94726e6d-fd82790929ea2102d75c.js" async=""></script><script src="/ea88be26-cca2dfabdd872139948c.js" async=""></script><script src="/app-ad529ea62d02597637a5.js" async=""></script><script src="/framework-9c9e72562348597eca86.js" async=""></script><script src="/webpack-runtime-c2aec7528692dce10ee3.js" async=""></script></body></html>
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/snippets/interruptibility";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-11e93f6b460090d94a3d.js"],"app":["/app-ad529ea62d02597637a5.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-e1b95d697ef69d0a253f.js"],"component---src-pages-404-js":["/component---src-pages-404-js-ff3204ca89ca577db759.js"],"component---src-pages-archive-js":["/component---src-pages-archive-js-6c06659b0a66aa171948.js"],"component---src-pages-blog-index-js":["/component---src-pages-blog-index-js-c80f0e8b288aa2d1a6de.js"],"component---src-pages-blog-tags-js":["/component---src-pages-blog-tags-js-45d64ce7df6e9d50162d.js"],"component---src-pages-index-js":["/component---src-pages-index-js-44a51e2e1c1188bcf328.js"],"component---src-pages-snippets-index-js":["/component---src-pages-snippets-index-js-dc0019a9c88aedbd0b09.js"],"component---src-pages-snippets-ux-laws-js":["/component---src-pages-snippets-ux-laws-js-d5a436445843a93e61d1.js"],"component---src-templates-post-js":["/component---src-templates-post-js-4b83d29969a96c4bfb73.js"],"component---src-templates-snippet-js":["/component---src-templates-snippet-js-bbb8cf010f1b0eddbea2.js"],"component---src-templates-tag-js":["/component---src-templates-tag-js-f89b012cd331be666d7a.js"]};/*]]>*/</script><script src="/polyfill-11e93f6b460090d94a3d.js" nomodule=""></script><script src="/component---src-templates-snippet-js-bbb8cf010f1b0eddbea2.js" async=""></script><script src="/406146c62b33e952bd15d6da681988e61f3afcf7-34f4af4d6a7099ccb1ba.js" async=""></script><script src="/94726e6d-fd82790929ea2102d75c.js" async=""></script><script src="/ea88be26-cca2dfabdd872139948c.js" async=""></script><script src="/app-ad529ea62d02597637a5.js" async=""></script><script src="/framework-9c9e72562348597eca86.js" async=""></script><script src="/webpack-runtime-c2aec7528692dce10ee3.js" async=""></script></body></html>
