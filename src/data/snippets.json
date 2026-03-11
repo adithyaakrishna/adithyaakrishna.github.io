@@ -60,5 +60,16 @@
     "previewImage": "/snippets/previews/interruptibility.png",
     "order": 9,
     "section": "css-hacks"
+  },
+  {
+    "slug": "linear-easing",
+    "path": "/snippets/linear-easing",
+    "title": "Spring Physics in Pure CSS",
+    "description": "Use linear() easing curves for spring-like motion.",
+    "tag": "linear()",
+    "tagTone": "mint",
+    "sourceFile": "content/css-hacks/linear-easing.html",
+    "previewImage": "/snippets/previews/linear-easing.png",
+    "order": 13
   }
 ]
