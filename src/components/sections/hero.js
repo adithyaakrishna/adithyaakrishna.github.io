@@ -135,17 +135,64 @@ const Hero = () => {
 
   return (
     <StyledHeroSection id="home">
-      <div className="status-actions">
+      <div
+        className="status-actions"
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          width: '100%',
+          gap: '1rem'
+        }}
+      >
         <div className="status-pill">
           <span className="status-dot" />
-          open to opportunities
+          <span style={{ fontWeight: 600 }}>open to opportunities</span>
         </div>
-        <Link to="/snippets" className="status-link">
-          snippets
-        </Link>
-        <Link to="/snippets/ux-laws" className="status-link">
-          laws of ux
-        </Link>
+        <div className="status-links" style={{ display: 'flex', gap: '0.8rem' }}>
+          <Link
+            to="/snippets"
+            className="status-link"
+            style={{
+              border: '1px solid rgba(41, 188, 137, 0.3)',
+              color: '#29BC89',
+              background: 'rgba(41, 188, 137, 0.08)',
+              padding: '7px 18px',
+              fontWeight: 500,
+              letterSpacing: '0.05em',
+              borderRadius: '0',
+              boxShadow: 'none',
+              fontSize: '13px',
+            }}
+            activeStyle={{
+              background: 'rgba(41, 188, 137, 0.13)',
+              color: '#35ebb0',
+            }}
+          >
+            snippets
+          </Link>
+          <Link
+            to="/snippets/ux-laws"
+            className="status-link"
+            style={{
+              border: '1px solid rgba(41, 188, 137, 0.3)',
+              color: '#29BC89',
+              background: 'rgba(41, 188, 137, 0.08)',
+              padding: '7px 18px',
+              fontWeight: 500,
+              letterSpacing: '0.05em',
+              borderRadius: '0',
+              boxShadow: 'none',
+              fontSize: '13px',
+            }}
+            activeStyle={{
+              background: 'rgba(41, 188, 137, 0.13)',
+              color: '#35ebb0',
+            }}
+          >
+            laws of ux
+          </Link>
+        </div>
       </div>
       <h1 className="intro-text">
         I build clear, fast products and design interfaces people trust and love to use.
