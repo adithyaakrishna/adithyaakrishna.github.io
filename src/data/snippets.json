@@ -71,5 +71,16 @@
     "sourceFile": "content/css-hacks/linear-easing.html",
     "previewImage": "/snippets/previews/linear-easing.png",
     "order": 13
+  },
+  {
+    "slug": "interpolate-size",
+    "path": "/snippets/interpolate-size",
+    "title": "Animate to height: auto",
+    "description": "Smoothly transition intrinsic sizing with interpolate-size.",
+    "tag": "interpolate-size",
+    "tagTone": "violet",
+    "sourceFile": "content/css-hacks/interpolate-size.html",
+    "previewImage": "/snippets/previews/interpolate-size.png",
+    "order": 4
   }
 ]
