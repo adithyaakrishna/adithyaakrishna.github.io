@@ -26,7 +26,8 @@ const StyledTagsPage = styled.div`
     gap: 8px;
     font-family: var(--font-stack, 'Space Mono', monospace);
     font-size: 12px;
-    color: #29BC89;
+    font-weight: 600;
+    color: #29bc89;
     text-decoration: none;
     text-transform: lowercase;
     letter-spacing: 0.1em;
@@ -38,7 +39,7 @@ const StyledTagsPage = styled.div`
 
     &:hover {
       opacity: 0.7;
-      color: #29BC89;
+      color: #29bc89;
     }
   }
 
@@ -67,19 +68,20 @@ const StyledTagsPage = styled.div`
     font-size: 12px;
     color: var(--text-dim, #888888);
     text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    background: var(--surface-bg);
     padding: 8px 14px;
     transition: color 0.3s ease, border-color 0.3s ease, text-shadow 0.3s ease;
 
     .count {
-      color: #29BC89;
+      color: #29bc89;
       font-size: 11px;
     }
 
     &:hover {
-      color: var(--accent, #ffffff);
-      border-color: rgba(255, 255, 255, 0.25);
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+      color: var(--accent);
+      border-color: var(--border-color-strong);
+      text-shadow: 0 0 8px var(--glow-color);
     }
   }
 `;

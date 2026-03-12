@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>light-dark() — CSS Hacks</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .ld-demo {
+        color-scheme: dark;
+        width: 100%;
+      }
+
+      .ld-demo:has(input:checked) {
+        color-scheme: light;
+      }
+
+      .ld-card {
+        padding: 24px;
+        border-radius: var(--radius);
+        background: light-dark(#f4f4f5, #141416);
+        border: 1px solid light-dark(#d4d4d8, #2a2a2f);
+        transition: background 0.3s, border-color 0.3s, color 0.3s;
+        margin-top: 20px;
+      }
+
+      .ld-card h4 {
+        font-size: 14px;
+        font-weight: 400;
+        color: light-dark(#18181b, #fafafa);
+        margin-bottom: 6px;
+        text-transform: lowercase;
+        letter-spacing: -0.02em;
+      }
+
+      .ld-card p {
+        font-size: 13px;
+        color: light-dark(#52525b, #a1a1aa);
+        line-height: 1.6;
+      }
+
+      .ld-badge {
+        display: inline-block;
+        margin-top: 14px;
+        padding: 4px 14px;
+        border-radius: 0px;
+        background: light-dark(#dcfce7, #052e16);
+        color: light-dark(#166534, #34d399);
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0.05em;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="tag" aria-label="back to index">← light-dark()</a>
+    <main>
+      <div class="demo">
+          <div class="ld-demo">
+            <label class="toggle">
+              <input type="checkbox" />
+              <span class="toggle-track"></span>
+              switch to light mode
+            </label>
+            <div class="ld-card">
+              <h4>theme-aware card</h4>
+              <p>
+                every color in this card uses light-dark(). toggle the switch to flip color-scheme
+                and watch all colors respond simultaneously — background, text, border, badge.
+              </p>
+              <span class="ld-badge">active</span>
+            </div>
+          </div>
+        </div>
+      <div class="code-block">
+        <pre><code class="language-css">.ld-demo:has(input:checked) {
+  color-scheme: light;
+}
+
+.ld-card {
+  background: light-dark(#f4f4f5, #141416);
+  border: 1px solid light-dark(#d4d4d8, #2a2a2f);
+}
+
+.ld-card h4 {
+  color: light-dark(#18181b, #fafafa);
+}
+
+.ld-card p {
+  color: light-dark(#52525b, #a1a1aa);
+}
+
+.ld-badge {
+  background: light-dark(#dcfce7, #052e16);
+  color: light-dark(#166534, #34d399);
+}</code></pre>
+      </div>
+    </main>
+  </body>
+</html>

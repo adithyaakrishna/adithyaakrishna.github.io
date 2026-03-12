@@ -26,13 +26,8 @@ const Head = ({ title, description, image }) => {
     `,
   );
 
-  const {
-    defaultTitle,
-    defaultDescription,
-    siteUrl,
-    defaultImage,
-    twitterUsername,
-  } = site.siteMetadata;
+  const { defaultTitle, defaultDescription, siteUrl, defaultImage, twitterUsername } =
+    site.siteMetadata;
 
   const seo = {
     title: title || defaultTitle,
@@ -41,7 +36,7 @@ const Head = ({ title, description, image }) => {
     url: `${siteUrl}${pathname}`,
   };
 
-  const themeInitScript = `(function(){var t=localStorage.getItem('theme')||'${THEME_MODE}';document.documentElement.setAttribute('data-theme',t);})();`;
+  const themeInitScript = `(function(){document.documentElement.setAttribute('data-theme','${THEME_MODE}');})();`;
 
   return (
     <Helmet title={title} defaultTitle={seo.title} titleTemplate={`%s | ${defaultTitle}`}>

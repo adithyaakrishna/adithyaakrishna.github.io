@@ -3,8 +3,7 @@ const config = require('./src/config');
 module.exports = {
   siteMetadata: {
     title: 'Adithya Krishna',
-    description:
-      'Adithya Krishna is a Software Engineer based out of Bengaluru, India.',
+    description: 'Adithya Krishna is a Software Engineer based out of Bengaluru, India.',
     siteUrl: 'https://adithyaakrishna.github.io', // No trailing slash allowed!
     image: '/adi.png', // Path to your image you placed in the 'static' folder
     twitterUsername: '@adii_kris',
@@ -23,8 +22,8 @@ module.exports = {
         name: 'Adithya Krishna',
         short_name: 'Adi Kris',
         start_url: '/',
-        background_color: config.colors.darkNavy,
-        theme_color: config.colors.navy,
+        background_color: config.colors.navy,
+        theme_color: config.colors.green,
         display: 'minimal-ui',
         icon: 'src/images/Fistbump.png',
       },

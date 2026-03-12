@@ -17,11 +17,12 @@ const StyledHeader = styled.header`
   padding: 0px 50px;
   width: 100%;
   height: var(--nav-height);
-  background-color: var(--navy);
+  background-color: var(--surface-overlay);
+  border-bottom: 1px solid var(--border-color-subtle);
   filter: none !important;
   pointer-events: auto !important;
   user-select: auto !important;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(14px);
   transition: var(--transition);
 
   ${props =>

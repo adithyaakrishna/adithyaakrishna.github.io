@@ -1,119 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>:has() — Niche CSS Hacks</title>
-<link rel="stylesheet" href="style.css" />
-<style>
-  .has-card {
-    width: 100%;
-    padding: 32px;
-    border-radius: var(--radius);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    transition: background 0.5s, border-color 0.5s, box-shadow 0.5s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-  }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>:has() — CSS Hacks</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .has-card {
+        width: 100%;
+        padding: 32px;
+        border-radius: var(--radius);
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        transition: background 0.5s, border-color 0.5s, box-shadow 0.5s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
 
-  .icon-row {
-    display: flex;
-    gap: 14px;
-    transition: gap 0.5s;
-  }
+      .icon-row {
+        display: flex;
+        gap: 14px;
+        transition: gap 0.5s;
+      }
 
-  .icon-box {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    transition: all 0.4s cubic-bezier(.4,0,.2,1);
-  }
+      .icon-box {
+        width: 48px;
+        height: 48px;
+        border-radius: 0px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        transition: all 0.4s var(--easing);
+      }
 
-  .has-text {
-    font-size: 0.92rem;
-    color: var(--text-2);
-    text-align: center;
-    max-width: 400px;
-    transition: color 0.5s;
-  }
+      .has-text {
+        font-size: 13px;
+        color: var(--text-2);
+        text-align: center;
+        max-width: 400px;
+        transition: color 0.5s;
+      }
 
-  .has-card:has(input:checked) {
-    background: var(--mint);
-    border-color: transparent;
-    box-shadow: 0 0 80px #34d39950;
-  }
+      .has-card:has(input:checked) {
+        background: var(--mint);
+        border-color: transparent;
+        box-shadow: 0 0 80px rgba(29, 127, 83, 0.3);
+      }
 
-  .has-card:has(input:checked) .icon-box {
-    background: #050506;
-    border-color: transparent;
-    scale: 1.2;
-  }
+      .has-card:has(input:checked) .icon-box {
+        background: #ffffff;
+        border-color: transparent;
+        scale: 1.2;
+      }
 
-  .has-card:has(input:checked) .icon-box:nth-child(1) { rotate: -15deg; }
-  .has-card:has(input:checked) .icon-box:nth-child(2) { rotate: 8deg; }
-  .has-card:has(input:checked) .icon-box:nth-child(3) { rotate: -5deg; }
-  .has-card:has(input:checked) .icon-row { gap: 22px; }
-  .has-card:has(input:checked) .has-text { color: #052e16; }
-  .has-card:has(input:checked) .toggle-track { background: #052e16; }
-  .has-card:has(input:checked) .toggle-track::after { background: var(--mint); }
-  .has-card:has(input:checked) .toggle { color: #052e16; }
-</style>
-</head>
-<body>
-
-<main>
-  <div class="hero">
-    <span class="tag tag-mint">:has()</span>
-    <h1>The Parent Selector That Does Everything</h1>
-    <p class="desc">Style any ancestor based on child state. The checkbox controls the entire card — background, shadows, rotation, spacing. Zero JavaScript.</p>
-  </div>
-
-  <div class="demo">
-    <div class="has-card">
-      <label class="toggle">
-        <input type="checkbox" />
-        <span class="toggle-track"></span>
-        Toggle me
-      </label>
-      <div class="icon-row">
-        <div class="icon-box"></div>
-        <div class="icon-box"></div>
-        <div class="icon-box"></div>
-      </div>
-      <p class="has-text">One checkbox controls background, glow, spacing, rotation, and color — all via <code style="font-family:var(--font-mono);font-size:0.85em">:has(input:checked)</code></p>
-    </div>
-  </div>
-
-  <div class="code-block">
-    <button class="copy-btn" onclick="copyCode(this)"><svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Copy</span></button>
-    <pre><code class="language-css">.card:has(input:checked) {
+      .has-card:has(input:checked) .icon-box:nth-child(1) {
+        rotate: -15deg;
+      }
+      .has-card:has(input:checked) .icon-box:nth-child(2) {
+        rotate: 8deg;
+      }
+      .has-card:has(input:checked) .icon-box:nth-child(3) {
+        rotate: -5deg;
+      }
+      .has-card:has(input:checked) .icon-row {
+        gap: 22px;
+      }
+      .has-card:has(input:checked) .has-text {
+        color: #ffffff;
+      }
+      .has-card:has(input:checked) .toggle-track {
+        background: rgba(255, 255, 255, 0.3);
+      }
+      .has-card:has(input:checked) .toggle-track::after {
+        background: var(--mint);
+      }
+      .has-card:has(input:checked) .toggle {
+        color: #ffffff;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="tag" aria-label="back to index">← :has()</a>
+    <main>
+      <div class="demo">
+          <div class="has-card">
+            <label class="toggle">
+              <input type="checkbox" />
+              <span class="toggle-track"></span>
+              toggle me
+            </label>
+            <div class="icon-row">
+              <div class="icon-box"></div>
+              <div class="icon-box"></div>
+              <div class="icon-box"></div>
+            </div>
+            <p class="has-text">
+              one checkbox controls background, glow, spacing, rotation, and color — all via
+              <code style="font-family: var(--font-mono); font-size: 0.85em"
+                >:has(input:checked)</code
+              >
+            </p>
+          </div>
+        </div>
+      <div class="code-block">
+        <pre><code class="language-css">.has-card:has(input:checked) {
   background: var(--mint);
-  box-shadow: 0 0 80px #34d39950;
+  border-color: transparent;
+  box-shadow: 0 0 80px rgba(29, 127, 83, 0.3);
 }
 
-.card:has(input:checked) .box {
+.has-card:has(input:checked) .icon-box {
+  background: #ffffff;
+  border-color: transparent;
   scale: 1.2;
-  rotate: -15deg;
-}</code></pre>
-  </div>
-</main>
-
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
-<script>
-function copyCode(btn) {
-  const code = btn.closest('.code-block').querySelector('code');
-  navigator.clipboard.writeText(code.textContent).then(() => {
-    btn.classList.add('copied');
-    btn.querySelector('span').textContent = 'Copied';
-    setTimeout(() => { btn.classList.remove('copied'); btn.querySelector('span').textContent = 'Copy'; }, 2000);
-  });
 }
-</script>
-</body>
+
+.has-card:has(input:checked) .icon-box:nth-child(1) {
+  rotate: -15deg;
+}
+.has-card:has(input:checked) .has-text {
+  color: #ffffff;
+}</code></pre>
+      </div>
+    </main>
+  </body>
 </html>

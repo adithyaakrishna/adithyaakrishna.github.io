@@ -1,100 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>interpolate-size — Niche CSS Hacks</title>
-<link rel="stylesheet" href="style.css" />
-<style>
-  .expand-wrapper {
-    interpolate-size: allow-keywords;
-    width: 100%;
-  }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>interpolate-size — CSS Hacks</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .expand-wrapper {
+        interpolate-size: allow-keywords;
+        width: 100%;
+      }
 
-  .expand-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
+      .expand-box {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 0px;
+        overflow: hidden;
+      }
 
-  .expand-header { padding: 18px 22px; }
+      .expand-header {
+        padding: 18px 22px;
+      }
 
-  .expand-content {
-    height: 0;
-    overflow: hidden;
-    transition: height 0.5s cubic-bezier(.4,0,.2,1);
-  }
+      .expand-content {
+        height: 0;
+        overflow: hidden;
+        transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
 
-  .expand-wrapper:has(input:checked) .expand-content {
-    height: auto;
-  }
+      .expand-wrapper:has(input:checked) .expand-content {
+        height: auto;
+      }
 
-  .expand-inner {
-    padding: 0 22px 22px;
-    font-size: 0.9rem;
-    color: var(--text-2);
-    line-height: 1.7;
-  }
-</style>
-</head>
-<body>
-
-<main>
-  <div class="hero">
-    <span class="tag tag-violet">interpolate-size</span>
-    <h1>Animate to height: auto</h1>
-    <p class="desc">The holy grail of CSS animation. Smoothly transition between a fixed size and an intrinsic keyword like <code style="font-family:var(--font-mono);color:var(--violet)">auto</code>. No JavaScript measurement needed.</p>
-  </div>
-
-  <div class="demo">
-    <div class="expand-wrapper">
-      <div class="expand-box">
-        <div class="expand-header">
-          <label class="toggle">
-            <input type="checkbox" />
-            <span class="toggle-track"></span>
-            Expand content
-          </label>
-        </div>
-        <div class="expand-content">
-          <div class="expand-inner">
-            This content has no fixed height. The browser calculates <code style="font-family:var(--font-mono);color:var(--violet)">auto</code> height and smoothly transitions to it. For years this needed JavaScript to measure offsetHeight and animate. With <code style="font-family:var(--font-mono);color:var(--violet)">interpolate-size: allow-keywords</code>, it's just CSS. Works with auto, min-content, max-content, and fit-content. Set it on :root to enable everywhere.
+      .expand-inner {
+        padding: 0 22px 22px;
+        font-size: 14px;
+        color: var(--text-2);
+        line-height: 1.7;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="tag" aria-label="back to index">← interpolate-size</a>
+    <main>
+      <div class="demo">
+          <div class="expand-wrapper">
+            <div class="expand-box">
+              <div class="expand-header">
+                <label class="toggle">
+                  <input type="checkbox" />
+                  <span class="toggle-track"></span>
+                  expand content
+                </label>
+              </div>
+              <div class="expand-content">
+                <div class="expand-inner">
+                  this content has no fixed height. the browser calculates
+                  <code style="font-family: var(--font-mono); color: var(--mint)">auto</code> height
+                  and smoothly transitions to it. for years this needed javascript to measure
+                  offsetHeight and animate. with
+                  <code style="font-family: var(--font-mono); color: var(--mint)"
+                    >interpolate-size: allow-keywords</code
+                  >, it's just css. works with auto, min-content, max-content, and fit-content. set
+                  it on :root to enable everywhere.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="code-block">
-    <button class="copy-btn" onclick="copyCode(this)"><svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Copy</span></button>
-    <pre><code class="language-css">:root {
+      <div class="code-block">
+        <pre><code class="language-css">.expand-wrapper {
   interpolate-size: allow-keywords;
+  width: 100%;
 }
 
-.content {
+.expand-content {
   height: 0;
   overflow: hidden;
-  transition: height 0.5s ease;
+  transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.content.open {
+.expand-wrapper:has(input:checked) .expand-content {
   height: auto;
 }</code></pre>
-  </div>
-</main>
-
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
-<script>
-function copyCode(btn) {
-  const code = btn.closest('.code-block').querySelector('code');
-  navigator.clipboard.writeText(code.textContent).then(() => {
-    btn.classList.add('copied');
-    btn.querySelector('span').textContent = 'Copied';
-    setTimeout(() => { btn.classList.remove('copied'); btn.querySelector('span').textContent = 'Copy'; }, 2000);
-  });
-}
-</script>
-</body>
+      </div>
+    </main>
+  </body>
 </html>

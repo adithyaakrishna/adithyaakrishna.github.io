@@ -7,6 +7,9 @@
 const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
+const prettier = require('prettier');
+const parserHtml = require('prettier/parser-html');
+const parserPostcss = require('prettier/parser-postcss');
 const snippetMetas = require('./src/data/snippets.json');
 
 function decodeHtmlEntities(value = '') {
@@ -24,6 +27,41 @@ function extractMatch(content, expression, fallback = '') {
   return match[1].trim();
 }
 
+function formatSnippetCode(source = '', language = '') {
+  const normalized = typeof source === 'string' ? source.trim() : '';
+  if (!normalized) return '';
+
+  const lowerLanguage = language.toLowerCase();
+  const formatConfig =
+    lowerLanguage === 'markup' || lowerLanguage === 'html'
+      ? {
+          parser: 'html',
+          plugins: [parserHtml],
+        }
+      : lowerLanguage === 'css'
+      ? {
+          parser: 'css',
+          plugins: [parserPostcss],
+        }
+      : null;
+
+  if (!formatConfig) return normalized;
+
+  try {
+    return prettier
+      .format(normalized, {
+        ...formatConfig,
+        htmlWhitespaceSensitivity: 'css',
+        printWidth: 80,
+        tabWidth: 2,
+        useTabs: false,
+      })
+      .trimEnd();
+  } catch (error) {
+    return normalized;
+  }
+}
+
 function parseSnippetSource({ slug, sourceFile, title, description, tag }) {
   const sourcePath = path.resolve(sourceFile);
   const source = fs.readFileSync(sourcePath, 'utf8');
@@ -31,18 +69,27 @@ function parseSnippetSource({ slug, sourceFile, title, description, tag }) {
   const demoCss = extractMatch(source, /<style>([\s\S]*?)<\/style>/i);
   const mainInner = extractMatch(source, /<main>([\s\S]*?)<\/main>/i);
   const codeLanguageClass = extractMatch(source, /<pre><code class="([^"]+)">/i, 'language-css');
-  const code = decodeHtmlEntities(extractMatch(source, /<pre><code class="[^"]+">([\s\S]*?)<\/code><\/pre>/i));
+  const codeLanguage = codeLanguageClass.replace('language-', '');
+  const rawCode = decodeHtmlEntities(
+    extractMatch(source, /<pre><code class="[^"]+">([\s\S]*?)<\/code><\/pre>/i),
+  );
+  const code = formatSnippetCode(rawCode, codeLanguage);
   const inferredTitle = decodeHtmlEntities(extractMatch(source, /<h1>([\s\S]*?)<\/h1>/i, title));
   const inferredDescription = decodeHtmlEntities(
     extractMatch(source, /<p class="desc">([\s\S]*?)<\/p>/i, description)
       .replace(/<[^>]+>/g, ' ')
-      .replace(/\s+/g, ' ')
+      .replace(/\s+/g, ' '),
   ).trim();
-  const inferredTag = decodeHtmlEntities(extractMatch(source, /<span class="tag[^"]*">([\s\S]*?)<\/span>/i, tag));
+  const inferredTag = decodeHtmlEntities(
+    extractMatch(source, /<span class="tag[^"]*">([\s\S]*?)<\/span>/i, tag),
+  );
 
   const withoutHero = mainInner.replace(/<div class="hero">[\s\S]*?<\/div>/i, '');
   const withoutCode = withoutHero.replace(/<div class="code-block">[\s\S]*?<\/div>/i, '');
-  const demoMarkup = withoutCode.trim();
+  const demoMarkup =
+    codeLanguage === 'markup' || codeLanguage === 'html'
+      ? formatSnippetCode(withoutCode, 'html')
+      : withoutCode.trim();
 
   return {
     slug,
@@ -50,7 +97,7 @@ function parseSnippetSource({ slug, sourceFile, title, description, tag }) {
     description: inferredDescription || description,
     tag: inferredTag || tag,
     code,
-    codeLanguage: codeLanguageClass.replace('language-', ''),
+    codeLanguage,
     sharedCss,
     demoCss,
     demoMarkup,

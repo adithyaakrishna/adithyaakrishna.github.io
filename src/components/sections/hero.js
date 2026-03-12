@@ -29,9 +29,10 @@ const StyledHeroSection = styled.section`
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    border: 1px solid rgba(41, 188, 137, 0.3);
+    border: 1px solid rgba(29, 127, 83, 0.2);
+    background: var(--accent-tint);
     padding: 6px 14px;
-    color: #29BC89;
+    color: var(--accent);
     font-size: 12px;
     border-radius: 0;
     margin-bottom: 0;
@@ -42,7 +43,7 @@ const StyledHeroSection = styled.section`
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background-color: #29BC89;
+      background-color: var(--accent);
       animation: ${pulse} 2s ease-in-out infinite;
     }
   }
@@ -63,15 +64,26 @@ const StyledHeroSection = styled.section`
     line-height: 1;
     color: var(--text-dim, #888888);
     text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    background: var(--surface-bg);
     padding: 8px 14px;
     transition: color 0.3s ease, border-color 0.3s ease, text-shadow 0.3s ease;
 
     &:hover {
-      color: #29BC89;
-      border-color: rgba(41, 188, 137, 0.35);
-      text-shadow: 0 0 8px rgba(41, 188, 137, 0.3);
+      color: var(--accent);
+      border-color: var(--border-color-strong);
+      text-shadow: 0 0 8px var(--glow-color);
     }
+  }
+
+  .status-link--primary {
+    border-color: rgba(29, 127, 83, 0.2);
+    background: var(--accent-tint);
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    font-size: 13px;
+    padding: 7px 18px;
   }
 
   .intro-text {
@@ -111,7 +123,8 @@ const StyledHeroSection = styled.section`
     line-height: 1;
     color: var(--text-dim, #888888);
     text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    background: var(--surface-bg);
     padding: 8px 14px;
     transition: color 0.3s ease, border-color 0.3s ease, text-shadow 0.3s ease;
 
@@ -121,9 +134,9 @@ const StyledHeroSection = styled.section`
     }
 
     &:hover {
-      color: #29BC89;
-      border-color: rgba(41, 188, 137, 0.35);
-      text-shadow: 0 0 8px rgba(41, 188, 137, 0.3);
+      color: var(--accent);
+      border-color: var(--border-color-strong);
+      text-shadow: 0 0 8px var(--glow-color);
     }
   }
 `;
@@ -142,54 +155,17 @@ const Hero = () => {
           justifyContent: 'space-between',
           alignItems: 'center',
           width: '100%',
-          gap: '1rem'
-        }}
-      >
+          gap: '1rem',
+        }}>
         <div className="status-pill">
           <span className="status-dot" />
           <span style={{ fontWeight: 600 }}>open to opportunities</span>
         </div>
         <div className="status-links" style={{ display: 'flex', gap: '0.8rem' }}>
-          <Link
-            to="/snippets"
-            className="status-link"
-            style={{
-              border: '1px solid rgba(41, 188, 137, 0.3)',
-              color: '#29BC89',
-              background: 'rgba(41, 188, 137, 0.08)',
-              padding: '7px 18px',
-              fontWeight: 500,
-              letterSpacing: '0.05em',
-              borderRadius: '0',
-              boxShadow: 'none',
-              fontSize: '13px',
-            }}
-            activeStyle={{
-              background: 'rgba(41, 188, 137, 0.13)',
-              color: '#35ebb0',
-            }}
-          >
+          <Link to="/snippets" className="status-link status-link--primary">
             snippets
           </Link>
-          <Link
-            to="/snippets/ux-laws"
-            className="status-link"
-            style={{
-              border: '1px solid rgba(41, 188, 137, 0.3)',
-              color: '#29BC89',
-              background: 'rgba(41, 188, 137, 0.08)',
-              padding: '7px 18px',
-              fontWeight: 500,
-              letterSpacing: '0.05em',
-              borderRadius: '0',
-              boxShadow: 'none',
-              fontSize: '13px',
-            }}
-            activeStyle={{
-              background: 'rgba(41, 188, 137, 0.13)',
-              color: '#35ebb0',
-            }}
-          >
+          <Link to="/snippets/ux-laws" className="status-link status-link--primary">
             laws of ux
           </Link>
         </div>
@@ -198,15 +174,36 @@ const Hero = () => {
         I build clear, fast products and design interfaces people trust and love to use.
       </h1>
       <p>
-        Hi, I'm Adithya Krishna. I create high-performance web products and crisp, intuitive interfaces using technologies like Next.js, PixiJS, and WebGL2.<br /><br />
-        <span style={{ color: '#29BC89' }}>Previously:</span> frontend at{' '}
-        <a href="https://noice.so" target="_blank" rel="noopener noreferrer" style={{ color: '#29BC89', textDecoration: 'underline' }}>Noice</a>
+        Hi, I'm Adithya Krishna. I create high-performance web products and crisp, intuitive
+        interfaces using technologies like Next.js, PixiJS, and WebGL2.
+        <br />
+        <br />
+        <span style={{ color: 'var(--accent)', fontWeight: 600 }}>Previously:</span> frontend at{' '}
+        <a
+          href="https://noice.so"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: 'var(--accent)', textDecoration: 'underline' }}>
+          Noice
+        </a>
         {', '}
-        <a href="https://tensorlake.ai" target="_blank" rel="noopener noreferrer" style={{ color: '#29BC89', textDecoration: 'underline' }}>Tensorlake</a>
+        <a
+          href="https://tensorlake.ai"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: 'var(--accent)', textDecoration: 'underline' }}>
+          Tensorlake
+        </a>
         {' & '}
         DX engineer at Reclaim Protocol, Software engineer at Documenso, and{' '}
-        <a href="https://redhat.com" target="_blank" rel="noopener noreferrer" style={{ color: '#29BC89', textDecoration: 'underline' }}>Red Hat</a>.
-        Meshery maintainer, GSoC '23 alum, based in Bengaluru, India.
+        <a
+          href="https://redhat.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: 'var(--accent)', textDecoration: 'underline' }}>
+          Red Hat
+        </a>
+        . Meshery maintainer, GSoC '23 alum, based in Bengaluru, India.
       </p>
       <div className="social-chips">
         {filteredSocials.map(({ url, name }) => (

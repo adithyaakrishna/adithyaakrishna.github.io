@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>doherty threshold — laws of UX in CSS</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .doherty-demo {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        width: 100%;
+        max-width: 420px;
+      }
+
+      .doherty-row {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .doherty-label {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: lowercase;
+        letter-spacing: 0.05em;
+        color: var(--text-3);
+      }
+
+      .doherty-btn {
+        padding: 14px 24px;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border);
+        background: var(--surface-2);
+        color: var(--text);
+        font-family: var(--font-mono);
+        font-size: 14px;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+      }
+
+      .doherty-btn.fast {
+        transition: background 0.25s, border-color 0.25s, transform 0.2s;
+      }
+
+      .doherty-btn.fast:hover {
+        background: var(--mint-dim);
+        border-color: var(--mint);
+        transform: translateY(-1px);
+      }
+
+      .doherty-btn.slow {
+        transition: background 0.9s, border-color 0.9s, transform 0.8s;
+      }
+
+      .doherty-btn.slow:hover {
+        background: var(--rose-dim);
+        border-color: var(--rose);
+        transform: translateY(-1px);
+      }
+
+      .doherty-note {
+        font-size: 13px;
+        color: var(--text-2);
+        line-height: 1.5;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="tag" aria-label="back to index">← transition-duration</a>
+    <main>
+      <div class="demo">
+          <div class="doherty-demo">
+            <div class="doherty-row">
+              <span class="doherty-label">under 400ms — feels instant</span>
+              <button type="button" class="doherty-btn fast">hover me (0.25s)</button>
+            </div>
+            <div class="doherty-row">
+              <span class="doherty-label">over 400ms — feels sluggish</span>
+              <button type="button" class="doherty-btn slow">hover me (0.9s)</button>
+            </div>
+            <p class="doherty-note">
+              same interaction; only transition duration changes. keep hovers and toggles in the
+              200–350ms range.
+            </p>
+          </div>
+        </div>
+      <div class="code-block">
+        <pre><code class="language-css">.doherty-btn.fast {
+  transition: background 0.25s, border-color 0.25s, transform 0.2s;
+}
+
+.doherty-btn.slow {
+  transition: background 0.9s, border-color 0.9s, transform 0.8s;
+}</code></pre>
+      </div>
+    </main>
+  </body>
+</html>

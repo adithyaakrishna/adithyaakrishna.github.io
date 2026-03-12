@@ -5,93 +5,99 @@ import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Layout } from '@components';
 import BlogLayout from '@components/blog-layout';
+import SnippetPreviewMedia from '../../components/snippet-preview-media';
 import snippets from '../../data/snippets.json';
 
-const StyledSnippetsPage = styled.div`
-  padding-top: 0.5vh;
-  width: 100%;
-  max-width: 820px;
-  margin: 0 auto;
+const PAGE_WIDTH = 1180;
 
-  @media (max-width: 600px) {
-    padding-top: 4vh;
+const StyledSnippetsPage = styled.div`
+  width: 100%;
+  display: grid;
+  gap: 2.5rem;
+
+  .nav-row {
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+    align-items: center;
   }
 
-  .back-link {
+  .nav-link {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    font-family: var(--font-stack, 'Space Mono', monospace);
     font-size: 12px;
-    color: #29bc89;
+    line-height: 1;
+    color: var(--text-dim, #888888);
     text-decoration: none;
+    border: 1px solid var(--border-color);
+    padding: 8px 14px;
+    transition: color 0.25s ease, border-color 0.25s ease;
     text-transform: lowercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 10px;
-    transition: opacity 0.3s;
+    letter-spacing: 0.05em;
 
     &:hover {
-      opacity: 0.7;
       color: #29bc89;
+      border-color: rgba(41, 188, 137, 0.35);
     }
+  }
+
+  .page-intro {
+    display: grid;
+    gap: 1rem;
+    max-width: 150ch;
   }
 
   .page-header {
-    margin-bottom: 2.5rem;
-  }
-
-  .page-title {
-    font-size: clamp(36px, 5vw, 52px);
-    font-weight: 400;
-    text-transform: lowercase;
-    letter-spacing: -0.02em;
-    color: var(--text-main, #e8e8e8);
-    margin-bottom: 0.5rem;
-  }
-
-  .page-subtitle {
-    font-size: 18px;
-    color: var(--text-dim, #888888);
-    max-width: 620px;
-    line-height: 1.7;
-  }
-
-  .section-header {
-    font-size: 16px;
-    color: var(--text-dim, #888888);
-    margin-bottom: 1rem;
+    font-size: 12px;
+    color: #29bc89;
     display: flex;
     align-items: center;
     gap: 1rem;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+  }
 
-    &::after {
-      content: '';
-      height: 1px;
-      flex-grow: 1;
-      background: var(--text-dim, #888888);
-      opacity: 0.2;
-    }
+  .page-header::after {
+    content: '';
+    height: 1px;
+    flex-grow: 1;
+    background: var(--text-dim, #555555);
+    opacity: 0.2;
+  }
 
-    .section-header-line {
-      flex-grow: 1;
-      height: 1px;
-      background: var(--text-dim, #888888);
-      opacity: 0.2;
-    }
+  .page-title {
+    margin: 0;
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.2;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    color: var(--text-main, #e8e8e8);
+  }
 
-    .section-header-link {
-      margin-left: auto;
-      font-size: 14px;
-      color: #29bc89;
-      text-decoration: none;
-      flex-shrink: 0;
+  .page-copy {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--text-dim, #888888);
+  }
 
-      &:hover {
-        text-decoration: underline;
-      }
-    }
+  .page-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    font-size: 12px;
+    color: var(--text-dim, #888888);
+    line-height: 1.8;
+  }
 
-    &.section-header-has-link::after {
-      display: none;
+  .page-link {
+    color: #29bc89;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(41, 188, 137, 0.3);
+
+    &:hover {
+      border-color: #29bc89;
     }
   }
 `;
@@ -99,215 +105,174 @@ const StyledSnippetsPage = styled.div`
 const StyledSnippetGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.2rem;
+  gap: 1.75rem 1.35rem;
 
-  @media (max-width: 900px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  @media (max-width: 600px) {
+  @media (max-width: 820px) {
     grid-template-columns: 1fr;
   }
 
-  .snippet-item {
-    display: flex;
-    flex-direction: column;
+  .snippet-card {
+    display: grid;
     gap: 0.95rem;
-    padding: 1rem 1rem 1.1rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
     text-decoration: none;
     color: inherit;
-    background: rgba(255, 255, 255, 0.01);
-    min-height: 264px;
-    transition: border-color 0.3s ease, transform 0.3s ease;
-    min-width: 0;
-
-    &:hover {
-      border-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
-    }
+    transition: transform 0.28s ease;
   }
 
-  .snippet-ux-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 3px 8px;
-    border-radius: 999px;
-    font-size: 10px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    background: rgba(251, 191, 36, 0.1);
-    border: 1px solid rgba(251, 191, 36, 0.3);
-    color: #fbbf24;
-    width: fit-content;
+  .snippet-card:hover {
+    transform: translateY(-4px);
   }
 
-  .snippet-ux-chip span {
-    color: var(--text-dim, #888888);
-    font-weight: 400;
-    text-transform: none;
-    letter-spacing: 0;
+  .snippet-card:hover .media-shell {
+    transform: translateY(-2px);
   }
 
-  .snippet-tag {
-    font-size: 16px;
-    letter-spacing: 0.02em;
-    text-transform: none;
-    font-family: 'Courier Prime', monospace;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-weight: 700;
-    width: fit-content;
+  .snippet-card:hover .media-video,
+  .snippet-card:hover .media-image {
+    transform: scale(1.018);
   }
 
-  .snippet-tag.is-at-rule {
-    color: #9f7aea;
+  .snippet-card:hover .card-title {
+    color: var(--text-main);
   }
 
-  .snippet-tag.is-pseudo {
-    color: #35d39a;
-  }
-
-  .snippet-tag.is-function {
-    color: #7dd3fc;
-  }
-
-  .snippet-tag.is-keyword {
-    color: #f9a8d4;
-  }
-
-  .snippet-title {
-    font-size: 26px;
-    text-transform: lowercase;
-    font-weight: 400;
-    color: var(--text-main, #e8e8e8);
-    margin: 0;
-    line-height: 1.4;
-    overflow-wrap: anywhere;
-  }
-
-  .snippet-desc {
-    font-size: 18px;
-    color: var(--text-dim, #888888);
-    margin: 0;
-    line-height: 1.7;
-    overflow-wrap: anywhere;
-  }
-
-  .preview-frame {
+  .media-frame {
     position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.08);
     aspect-ratio: 16 / 10;
     overflow: hidden;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    border-radius: 28px;
+    border: 1px solid rgba(118, 133, 162, 0.18);
+    background: linear-gradient(
+      180deg,
+      rgba(236, 241, 248, 0.95) 0%,
+      rgba(245, 247, 251, 0.98) 100%
+    );
   }
 
-  .preview-image {
+  .media-shell {
+    width: 100%;
+    height: 100%;
+    padding: clamp(8px, 1.4vw, 10px);
+    transition: transform 0.35s ease;
+  }
+
+  .media-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 45%);
+  }
+
+  .media-video,
+  .media-image {
     width: 100%;
     height: 100%;
     display: block;
     object-fit: cover;
     object-position: center;
+    border-radius: 22px;
+    border: 1px solid rgba(130, 144, 171, 0.14);
+    background: rgba(255, 255, 255, 0.94);
   }
 
-  .preview-image.is-hidden {
-    opacity: 0;
-    pointer-events: none;
+  .card-copy {
+    display: grid;
+    gap: 0.4rem;
+    min-width: 0;
   }
 
-  .preview-fallback {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-    padding: 0.75rem;
-    background: radial-gradient(circle at 20% 20%, rgba(41, 188, 137, 0.35), rgba(255, 255, 255, 0));
-    color: var(--text-main, #e8e8e8);
+  .card-kicker {
     font-family: 'Courier Prime', monospace;
-    font-size: 14px;
-    letter-spacing: 0.03em;
+    font-size: 12px;
+    font-weight: 600;
+    color: #29bc89;
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+  }
+
+  .card-title {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.4;
+    font-weight: 500 !important;
+    color: var(--text-main, #e8e8e8);
+    transition: color 0.25s ease;
+  }
+
+  .card-description {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-dim, #888888);
   }
 `;
 
-function getTokenClassName(tag) {
-  if (tag.startsWith('@')) return 'is-at-rule';
-  if (tag.startsWith(':')) return 'is-pseudo';
-  if (tag.includes('(')) return 'is-function';
-  return 'is-keyword';
-}
-
 function SnippetCard({ snippet }) {
   return (
-    <Link to={snippet.path} className="snippet-item">
-      {snippet.uxLaw && (
-        <span className="snippet-ux-chip">
-          Law of UX <span>· {snippet.uxLaw}</span>
-        </span>
-      )}
-      <div className="preview-frame">
-        <img
-          src={snippet.previewImage}
-          alt={`${snippet.title} preview`}
-          className="preview-image"
-          loading="lazy"
-          onError={event => {
-            event.currentTarget.classList.add('is-hidden');
-          }}
-        />
-        <div className="preview-fallback">{snippet.tag}</div>
+    <Link to={snippet.path} className="snippet-card">
+      <SnippetPreviewMedia
+        slug={snippet.slug}
+        title={snippet.title}
+        previewImage={snippet.previewImage}
+        previewVideo={snippet.previewVideo}
+      />
+
+      <div className="card-copy">
+        <span className="card-kicker">{snippet.tag}</span>
+        <h2 className="card-title">{snippet.title}</h2>
       </div>
-      <span className={`snippet-tag ${getTokenClassName(snippet.tag)}`}>{snippet.tag}</span>
-      <h3 className="snippet-title">{snippet.title}</h3>
-      <p className="snippet-desc">{snippet.description}</p>
     </Link>
   );
 }
 
+SnippetCard.propTypes = {
+  snippet: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    previewVideo: PropTypes.string,
+    tag: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
 const SnippetsPage = ({ location }) => {
-  const allSnippets = [...snippets].sort((a, b) => a.order - b.order);
-  const cssHacks = allSnippets.filter(s => (s.section || 'css-hacks') === 'css-hacks');
-  const lawsOfUx = allSnippets.filter(s => s.section === 'laws-of-ux');
+  const cssHacks = [...snippets]
+    .filter(snippet => (snippet.section || 'css-hacks') === 'css-hacks')
+    .sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
 
   return (
     <Layout location={location}>
-      <BlogLayout contentWidth={1120}>
+      <BlogLayout contentWidth={PAGE_WIDTH}>
         <Helmet title="Snippets" />
 
         <StyledSnippetsPage>
-          <Link to="/" className="back-link">
-            &larr; home
-          </Link>
+          <div className="nav-row">
+            <Link to="/" className="nav-link">
+              home
+            </Link>
+            <Link to="/snippets/ux-laws" className="nav-link">
+              laws of ux
+            </Link>
+          </div>
 
-          <div className="page-header">
-            <h1 className="page-title">snippets_&amp;_hacks</h1>
-            <p className="page-subtitle">
-              These are findings from my snippets and hacks.<br />
-              <Link to="/snippets/ux-laws" style={{ color: '#29bc89', textDecoration: 'none', marginTop: '0.5rem', display: 'inline-block' }}>
-                Laws of UX in CSS →
+          <div className="page-intro">
+            <div className="page-header">snippets</div>
+            <h1 className="page-title">CSS snippets you can preview and explore.</h1>
+            <p className="page-copy">
+              The index stays quiet and visual. Each tile leads to a focused view of the snippet.
+              For deeper UX-related examples, see the separate{' '}
+              <Link to="/snippets/ux-laws" className="page-link">
+                laws of ux page
               </Link>
+              .
             </p>
           </div>
 
-          <div className="section-header">css_hacks</div>
           <StyledSnippetGrid>
             {cssHacks.map(snippet => (
-              <SnippetCard snippet={snippet} key={snippet.slug} />
-            ))}
-          </StyledSnippetGrid>
-
-          <div className="section-header section-header-has-link" style={{ marginTop: '2.5rem' }}>
-            laws_of_ux
-            <span className="section-header-line" aria-hidden="true" />
-            <Link to="/snippets/ux-laws" className="section-header-link">
-              See all principles →
-            </Link>
-          </div>
-          <StyledSnippetGrid>
-            {lawsOfUx.map(snippet => (
               <SnippetCard snippet={snippet} key={snippet.slug} />
             ))}
           </StyledSnippetGrid>

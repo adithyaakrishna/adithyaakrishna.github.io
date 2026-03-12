@@ -1,17 +1,17 @@
 import { css } from 'styled-components';
 
 const prismColors = {
-  bg: `#1D1F20`,
-  lineHighlight: `#1d2d50`,
-  blue: `#5ccfe6`,
-  purple: `#c3a6ff`,
-  green: `#29bc89`,
-  Fwhite: `#1D1F20`,
-  yellow: `#ffd580`,
-  orange: `#ffae57`,
-  red: `#ef6b73`,
-  grey: `#a2aabc`,
-  comment: `#8695b799`,
+  background: `#282a36`,
+  currentLine: `#44475a`,
+  foreground: `#f8f8f2`,
+  comment: `#6272a4`,
+  cyan: `#8be9fd`,
+  green: `#50fa7b`,
+  orange: `#ffb86c`,
+  pink: `#ff79c6`,
+  purple: `#bd93f9`,
+  red: `#ff5555`,
+  yellow: `#f1fa8c`,
 };
 
 // https://www.gatsbyjs.org/packages/gatsby-remark-prismjs
@@ -22,8 +22,8 @@ const PrismStyles = css`
   * and overflow that we removed from <pre>.
   */
   .gatsby-highlight {
-    background-color: ${prismColors.bg};
-    color: ${prismColors.grey};
+    background-color: ${prismColors.background};
+    color: ${prismColors.foreground};
     border-radius: var(--border-radius);
     margin: 2em 0;
     padding: 1.25em;
@@ -31,6 +31,8 @@ const PrismStyles = css`
     position: relative;
     font-family: var(--font-mono);
     font-size: var(--fz-md);
+    border: 1px solid rgba(98, 114, 164, 0.3);
+    box-shadow: inset 0 1px 0 rgba(248, 248, 242, 0.02);
   }
 
   .gatsby-highlight code[class*='language-'],
@@ -65,14 +67,15 @@ const PrismStyles = css`
 
   /* File names */
   .gatsby-code-title {
+    position: relative;
     padding: 1em 1.5em;
     font-family: var(--font-mono);
     font-size: var(--fz-xs);
-    background-color: ${prismColors.bg};
-    color: ${prismColors.grey};
+    background-color: ${prismColors.currentLine};
+    color: ${prismColors.foreground};
     border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
-    border-bottom: 1px solid ${prismColors.lineHighlight};
+    border-bottom: 1px solid rgba(98, 114, 164, 0.45);
 
     & + .gatsby-highlight {
       margin-top: 0;
@@ -84,8 +87,8 @@ const PrismStyles = css`
   /* Line highlighting */
   .gatsby-highlight-code-line {
     display: block;
-    background-color: ${prismColors.lineHighlight};
-    border-left: 2px solid var(--red);
+    background-color: rgba(68, 71, 90, 0.85);
+    border-left: 2px solid ${prismColors.purple};
     padding-left: calc(1em + 2px);
     padding-right: 1em;
     margin-right: -1.35em;
@@ -94,13 +97,14 @@ const PrismStyles = css`
 
   /* Language badges */
   .gatsby-highlight pre[class*='language-']::before {
-    background: var(--lightest-navy);
-    color: var(--white);
+    background: rgba(248, 248, 242, 0.08);
+    color: ${prismColors.cyan};
     font-size: var(--fz-xxs);
     font-family: var(--font-mono);
     line-height: 1.5;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    border: 1px solid rgba(139, 233, 253, 0.18);
     border-radius: 0 0 3px 3px;
     position: absolute;
     top: 0;
@@ -115,6 +119,13 @@ const PrismStyles = css`
   }
   .gatsby-highlight pre[class='language-jsx']::before {
     content: 'jsx';
+  }
+  .gatsby-highlight pre[class='language-typescript']::before,
+  .gatsby-highlight pre[class='language-ts']::before {
+    content: 'ts';
+  }
+  .gatsby-highlight pre[class='language-tsx']::before {
+    content: 'tsx';
   }
   .gatsby-highlight pre[class='language-graphql']::before {
     content: 'GraphQL';
@@ -157,6 +168,15 @@ const PrismStyles = css`
     content: 'flow';
   }
 
+  .gatsby-highlight::selection,
+  .gatsby-highlight *::selection,
+  .gatsby-code-title::selection,
+  .gatsby-code-title *::selection {
+    background: rgba(139, 233, 253, 0.28);
+    color: ${prismColors.foreground};
+    text-shadow: none;
+  }
+
   /* Prism Styles */
   .token {
     display: inline;
@@ -169,7 +189,7 @@ const PrismStyles = css`
     color: ${prismColors.comment};
   }
   .token.punctuation {
-    color: ${prismColors.grey};
+    color: ${prismColors.foreground};
   }
   .token.namespace,
   .token.deleted {
@@ -200,7 +220,7 @@ const PrismStyles = css`
   .token.builtin,
   .token.entity,
   .token.url {
-    color: ${prismColors.blue};
+    color: ${prismColors.pink};
   }
   .token.string,
   .token.char,
@@ -209,6 +229,20 @@ const PrismStyles = css`
   .token.variable,
   .token.inserted {
     color: ${prismColors.green};
+  }
+  .token.parameter,
+  .token.interpolation,
+  .token.interpolation-punctuation {
+    color: ${prismColors.foreground};
+  }
+  .token.annotation,
+  .token.property-access {
+    color: ${prismColors.cyan};
+  }
+  .token.console,
+  .token.dom,
+  .token.maybe-class-name {
+    color: ${prismColors.orange};
   }
   .token.important,
   .token.bold {

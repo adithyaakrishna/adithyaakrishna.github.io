@@ -19,7 +19,8 @@ const StyledBlogPage = styled.div`
     align-items: center;
     gap: 8px;
     font-size: 12px;
-    color: #29BC89;
+    font-weight: 600;
+    color: #29bc89;
     text-decoration: none;
     text-transform: lowercase;
     letter-spacing: 0.1em;
@@ -28,7 +29,7 @@ const StyledBlogPage = styled.div`
 
     &:hover {
       opacity: 0.7;
-      color: #29BC89;
+      color: #29bc89;
     }
   }
 
@@ -52,7 +53,8 @@ const StyledBlogPage = styled.div`
   }
 
   .section-header {
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 600;
     color: var(--text-dim, #888888);
     margin-bottom: 1rem;
     display: flex;
@@ -79,7 +81,7 @@ const StyledPostList = styled.div`
     justify-content: space-between;
     align-items: baseline;
     padding: 1rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--border-color-subtle);
     transition: all 0.3s ease;
     text-decoration: none;
     color: inherit;
@@ -92,12 +94,12 @@ const StyledPostList = styled.div`
 
     &:hover {
       padding-left: 10px;
-      color: var(--accent, #ffffff);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-main, #e8e8e8);
+      border-bottom: 1px solid var(--border-color-strong);
     }
 
     &:hover .post-title {
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+      text-shadow: 0 0 8px var(--glow-color);
     }
   }
 
@@ -147,13 +149,13 @@ const StyledPostList = styled.div`
 
     .tag {
       font-size: 11px;
-      color: #29BC89;
+      color: #29bc89;
       text-decoration: none;
       transition: opacity 0.3s;
 
       &:hover {
         opacity: 0.7;
-        color: #29BC89;
+        color: #29bc89;
       }
     }
   }
@@ -171,7 +173,20 @@ const BlogPage = ({ location, data }) => {
 
   const formatDate = dateStr => {
     const d = new Date(dateStr);
-    const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+    const months = [
+      'jan',
+      'feb',
+      'mar',
+      'apr',
+      'may',
+      'jun',
+      'jul',
+      'aug',
+      'sep',
+      'oct',
+      'nov',
+      'dec',
+    ];
     return `${months[d.getMonth()]} ${d.getFullYear()}`;
   };
 
@@ -233,7 +248,10 @@ export default BlogPage;
 export const pageQuery = graphql`
   {
     allMarkdownRemark(
-      filter: { fileAbsolutePath: { regex: "/content/posts/" }, frontmatter: { draft: { ne: true } } }
+      filter: {
+        fileAbsolutePath: { regex: "/content/posts/" }
+        frontmatter: { draft: { ne: true } }
+      }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
       edges {

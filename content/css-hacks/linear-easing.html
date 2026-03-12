@@ -1,110 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>linear() — Niche CSS Hacks</title>
-<link rel="stylesheet" href="style.css" />
-<style>
-  @keyframes bounce-ball {
-    0%   { translate: 0 0; }
-    50%  { translate: 0 -100px; }
-    100% { translate: 0 0; }
-  }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>linear() — CSS Hacks</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      @keyframes bounce-ball {
+        0% {
+          translate: 0 0;
+        }
+        50% {
+          translate: 0 -100px;
+        }
+        100% {
+          translate: 0 0;
+        }
+      }
 
-  .ball-row {
-    display: flex;
-    gap: 80px;
-    justify-content: center;
-    align-items: flex-end;
-    min-height: 160px;
-    padding-top: 20px;
-  }
+      .ball-row {
+        display: flex;
+        gap: 80px;
+        justify-content: center;
+        align-items: flex-end;
+        min-height: 160px;
+        padding-top: 20px;
+      }
 
-  .ball-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
+      .ball-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
 
-  .ball {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-  }
+      .ball {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+      }
 
-  .ball-ease {
-    background: var(--rose);
-    animation: bounce-ball 1.5s ease infinite;
-  }
+      .ball-ease {
+        background: var(--text-3);
+        animation: bounce-ball 1.5s ease infinite;
+      }
 
-  .ball-spring {
-    background: var(--mint);
-    animation: bounce-ball 1.5s linear(
-      0, 0.007 0.7%, 0.028 1.4%, 0.109 2.8%,
-      0.236 4.4%, 0.59 7.7%, 0.778 9.7%,
-      0.93 11.7%, 1.026 13.2%, 1.089 14.6%,
-      1.125 15.8%, 1.137 16.9%, 1.131 17.8%,
-      1.101 19.2%, 0.996 22.5%, 0.953 24.3%,
-      0.928 26.3%, 0.924 27.4%, 0.925 28.7%,
-      0.938 30.6%, 0.977 34%, 1.003 36.7%,
-      1.016 39.3%, 1.02 42.4%, 1.009 48.4%,
-      0.997 55%, 1.001 63.4%, 1
-    ) infinite;
-  }
+      .ball-spring {
+        background: var(--mint);
+        animation: bounce-ball 1.5s
+          linear(
+            0,
+            0.007 0.7%,
+            0.028 1.4%,
+            0.109 2.8%,
+            0.236 4.4%,
+            0.59 7.7%,
+            0.778 9.7%,
+            0.93 11.7%,
+            1.026 13.2%,
+            1.089 14.6%,
+            1.125 15.8%,
+            1.137 16.9%,
+            1.131 17.8%,
+            1.101 19.2%,
+            0.996 22.5%,
+            0.953 24.3%,
+            0.928 26.3%,
+            0.924 27.4%,
+            0.925 28.7%,
+            0.938 30.6%,
+            0.977 34%,
+            1.003 36.7%,
+            1.016 39.3%,
+            1.02 42.4%,
+            1.009 48.4%,
+            0.997 55%,
+            1.001 63.4%,
+            1
+          )
+          infinite;
+      }
 
-  .ball-label {
-    font-size: 0.82rem;
-    color: var(--text-3);
-    font-weight: 500;
-  }
-</style>
-</head>
-<body>
-
-<main>
-  <div class="hero">
-    <span class="tag tag-mint">linear()</span>
-    <h1>Spring Physics in Pure CSS</h1>
-    <p class="desc">Define any easing curve with a list of output points. Springs, bounces, elastic — no JavaScript physics engine. Compare the generic ease vs a spring curve.</p>
-  </div>
-
-  <div class="demo">
-    <div class="ball-row">
-      <div class="ball-col">
-        <div class="ball ball-ease"></div>
-        <span class="ball-label" style="color:var(--rose)">ease</span>
-      </div>
-      <div class="ball-col">
-        <div class="ball ball-spring"></div>
-        <span class="ball-label" style="color:var(--mint)">linear() spring</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="code-block">
-    <button class="copy-btn" onclick="copyCode(this)"><svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Copy</span></button>
-    <pre><code class="language-css">animation: bounce 1.5s linear(
-  0, 0.007 0.7%, 0.109 2.8%, 0.59 7.7%,
-  1.125 15.8%, 1.137 16.9%, 0.953 24.3%,
-  0.924 27.4%, 0.938 30.6%, 1.003 36.7%,
-  1.02 42.4%, 0.997 55%, 1
-) infinite;</code></pre>
-  </div>
-</main>
-
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
-<script>
-function copyCode(btn) {
-  const code = btn.closest('.code-block').querySelector('code');
-  navigator.clipboard.writeText(code.textContent).then(() => {
-    btn.classList.add('copied');
-    btn.querySelector('span').textContent = 'Copied';
-    setTimeout(() => { btn.classList.remove('copied'); btn.querySelector('span').textContent = 'Copy'; }, 2000);
-  });
+      .ball-label {
+        font-size: 12px;
+        color: var(--text-3);
+        font-weight: 400;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="tag" aria-label="back to index">← linear()</a>
+    <main>
+      <div class="demo">
+          <div class="ball-row">
+            <div class="ball-col">
+              <div class="ball ball-ease"></div>
+              <span class="ball-label" style="color: var(--text-3)">ease</span>
+            </div>
+            <div class="ball-col">
+              <div class="ball ball-spring"></div>
+              <span class="ball-label" style="color: var(--mint)">linear() spring</span>
+            </div>
+          </div>
+        </div>
+      <div class="code-block">
+        <pre><code class="language-css">@keyframes bounce-ball {
+  0% { translate: 0 0; }
+  50% { translate: 0 -100px; }
+  100% { translate: 0 0; }
 }
-</script>
-</body>
+
+.ball-ease {
+  animation: bounce-ball 1.5s ease infinite;
+}
+
+.ball-spring {
+  animation: bounce-ball 1.5s
+    linear(0, 0.007 0.7%, 0.028 1.4%, ... 1)
+    infinite;
+}</code></pre>
+      </div>
+    </main>
+  </body>
 </html>

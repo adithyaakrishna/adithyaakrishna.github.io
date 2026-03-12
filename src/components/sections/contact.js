@@ -10,8 +10,9 @@ const StyledContactSection = styled.section`
   overflow-wrap: break-word;
 
   .section-header {
-    font-size: 12px;
-    color: #29BC89;
+    font-size: 14px;
+    font-weight: 600;
+    color: #29bc89;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -33,22 +34,22 @@ const StyledContactSection = styled.section`
   }
 
   .email-link {
-    color: #fff;
+    color: var(--text-main);
     text-decoration: none;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid var(--border-color-strong);
     padding-bottom: 2px;
     transition: border-color 0.3s;
 
     &:hover {
-      border-color: #fff;
-      color: #fff;
+      border-color: var(--accent);
+      color: var(--accent);
     }
   }
 
   .footer-quote {
     margin-top: 4rem;
     font-size: 13px;
-    color: #29BC89;
+    color: #29bc89;
     max-width: 100ch;
     font-style: italic;
     opacity: 0.6;
@@ -58,13 +59,12 @@ const StyledContactSection = styled.section`
 const Contact = () => (
   <StyledContactSection id="contact">
     <div className="section-header">contact</div>
-    <p>
-      I'd love to hear from you. Feel free to reach out via email anytime.
-    </p>
-    <a href={`mailto:${email}`} className="email-link">{email}</a>
+    <p>I'd love to hear from you. Feel free to reach out via email anytime.</p>
+    <a href={`mailto:${email}`} className="email-link">
+      {email}
+    </a>
     <div className="footer-quote">
-      &ldquo;I build clear, fast products and design interfaces
-      people trust and love to use.&rdquo;
+      &ldquo;I build clear, fast products and design interfaces people trust and love to use.&rdquo;
     </div>
   </StyledContactSection>
 );

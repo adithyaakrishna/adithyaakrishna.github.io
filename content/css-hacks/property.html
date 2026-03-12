@@ -1,99 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>@property — Niche CSS Hacks</title>
-<link rel="stylesheet" href="style.css" />
-<style>
-  @property --grad-a {
-    syntax: '<color>';
-    inherits: false;
-    initial-value: #34d399;
-  }
-  @property --grad-b {
-    syntax: '<color>';
-    inherits: false;
-    initial-value: #a78bfa;
-  }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@property — CSS Hacks</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      @property --grad-a {
+        syntax: '<color>';
+        inherits: false;
+        initial-value: #1d7f53;
+      }
+      @property --grad-b {
+        syntax: '<color>';
+        inherits: false;
+        initial-value: #249565;
+      }
 
-  .gradient-box {
-    width: 100%;
-    height: 140px;
-    border-radius: var(--radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: #050506;
-    cursor: pointer;
-  }
+      .gradient-box {
+        width: 100%;
+        height: 140px;
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 400;
+        color: #ffffff;
+        cursor: pointer;
+      }
 
-  .gradient-snap {
-    background: linear-gradient(135deg, #34d399, #a78bfa);
-    transition: background 0.8s;
-  }
-  .gradient-snap:hover {
-    background: linear-gradient(135deg, #fb7185, #fbbf24);
-  }
+      .gradient-snap {
+        background: linear-gradient(135deg, #1d7f53, #2d9a6a);
+        transition: background 0.8s;
+      }
+      .gradient-snap:hover {
+        background: linear-gradient(135deg, #249565, #163325);
+      }
 
-  .gradient-smooth {
-    background: linear-gradient(135deg, var(--grad-a), var(--grad-b));
-    transition: --grad-a 0.8s, --grad-b 0.8s;
-  }
-  .gradient-smooth:hover {
-    --grad-a: #fb7185;
-    --grad-b: #fbbf24;
-  }
-</style>
-</head>
-<body>
-
-<main>
-  <div class="hero">
-    <span class="tag tag-violet">@property</span>
-    <h1>Animate the Unanimatable</h1>
-    <p class="desc">Declare custom property types so CSS can interpolate gradients, colors, and angles. Without it, gradients snap. With it, they flow.</p>
-  </div>
-
-  <div class="comparison">
-    <div class="side">
-      <div class="gradient-box gradient-snap">Hover me — I snap</div>
-      <span class="side-label"><span class="dot dot-red"></span> Without @property</span>
-    </div>
-    <div class="side">
-      <div class="gradient-box gradient-smooth">Hover me — I flow</div>
-      <span class="side-label"><span class="dot dot-green"></span> With @property</span>
-    </div>
-  </div>
-
-  <div class="code-block">
-    <button class="copy-btn" onclick="copyCode(this)"><svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Copy</span></button>
-    <pre><code class="language-css">@property --color {
+      .gradient-smooth {
+        background: linear-gradient(135deg, var(--grad-a), var(--grad-b));
+        transition: --grad-a 0.8s, --grad-b 0.8s;
+      }
+      .gradient-smooth:hover {
+        --grad-a: #249565;
+        --grad-b: #163325;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="tag" aria-label="back to index">← @property</a>
+    <main>
+      <div class="comparison">
+          <div class="side">
+            <div class="gradient-box gradient-snap">hover me — i snap</div>
+            <span class="side-label"><span class="dot dot-red"></span> without @property</span>
+          </div>
+          <div class="side">
+            <div class="gradient-box gradient-smooth">hover me — i flow</div>
+            <span class="side-label"><span class="dot dot-green"></span> with @property</span>
+          </div>
+        </div>
+      <div class="code-block">
+        <pre><code class="language-css">@property --grad-a {
   syntax: '&lt;color&gt;';
   inherits: false;
-  initial-value: #34d399;
+  initial-value: #1d7f53;
+}
+@property --grad-b {
+  syntax: '&lt;color&gt;';
+  inherits: false;
+  initial-value: #249565;
 }
 
-.box {
-  background: linear-gradient(135deg, var(--color), var(--b));
-  transition: --color 0.8s;
+.gradient-snap {
+  background: linear-gradient(135deg, #1d7f53, #2d9a6a);
+  transition: background 0.8s;
+}
+.gradient-snap:hover {
+  background: linear-gradient(135deg, #249565, #163325);
+}
+
+.gradient-smooth {
+  background: linear-gradient(135deg, var(--grad-a), var(--grad-b));
+  transition: --grad-a 0.8s, --grad-b 0.8s;
+}
+.gradient-smooth:hover {
+  --grad-a: #249565;
+  --grad-b: #163325;
 }</code></pre>
-  </div>
-</main>
-
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
-<script>
-function copyCode(btn) {
-  const code = btn.closest('.code-block').querySelector('code');
-  navigator.clipboard.writeText(code.textContent).then(() => {
-    btn.classList.add('copied');
-    btn.querySelector('span').textContent = 'Copied';
-    setTimeout(() => { btn.classList.remove('copied'); btn.querySelector('span').textContent = 'Copy'; }, 2000);
-  });
-}
-</script>
-</body>
+      </div>
+    </main>
+  </body>
 </html>

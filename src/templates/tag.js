@@ -26,7 +26,8 @@ const StyledTagPage = styled.div`
     gap: 8px;
     font-family: var(--font-stack, 'Space Mono', monospace);
     font-size: 12px;
-    color: #29BC89;
+    font-weight: 600;
+    color: #29bc89;
     text-decoration: none;
     text-transform: lowercase;
     letter-spacing: 0.1em;
@@ -38,7 +39,7 @@ const StyledTagPage = styled.div`
 
     &:hover {
       opacity: 0.7;
-      color: #29BC89;
+      color: #29bc89;
     }
   }
 
@@ -57,19 +58,20 @@ const StyledTagPage = styled.div`
 
     .view-all {
       font-size: 12px;
-      color: #29BC89;
+      color: #29bc89;
       text-decoration: none;
       transition: opacity 0.3s;
 
       &:hover {
         opacity: 0.7;
-        color: #29BC89;
+        color: #29bc89;
       }
     }
   }
 
   .section-header {
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 600;
     color: var(--text-dim, #888888);
     margin-bottom: 1rem;
     display: flex;
@@ -90,19 +92,19 @@ const StyledTagPage = styled.div`
     justify-content: space-between;
     align-items: baseline;
     padding: 1rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--border-color-subtle);
     transition: all 0.3s ease;
     text-decoration: none;
     color: inherit;
 
     &:hover {
       padding-left: 10px;
-      color: var(--accent, #ffffff);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-main, #e8e8e8);
+      border-bottom: 1px solid var(--border-color-strong);
     }
 
     &:hover .post-title {
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+      text-shadow: 0 0 8px var(--glow-color);
     }
   }
 
@@ -129,7 +131,20 @@ const TagTemplate = ({ pageContext, data, location }) => {
 
   const formatDate = dateStr => {
     const d = new Date(dateStr);
-    const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+    const months = [
+      'jan',
+      'feb',
+      'mar',
+      'apr',
+      'may',
+      'jun',
+      'jul',
+      'aug',
+      'sep',
+      'oct',
+      'nov',
+      'dec',
+    ];
     return `${months[d.getMonth()]} ${d.getFullYear()}`;
   };
 
@@ -147,7 +162,9 @@ const TagTemplate = ({ pageContext, data, location }) => {
 
           <div className="tag-header">
             <h1>#{tag}</h1>
-            <Link to="/blog/tags" className="view-all">view all tags</Link>
+            <Link to="/blog/tags" className="view-all">
+              view all tags
+            </Link>
           </div>
 
           <div className="section-header">posts</div>
@@ -191,7 +208,7 @@ TagTemplate.propTypes = {
 };
 
 export const pageQuery = graphql`
-  query($tag: String!) {
+  query ($tag: String!) {
     allMarkdownRemark(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }

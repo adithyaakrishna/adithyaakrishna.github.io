@@ -37,6 +37,7 @@ interface BoundingBoxRendererProps {
 ```
 
 The component takes three key props:
+
 - `type`: Whether we're annotating a PDF or an image
 - `rects`: An array of rectangle data to render
 - `onFragmentClick`: Optional callback for when a user clicks a box
@@ -58,7 +59,7 @@ useEffect(() => {
     const imageElement = container.parentElement?.previousElementSibling as HTMLImageElement;
     setScale({
       x: rect.width / imageElement.naturalWidth,
-      y: rect.height / imageElement.naturalHeight
+      y: rect.height / imageElement.naturalHeight,
     });
   };
   calculateScale();
@@ -106,9 +107,12 @@ An often overlooked aspect of overlaying multiple elements is managing z-index t
 ```tsx
 export const getZIndexByType = (type: string): number => {
   switch (type) {
-    case 'text': return 5;
-    case 'table': return 10;
-    default: return 1;
+    case 'text':
+      return 5;
+    case 'table':
+      return 10;
+    default:
+      return 1;
   }
 };
 ```
@@ -118,6 +122,7 @@ This ensures that certain element types always appear above others, creating a m
 ## The Final Touch: Hover Effects
 
 What makes our component truly interactive is the hover effect. When a user hovers over a box:
+
 1. The background opacity changes
 2. A shadow appears around the box
 3. A label showing the element type pops up

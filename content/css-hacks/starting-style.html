@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@starting-style — CSS Hacks</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .starting-appear {
+        display: none;
+        opacity: 0;
+        scale: 0.92;
+        translate: 0 14px;
+        transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+          scale 0.45s cubic-bezier(0.4, 0, 0.2, 1), translate 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+          display 0.45s allow-discrete;
+      }
+
+      .starting-wrapper:has(input:checked) .starting-appear {
+        display: flex;
+        opacity: 1;
+        scale: 1;
+        translate: 0 0;
+      }
+
+      @starting-style {
+        .starting-wrapper:has(input:checked) .starting-appear {
+          opacity: 0;
+          scale: 0.92;
+          translate: 0 14px;
+        }
+      }
+
+      .starting-appear {
+        gap: 14px;
+        align-items: center;
+        padding: 20px 24px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        margin-top: 20px;
+        width: 100%;
+      }
+
+      .avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--mint), var(--violet));
+        flex-shrink: 0;
+      }
+
+      .msg {
+        font-size: 14px;
+        color: var(--text-2);
+        line-height: 1.5;
+      }
+      .msg strong {
+        color: var(--text);
+      }
+    
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="tag" aria-label="back to index">← @starting-style</a>
+    <main>
+      <div class="demo">
+          <div class="starting-wrapper" style="width: 100%">
+            <label class="toggle">
+              <input type="checkbox" />
+              <span class="toggle-track"></span>
+              show notification
+            </label>
+            <div class="starting-appear">
+              <div class="avatar"></div>
+              <div class="msg">
+                <strong>new message</strong> — i animated in from display:none. pure CSS
+                transitions. no keyframes required.
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="code-block">
+        <pre><code class="language-css">.starting-appear {
+  display: none;
+  opacity: 0;
+  scale: 0.92;
+  transition: opacity 0.45s, scale 0.45s,
+    translate 0.45s, display 0.45s allow-discrete;
+}
+
+.starting-wrapper:has(input:checked) .starting-appear {
+  display: flex;
+  opacity: 1;
+  scale: 1;
+}
+
+@starting-style {
+  .starting-wrapper:has(input:checked) .starting-appear {
+    opacity: 0;
+    scale: 0.92;
+    translate: 0 14px;
+  }
+}</code></pre>
+      </div>
+    </main>
+  </body>
+</html>

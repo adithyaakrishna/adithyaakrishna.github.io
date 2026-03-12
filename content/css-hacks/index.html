@@ -1,103 +1,471 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Niche CSS Hacks</title>
-<link rel="stylesheet" href="style.css" />
-<style>
-  html, body { overflow: auto; height: auto; }
-  body { justify-content: flex-start; min-height: 100vh; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css hacks & laws of ux</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      html,
+      body {
+        overflow: auto;
+        height: auto;
+      }
+      body {
+        justify-content: flex-start;
+        min-height: 100vh;
+      }
 
-  main {
-    max-width: 640px;
-    padding: 60px 40px 80px;
-    gap: 40px;
-  }
+      main {
+        max-width: 2000px;
+        height: auto;
+        padding: 24px 16px 64px;
+        gap: 24px;
+        justify-content: flex-start;
+      }
 
-  .index-title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1.05;
-  }
+      @media (min-width: 640px) {
+        main {
+          padding: 32px 24px 80px;
+          gap: 32px;
+        }
+      }
 
-  .index-title .gradient {
-    background: linear-gradient(135deg, var(--mint), var(--violet), var(--rose));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+      /* index page tag — positioned, not fixed */
+      .index-tag {
+        position: relative;
+        top: auto;
+        left: auto;
+        opacity: 1;
+        animation: none;
+      }
 
-  .index-sub {
-    font-size: 1rem;
-    color: var(--text-2);
-    font-weight: 300;
-    margin-top: -24px;
-  }
+      /* header row */
+      .index-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        width: 100%;
+      }
 
-  .hack-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-  }
+      .index-header .index-tag {
+        flex-shrink: 0;
+      }
 
-  .hack-link {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 20px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    text-decoration: none;
-    color: var(--text);
-    transition: background 0.2s, border-color 0.2s;
-  }
+      /* separator */
+      .divider {
+        width: 100%;
+        height: 1px;
+        background: var(--border);
+        margin-top: -12px;
+      }
 
-  .hack-link:hover {
-    background: var(--surface-2);
-    border-color: var(--border-light);
-  }
+      /* sections */
+      .section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
 
-  .hack-link .tag { margin: 0; flex-shrink: 0; }
+      /* fallback poster for cards without video */
+      .snippet-card .fallback-poster {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="index-header">
+        <span class="tag index-tag">css_hacks</span>
+      </div>
+      <div class="divider"></div>
 
-  .hack-link .hack-name {
-    font-size: 0.95rem;
-    font-weight: 500;
-  }
+      <section class="section" aria-label="css hacks">
+        <div class="section-head">css_hacks</div>
+        <div class="snippet-grid">
+          <a href="property.html" class="snippet-card" aria-label="@property">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/property.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/property.webm" type="video/webm" />
+              <source src="/snippets/videos/property.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="has.html" class="snippet-card" aria-label=":has()">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/has.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/has.webm" type="video/webm" />
+              <source src="/snippets/videos/has.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="popover.html" class="snippet-card" aria-label="popover">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/popover.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/popover.webm" type="video/webm" />
+              <source src="/snippets/videos/popover.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a
+            href="scroll-timeline.html"
+            class="snippet-card"
+            aria-label="animation-timeline: scroll()">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/scroll-timeline.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/scroll-timeline.webm" type="video/webm" />
+              <source src="/snippets/videos/scroll-timeline.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="interpolate-size.html" class="snippet-card" aria-label="interpolate-size">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/interpolate-size.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/interpolate-size.webm" type="video/webm" />
+              <source src="/snippets/videos/interpolate-size.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="starting-style.html" class="snippet-card" aria-label="@starting-style">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/starting-style.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/starting-style.webm" type="video/webm" />
+              <source src="/snippets/videos/starting-style.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="user-invalid.html" class="snippet-card" aria-label=":user-invalid">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/user-invalid.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/user-invalid.webm" type="video/webm" />
+              <source src="/snippets/videos/user-invalid.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="view-timeline.html" class="snippet-card" aria-label="animation-timeline: view()">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/view-timeline.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/view-timeline.webm" type="video/webm" />
+              <source src="/snippets/videos/view-timeline.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a
+            href="allow-discrete.html"
+            class="snippet-card"
+            aria-label="transition-behavior: allow-discrete">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/allow-discrete.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/allow-discrete.webm" type="video/webm" />
+              <source src="/snippets/videos/allow-discrete.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="details.html" class="snippet-card" aria-label="<details name=''>">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/details.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/details.webm" type="video/webm" />
+              <source src="/snippets/videos/details.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="light-dark.html" class="snippet-card" aria-label="light-dark()">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/light-dark.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/light-dark.webm" type="video/webm" />
+              <source src="/snippets/videos/light-dark.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="color-mix.html" class="snippet-card" aria-label="color-mix()">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/color-mix.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/color-mix.webm" type="video/webm" />
+              <source src="/snippets/videos/color-mix.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="interruptibility.html" class="snippet-card" aria-label="transition vs keyframes">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/interruptibility.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/interruptibility.webm" type="video/webm" />
+              <source src="/snippets/videos/interruptibility.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="layer.html" class="snippet-card" aria-label="@layer">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/layer.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/layer.webm" type="video/webm" />
+              <source src="/snippets/videos/layer.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="overscroll-behavior.html" class="snippet-card" aria-label="overscroll-behavior">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/overscroll-behavior.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/overscroll-behavior.webm" type="video/webm" />
+              <source src="/snippets/videos/overscroll-behavior.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="focus-visible.html" class="snippet-card" aria-label=":focus-visible">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/focus-visible.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/focus-visible.webm" type="video/webm" />
+              <source src="/snippets/videos/focus-visible.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="nth-child.html" class="snippet-card" aria-label=":nth-child(n of S)">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/nth-child.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/nth-child.webm" type="video/webm" />
+              <source src="/snippets/videos/nth-child.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="content-visibility.html" class="snippet-card" aria-label="content-visibility">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/content-visibility.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/content-visibility.webm" type="video/webm" />
+              <source src="/snippets/videos/content-visibility.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="linear-easing.html" class="snippet-card" aria-label="linear()">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/linear-easing.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/linear-easing.webm" type="video/webm" />
+              <source src="/snippets/videos/linear-easing.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="text-wrap.html" class="snippet-card" aria-label="text-wrap: pretty">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/text-wrap.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/text-wrap.webm" type="video/webm" />
+              <source src="/snippets/videos/text-wrap.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+        </div>
+      </section>
 
-  .hack-link .arrow {
-    margin-left: auto;
-    color: var(--text-3);
-    font-size: 1.1rem;
-    transition: translate 0.2s;
-  }
-
-  .hack-link:hover .arrow { translate: 4px 0; }
-</style>
-</head>
-<body>
-
-<main>
-  <h1 class="index-title">My <span class="gradient">CSS</span> Findings</h1>
-  <p class="index-sub">Findings from my snippets and hacks.</p>
-
-  <div class="hack-list">
-    <a href="property.html" class="hack-link">
-      <span class="tag tag-violet">@property</span>
-      <span class="hack-name">Animate the Unanimatable</span>
-      <span class="arrow">→</span>
-    </a>
-    <a href="has.html" class="hack-link">
-      <span class="tag tag-mint">:has()</span>
-      <span class="hack-name">The Parent Selector That Does Everything</span>
-      <span class="arrow">→</span>
-    </a>
-  </div>
-</main>
-
-</body>
+      <section class="section" aria-label="laws of ux">
+        <div class="section-head">laws_of_ux</div>
+        <div class="snippet-grid">
+          <a href="doherty-threshold.html" class="snippet-card" aria-label="transition-duration">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/doherty-threshold.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/doherty-threshold.webm" type="video/webm" />
+              <source src="/snippets/videos/doherty-threshold.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="fitts-law.html" class="snippet-card" aria-label="min-height / padding">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/fitts-law.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/fitts-law.webm" type="video/webm" />
+              <source src="/snippets/videos/fitts-law.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="proximity.html" class="snippet-card" aria-label="gap / margin">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/proximity.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/proximity.webm" type="video/webm" />
+              <source src="/snippets/videos/proximity.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="common-region.html" class="snippet-card" aria-label="border / background">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/common-region.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/common-region.webm" type="video/webm" />
+              <source src="/snippets/videos/common-region.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="von-restorff.html" class="snippet-card" aria-label="contrast">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/von-restorff.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/von-restorff.webm" type="video/webm" />
+              <source src="/snippets/videos/von-restorff.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+          <a href="peak-end.html" class="snippet-card" aria-label="transition (exit)">
+            <img
+              class="fallback-poster"
+              src="/snippets/previews/peak-end.png"
+              alt=""
+              aria-hidden="true" />
+            <video autoplay loop muted playsinline aria-hidden="true">
+              <source src="/snippets/videos/peak-end.webm" type="video/webm" />
+              <source src="/snippets/videos/peak-end.mp4" type="video/mp4" />
+            </video>
+            <div class="card-overlay">
+              <div class="card-overlay-inner"><span>view live</span></div>
+            </div>
+          </a>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>

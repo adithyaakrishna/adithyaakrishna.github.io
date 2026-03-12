@@ -1,124 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Interruptibility — Transitions vs Keyframes</title>
-<link rel="stylesheet" href="style.css" />
-<style>
-  .interrupt-demo {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    width: 100%;
-    max-width: 420px;
-  }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>interruptibility — transitions vs keyframes</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .interrupt-demo {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        width: 100%;
+        max-width: 420px;
+      }
 
-  .interrupt-row {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+      .interrupt-row {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
 
-  .interrupt-label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-3);
-  }
+      .interrupt-label {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: lowercase;
+        letter-spacing: 0.05em;
+        color: var(--text-3);
+      }
 
-  .interrupt-box {
-    width: 100%;
-    height: 56px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border);
-    background: var(--surface-2);
-    cursor: pointer;
-  }
+      .interrupt-box {
+        width: 100%;
+        height: 56px;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border);
+        background: var(--surface-2);
+        cursor: pointer;
+      }
 
-  .interrupt-box.transition-demo {
-    transition: transform 0.6s ease, background 0.3s;
-  }
+      .interrupt-box.transition-demo {
+        transition: transform 0.6s ease, background 0.3s;
+      }
 
-  .interrupt-box.transition-demo:hover {
-    transform: translateX(120px);
-    background: var(--mint-dim);
-    border-color: var(--mint);
-  }
+      .interrupt-box.transition-demo:hover {
+        transform: translateX(120px);
+        background: var(--mint-dim);
+        border-color: var(--mint);
+      }
 
-  .interrupt-box.keyframe-demo {
-    animation: slide-right 1.2s ease-in-out infinite alternate;
-  }
+      .interrupt-box.keyframe-demo {
+        animation: slide-right 1.2s ease-in-out infinite alternate;
+      }
 
-  .interrupt-box.keyframe-demo:hover {
-    animation-play-state: paused;
-  }
+      .interrupt-box.keyframe-demo:hover {
+        animation-play-state: paused;
+      }
 
-  @keyframes slide-right {
-    from { transform: translateX(0); }
-    to { transform: translateX(120px); }
-  }
+      @keyframes slide-right {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(120px);
+        }
+      }
 
-  .interrupt-note {
-    font-size: 0.85rem;
-    color: var(--text-2);
-    line-height: 1.5;
-  }
-</style>
-</head>
-<body>
-
-<main>
-  <div class="hero">
-    <span class="tag tag-mint">transition vs keyframes</span>
-    <h1>Make Interactions Interruptible</h1>
-    <p class="desc">Transitions interpolate toward the latest state and can be interrupted when you move the cursor away. Keyframe animations run on a fixed timeline and don't retarget once started.</p>
-  </div>
-
-  <div class="demo">
-    <div class="interrupt-demo">
-      <div class="interrupt-row">
-        <span class="interrupt-label">Transition — hover and move away mid-way</span>
-        <div class="interrupt-box transition-demo"></div>
-      </div>
-      <div class="interrupt-row">
-        <span class="interrupt-label">Keyframes — runs to completion</span>
-        <div class="interrupt-box keyframe-demo"></div>
-      </div>
-      <p class="interrupt-note">Use transitions for interactions that should respond to user intent; use keyframes for staged sequences that run once.</p>
-    </div>
-  </div>
-
-  <div class="code-block">
-    <button class="copy-btn" onclick="copyCode(this)"><svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Copy</span></button>
-    <pre><code class="language-css">/* Interruptible: reverses when hover ends */
-.box {
-  transition: transform 0.6s ease;
+      .interrupt-note {
+        font-size: 13px;
+        color: var(--text-2);
+        line-height: 1.5;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="tag" aria-label="back to index">← transition vs keyframes</a>
+    <main>
+      <div class="demo">
+          <div class="interrupt-demo">
+            <div class="interrupt-row">
+              <span class="interrupt-label">transition — hover and move away mid-way</span>
+              <div class="interrupt-box transition-demo"></div>
+            </div>
+            <div class="interrupt-row">
+              <span class="interrupt-label">keyframes — runs to completion</span>
+              <div class="interrupt-box keyframe-demo"></div>
+            </div>
+            <p class="interrupt-note">
+              use transitions for interactions that should respond to user intent; use keyframes for
+              staged sequences that run once.
+            </p>
+          </div>
+        </div>
+      <div class="code-block">
+        <pre><code class="language-css">.interrupt-box.transition-demo {
+  transition: transform 0.6s ease, background 0.3s;
 }
-.box:hover {
+.interrupt-box.transition-demo:hover {
   transform: translateX(120px);
 }
 
-/* Fixed timeline: cannot retarget mid-run */
-.box-animated {
-  animation: slide 1.2s ease-in-out infinite alternate;
-}</code></pre>
-  </div>
-</main>
-
-<script>
-function copyCode(btn) {
-  var code = btn.closest('.code-block').querySelector('code');
-  if (code && navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(code.textContent).then(function() {
-      btn.classList.add('copied');
-      var span = btn.querySelector('span');
-      if (span) span.textContent = 'Copied';
-      setTimeout(function() { btn.classList.remove('copied'); if (span) span.textContent = 'Copy'; }, 2000);
-    });
-  }
+.interrupt-box.keyframe-demo {
+  animation: slide-right 1.2s ease-in-out infinite alternate;
 }
-</script>
-</body>
+.interrupt-box.keyframe-demo:hover {
+  animation-play-state: paused;
+}
+
+@keyframes slide-right {
+  from { transform: translateX(0); }
+  to { transform: translateX(120px); }
+}</code></pre>
+      </div>
+    </main>
+  </body>
 </html>

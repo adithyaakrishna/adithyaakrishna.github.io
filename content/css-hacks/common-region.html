@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Law of Common Region — Laws of UX in CSS</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .region-demo {
+        width: 100%;
+        max-width: 480px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      .region-section h4 {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: lowercase;
+        letter-spacing: 0.05em;
+        color: var(--text-3);
+        margin-bottom: 12px;
+      }
+
+      .region-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .region-list.plain .item {
+        padding: 10px 14px;
+        font-size: 14px;
+        color: var(--text-2);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .region-list.plain .item:last-child {
+        border-bottom: none;
+      }
+
+      .region-list.bounded .item {
+        padding: 14px 18px;
+        font-size: 14px;
+        color: var(--text-2);
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+      }
+
+      .region-list.bounded .group {
+        background: var(--surface-3);
+        border: 1px solid var(--border-light);
+        border-radius: var(--radius);
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .region-list.bounded .group + .group {
+        margin-top: 12px;
+      }
+
+      .region-list.bounded .group-title {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: lowercase;
+        letter-spacing: 0.05em;
+        color: var(--text-3);
+        padding: 6px 10px;
+        border-bottom: 1px solid var(--border);
+        margin: -8px -8px 4px -8px;
+        border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+        background: rgba(29, 127, 83, 0.04);
+      }
+
+      .region-note {
+        font-size: 13px;
+        color: var(--text-2);
+        line-height: 1.6;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="tag" aria-label="back to index">← border / background</a>
+    <main>
+      <div class="demo">
+          <div class="region-demo">
+            <div class="region-section">
+              <h4>no boundary — flat list</h4>
+              <div class="region-list plain">
+                <div class="item">account</div>
+                <div class="item">privacy</div>
+                <div class="item">billing</div>
+                <div class="item">notifications</div>
+              </div>
+            </div>
+            <div class="region-section">
+              <h4>bounded regions — obvious groups</h4>
+              <div class="region-list bounded">
+                <div class="group">
+                  <div class="group-title">profile</div>
+                  <div class="item">account</div>
+                  <div class="item">privacy</div>
+                </div>
+                <div class="group">
+                  <div class="group-title">subscription</div>
+                  <div class="item">billing</div>
+                  <div class="item">notifications</div>
+                </div>
+              </div>
+            </div>
+            <p class="region-note">
+              same items; background + border create "common region" so the eye sees two groups.
+            </p>
+          </div>
+        </div>
+      <div class="code-block">
+        <pre><code class="language-css">.region-list.bounded .item {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.region-list.bounded .group {
+  background: var(--surface-3);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 8px;
+}</code></pre>
+      </div>
+    </main>
+  </body>
+</html>

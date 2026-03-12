@@ -3,23 +3,31 @@ import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 
 const monthMap = {
-  january: 'jan', february: 'feb', march: 'mar', april: 'apr',
-  may: 'may', june: 'jun', july: 'jul', august: 'aug',
-  september: 'sep', october: 'oct', november: 'nov', december: 'dec',
+  january: 'jan',
+  february: 'feb',
+  march: 'mar',
+  april: 'apr',
+  may: 'may',
+  june: 'jun',
+  july: 'jul',
+  august: 'aug',
+  september: 'sep',
+  october: 'oct',
+  november: 'nov',
+  december: 'dec',
 };
 
 function shortenRange(range) {
   if (!range) return '';
-  return range.toLowerCase().replace(
-    /\b(january|february|march|april|may|june|july|august|september|october|november|december)\b/g,
-    match => monthMap[match],
-  );
+  return range
+    .toLowerCase()
+    .replace(
+      /\b(january|february|march|april|may|june|july|august|september|october|november|december)\b/g,
+      match => monthMap[match],
+    );
 }
 
-const shownCompanies = [
-  'noice',
-  'tensorlake',
-];
+const shownCompanies = ['noice', 'tensorlake'];
 
 const companyDisplayNames = {
   'openchemistry - google summer of code': 'GSOC',
@@ -38,8 +46,9 @@ const StyledJobsSection = styled.section`
   overflow: hidden;
 
   .section-header {
-    font-size: 12px;
-    color: #29BC89;
+    font-size: 14px;
+    font-weight: 600;
+    color: #29bc89;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -55,11 +64,11 @@ const StyledJobsSection = styled.section`
   }
 
   .exp-item {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--border-color-subtle);
     transition: border-color 0.3s ease;
 
     &:hover {
-      border-bottom-color: rgba(255, 255, 255, 0.2);
+      border-bottom-color: var(--border-color-strong);
     }
   }
 
@@ -80,12 +89,12 @@ const StyledJobsSection = styled.section`
 
     &:hover {
       padding-left: 10px;
-      color: var(--accent, #ffffff);
+      color: var(--text-main, #e8e8e8);
     }
 
     &:hover .item-title {
       filter: blur(0px);
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+      text-shadow: 0 0 8px var(--glow-color);
     }
   }
 
@@ -111,8 +120,9 @@ const StyledJobsSection = styled.section`
   }
 
   .item-index {
+    font-weight: 600;
     font-size: 12px;
-    color: #29BC89;
+    color: #29bc89;
     font-family: 'Courier Prime', monospace;
     flex-shrink: 0;
   }
@@ -146,7 +156,7 @@ const StyledJobsSection = styled.section`
 
     .separator {
       margin: 0 0.4rem;
-      color: #29BC89;
+      color: #29bc89;
       opacity: 0.8;
     }
   }
@@ -162,7 +172,7 @@ const StyledJobsSection = styled.section`
 
   .exp-item.open .exp-toggle {
     transform: rotate(45deg);
-    color: var(--accent, #ffffff);
+    color: var(--accent);
   }
 
   .exp-body {
@@ -215,7 +225,7 @@ const StyledJobsSection = styled.section`
         content: '▸';
         position: absolute;
         left: 0;
-        color: #29BC89;
+        color: #29bc89;
       }
     }
   }
@@ -228,8 +238,8 @@ const StyledJobsSection = styled.section`
     font-size: 12px;
     line-height: 1;
     color: var(--text-dim, #888888);
-    background: none;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--surface-bg);
+    border: 1px solid var(--border-color);
     padding: 8px 14px;
     margin-top: 0.5rem;
     cursor: pointer;
@@ -238,9 +248,9 @@ const StyledJobsSection = styled.section`
     letter-spacing: 0.05em;
 
     &:hover {
-      color: var(--accent, #ffffff);
-      border-color: rgba(255, 255, 255, 0.25);
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+      color: var(--accent);
+      border-color: var(--border-color-strong);
+      text-shadow: 0 0 8px var(--glow-color);
     }
 
     .pill-toggle {
@@ -292,8 +302,8 @@ const Jobs = () => {
   `);
 
   const allJobs = data.jobs.edges;
-  const mainJobs = allJobs.filter(
-    ({ node }) => shownCompanies.includes(node.frontmatter.company?.toLowerCase()),
+  const mainJobs = allJobs.filter(({ node }) =>
+    shownCompanies.includes(node.frontmatter.company?.toLowerCase()),
   );
   const otherJobs = allJobs.filter(
     ({ node }) => !shownCompanies.includes(node.frontmatter.company?.toLowerCase()),
@@ -329,10 +339,7 @@ const Jobs = () => {
           <span className="exp-toggle">+</span>
         </div>
         <div className="exp-body">
-          <div
-            className="exp-detail"
-            dangerouslySetInnerHTML={{ __html: node.html }}
-          />
+          <div className="exp-detail" dangerouslySetInnerHTML={{ __html: node.html }} />
         </div>
       </div>
     );
@@ -351,7 +358,9 @@ const Jobs = () => {
             previous ({otherJobs.length}) <span className="pill-toggle">+</span>
           </button>
           <div className={`others-body${showOthers ? ' open' : ''}`}>
-            {otherJobs.map(({ node }, i) => renderExpItem(node, i, 'other', mainJobs.length + i + 1))}
+            {otherJobs.map(({ node }, i) =>
+              renderExpItem(node, i, 'other', mainJobs.length + i + 1),
+            )}
           </div>
         </>
       )}

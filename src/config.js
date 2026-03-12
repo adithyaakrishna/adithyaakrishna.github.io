@@ -1,4 +1,4 @@
-const THEME_MODE = 'dark';
+const THEME_MODE = 'light';
 const THEME_ANIMATION_SHAPE = 'fade';
 
 module.exports = {
@@ -49,9 +49,9 @@ module.exports = {
   ],
 
   colors: {
-    green: '#4688ff',
-    navy: '#0a192f',
-    darkNavy: '#020c1b',
+    green: '#1d7f53',
+    navy: '#f7faf6',
+    darkNavy: '#eef4ef',
   },
 
   srConfig: (delay = 200, viewFactor = 0.25) => ({

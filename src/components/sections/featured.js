@@ -13,8 +13,9 @@ const StyledFeaturedSection = styled.section`
   overflow: hidden;
 
   .section-header {
-    font-size: 12px;
-    color: #29BC89;
+    font-size: 14px;
+    font-weight: 600;
+    color: #29bc89;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -34,7 +35,7 @@ const StyledFeaturedSection = styled.section`
     justify-content: space-between;
     align-items: baseline;
     padding: 1rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--border-color-subtle);
     transition: all 0.3s ease;
     position: relative;
     text-decoration: none;
@@ -48,13 +49,13 @@ const StyledFeaturedSection = styled.section`
 
     &:hover {
       padding-left: 10px;
-      color: var(--accent, #ffffff);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-main, #e8e8e8);
+      border-bottom: 1px solid var(--border-color-strong);
     }
 
     &:hover .item-title {
       filter: blur(0px);
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+      text-shadow: 0 0 8px var(--glow-color);
     }
   }
 
@@ -71,6 +72,7 @@ const StyledFeaturedSection = styled.section`
 
   .item-index {
     font-size: 12px;
+    font-weight: 600;
     color: var(--text-dim, #555555);
     font-family: 'Courier Prime', monospace;
   }
@@ -113,15 +115,15 @@ const StyledFeaturedSection = styled.section`
     }
 
     a {
-      color: #29BC89;
+      color: #29bc89;
       text-decoration: none;
       border-bottom: 1px solid rgba(41, 188, 137, 0.3);
       font-size: 12px;
       transition: border-color 0.3s;
 
       &:hover {
-        border-color: #29BC89;
-        color: #29BC89;
+        border-color: #29bc89;
+        color: #29bc89;
       }
     }
   }
@@ -164,12 +166,7 @@ const Featured = () => {
         const { title, external, github } = node.frontmatter;
         const link = external || github || '#';
         return (
-          <a
-            href={link}
-            className="list-item"
-            key={i}
-            target="_blank"
-            rel="noopener noreferrer">
+          <a href={link} className="list-item" key={i} target="_blank" rel="noopener noreferrer">
             <div className="item-left">
               <span className="item-index">proj_{String(i + 1).padStart(3, '0')}</span>
               <span className="item-title">{title?.toLowerCase()}</span>

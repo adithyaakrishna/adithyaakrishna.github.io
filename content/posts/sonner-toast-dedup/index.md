@@ -25,7 +25,7 @@ The entire implementation lives in two files: a TypeScript wrapper (`sonner.tsx`
 ### `sonner.tsx` — the dedup wrapper
 
 ```tsx
-"use client";
+'use client';
 
 import {
   CircleCheckIcon,
@@ -33,36 +33,36 @@ import {
   Loader2Icon,
   OctagonXIcon,
   TriangleAlertIcon,
-} from "lucide-react";
-import { useTheme } from "next-themes";
+} from 'lucide-react';
+import { useTheme } from 'next-themes';
 import {
   toast as sonnerToast,
   Toaster as Sonner,
   type ExternalToast,
   type ToasterProps,
-} from "sonner";
+} from 'sonner';
 
 const activeToasts = new Map<string, string | number>();
 const nudgeCounts = new Map<string, number>();
 
 function getToastKey(message: unknown, type: string): string | null {
-  if (typeof message === "string") return `${type}:${message}`;
+  if (typeof message === 'string') return `${type}:${message}`;
   return null;
 }
 
 function cleanupHandlers(
   key: string | null,
   data?: ExternalToast,
-): Pick<ExternalToast, "onDismiss" | "onAutoClose"> {
+): Pick<ExternalToast, 'onDismiss' | 'onAutoClose'> {
   return {
-    onDismiss: (t) => {
+    onDismiss: t => {
       if (key) {
         activeToasts.delete(key);
         nudgeCounts.delete(key);
       }
       data?.onDismiss?.(t);
     },
-    onAutoClose: (t) => {
+    onAutoClose: t => {
       if (key) {
         activeToasts.delete(key);
         nudgeCounts.delete(key);
@@ -84,13 +84,28 @@ function cleanupHandlers(
 }
 
 @keyframes toast-nudge-a {
-  0%, 100% { translate: 0; }
-  10% { translate: -4px; }
-  25% { translate: 3px; }
-  40% { translate: -2px; }
-  55% { translate: 1.5px; }
-  70% { translate: -0.75px; }
-  85% { translate: 0.25px; }
+  0%,
+  100% {
+    translate: 0;
+  }
+  10% {
+    translate: -4px;
+  }
+  25% {
+    translate: 3px;
+  }
+  40% {
+    translate: -2px;
+  }
+  55% {
+    translate: 1.5px;
+  }
+  70% {
+    translate: -0.75px;
+  }
+  85% {
+    translate: 0.25px;
+  }
 }
 ```
 
@@ -134,10 +149,10 @@ The CSS `translate` property is **independent of `transform`**. The browser comp
 Import `toast` from the wrapper instead of directly from sonner. No call-site changes needed:
 
 ```ts
-import { toast } from "@/components/ui/sonner";
+import { toast } from '@/components/ui/sonner';
 
-toast.success("Saved!");
-toast.error("Failed to connect");
+toast.success('Saved!');
+toast.error('Failed to connect');
 ```
 
 ## Limitations

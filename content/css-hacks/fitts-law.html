@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fitts's Law — CSS Hacks</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .fitts-demo {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        width: 100%;
+        max-width: 520px;
+      }
+
+      @media (max-width: 500px) {
+        .fitts-demo {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .fitts-card {
+        padding: 24px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--surface);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .fitts-label {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: lowercase;
+        letter-spacing: 0.05em;
+        color: var(--text-3);
+        text-align: center;
+      }
+
+      .fitts-btn {
+        font-family: var(--font-mono);
+        font-size: 14px;
+        color: var(--text);
+        cursor: pointer;
+        border-radius: 0px;
+        border: 1px solid var(--border);
+        background: var(--surface-2);
+      }
+
+      .fitts-btn.good {
+        padding: 16px 28px;
+        min-height: 48px;
+        min-width: 120px;
+        transition: background 0.2s, border-color 0.2s;
+      }
+
+      .fitts-btn.good:hover {
+        background: var(--mint-dim);
+        border-color: var(--mint);
+      }
+
+      .fitts-btn.bad {
+        padding: 6px 12px;
+        font-size: 14px;
+        transition: background 0.2s, border-color 0.2s;
+      }
+
+      .fitts-btn.bad:hover {
+        background: var(--rose-dim);
+        border-color: var(--rose);
+      }
+
+      .fitts-note {
+        font-size: 12px;
+        color: var(--text-2);
+        text-align: center;
+        line-height: 1.5;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="tag" aria-label="back to index">← min-height / padding</a>
+    <main>
+      <div class="demo">
+          <div class="fitts-demo">
+            <div class="fitts-card">
+              <span class="fitts-label">large hit area (easy to tap)</span>
+              <button type="button" class="fitts-btn good">submit</button>
+              <p class="fitts-note">min-height: 48px, padding: 16px 28px</p>
+            </div>
+            <div class="fitts-card">
+              <span class="fitts-label">small hit area (easy to miss)</span>
+              <button type="button" class="fitts-btn bad">submit</button>
+              <p class="fitts-note">tiny padding — same label, harder to hit</p>
+            </div>
+          </div>
+        </div>
+      <div class="code-block">
+        <pre><code class="language-css">.fitts-btn.good {
+  padding: 16px 28px;
+  min-height: 48px;
+  min-width: 120px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.fitts-btn.bad {
+  padding: 6px 12px;
+  font-size: 14px;
+}</code></pre>
+      </div>
+    </main>
+  </body>
+</html>

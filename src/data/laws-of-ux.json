@@ -4,7 +4,7 @@
     "name": "Aesthetic-Usability Effect",
     "description": "Users often perceive aesthetically pleasing design as design that's more usable.",
     "cssTakeaway": "Use design tokens (CSS custom properties) for color, type scale, and spacing so the UI feels consistent and polished. Consistency reads as quality.",
-    "snippetSlug": null,
+    "snippetSlug": "property",
     "externalUrl": "https://lawsofux.com/aesthetic-usability-effect"
   },
   {
@@ -28,7 +28,7 @@
     "name": "Hick's Law",
     "description": "The time it takes to make a decision increases with the number and complexity of choices.",
     "cssTakeaway": "Progressive disclosure: use <details>/<summary> or show/hide with CSS to reduce visible options. Fewer choices at once.",
-    "snippetSlug": null,
+    "snippetSlug": "details",
     "externalUrl": "https://lawsofux.com/hicks-law"
   },
   {
@@ -60,7 +60,7 @@
     "name": "Law of Similarity",
     "description": "Similar elements are perceived as a complete picture or group.",
     "cssTakeaway": "Reuse the same classes and design tokens so similar function looks similar; reserve contrast for the primary action.",
-    "snippetSlug": "von-restorff",
+    "snippetSlug": null,
     "externalUrl": "https://lawsofux.com/law-of-similarity"
   },
   {
@@ -84,7 +84,7 @@
     "name": "Serial Position Effect",
     "description": "Users best remember the first and last items in a series.",
     "cssTakeaway": "Use :first-child / :last-child or :nth-child(n of S) to emphasize start and end (e.g. stepper, list, breadcrumb).",
-    "snippetSlug": null,
+    "snippetSlug": "nth-child",
     "externalUrl": "https://lawsofux.com/serial-position-effect"
   },
   {

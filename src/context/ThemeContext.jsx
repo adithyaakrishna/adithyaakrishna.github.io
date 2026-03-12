@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { THEME_ANIMATION_SHAPE } from '@config';
 
 const THEME_KEY = 'theme';
-const THEME_COLORS = { light: '#F2EFE9', dark: '#121212' };
+const THEME_COLORS = { light: '#f7faf6', dark: '#080808' };
 
 function getOriginFromEvent(event, vw, vh) {
   const fallback = { x: vw / 2, y: vh / 2 };
@@ -20,14 +20,12 @@ function getOriginFromEvent(event, vw, vh) {
 const ThemeContext = createContext(null);
 
 export function ThemeProvider({ children }) {
-  const [theme, setThemeState] = useState('dark');
+  const [theme, setThemeState] = useState('light');
 
   useEffect(() => {
-    const saved = localStorage.getItem(THEME_KEY);
-    if (saved) {
-      document.documentElement.setAttribute('data-theme', saved);
-      setThemeState(saved);
-    }
+    const initialTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', initialTheme);
+    setThemeState(initialTheme);
   }, []);
 
   const changeThemeWithReveal = (newTheme, event) => {
@@ -60,7 +58,6 @@ export function ThemeProvider({ children }) {
     const runTransition = () => {
       document.documentElement.setAttribute('data-theme-transitioning', 'true');
       document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem(THEME_KEY, newTheme);
       setThemeState(newTheme);
 
       if (isFade) {
@@ -113,7 +110,7 @@ export function ThemeProvider({ children }) {
           duration: 0.25,
           ease: 'power2.out',
         },
-        '-=0.05'
+        '-=0.05',
       );
     };
 
@@ -122,21 +119,16 @@ export function ThemeProvider({ children }) {
 
   const value = { theme, setThemeState, changeThemeWithReveal, THEME_KEY };
 
-  return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
 export function useTheme() {
   const ctx = useContext(ThemeContext);
   if (!ctx) {
     return {
-      theme: 'dark',
+      theme: 'light',
       changeThemeWithReveal: (theme, evt) => {
         document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem(THEME_KEY, theme);
       },
       THEME_KEY,
     };

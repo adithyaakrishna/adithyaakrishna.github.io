@@ -46,8 +46,9 @@ const StyledThoughtsSection = styled.section`
   overflow: hidden;
 
   .section-header {
-    font-size: 12px;
-    color: #29BC89;
+    font-size: 14px;
+    font-weight: 600;
+    color: #29bc89;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -67,7 +68,7 @@ const StyledThoughtsSection = styled.section`
     justify-content: space-between;
     align-items: baseline;
     padding: 1rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--border-color-subtle);
     transition: all 0.3s ease;
     position: relative;
     text-decoration: none;
@@ -80,13 +81,13 @@ const StyledThoughtsSection = styled.section`
 
     &:hover {
       padding-left: 10px;
-      color: var(--accent, #ffffff);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-main, #e8e8e8);
+      border-bottom: 1px solid var(--border-color-strong);
     }
 
     &:hover .item-title {
       filter: blur(0px);
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+      text-shadow: 0 0 8px var(--glow-color);
     }
   }
 
@@ -105,7 +106,8 @@ const StyledThoughtsSection = styled.section`
 
   .item-index {
     font-size: 12px;
-    color: #29BC89;
+    font-weight: 600;
+    color: #29bc89;
     font-family: 'Courier Prime', monospace;
   }
 
@@ -135,7 +137,8 @@ const StyledThoughtsSection = styled.section`
     line-height: 1;
     color: var(--text-dim, #888888);
     text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    background: var(--surface-bg);
     padding: 8px 14px;
     margin-top: 0.5rem;
     transition: color 0.3s ease, border-color 0.3s ease, text-shadow 0.3s ease;
@@ -143,9 +146,9 @@ const StyledThoughtsSection = styled.section`
     letter-spacing: 0.05em;
 
     &:hover {
-      color: var(--accent, #ffffff);
-      border-color: rgba(255, 255, 255, 0.25);
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+      color: var(--accent);
+      border-color: var(--border-color-strong);
+      text-shadow: 0 0 8px var(--glow-color);
     }
   }
 `;
@@ -154,10 +157,7 @@ const Thoughts = () => (
   <StyledThoughtsSection id="thoughts">
     <div className="section-header">thoughts_&amp;_logs</div>
     {blogPosts.slice(0, 3).map((post, i) => (
-      <a
-        href={post.url}
-        className="list-item"
-        key={i}>
+      <a href={post.url} className="list-item" key={i}>
         <div className="item-left">
           <span className="item-index">{post.slug}</span>
           <span className="item-title">{post.title}</span>

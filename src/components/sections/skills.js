@@ -12,8 +12,9 @@ const StyledSkillsSection = styled.section`
   overflow-wrap: break-word;
 
   .section-header {
-    font-size: 12px;
-    color: #29BC89;
+    font-size: 14px;
+    font-weight: 600;
+    color: #29bc89;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -39,7 +40,7 @@ const StyledSkillsSection = styled.section`
     transition: color 0.2s;
 
     &:hover {
-      color: #fff;
+      color: var(--accent);
       text-decoration: line-through;
     }
   }

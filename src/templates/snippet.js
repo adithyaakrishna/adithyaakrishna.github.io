@@ -2,9 +2,18 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link, navigate } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
+import Prism from 'prismjs';
 import styled from 'styled-components';
 import { Layout } from '@components';
 import BlogLayout from '@components/blog-layout';
+
+import 'prismjs/components/prism-markup';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-tsx';
 
 const StyledSnippetPage = styled.div`
   padding-top: 0.5vh;
@@ -28,6 +37,7 @@ const StyledSnippetPage = styled.div`
     gap: 8px;
     font-family: var(--font-stack, 'Space Mono', monospace);
     font-size: 13px;
+    font-weight: 600;
     color: #29bc89;
     text-decoration: none;
     text-transform: lowercase;
@@ -71,6 +81,7 @@ const StyledSnippetHeader = styled.header`
     color: #29bc89;
     text-decoration: none;
     font-size: 14px;
+    font-weight: 600;
     font-family: 'Courier Prime', monospace;
   }
 
@@ -152,13 +163,12 @@ const StyledDemoFrame = styled.iframe`
 
 const StyledCodeBlock = styled.div`
   position: relative;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
 
   .copy-button {
     position: absolute;
     right: 10px;
     top: 10px;
+    z-index: 2;
     border: 1px solid rgba(255, 255, 255, 0.12);
     background: rgba(0, 0, 0, 0.25);
     color: var(--text-main, #e8e8e8);
@@ -174,107 +184,36 @@ const StyledCodeBlock = styled.div`
     }
   }
 
-  pre {
+  .gatsby-highlight {
     margin: 0;
-    padding: 1.8rem 1.6rem;
-    overflow-x: auto;
-    line-height: 1.65;
+  }
+
+  .gatsby-highlight pre[class*='language-'] {
     font-size: 14px;
-    color: var(--text-dim, #b0b0b0);
-    white-space: pre;
-  }
-
-  code {
-    font-family: 'Space Mono', 'Courier Prime', monospace;
-    font-size: 14px;
-  }
-
-  .token-comment {
-    color: #7a7f8e;
-  }
-
-  .token-selector {
-    color: #f472b6;
-  }
-
-  .token-property {
-    color: #a78bfa;
-  }
-
-  .token-punctuation {
-    color: #9ca3af;
-  }
-
-  .token-value {
-    color: #fbbf24;
-  }
-
-  .token-string {
-    color: #86efac;
-  }
-
-  .token-keyword {
-    color: #7dd3fc;
-  }
-
-  .token-tag {
-    color: #c4b5fd;
-  }
-
-  .token-attr-name {
-    color: #fca5a5;
-  }
-
-  .token-attr-value {
-    color: #86efac;
+    line-height: 1.7;
+    padding-right: 5.2rem;
   }
 `;
 
-function escapeHtml(input = '') {
-  return input
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-}
+function getPrismLanguage(language = 'css') {
+  const normalizedLanguage = language.toLowerCase();
 
-function highlightCss(source = '') {
-  return source
-    .replace(/\/\*[\s\S]*?\*\//g, match => `<span class="token-comment">${match}</span>`)
-    .replace(/([^{\n]+)(\s*\{)/g, (_, selector, brace) =>
-      `<span class="token-selector">${selector}</span><span class="token-punctuation">${brace}</span>`
-    )
-    .replace(/([a-zA-Z-]+)(\s*:)/g, (_, property, colon) =>
-      `<span class="token-property">${property}</span><span class="token-punctuation">${colon}</span>`
-    )
-    .replace(/(:\s*)([^;\n]+)(;?)/g, (_, prefix, value, suffix) =>
-      `${prefix}<span class="token-value">${value}</span><span class="token-punctuation">${suffix}</span>`
-    )
-    .replace(/([{}();,])/g, '<span class="token-punctuation">$1</span>');
-}
+  if (normalizedLanguage === 'html') return 'markup';
+  if (normalizedLanguage === 'js') return 'javascript';
+  if (normalizedLanguage === 'ts') return 'typescript';
 
-function highlightMarkup(source = '') {
-  return source
-    .replace(/(&lt;!--[\s\S]*?--&gt;)/g, '<span class="token-comment">$1</span>')
-    .replace(/(&lt;\/?)([a-zA-Z0-9-]+)([^&]*?)(\/?&gt;)/g, (_, open, tag, attrs, close) => {
-      const highlightedAttrs = attrs
-        .replace(/([a-zA-Z:-]+)(=)("[^"]*"|'[^']*')/g, '<span class="token-attr-name">$1</span><span class="token-punctuation">$2</span><span class="token-attr-value">$3</span>');
-      return `${open}<span class="token-tag">${tag}</span>${highlightedAttrs}${close}`;
-    });
-}
-
-function highlightJavaScript(source = '') {
-  return source
-    .replace(/(\/\/[^\n]*|\/\*[\s\S]*?\*\/)/g, '<span class="token-comment">$1</span>')
-    .replace(/\b(const|let|var|function|return|if|else|for|while|new|class|import|from|export|await|async)\b/g, '<span class="token-keyword">$1</span>')
-    .replace(/("[^"]*"|'[^']*'|`[^`]*`)/g, '<span class="token-string">$1</span>')
-    .replace(/([{}();,])/g, '<span class="token-punctuation">$1</span>');
+  return normalizedLanguage;
 }
 
 function highlightCode(source = '', language = 'css') {
-  const escapedCode = escapeHtml(source);
-  if (language === 'markup' || language === 'html') return highlightMarkup(escapedCode);
-  if (language === 'javascript' || language === 'js') return highlightJavaScript(escapedCode);
-  return highlightCss(escapedCode);
+  const prismLanguage = getPrismLanguage(language);
+  const grammar =
+    Prism.languages[prismLanguage] ||
+    Prism.languages.css ||
+    Prism.languages.markup ||
+    Prism.languages.plain;
+
+  return Prism.highlight(source, grammar, prismLanguage);
 }
 
 function createSnippetFrameDoc({ sharedCss, demoCss, demoMarkup }) {
@@ -297,7 +236,6 @@ function createSnippetFrameDoc({ sharedCss, demoCss, demoMarkup }) {
     main {
       max-width: none;
       width: 100%;
-      padding: 20px;
     }
     @media (max-width: 600px) {
       main {
@@ -358,13 +296,14 @@ const SnippetTemplate = ({ location, pageContext }) => {
   const { snippet } = pageContext;
   const [frameHeight, setFrameHeight] = useState(260);
   const [copyLabel, setCopyLabel] = useState('copy');
-  const frameDoc = useMemo(
-    () => createSnippetFrameDoc(snippet),
-    [snippet]
+  const frameDoc = useMemo(() => createSnippetFrameDoc(snippet), [snippet]);
+  const prismLanguage = useMemo(
+    () => getPrismLanguage(snippet.codeLanguage),
+    [snippet.codeLanguage],
   );
   const highlightedCode = useMemo(
     () => highlightCode(snippet.code, snippet.codeLanguage),
-    [snippet.code, snippet.codeLanguage]
+    [snippet.code, snippet.codeLanguage],
   );
 
   useEffect(() => {
@@ -374,15 +313,13 @@ const SnippetTemplate = ({ location, pageContext }) => {
       const nextHeight = Number(event.data.height);
       if (!Number.isFinite(nextHeight) || nextHeight <= 0) return;
       // Keep demos tight to content while avoiding runaway heights.
-      setFrameHeight(Math.max(220, Math.min(nextHeight + 8, 460)));
+      setFrameHeight(Math.max(260, Math.min(nextHeight + 8, 460)));
     }
 
-    if (typeof window !== 'undefined')
-      window.addEventListener('message', onMessage);
+    if (typeof window !== 'undefined') window.addEventListener('message', onMessage);
 
     return () => {
-      if (typeof window !== 'undefined')
-        window.removeEventListener('message', onMessage);
+      if (typeof window !== 'undefined') window.removeEventListener('message', onMessage);
     };
   }, []);
 
@@ -464,12 +401,14 @@ const SnippetTemplate = ({ location, pageContext }) => {
               <button type="button" className="copy-button" onClick={handleCopy}>
                 {copyLabel}
               </button>
-              <pre>
-                <code
-                  className={`language-${snippet.codeLanguage || 'css'}`}
-                  dangerouslySetInnerHTML={{ __html: highlightedCode }}
-                />
-              </pre>
+              <div className="gatsby-highlight" data-language={prismLanguage}>
+                <pre className={`language-${prismLanguage}`}>
+                  <code
+                    className={`language-${prismLanguage}`}
+                    dangerouslySetInnerHTML={{ __html: highlightedCode }}
+                  />
+                </pre>
+              </div>
             </StyledCodeBlock>
           </StyledSnippetSection>
         </StyledSnippetPage>

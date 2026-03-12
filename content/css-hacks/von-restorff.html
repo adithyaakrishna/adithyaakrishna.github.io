@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Von Restorff Effect — Laws of UX in CSS</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .von-demo {
+        width: 100%;
+        max-width: 380px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .von-demo .btn {
+        padding: 14px 20px;
+        border-radius: var(--radius-sm);
+        font-family: var(--font-mono);
+        font-size: 13px;
+        cursor: pointer;
+        text-align: center;
+        border: 1px solid var(--border);
+        background: var(--surface-2);
+        color: var(--text-2);
+        transition: background 0.25s, border-color 0.25s, color 0.25s;
+      }
+
+      .von-demo .btn:hover {
+        background: var(--surface-3);
+        border-color: var(--border-strong);
+        color: var(--text);
+      }
+
+      .von-demo .btn.primary {
+        background: var(--mint);
+        border-color: var(--mint);
+        color: #ffffff;
+        font-weight: 700;
+        box-shadow: 0 0 24px rgba(29, 127, 83, 0.25);
+      }
+
+      .von-demo .btn.primary:hover {
+        background: var(--mint-bright);
+        border-color: var(--mint-bright);
+        box-shadow: 0 0 32px rgba(29, 127, 83, 0.35);
+      }
+
+      .von-note {
+        font-size: 13px;
+        color: var(--text-2);
+        line-height: 1.6;
+        margin-top: 8px;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="tag" aria-label="back to index">← contrast</a>
+    <main>
+      <div class="demo">
+          <div class="von-demo">
+            <button type="button" class="btn primary">save changes</button>
+            <button type="button" class="btn">cancel</button>
+            <button type="button" class="btn">reset to default</button>
+            <p class="von-note">
+              one primary (color + weight + shadow); secondaries share the same subdued style. the
+              eye goes to "save" first.
+            </p>
+          </div>
+        </div>
+      <div class="code-block">
+        <pre><code class="language-css">.von-demo .btn.primary {
+  background: var(--mint);
+  border-color: var(--mint);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 0 24px rgba(29, 127, 83, 0.25);
+}
+
+.von-demo .btn:not(.primary) {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+}</code></pre>
+      </div>
+    </main>
+  </body>
+</html>

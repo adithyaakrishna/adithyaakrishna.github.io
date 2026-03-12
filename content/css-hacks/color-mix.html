@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>color-mix() — CSS Hacks</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .palette {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .swatch {
+        width: 72px;
+        height: 72px;
+        border-radius: 0px;
+        position: relative;
+        transition: scale 0.2s;
+        cursor: default;
+      }
+
+      .swatch:hover {
+        scale: 1.12;
+      }
+
+      .swatch-label {
+        position: absolute;
+        bottom: -22px;
+        left: 50%;
+        translate: -50% 0;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-3);
+        white-space: nowrap;
+      }
+
+      .sw-base {
+        background: var(--mint);
+      }
+      .sw-light {
+        background: color-mix(in oklch, var(--mint), white 40%);
+      }
+      .sw-dark {
+        background: color-mix(in oklch, var(--mint), black 40%);
+      }
+      .sw-fade {
+        background: color-mix(in oklch, var(--mint), transparent 60%);
+      }
+      .sw-mix-v {
+        background: color-mix(in oklch, var(--mint) 50%, var(--violet));
+      }
+      .sw-mix-r {
+        background: color-mix(in oklch, var(--mint) 50%, var(--rose));
+      }
+      .sw-mix-a {
+        background: color-mix(in oklch, var(--mint) 50%, var(--amber));
+      }
+      .sw-mix-s {
+        background: color-mix(in oklch, var(--violet) 50%, var(--rose));
+      }
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="tag" aria-label="back to index">← color-mix()</a>
+    <main>
+      <div class="demo">
+        <div class="palette">
+          <div class="swatch sw-light"><span class="swatch-label">+ white</span></div>
+          <div class="swatch sw-base"><span class="swatch-label">base</span></div>
+          <div class="swatch sw-dark"><span class="swatch-label">+ black</span></div>
+          <div class="swatch sw-fade"><span class="swatch-label">+ transparent</span></div>
+          <div class="swatch sw-mix-v"><span class="swatch-label">+ violet</span></div>
+          <div class="swatch sw-mix-r"><span class="swatch-label">+ rose</span></div>
+          <div class="swatch sw-mix-a"><span class="swatch-label">+ amber</span></div>
+          <div class="swatch sw-mix-s"><span class="swatch-label">violet + rose</span></div>
+        </div>
+      </div>
+      <div class="code-block">
+        <pre><code class="language-css">.sw-light {
+  background: color-mix(in oklch, var(--mint), white 40%);
+}
+.sw-dark {
+  background: color-mix(in oklch, var(--mint), black 40%);
+}
+.sw-fade {
+  background: color-mix(in oklch, var(--mint), transparent 60%);
+}
+.sw-mix-v {
+  background: color-mix(in oklch, var(--mint) 50%, var(--violet));
+}</code></pre>
+      </div>
+    </main>
+  </body>
+</html>

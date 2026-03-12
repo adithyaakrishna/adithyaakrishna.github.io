@@ -53,7 +53,7 @@ useEffect(() => {
   await app.init({
     width: 800,
     height: 400,
-    background: "#ffffff",
+    background: '#ffffff',
     antialias: true,
     resolution: window.devicePixelRatio || 1,
     autoDensity: true,
@@ -75,17 +75,13 @@ useEffect(() => {
 Every chart needs two functions: one to convert a price to a Y pixel, and one to convert a data index to an X pixel.
 
 ```tsx
-const pointSpacing = data.length > 1
-  ? chartWidth / (data.length - 1)
-  : 0;
+const pointSpacing = data.length > 1 ? chartWidth / (data.length - 1) : 0;
 
 const yScale = chartHeight / (yMax - yMin);
 
-const priceToY = (price) =>
-  padding.top + chartHeight - (price - yMin) * yScale;
+const priceToY = price => padding.top + chartHeight - (price - yMin) * yScale;
 
-const indexToX = (index) =>
-  padding.left + index * pointSpacing;
+const indexToX = index => padding.left + index * pointSpacing;
 ```
 
 **Why `chartHeight - ...`?** In screen coordinates, Y=0 is the **top**. But in a price chart, higher prices should be higher on screen (lower Y). So we flip it.
@@ -98,8 +94,8 @@ The star of the show — a smooth line connecting all price points:
 chartLayer.setStrokeStyle({
   width: 2,
   color: 0x09090b,
-  cap: "round",
-  join: "round",
+  cap: 'round',
+  join: 'round',
 });
 
 chartLayer.moveTo(indexToX(0), priceToY(data[0].price));
@@ -152,7 +148,7 @@ overlayLayer.stroke();
 On mobile, after 300ms of holding, a pulsing dot appears and we trigger a haptic vibration:
 
 ```tsx
-if ("vibrate" in navigator) {
+if ('vibrate' in navigator) {
   navigator.vibrate(20);
 }
 ```
@@ -162,7 +158,7 @@ if ("vibrate" in navigator) {
 Green triangles for buys, red for sells. They sit right on the price line at the exact point the trade happened:
 
 ```tsx
-if (marker.type === "buy") {
+if (marker.type === 'buy') {
   chartLayer.moveTo(x, y - 12);
   chartLayer.lineTo(x - 8, y + 4);
   chartLayer.lineTo(x + 8, y + 4);
@@ -173,7 +169,7 @@ if (marker.type === "buy") {
 }
 
 chartLayer.closePath();
-chartLayer.fill(marker.type === "buy" ? 0x22c55e : 0xef4444);
+chartLayer.fill(marker.type === 'buy' ? 0x22c55e : 0xef4444);
 ```
 
 ## Performance Tricks

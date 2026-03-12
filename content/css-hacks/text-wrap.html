@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>text-wrap — CSS Hacks</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .wrap-text {
+        font-size: 18px;
+        font-weight: 400;
+        max-width: 220px;
+        line-height: 1.35;
+        text-align: center;
+        letter-spacing: -0.01em;
+      }
+
+      .wrap-pretty {
+        text-wrap: pretty;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="tag" aria-label="back to index">← text-wrap: pretty</a>
+    <main>
+      <div class="comparison">
+          <div class="side">
+            <p class="wrap-text">design systems need thoughtful line breaks</p>
+            <span class="side-label"><span class="dot dot-red"></span> default wrapping</span>
+          </div>
+          <div class="side">
+            <p class="wrap-text wrap-pretty">design systems need thoughtful line breaks</p>
+            <span class="side-label"><span class="dot dot-green"></span> text-wrap: pretty</span>
+          </div>
+        </div>
+      <div class="code-block">
+        <pre><code class="language-css">.wrap-pretty {
+  text-wrap: pretty;
+}</code></pre>
+      </div>
+    </main>
+  </body>
+</html>

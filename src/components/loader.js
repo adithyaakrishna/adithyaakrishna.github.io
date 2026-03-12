@@ -16,7 +16,7 @@ const StyledLoader = styled.div`
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: #000;
+  background-color: var(--bg-color);
   z-index: 99;
   opacity: ${props => (props.isFading ? 0 : 1)};
   transition: opacity 0.4s ease-out;
@@ -24,7 +24,7 @@ const StyledLoader = styled.div`
   .lottie-wrapper {
     width: 200px;
     height: 200px;
-    filter: invert(1);
+    filter: drop-shadow(0 10px 25px var(--shadow-color, rgba(17, 46, 33, 0.1)));
   }
 `;
 

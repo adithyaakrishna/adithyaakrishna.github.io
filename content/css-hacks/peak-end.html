@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Peak-End Rule — Laws of UX in CSS</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .peak-demo {
+        width: 100%;
+        max-width: 420px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .peak-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .peak-label {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: lowercase;
+        letter-spacing: 0.05em;
+        color: var(--text-3);
+        min-width: 100px;
+      }
+
+      .peak-card {
+        padding: 20px 24px;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        cursor: pointer;
+        width: 100%;
+        max-width: 240px;
+      }
+
+      .peak-card .title {
+        font-weight: 400;
+        color: var(--text);
+        margin-bottom: 4px;
+      }
+
+      .peak-card .meta {
+        font-size: 13px;
+        color: var(--text-2);
+      }
+
+      .peak-card.with-exit {
+        transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .peak-card.with-exit:hover {
+        box-shadow: 0 0 40px rgba(29, 127, 83, 0.15);
+        border-color: var(--mint);
+      }
+
+      .peak-card.no-exit {
+        transition: opacity 0.15s, box-shadow 0.15s;
+      }
+
+      .peak-card.no-exit:hover {
+        box-shadow: 0 0 24px rgba(29, 127, 83, 0.08);
+        border-color: var(--border-strong);
+      }
+
+      .peak-note {
+        font-size: 13px;
+        color: var(--text-2);
+        line-height: 1.6;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="tag" aria-label="back to index">← transition (exit)</a>
+    <main>
+      <div class="demo">
+          <div class="peak-demo">
+            <div class="peak-row">
+              <span class="peak-label">with exit transition</span>
+              <div class="peak-card with-exit">
+                <div class="title">card title</div>
+                <div class="meta">hover and move away — smooth out</div>
+              </div>
+            </div>
+            <div class="peak-row">
+              <span class="peak-label">instant off</span>
+              <div class="peak-card no-exit">
+                <div class="title">card title</div>
+                <div class="meta">hover and move away — snaps back</div>
+              </div>
+            </div>
+            <p class="peak-note">
+              same hover state; the "with exit" card keeps a 0.3s transition on the way out so the
+              end feels polished.
+            </p>
+          </div>
+        </div>
+      <div class="code-block">
+        <pre><code class="language-css">.peak-card.with-exit {
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.peak-card.no-exit {
+  transition: opacity 0.15s, box-shadow 0.15s;
+}</code></pre>
+      </div>
+    </main>
+  </body>
+</html>

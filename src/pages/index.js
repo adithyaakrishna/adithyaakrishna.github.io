@@ -28,11 +28,11 @@ const StyledGhostBlob = styled.div`
   transform: translate(-50%, -50%);
   width: 50vh;
   height: 50vh;
-  background: radial-gradient(circle, rgba(30,30,30,0.6) 0%, rgba(10,10,10,0) 70%);
-  filter: blur(60px);
+  background: radial-gradient(circle, var(--blob-color) 0%, transparent 72%);
+  filter: blur(80px);
   z-index: -1;
   animation: ${breathe} 12s infinite alternate ease-in-out;
-  opacity: 0.35;
+  opacity: 0.8;
 `;
 
 const StyledLayoutGrid = styled.div`
@@ -64,17 +64,18 @@ const StyledBrandCol = styled.aside`
   .logo {
     font-size: 14px;
     letter-spacing: 0.05em;
-    color: #fff !important;
+    color: var(--text-main) !important;
     text-decoration: none;
 
-    &:hover, &:focus {
-      color: #29BC89;
+    &:hover,
+    &:focus {
+      color: var(--accent);
     }
   }
 
   .coords {
     font-size: 10px;
-    color: #29BC89;
+    color: var(--accent);
     opacity: 0.6;
   }
 `;
@@ -116,15 +117,15 @@ const StyledMetaCol = styled.aside`
     text-orientation: mixed;
     font-size: 11px;
     letter-spacing: 0.15em;
-    color: #29BC89;
+    color: var(--accent);
     text-decoration: none;
     text-transform: lowercase;
     transition: color 0.3s ease, text-shadow 0.3s ease;
     padding: 0.25rem 0;
 
     &:hover {
-      color: #ffffff;
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+      color: var(--text-main);
+      text-shadow: 0 0 8px var(--glow-color);
     }
   }
 `;
@@ -137,8 +138,9 @@ const IndexPage = ({ location }) => {
       if (!blobRef.current) return;
       const x = e.clientX / window.innerWidth;
       const y = e.clientY / window.innerHeight;
-      blobRef.current.style.transform =
-        `translate(calc(-50% + ${x * 30}px), calc(-50% + ${y * 30}px))`;
+      blobRef.current.style.transform = `translate(calc(-50% + ${x * 30}px), calc(-50% + ${
+        y * 30
+      }px))`;
     };
     document.addEventListener('mousemove', handleMouseMove);
     return () => document.removeEventListener('mousemove', handleMouseMove);
@@ -151,9 +153,12 @@ const IndexPage = ({ location }) => {
 
       <StyledLayoutGrid>
         <StyledBrandCol>
-          <a href="#" className="logo">Adithya Krishna</a>
+          <a href="#" className="logo">
+            Adithya Krishna
+          </a>
           <div className="coords">
-            lat: 12.9716<br />
+            lat: 12.9716
+            <br />
             lon: 77.5946
           </div>
         </StyledBrandCol>
@@ -169,7 +174,9 @@ const IndexPage = ({ location }) => {
 
         <StyledMetaCol>
           <div className="vertical-line-container">
-            <a href={`mailto:${email}`} className="social-link">{email}</a>
+            <a href={`mailto:${email}`} className="social-link">
+              {email}
+            </a>
           </div>
         </StyledMetaCol>
       </StyledLayoutGrid>
