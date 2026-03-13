@@ -217,11 +217,10 @@ function SnippetCard({ snippet }) {
         previewImage={snippet.previewImage}
         previewVideo={snippet.previewVideo}
       />
-
-      <div className="card-copy">
+      {/* <div className="card-copy">
         <span className="card-kicker">{snippet.tag}</span>
         <h2 className="card-title">{snippet.title}</h2>
-      </div>
+      </div> */}
     </Link>
   );
 }
