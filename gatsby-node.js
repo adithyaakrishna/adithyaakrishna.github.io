@@ -18,34 +18,40 @@ function decodeHtmlEntities(value = '') {
     .replace(/&gt;/g, '>')
     .replace(/&amp;/g, '&')
     .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'");
+    .replace(/&#39;/g, '\'');
 }
 
 function extractMatch(content, expression, fallback = '') {
   const match = content.match(expression);
-  if (!match || !match[1]) return fallback;
+  if (!match || !match[1]) {
+    return fallback;
+  }
   return match[1].trim();
 }
 
 function formatSnippetCode(source = '', language = '') {
   const normalized = typeof source === 'string' ? source.trim() : '';
-  if (!normalized) return '';
+  if (!normalized) {
+    return '';
+  }
 
   const lowerLanguage = language.toLowerCase();
   const formatConfig =
     lowerLanguage === 'markup' || lowerLanguage === 'html'
       ? {
-          parser: 'html',
-          plugins: [parserHtml],
-        }
+        parser: 'html',
+        plugins: [parserHtml],
+      }
       : lowerLanguage === 'css'
-      ? {
+        ? {
           parser: 'css',
           plugins: [parserPostcss],
         }
-      : null;
+        : null;
 
-  if (!formatConfig) return normalized;
+  if (!formatConfig) {
+    return normalized;
+  }
 
   try {
     return prettier
@@ -57,7 +63,7 @@ function formatSnippetCode(source = '', language = '') {
         useTabs: false,
       })
       .trimEnd();
-  } catch (error) {
+  } catch {
     return normalized;
   }
 }
@@ -120,7 +126,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     {
       postsRemark: allMarkdownRemark(
         filter: { fileAbsolutePath: { regex: "/content/posts/" } }
-        sort: { order: DESC, fields: [frontmatter___date] }
+        sort: { frontmatter: { date: DESC } }
         limit: 1000
       ) {
         edges {
@@ -132,7 +138,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
       }
       tagsGroup: allMarkdownRemark(limit: 2000) {
-        group(field: frontmatter___tags) {
+        group(field: { frontmatter: { tags: SELECT } }) {
           fieldValue
         }
       }
@@ -152,7 +158,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     createPage({
       path: node.frontmatter.slug,
       component: postTemplate,
-      context: {},
+      context: {
+        slug: node.frontmatter.slug,
+      },
     });
   });
 
@@ -182,6 +190,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         },
       },
     });
+  });
+};
+
+exports.onCreateBabelConfig = ({ actions }) => {
+  actions.setBabelPlugin({
+    name: '@babel/plugin-transform-class-properties',
+    options: {
+      loose: true,
+    },
   });
 };
 

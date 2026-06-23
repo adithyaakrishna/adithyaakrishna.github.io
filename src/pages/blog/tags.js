@@ -71,7 +71,10 @@ const StyledTagsPage = styled.div`
     border: 1px solid var(--border-color);
     background: var(--surface-bg);
     padding: 8px 14px;
-    transition: color 0.3s ease, border-color 0.3s ease, text-shadow 0.3s ease;
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease,
+      text-shadow 0.3s ease;
 
     .count {
       color: #29bc89;
@@ -137,7 +140,7 @@ export default TagsPage;
 export const pageQuery = graphql`
   query {
     allMarkdownRemark(limit: 2000, filter: { frontmatter: { draft: { ne: true } } }) {
-      group(field: frontmatter___tags) {
+      group(field: { frontmatter: { tags: SELECT } }) {
         fieldValue
         totalCount
       }

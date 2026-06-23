@@ -1,4 +1,4 @@
-name: "Label Issues"
+name: 'Label Issues'
 
 on:
   issues:
@@ -14,7 +14,7 @@ jobs:
     permissions:
       issues: write
     steps:
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@v9
         with:
           script: |
             github.rest.issues.addLabels({

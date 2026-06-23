@@ -8,7 +8,9 @@ import { Layout } from '@components';
 import BlogLayout from '@components/blog-layout';
 
 function copyWithFallback(rawCode) {
-  if (typeof document === 'undefined') return false;
+  if (typeof document === 'undefined') {
+    return false;
+  }
   const textArea = document.createElement('textarea');
   textArea.value = rawCode;
   textArea.setAttribute('readonly', '');
@@ -219,7 +221,10 @@ const StyledPostContent = styled.div`
     letter-spacing: 0.08em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
   }
 
   .code-copy-button:hover,
@@ -257,7 +262,9 @@ const PostTemplate = ({ data, location }) => {
 
   useEffect(() => {
     const container = contentRef.current;
-    if (!container) return undefined;
+    if (!container) {
+      return undefined;
+    }
 
     const copyButtons = [];
     const resetTimers = [];
@@ -265,7 +272,9 @@ const PostTemplate = ({ data, location }) => {
 
     highlights.forEach(block => {
       const codeNode = block.querySelector('code');
-      if (!codeNode) return;
+      if (!codeNode) {
+        return;
+      }
 
       const previousSibling = block.previousElementSibling;
       const mountTarget =
@@ -281,9 +290,11 @@ const PostTemplate = ({ data, location }) => {
 
       const handleCopy = async () => {
         const rawCode = codeNode.textContent || '';
-        if (!rawCode) return;
+        if (!rawCode) {
+          return;
+        }
 
-        let didCopy = false;
+        let didCopy;
         if (
           typeof navigator !== 'undefined' &&
           navigator.clipboard &&
@@ -293,7 +304,7 @@ const PostTemplate = ({ data, location }) => {
           try {
             await navigator.clipboard.writeText(rawCode);
             didCopy = true;
-          } catch (error) {
+          } catch {
             didCopy = copyWithFallback(rawCode);
           }
         } else {
@@ -370,8 +381,8 @@ PostTemplate.propTypes = {
 };
 
 export const pageQuery = graphql`
-  query ($path: String!) {
-    markdownRemark(frontmatter: { slug: { eq: $path } }) {
+  query ($slug: String!) {
+    markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       html
       frontmatter {
         title

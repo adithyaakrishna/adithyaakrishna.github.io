@@ -18,7 +18,9 @@ const monthMap = {
 };
 
 function shortenRange(range) {
-  if (!range) return '';
+  if (!range) {
+    return '';
+  }
   return range
     .toLowerCase()
     .replace(
@@ -164,7 +166,9 @@ const StyledJobsSection = styled.section`
   .exp-toggle {
     font-size: 14px;
     color: var(--text-dim, #888888);
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      color 0.3s ease;
     display: inline-block;
     flex-shrink: 0;
     margin-top: 2px;
@@ -179,7 +183,9 @@ const StyledJobsSection = styled.section`
     display: grid;
     grid-template-rows: 0fr;
     overflow: hidden;
-    transition: grid-template-rows 0.35s ease, opacity 0.3s ease;
+    transition:
+      grid-template-rows 0.35s ease,
+      opacity 0.3s ease;
     opacity: 0;
 
     > div {
@@ -243,7 +249,10 @@ const StyledJobsSection = styled.section`
     padding: 8px 14px;
     margin-top: 0.5rem;
     cursor: pointer;
-    transition: color 0.3s ease, border-color 0.3s ease, text-shadow 0.3s ease;
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease,
+      text-shadow 0.3s ease;
     text-transform: lowercase;
     letter-spacing: 0.05em;
 
@@ -266,7 +275,9 @@ const StyledJobsSection = styled.section`
   .others-body {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    transition:
+      max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.3s ease;
     opacity: 0;
     display: flex;
     flex-direction: column;
@@ -284,7 +295,7 @@ const Jobs = () => {
     query {
       jobs: allMarkdownRemark(
         filter: { fileAbsolutePath: { regex: "/content/jobs/" } }
-        sort: { fields: [frontmatter___index], order: DESC }
+        sort: { frontmatter: { index: DESC } }
       ) {
         edges {
           node {
@@ -316,6 +327,13 @@ const Jobs = () => {
     setOpenJobs(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
+  const handleJobKeyDown = (event, key) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleJob(key);
+    }
+  };
+
   const renderExpItem = (node, idx, keyPrefix, displayNum) => {
     const { title, company, range } = node.frontmatter;
     const companyLower = company?.toLowerCase();
@@ -324,7 +342,12 @@ const Jobs = () => {
     const isOpen = !!openJobs[key];
     return (
       <div className={`exp-item${isOpen ? ' open' : ''}`} key={key}>
-        <div className="exp-header" onClick={() => toggleJob(key)} role="button" tabIndex={0}>
+        <div
+          className="exp-header"
+          onClick={() => toggleJob(key)}
+          onKeyDown={event => handleJobKeyDown(event, key)}
+          role="button"
+          tabIndex={0}>
           <div className="exp-left-group">
             <div className="item-left">
               <span className="item-index">{String(displayNum).padStart(2, '0')}</span>
