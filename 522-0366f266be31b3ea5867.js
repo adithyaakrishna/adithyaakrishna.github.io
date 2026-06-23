@@ -1,0 +1,1 @@
+(self.webpackChunkadikris_portfolio=self.webpackChunkadikris_portfolio||[]).push([[522],{8522:function(){}}]);
