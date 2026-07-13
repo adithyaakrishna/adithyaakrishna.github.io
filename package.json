@@ -76,7 +76,7 @@
     "@babel/eslint-parser": "^8.0.1",
     "@babel/plugin-transform-class-properties": "^8.0.1",
     "@babel/preset-react": "^8.0.1",
-    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/eslintrc": "^3.3.6",
     "@eslint/js": "^10.0.1",
     "@upstatement/eslint-config": "^3.0.0",
     "@upstatement/prettier-config": "^1.1.0",
