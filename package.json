@@ -69,7 +69,7 @@
     "react-helmet": "^6.1.0",
     "react-transition-group": "^4.4.5",
     "scrollreveal": "^4.0.9",
-    "styled-components": "^6.4.2"
+    "styled-components": "^6.4.4"
   },
   "devDependencies": {
     "@babel/core": "^8.0.1",
